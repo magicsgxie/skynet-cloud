@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RootNamespace>UWay.Skynet.Cloud.Web.Core</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;COLOR</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Skynet.Cloud.Data\Skynet.Cloud.Data.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Nacos\Skynet.Cloud.Nacos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Nacos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EasyCaching.InMemory" Version="0.5.4.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+</Project>

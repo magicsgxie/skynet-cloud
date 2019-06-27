@@ -1,0 +1,267 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data;
+using System.Data.Common;
+using System.Data.OracleClient;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
+using UWay.Skynet.Cloud.Data.Common;
+
+using UWay.Skynet.Cloud.Mapping;
+using UWay.Skynet.Cloud.Reflection;
+
+namespace UWay.Skynet.Cloud.Data.Driver
+{
+    //class OracleClientDriver : IDriver
+    //{
+
+    //    private static readonly Regex OrderByAlias = new Regex(@"[\""\[\]\w]+\.([\[\]\""\w]+)", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+    //    private static readonly Regex chinaRegix =  new Regex( @"[\u4e00-\u9fa5]", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+    //    public bool AllowsMultipleOpenReaders
+    //    {
+    //        get
+    //        {
+    //            return true;
+    //        }
+    //    }
+
+    //    public char NamedPrefix
+    //    {
+    //        get
+    //        {
+    //            return ':';
+    //        }
+    //    }
+
+    //    //public ISqlOmRenderer Render
+    //    //{
+    //    //    get
+    //    //    {
+    //    //        return new OracleRenderer();
+    //    //    }
+    //    //}
+
+    //    public void AddParameter(DbCommand command, NamedParameter parameter, object value)
+    //    {
+    //        OracleParameter p= new OracleParameter();
+    //        InitializeParameter(p, parameter, value);
+    //        command.Parameters.Add(p);
+    //    }
+
+    //    private void InitializeParameter(OracleParameter p, NamedParameter parameter, object value)
+    //    {
+    //        p.ParameterName = parameter.Name;
+    //        p.Value = value ?? DBNull.Value;
+    //        var sqlType = parameter.SqlType;
+    //        if (parameter.SqlType != null)
+    //        {
+    //            if (sqlType.Length > 0)
+    //                p.Size = sqlType.Length;
+    //            if (sqlType.Required)
+    //                p.IsNullable = false;
+    //            switch (sqlType.DbType)
+    //            {
+    //                case DBType.NChar:
+    //                case DBType.NVarChar:
+    //                    {
+    //                        var str = value as string;
+    //                        if (!string.IsNullOrEmpty(str))
+    //                        {
+    //                            p.Size = str.Length;
+    //                            int count = Encoding.Default.GetByteCount(str);
+
+    //                            if (chinaRegix.IsMatch(str) && count > 4000 && str.Length <= 4000)
+    //                            {
+    //                                //p.Size = 2000;
+    //                                p.Value = str.Substring(2000);
+    //                            }
+
+    //                            if (parameter.Name.StartsWith("CLOB_"))
+    //                            {
+    //                                parameter.sqlType = SqlType.Get(DBType.Text, int.MaxValue);
+    //                            }
+
+    //                        }
+
+    //                        break;
+    //                    }
+    //                case DBType.Char:
+    //                case DBType.VarChar:
+    //                    {
+    //                        var str = value as string;
+    //                        if (!string.IsNullOrEmpty(str))
+    //                            p.Size = str.Length * 1;
+    //                        break;
+    //                    }
+    //                case DBType.Guid:
+    //                    parameter.sqlType = SqlType.Get(DBType.Binary, 16);
+    //                    if (value is Guid)
+    //                        p.Value = ((Guid)value).ToByteArray();
+    //                    else if (value != null)
+    //                        p.Value = (((Guid?)value).Value).ToByteArray();
+    //                    break;
+    //                case DBType.Binary:
+    //                case DBType.Image:
+    //                    if (value is Guid)
+    //                    {
+    //                        p.Value = ((Guid)value).ToByteArray();
+    //                        parameter.sqlType = SqlType.Get(DBType.Binary, 16);
+    //                    }
+    //                    else if (value is Guid?)
+    //                    {
+    //                        p.Value = ((Guid?)value).Value.ToByteArray();
+    //                        parameter.sqlType = SqlType.Get(DBType.Binary, 16);
+    //                    }
+    //                    break;
+    //            }
+    //        }
+    //        ConvertDBTypeToNativeType(p, parameter.sqlType.DbType);
+    //    }
+
+    //    private void ConvertDBTypeToNativeType(OracleParameter p, DBType dbType) {
+    //        switch (dbType)
+    //        {
+    //            case DBType.Binary: p.DbType = System.Data.DbType.Binary; break;
+    //            case DBType.Boolean: p.DbType = System.Data.DbType.Boolean; break;
+    //            case DBType.Byte: p.DbType = System.Data.DbType.Byte; break;
+    //            case DBType.Char: p.DbType = System.Data.DbType.AnsiStringFixedLength; break;
+    //            case DBType.DateTime: p.DbType = System.Data.DbType.DateTime; break;
+    //            case DBType.Decimal: p.DbType = System.Data.DbType.Decimal; break;
+    //            case DBType.Double: p.DbType = System.Data.DbType.Double; break;
+    //            case DBType.Guid: p.DbType = System.Data.DbType.Guid; break;
+    //            case DBType.Image: p.DbType = System.Data.DbType.Binary; break;
+    //            case DBType.Int16: p.DbType = System.Data.DbType.Int16; break;
+    //            case DBType.Int32: p.DbType = System.Data.DbType.Int32; break;
+    //            case DBType.Int64: p.DbType = System.Data.DbType.Int64; break;
+    //            case DBType.Currency: p.DbType = System.Data.DbType.Currency; break;
+    //            case DBType.NChar: p.DbType = System.Data.DbType.StringFixedLength; break;
+    //            case DBType.NText: p.OracleType = OracleType.NClob; break;
+    //            case DBType.NVarChar: p.DbType = DbType.AnsiString; break;
+    //            case DBType.Single: p.DbType = DbType.Single; break;
+    //            case DBType.Text: p.OracleType = OracleType.NClob; break;
+    //            //case DBType.Timestamp: p.DbType = System.Data.DbType.Binary; break;
+    //            case DBType.VarChar: p.DbType = DbType.AnsiString; break;
+    //        }
+    //    }
+
+    //    public void AddParameters(DbCommand cmd, object namedParameters)
+    //    {
+    //        var type = namedParameters.GetType();
+    //        var dic = namedParameters as IDictionary<string, object>;
+    //        if (dic != null)
+    //        {
+    //            foreach (var key in dic.Keys)
+    //                AddParameter(cmd, key, dic[key]);
+    //            return;
+    //        }
+
+    //        var nvc = namedParameters as NameValueCollection;
+    //        if (nvc != null)
+    //        {
+    //            foreach (string key in nvc.Keys)
+    //                AddParameter(cmd, key, nvc[key]);
+    //            return;
+    //        }
+
+    //        var hs = namedParameters as Hashtable;
+    //        if (hs != null)
+    //        {
+    //            foreach (string key in hs.Keys.OfType<string>())
+    //                AddParameter(cmd, key, hs[key]);
+    //            return;
+    //        }
+
+
+
+    //        const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance;
+    //        var items = from m in type
+    //                   .GetFields(bindingFlags)
+    //                   .Where(p => !p.HasAttribute<IgnoreAttribute>(true))
+    //                   .Where(p => !p.Name.Contains("k__BackingField"))
+    //                   .Cast<MemberInfo>()
+    //                   .Union(type
+    //                       .GetProperties(bindingFlags)
+    //                       .Where(p => p.CanRead)
+    //                       .Where(p => !p.HasAttribute<IgnoreAttribute>(true))
+    //                       .Cast<MemberInfo>()
+    //                       ).Distinct()
+    //                    select m;
+
+    //        foreach (var item in items.ToArray())
+    //            AddParameter(cmd, item.Name, item.GetGetter()(namedParameters));
+    //    }
+
+    //    protected virtual void AddParameter(DbCommand cmd, string name, object item)
+    //    {
+    //        var p = new OracleParameter();
+    //        p.ParameterName = name;
+    //        if (item == null)
+    //            p.Value = DBNull.Value;
+    //        else
+    //        {
+    //            var type = item.GetType();
+    //            if (type.IsNullable())
+    //                item = Converter.Convert(item, Nullable.GetUnderlyingType(type));
+
+    //            InitializeParameter(item, p, type);
+    //        }
+    //        cmd.Parameters.Add(p);
+    //    }
+
+    //    protected virtual void InitializeParameter(object item, OracleParameter p, Type type)
+    //    {
+    //        var typeCode = Type.GetTypeCode(type);
+    //        switch (typeCode)
+    //        {
+    //            case TypeCode.SByte:
+    //                item = Convert.ToByte(item);
+    //                break;
+    //            case TypeCode.UInt16:
+    //                item = Convert.ToInt16(item);
+    //                break;
+    //            case TypeCode.UInt32:
+    //                item = Convert.ToInt32(item);
+    //                break;
+    //            case TypeCode.UInt64:
+    //                item = Convert.ToInt64(item);
+    //                break;
+    //            case TypeCode.String:
+    //                if (p.ParameterName.StartsWith("CLOB_"))
+    //                    p.OracleType = OracleType.NClob;
+    //                break;
+    //        }
+            
+    //        p.Value = item;
+    //    }
+
+    //    public string BuildPageQuery(long skip, long take, PagingHelper.SQLParts parts, object namedParameters)
+    //    {
+    //        parts.sqlOrderBy = string.IsNullOrEmpty(parts.sqlOrderBy) ? null : OrderByAlias.Replace(parts.sqlOrderBy, "$1");
+    //        var sqlPage = string.Format("SELECT {4} FROM (SELECT ROW_NUMBER() OVER ({0}) poco_rn, poco_base.* \nFROM ( \n{1}) poco_base ) poco_paged \nWHERE poco_rn > {2} AND poco_rn <= {3} \nORDER BY poco_rn",
+    //                                                                parts.sqlOrderBy ?? "ORDER BY (SELECT NULL /*poco_dual*/)", parts.sqlUnordered, skip, take, parts.sqlColumns);
+    //        return sqlPage;
+    //    }
+
+    //    public DbCommand CreateCommand(DbConnection conn, string sql, object namedParameters)
+    //    {
+    //        Guard.NotNullOrEmpty(sql, "sql");
+    //        var cmd = conn.CreateCommand();
+
+    //        cmd.CommandText = GetReplaceSql(sql);
+    //        if (namedParameters != null)
+    //            AddParameters(cmd, namedParameters);
+    //        return cmd;
+    //    }
+
+    //    private string GetReplaceSql(string sql)
+    //    {
+    //        if (NamedPrefix != '@')
+    //            sql = ParameterHelper.rxParamsPrefix.Replace(sql, m => NamedPrefix + m.Value.Substring(1));
+    //        return sql.Replace("@@", "@");
+    //    }
+    //}
+}

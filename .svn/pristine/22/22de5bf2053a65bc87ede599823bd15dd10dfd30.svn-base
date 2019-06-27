@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>UWay.Skynet.Cloud.ApiDemo</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="NSwag.AspNetCore" Version="12.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.Web.Core\Skynet.Cloud.Web.Core.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Entity\Skynet.Cloud.Upms.Test.Entity.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Repository\Skynet.Cloud.Upms.Test.Repository.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Service.Interface\Skynet.Cloud.Upms.Test.Service.Interface.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Service\Skynet.Cloud.Upms.Test.Service.csproj" />
+  </ItemGroup>
+
+</Project>

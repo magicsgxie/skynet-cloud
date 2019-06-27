@@ -1,0 +1,125 @@
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Steeltoe.Discovery.Nacos.Discovery;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using UWay.Skynet.Cloud.Nacos;
+
+namespace Steeltoe.Discovery.Nacos.Registry
+{
+    public class NacosServiceRegistry : INacosServiceRegistry
+    {
+        private const string UNKNOWN = "UNKNOWN";
+        private const string UP = "UP";
+        private const string DOWN = "DOWN";
+        private const string OUT_OF_SERVICE = "OUT_OF_SERVICE";
+
+        private readonly INacosClient _client;
+        private readonly IScheduler _scheduler;
+        private readonly ILogger<NacosServiceRegistry> _logger;
+
+
+        private readonly IOptionsMonitor<NacosDiscoveryOptions> _optionsMonitor;
+        private readonly NacosDiscoveryOptions _options;
+        internal NacosDiscoveryOptions Options
+        {
+            get
+            {
+                if (_optionsMonitor != null)
+                {
+                    return _optionsMonitor.CurrentValue;
+                }
+
+                return _options;
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NacosServiceRegistry"/> class.
+        /// </summary>
+        /// <param name="client">the Nacos client to use</param>
+        /// <param name="options">the configuration options</param>
+        /// <param name="scheduler">a scheduler to use for heart beats</param>
+        /// <param name="logger">an optional logger</param>
+        public NacosServiceRegistry(INacosClient client, NacosDiscoveryOptions options, IScheduler scheduler = null, ILogger<NacosServiceRegistry> logger = null)
+        {
+            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _options = options ?? throw new ArgumentNullException(nameof(options));
+            _scheduler = scheduler;
+            _logger = logger;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NacosServiceRegistry"/> class.
+        /// </summary>
+        /// <param name="client">the Nacos client to use</param>
+        /// <param name="optionsMonitor">the configuration options</param>
+        /// <param name="scheduler">a scheduler to use for heart beats</param>
+        /// <param name="logger">an optional logger</param>
+        public NacosServiceRegistry(INacosClient client, IOptionsMonitor<NacosDiscoveryOptions> optionsMonitor, IScheduler scheduler = null, ILogger<NacosServiceRegistry> logger = null)
+        {
+            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _optionsMonitor = optionsMonitor ?? throw new ArgumentNullException(nameof(optionsMonitor));
+            _scheduler = scheduler;
+            _logger = logger;
+        }
+
+        public Task RegisterAsync(RegisterInstanceRequest registration)
+        {
+            return _client.RegisterInstanceAsync(registration);
+        }
+
+        public Task DeregisterAsync(RemoveInstanceRequest registration)
+        {
+            return _client.RemoveInstanceAsync(registration);
+        }
+
+        public Task SetStatusAsync(ModifyInstanceHealthStatusRequest registration)
+        {
+            return _client.ModifyInstanceHealthStatusAsync(registration);
+        }
+
+        public Task<object> GetStatusAsync(INacosRegistration registration)
+        {
+            //return _client..GetMetricsAsync()
+            return null;
+        }
+
+        public void Register(INacosRegistration registration)
+        {
+            
+        }
+
+        public void Deregister(INacosRegistration registration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetStatus(INacosRegistration registration, string status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public INacosRegistration GetStatus<INacosRegistration>(ModifyInstanceHealthStatusRequest registration) where INacosRegistration : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetStatusAsync(ModifyInstanceHealthStatusRequest registration, string status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public S GetStatus<S>(INacosRegistration registration) where S : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

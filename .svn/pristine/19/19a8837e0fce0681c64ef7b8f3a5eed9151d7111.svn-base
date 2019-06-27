@@ -1,0 +1,21 @@
+﻿//using System;
+//using System.Data.Common;
+//using UWay.Skynet.Cloud.Data.Common;
+
+//namespace UWay.Skynet.Cloud.Data
+//{
+//    public interface ISqlLog
+//    {
+//        void AddMessage(string message);
+
+//        void LogError(string message);
+
+//        void LogError(string message, Exception ex);
+//        void AddCommand(string commandText, NamedParameter[] parameters, object[] paramValues);
+//        void AddParameters(NamedParameter[] parameters, object[] paramValues);
+
+//        void AddCommand(string commandText, DbParameterCollection paramters);
+
+//        void Log();
+//    }
+//}

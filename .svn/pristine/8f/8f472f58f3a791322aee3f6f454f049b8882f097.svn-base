@@ -1,0 +1,8 @@
+﻿using System;
+
+namespace Skynet.Cloud.Upms.Service.Interface
+{
+    public class Class1
+    {
+    }
+}

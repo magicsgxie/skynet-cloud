@@ -1,0 +1,19 @@
+﻿using Skynet.Cloud.Upms.Test.Entity;
+using Skynet.Cloud.Upms.Test.Repository;
+using Skynet.Cloud.Upms.Test.Service.Interface;
+using System;
+using UWay.Skynet.Cloud.Data;
+
+namespace Skynet.Cloud.Upms.Test.Service
+{
+    public class UserService : IUserService
+    {
+        public User GetById(int userId)
+        {
+            using (var dbContext = UnitOfWork.Get(DbContainer.ContainerName))
+            {
+                return new UserRepository(dbContext).GetByID(userId);
+            }
+        }
+    }
+}

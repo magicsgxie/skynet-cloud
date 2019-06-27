@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:ulinq-mapping-1.0"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/XMLSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name ="Mapping" >
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:annotation>
+            <xs:documentation>使用Table元素来定义一个持久化类到数据库表间的映射</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="Id" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>数据库表主键</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="Member" type="xs:string" use ="required">
+                    <xs:annotation>
+                      <xs:documentation>持久化类标识成员的名字，该成员可以是Public的字段或属性</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="Name" type="xs:string" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选 - 默认为成员名): 主键字段的名字</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="DbType"   use ="optional">
+                    <xs:annotation>
+                      <xs:documentation>
+                        (可选 - 默认为成员类型映射的Db类型): 列类型
+                      </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType >
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="Char" />
+                        <xs:enumeration value="NChar" />
+                        <xs:enumeration value="VarChar" />
+                        <xs:enumeration value="NVarChar" />
+                        <xs:enumeration value="DateTime"/>
+                        <xs:enumeration value="Guid"/>
+                        <xs:enumeration value="Int16"/>
+                        <xs:enumeration value="Int32"/>
+                        <xs:enumeration value="Int64"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name ="Length" type ="xs:int" use ="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选)：列长度</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="IsDbGenerated" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选)：是否自动增一的</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="SequenceName" type="xs:string" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选)：是否自动增一的</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Column" minOccurs="0" maxOccurs="unbounded" >
+                <xs:annotation>
+                  <xs:documentation>数据库表列</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="Member" type="xs:string" use ="required">
+                    <xs:annotation>
+                      <xs:documentation>持久化类成员的名字，该成员可以是Public的字段或属性</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="Name" type="xs:string" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选 - 默认为成员名): 列名</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="DbType"   use ="optional">
+                    <xs:annotation>
+                      <xs:documentation>
+                        (可选 - 默认为成员类型映射的Db类型): 列类型
+                      </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType >
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="Char" />
+                        <xs:enumeration value="NChar" />
+                        <xs:enumeration value="VarChar" />
+                        <xs:enumeration value="NVarChar" />
+                        <xs:enumeration value="Text" />
+                        <xs:enumeration value="NText" />
+                        <xs:enumeration value="Image"/>
+                        <xs:enumeration value="Binary"/>
+                        <xs:enumeration value="Byte"/>
+                        <xs:enumeration value="Boolean"/>
+                        <xs:enumeration value="DateTime"/>
+                        <xs:enumeration value="Currency"/>
+                        <xs:enumeration value="Decimal"/>
+                        <xs:enumeration value="Double"/>
+                        <xs:enumeration value="Guid"/>
+                        <xs:enumeration value="Int16"/>
+                        <xs:enumeration value="Int32"/>
+                        <xs:enumeration value="Int64"/>
+                        <xs:enumeration value="Single"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name ="Length" type ="xs:int" use ="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选)：列长度</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name ="Precision" type ="xs:byte" use ="optional"/>
+                  <xs:attribute name ="Scale"  type="xs:byte" use ="optional"/>
+                  <xs:attribute name="Required" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选)：是否允许为必输项</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Ignore" minOccurs="0" maxOccurs="unbounded" >
+                <xs:annotation>
+                  <xs:documentation>忽略的成员名</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="Member" type="xs:string" use ="required">
+                    <xs:annotation>
+                      <xs:documentation>持久化类成员的名字，该成员可以是Public的字段或属性</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ComputedColumn" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>数据库表计算列，该列只允许查询</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="Member" type="xs:string" use ="required">
+                    <xs:annotation>
+                      <xs:documentation>持久化类成员的名字，该成员可以是Public的字段或属性</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="Name" type="xs:string" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选 - 默认为成员名): 列名</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="DbType"   use ="optional">
+                    <xs:annotation>
+                      <xs:documentation>
+                        (可选 - 默认为成员类型映射的Db类型): 列类型
+                      </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType >
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="Char" />
+                        <xs:enumeration value="NChar" />
+                        <xs:enumeration value="VarChar" />
+                        <xs:enumeration value="NVarChar" />
+                        <xs:enumeration value="Text" />
+                        <xs:enumeration value="NText" />
+                        <xs:enumeration value="Byte"/>
+                        <xs:enumeration value="Boolean"/>
+                        <xs:enumeration value="DateTime"/>
+                        <xs:enumeration value="Currency"/>
+                        <xs:enumeration value="Decimal"/>
+                        <xs:enumeration value="Double"/>
+                        <xs:enumeration value="Guid"/>
+                        <xs:enumeration value="Int16"/>
+                        <xs:enumeration value="Int32"/>
+                        <xs:enumeration value="Int64"/>
+                        <xs:enumeration value="Single"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name ="Length" type ="xs:int" use ="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选)：列长度</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name ="Precision" type ="xs:short" use ="optional"/>
+                  <xs:attribute name ="Scale"  type="xs:short" use ="optional"/>
+                  <xs:attribute name="Required" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选)：是否允许为必输项</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="OneToOne" minOccurs="0" maxOccurs="unbounded" >
+                <xs:annotation>
+                  <xs:documentation>一对一映射关系</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="Member" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>持久化类成员的名字，该成员可以是Public的字段或属性</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="ThisKey" type="xs:string" use="optional"/>
+                  <xs:attribute name="OtherKey" type="xs:string" use ="optional"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ManyToOne" minOccurs="0" maxOccurs="unbounded" >
+                <xs:annotation>
+                  <xs:documentation>多对一关系</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="Member" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>持久化类成员的名字，该成员可以是Public的字段或属性</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="ThisKey" type="xs:string" use="optional"/>
+                  <xs:attribute name="OtherKey" type="xs:string" use ="optional"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="OneToMany" minOccurs="0" maxOccurs="unbounded" >
+                <xs:annotation>
+                  <xs:documentation>一对多映射关系</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="Member" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>持久化类成员的名字，该成员可以是Public的字段或属性</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="ThisKey" type="xs:string" use="optional"/>
+                  <xs:attribute name="OtherKey" type="xs:string" use ="optional"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Version" minOccurs="0" maxOccurs="1" >
+                <xs:annotation>
+                  <xs:documentation>元素是可选的，表明表中包含附带版本信息的数据。 这在你准备使用 长事务（long transactions）的时候特别有用</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:attribute name="Member" type="xs:string" use ="required">
+                    <xs:annotation>
+                      <xs:documentation>持久化类成员的名字，该成员可以是Public的字段或属性</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="Name" type="xs:string" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选 - 默认为成员名): 列名</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="DbType"   use ="optional">
+                    <xs:annotation>
+                      <xs:documentation>
+                        (可选 - 默认为成员类型映射的Db类型): 列类型
+                      </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType >
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="Int32"/>
+                        <xs:enumeration value="Int64"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="Required" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>(可选)：是否允许为必输项</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Class" type="xs:string" use="required" >
+              <xs:annotation>
+                <xs:documentation>类名，如果在Mapping元素中指定了'Namespace'属性，这里只需要指定短类名，否则需要长类名</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Name" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>表名</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Readonly" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>指示该数据表是否只允许查询</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Schema" type="xs:string" >
+        <xs:annotation>
+          <xs:documentation>数据库schema名称,可选的</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="Namespace" type="xs:string"  use="required">
+        <xs:annotation>
+          <xs:documentation>
+            指定映射文件中的类的名称空间名
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="AssemblyName" type="xs:string"  use="required">
+        <xs:annotation>
+          <xs:documentation>
+            指定映射文件中的类的应用程序集名称，用来动态加载Assembly和实体类型
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

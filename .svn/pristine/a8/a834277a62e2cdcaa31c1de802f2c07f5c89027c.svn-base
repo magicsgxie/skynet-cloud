@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>UWay.Skynet.Cloud.Upms.Service.Interface</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Security\Skynet.Cloud.Security.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Upms.Entity\Skynet.Cloud.Upms.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

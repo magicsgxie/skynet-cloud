@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisposableInvalid" xml:space="preserve">
+    <value>The disposable must implement IDisposable</value>
+  </data>
+  <data name="ArgumentEnumerableInvalid" xml:space="preserve">
+    <value>The enumerable must implement at least IEnumerable</value>
+  </data>
+  <data name="ArgumentCountError" xml:space="preserve">
+    <value>{0} function {1} requires {2} arguments</value>
+    <comment>{0}方法{1}需要{2}参数</comment>
+  </data>
+  <data name="BooleanExpression" xml:space="preserve">
+    <value>Test must be a boolean expression</value>
+    <comment>必须为布尔表达式</comment>
+  </data>
+  <data name="VariableNoInitialize" xml:space="preserve">
+    <value>Initializer must be assignable to variable</value>
+    <comment>变量必须初始化</comment>
+  </data>
+  <data name="ArgumentLabel" xml:space="preserve">
+    <value>Continue label target must be void</value>
+  </data>
+  <data name="ArgumentQuery" xml:space="preserve">
+    <value>Cannot deduce query provider from query</value>
+  </data>
+  <data name="EntityORMappingNoConfig" xml:space="preserve">
+    <value>Entity type '{0}' not configure mapping!</value>
+    <comment>没有为实体配置映射</comment>
+  </data>
+  <data name="ExpressionError" xml:space="preserve">
+    <value>The expression of type '{0}' is not a sequence</value>
+    <comment>表达式类型不是序列</comment>
+  </data>
+  <data name="ColumnUndefine" xml:space="preserve">
+    <value>Reference to undefined column</value>
+    <comment>引用了没有定义的列</comment>
+  </data>
+  <data name="TypeUnhandle" xml:space="preserve">
+    <value>Unhandled {0} type:{1}</value>
+    <comment>未经处理的类型</comment>
+  </data>
+  <data name="ConvertTypeInvalid" xml:space="preserve">
+    <value>Cann't convert from '{0}' to db type.</value>
+    <comment>无法转换成db类型</comment>
+  </data>
+  <data name="CastTypeInvalid" xml:space="preserve">
+    <value>No type mapping for SqlType {0}</value>
+    <comment>映射到数据库中的类型为空</comment>
+  </data>
+  <data name="InvalidOperationCompareException" xml:space="preserve">
+    <value>Cannot compare two constructed types with different sets of members assigned.</value>
+  </data>
+  <data name="ConstructTypeInvalid" xml:space="preserve">
+    <value>Cannot construct type '{0}' with all mapped includedMembers.</value>
+    <comment>映射成员不能构造类型{0}</comment>
+  </data>
+  <data name="CycleInvalid" xml:space="preserve">
+    <value>Cycle in topological sort</value>
+    <comment>在拓扑排序中循环</comment>
+  </data>
+  <data name="DeferInvalid" xml:space="preserve">
+    <value>The member '{0}' cannot be deferred due to its type.</value>
+    <comment>由于该成员的类型，故不能延迟</comment>
+  </data>
+  <data name="FuncionInvalid" xml:space="preserve">
+    <value>Invalid function：</value>
+    <comment>无效方法</comment>
+  </data>
+  <data name="LengthInvalid" xml:space="preserve">
+    <value>Incorrect number of {0}</value>
+    <comment>长度错误</comment>
+  </data>
+  <data name="DeclarationQueryInvalid" xml:space="preserve">
+    <value>Declaration query not allowed for this langauge</value>
+    <comment>此语言不允许声明查询</comment>
+  </data>
+  <data name="NoExistQueryProvider" xml:space="preserve">
+    <value>Could not find query provider</value>
+  </data>
+  <data name="SubqueryInvalid" xml:space="preserve">
+    <value>Subquery does not originate with a member access</value>
+  </data>
+  <data name="TypeInvalid" xml:space="preserve">
+    <value>{0} is valid type</value>
+    <comment>无效类型</comment>
+  </data>
+  <data name="ConnectionStringConfigToMany" xml:space="preserve">
+    <value>Too many connection strings in config file.</value>
+    <comment>配置文件中配置了太多的连接</comment>
+  </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>{0} is not supported {1}</value>
+    <comment>{0}在{1}的情况下不支持此方法</comment>
+  </data>
+  <data name="OperationNotSupported" xml:space="preserve">
+    <value>'{0}' not support '{1}' operation {2}</value>
+    <comment>{0}在{2}的情况下不支持{1}操作</comment>
+  </data>
+  <data name="NoProjectionTranslateToSQL" xml:space="preserve">
+    <value>Non-scalar projections cannot be translated to SQL</value>
+    <comment>无映射可以翻译成SQL</comment>
+  </data>
+  <data name="ORMappingMissValue" xml:space="preserve">
+    <value>Missing '{0}' value in member {1} when OR mapping</value>
+    <comment>在OR映射时，成员中丢失{0}值</comment>
+  </data>
+  <data name="EntityRepeatRegister" xml:space="preserve">
+    <value>Repeat register entity mapping for entity {0}</value>
+    <comment>已为实体配置映射</comment>
+  </data>
+  <data name="ConnectionStringNameInvalid" xml:space="preserve">
+    <value>Invalid connection configure for :{0}</value>
+  </data>
+  <data name="ConnectionStringNoConfigException" xml:space="preserve">
+    <value>No configure connection string by config file.</value>
+    <comment>没有在配置文件中配置连接字符串</comment>
+  </data>
+  <data name="AttrbuteMappingError" xml:space="preserve">
+    <value>AttributeMapping: The member '{0}.{1}' referenced in {2} for '{3}' is not mapped or does not exist</value>
+  </data>
+  <data name="ConnectionStringConfigError" xml:space="preserve">
+    <value>ConnectionString</value>
+  </data>
+  <data name="ConnectionStringProviderNameError" xml:space="preserve">
+    <value>connectionString.ProviderName</value>
+  </data>
+  <data name="DelegateToManyArguments" xml:space="preserve">
+    <value>Delegate has too many arguments</value>
+  </data>
+  <data name="NoExist" xml:space="preserve">
+    <value>{0} is not exist</value>
+  </data>
+  <data name="NotCastFromTypeToType" xml:space="preserve">
+    <value>Cannot cast elements from type '{0}' to type '{1}'</value>
+  </data>
+  <data name="ProviderNameForInvalid" xml:space="preserve">
+    <value>{0} Provider name not exists or invalid for {1}</value>
+  </data>
+  <data name="ProviderNameInvalid" xml:space="preserve">
+    <value>Provider name invalid</value>
+  </data>
+  <data name="SQLCESupportSkip" xml:space="preserve">
+    <value>SQLCE can only support Skip when it is immediately followed by Take</value>
+  </data>
+  <data name="VersionMemberTypeInvalid" xml:space="preserve">
+    <value>Invalid Version member type '{0}' for  '{1}' ,version type must be int type.</value>
+  </data>
+  <data name="VersionTooMany" xml:space="preserve">
+    <value>Version member too many in entity '{0}'</value>
+  </data>
+  <data name="CouldNotFindRequiredAttribute" xml:space="preserve">
+    <value>Mapping Problem: Could not find required attribute '{0}': {1}.</value>
+  </data>
+</root>

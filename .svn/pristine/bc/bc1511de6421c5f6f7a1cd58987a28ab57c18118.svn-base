@@ -1,0 +1,17 @@
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using UWay.Skynet.Cloud.Helpers;
+
+namespace UWay.Skynet.Cloud.Web.Core.Filters
+{
+    public class GlobalExceptionFilter : IExceptionFilter
+    {
+        public void OnException(ExceptionContext filterContext)
+        {
+            var type = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType;
+            Log4NetHelper.WriteError(type, filterContext.Exception);
+        }
+    }
+}

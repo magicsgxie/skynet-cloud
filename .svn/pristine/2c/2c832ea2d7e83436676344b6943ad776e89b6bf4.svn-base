@@ -1,0 +1,45 @@
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Steeltoe.Discovery.Nacos.Discovery;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Steeltoe.Discovery.Nacos.Registry
+{
+    //public class NacosServiceRegistrar: INacosServiceRegistrar
+    //{
+    //    internal int _running = 0;
+
+    //    private const int NOT_RUNNING = 0;
+    //    private const int RUNNING = 1;
+
+    //    private readonly ILogger<NacosServiceRegistrar> _logger;
+    //    private readonly INacosServiceRegistry _registry;
+    //    private readonly IOptionsMonitor<NacosDiscoveryOptions> _optionsMonitor;
+    //    private readonly NacosDiscoveryOptions _options;
+
+    //    /// <inheritdoc/>
+    //    public INacosRegistration Registration { get; }
+
+    //    public void Start()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void Register()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void Deregister()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public void Dispose()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
+}

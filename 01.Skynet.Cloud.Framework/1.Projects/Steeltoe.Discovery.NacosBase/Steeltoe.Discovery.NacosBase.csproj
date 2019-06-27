@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Steeltoe.Discovery.Nacos</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.Common" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Skynet.Cloud.Nacos\Skynet.Cloud.Nacos.csproj" />
+  </ItemGroup>
+
+</Project>

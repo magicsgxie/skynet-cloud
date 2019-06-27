@@ -1,0 +1,56 @@
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using UWay.Skynet.Cloud.Nacos;
+
+namespace UWay.Skynet.Cloud.WebCore
+{
+    public static class ConfigNacosHostBuilderExtensions
+    {
+        /// <summary>
+        /// Add Config Server and Cloud Foundry as application configuration sources. Add Config Server health check
+        /// contributor to the service container.
+        /// </summary>
+        /// <param name="hostBuilder"><see cref="IWebHostBuilder"/></param>
+        /// <param name="loggerFactory"><see cref="ILoggerFactory"/></param>
+        /// <returns><see cref="IWebHostBuilder"/> with config server and Cloud Foundry Config Provider attached</returns>
+        public static IWebHostBuilder AddConfigNacos(this IWebHostBuilder hostBuilder, ILoggerFactory loggerFactory = null)
+        {
+            hostBuilder.ConfigureAppConfiguration((context, config) =>
+            {
+                var clientFactory = GetHttpClientFactory();
+                var processor = GetProcessor();
+                config.AddConfigNacosServer(context.HostingEnvironment,clientFactory,processor, loggerFactory);
+            });
+
+
+            return hostBuilder;
+        }
+
+      
+
+
+        public static ILocalConfigInfoProcessor GetProcessor()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.TryAddSingleton<ILocalConfigInfoProcessor, MemoryLocalConfigInfoProcessor>();
+
+            return serviceCollection.BuildServiceProvider().GetService<ILocalConfigInfoProcessor>();
+        }
+
+        public static IHttpClientFactory GetHttpClientFactory()
+        {
+            IServiceCollection collection = new ServiceCollection();
+            collection.AddHttpClient(ConstValue.ClientName)
+                      .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler() { UseProxy = false });
+
+            return collection.BuildServiceProvider().GetService<IHttpClientFactory>();
+        }
+
+    }
+}

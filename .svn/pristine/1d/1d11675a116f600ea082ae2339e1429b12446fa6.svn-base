@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Mapping xlmns="urn:ulinq-mapping-1.0"
+         Namespace="Skynet.Cloud.Test1.Entity"
+         AssemblyName="Skynet.Cloud.Test1.Entity">
+  <Table Name="NE_BSC_C" Class="NeBscOrMme">
+    <Id Name="NE_SYS_ID" Member = "NeMmeID"  IsDbGenerated ="false"/>
+    <Column Name = "BSC_ID" Member="MmeID" />
+    <Column Name="CHINA_NAME" Member="NeName"/>
+    <Column Name="CITY_ID" Member="CityID"/>
+    <Column Name="CITY_NAME" Member="CityName"/>
+    <Column Name = "RELATED_MSC" Member="NeOmcID" />
+    <Ignore Member="VendorName"/>
+  </Table>
+</Mapping>

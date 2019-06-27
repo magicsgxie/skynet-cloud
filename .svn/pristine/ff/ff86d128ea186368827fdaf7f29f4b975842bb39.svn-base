@@ -1,0 +1,109 @@
+﻿using System;
+using System.Collections.Generic;
+using UWay.Skynet.Cloud.Data;
+
+namespace Skynet.Cloud.Test1.Entity
+{
+    public class BasicNe
+    {
+        /// <summary>
+        /// 网元唯一标识
+        /// </summary>
+        [Ignore]
+        
+        public virtual string NeSysID
+        {
+            set;
+            get;
+        }
+
+
+        /// <summary>
+        /// 网元名称
+        /// </summary>
+        
+        //[Column("CHINA_NAME")]
+        public virtual string NeName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 网元级别
+        /// </summary>
+        
+        [Ignore]
+        public int NeLevel
+        {
+            get;
+            set;
+        }
+
+
+        private string _verndor = string.Empty;
+        /// <summary>
+        /// 厂家
+        /// </summary>
+        
+        //[Column("VENDOR")]
+        public string Vendor
+        {
+            set
+            {
+                _verndor = value;
+            }
+            get
+            {
+                return _verndor;
+
+            }
+        }
+
+
+        private string _vendorName;
+        /// <summary>
+        /// 厂家名称，考虑到有部分网络制式中没有该字段
+        /// </summary>
+        
+        public string VendorName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 地市ID
+        /// </summary>
+        
+        //[Column("CITY_ID")]
+        public int CityID
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 城市名称
+        /// </summary>
+        
+        //[Column("CITY_NAME")]
+        public string CityName
+        {
+            set;
+            get;
+        }
+
+
+        /// <summary>
+        /// 网络制式
+        /// </summary>
+        
+        [Ignore]
+        public int NetType
+        {
+            set;
+            get;
+        }
+    }
+}

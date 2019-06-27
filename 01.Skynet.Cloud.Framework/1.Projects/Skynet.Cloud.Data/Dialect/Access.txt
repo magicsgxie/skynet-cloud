@@ -1,0 +1,70 @@
+﻿Access函数大全
+2009-12-23 来源:中国Asp之家  
+▲日期/时间
+CDate  将字符串转化成为日期 select CDate("2005/4/5")
+Date  返回当前日期
+DateAdd  将指定日期加上某个日期select dateAdd("d",30,Date())将当前日期加上30天,其中d可以换为yyyy或H等
+DateDiff 判断两个日期之间的间隔 select DateDiff("d","2006-5-1","2006-6-1")返回31,其中d可以换为yyyy,m,H等
+DatePart 返回日期的某个部分 select DatePart("d","2006-5-1")返回1,即1号，d也可以换为yyyy或m
+Day  返回日期的d部分,等同于datepart的d部分
+Hour  返回日期的小时
+IsDate  判断是否是日期,是日期返回-1,不是日期返回0
+Minute  返回日期的分钟部分
+Month  返回日期的月份部分
+Now  返回当前时间(完整时间，包括年月日 小时分秒)
+Second  返回日期的秒部分
+Time  返回当前的时间部分(即除去年/月/日的部分)
+Weekday  返回某个日期的当前星期(星期天为1,星期一为2,星期二为3...)，例如select weekday(now());
+Year  返回某个日期的年份
+
+▲检查
+IsEmpty  检测是否为空(不过经测试，不管什么情况，都返回0)
+IsNull  检测是否为Null值，null值返回0，非null值返回-1
+IsNumeric 检测是否为数字,是数字返回-1，否则返回0
+
+算术
+Abs   绝对值
+Atn   返正切值。
+Cos   余弦值
+Exp   返回 e 的给定次幂。
+Fix   返回数字的整数部分(即小数部分完全截掉)
+Int  将数字向下取整到最接近的整数。(其实等同于Fix)
+Log  返回以E为底的对数值
+Rnd  返回一个0到1之间的随机数值
+Sgn  返回数字的正负符号(正数返回1,负数返回-1,0值返回0)
+Sin  正弦值
+Sqr  返回平方根值
+Tan   正切值
+
+▲程序流程
+Choose  根据第一参数，返回后面字符串组的值,Select Choose(1,"a","b","c")返回a,将1改成2后，返回b,改成3后，返回c(第一个参数也可以是某个字段)
+IIF  根据表达式返回特定的值 Select IIF("3>1","OK","False")，返回OK
+
+▲Sql合计函数
+Avg  取字段平均值
+Count  统计记录条数
+Max  取字段最大值
+Min  取字段最小值
+StDev  估算样本的标准差（忽略样本中的逻辑值和文本）。
+StDevP  计算以参数形式（忽略逻辑值和文本）给出的整个样本总体的标准偏差。
+Sum  计算字段的总合
+Var  估算样本方差（忽略样本中的逻辑值和文本）。
+VarP  计算整个样本总体的方差（忽略样本总体中的逻辑值和文本）。
+
+
+▲文本
+Asc   返回字母的Acsii值，select Asc("A")返回65
+Chr   将ascii值转换到字符 select chr(65)返回"A"
+Format   格式化字符串，Select Format(now(),'yyyy-mm-dd')返回类似于"2005-04-03" ,Select Format(3/9,"0.00")返回0.33
+InStr   查询子串在字符串中的位置 select Instr("abc","a")返回1,select Instr("abc","f")返回0 
+LCase  返回字符串的小写形式 
+Left  左截取字符串
+Len  返回字符串长度
+LTrim  左截取空格
+Mid    取得子字符串 select mid("123",1,2) as midDemo 返回12
+Right  右截取字符串
+RTrim  右截取空格
+Space  产生空格 select Space(4)返回4个空格
+StrComp  比较两个字符串是否内容一致(不区分大小写)select StrComp("abc","ABC")返回0,select StrComp("abc","123")返回-1
+Trim  截取字符串两头的空格
+UCase  将字符串转大写

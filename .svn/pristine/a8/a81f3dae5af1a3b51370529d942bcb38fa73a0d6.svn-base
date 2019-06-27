@@ -1,0 +1,21 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.Text;
+using UWay.Skynet.Cloud.Nacos;
+
+namespace Steeltoe.Discovery.Nacos
+{
+    //public class NacosClientFactory
+    //{
+    //    public static INacosClient CreateClient(NacosOptions options)
+    //    {
+    //        if(options == null)
+    //        {
+    //            throw new ArgumentNullException(nameof(options));
+    //        }
+
+    //        var client = new NacosClient();
+    //    }
+    //}
+}

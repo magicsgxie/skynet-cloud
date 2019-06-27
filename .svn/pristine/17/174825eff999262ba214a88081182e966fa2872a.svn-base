@@ -1,0 +1,20 @@
+﻿using Steeltoe.Common.Discovery;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Steeltoe.Discovery.Nacos.Registry
+{
+    public interface INacosRegistration : IServiceInstance
+    {
+        /// <summary>
+        /// Gets the Nacos service registration
+        /// </summary>
+        //AgentServiceRegistration Service { get; }
+
+        /// <summary>
+        /// Gets the instance id to use for registration
+        /// </summary>
+        string InstanceId { get; }
+    }
+}
