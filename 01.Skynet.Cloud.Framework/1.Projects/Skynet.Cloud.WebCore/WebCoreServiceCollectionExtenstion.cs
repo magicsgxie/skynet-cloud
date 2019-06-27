@@ -28,7 +28,8 @@ namespace UWay.Skynet.Cloud.WebCore
     {
         private static readonly string SKYNET = "skynet";
         private static readonly string SKYNET_CLOUD = "cloud";
-        private static readonly string SKYNET_CLOUD_SERVICE_DB = "db";
+        private static readonly string SKYNET_CLOUD_SERVICE_DBNAME = "db";
+        private static readonly string SKYNET_CLOUD_SERVICE_FROM = "from";
         private static readonly string SKYNET_CLOUD_SERVICE_ROUTE = "route";
         private static readonly string SKYNET_CLOUD_SERVICE_INTERFACE = "interface";
         private static readonly string SKYNET_CLOUD_SERVICE_IMPL = "impl";
@@ -46,7 +47,8 @@ namespace UWay.Skynet.Cloud.WebCore
         private static void AddDataBaseInfo(IConfiguration config, string containerName, string providerName, string serviceName = null, ILoggerFactory loggerFactory = null)
         {
             var section = config.GetSection(SKYNET).GetSection(SKYNET_CLOUD);
-            var useMainDb = section.GetValue<string>(SKYNET_CLOUD_SERVICE_DB,"upms");
+            var defaultContainer = section.GetValue<string>(SKYNET_CLOUD_SERVICE_DBNAME, "upms");
+            var isFromDB = section.GetValue<bool>(SKYNET_CLOUD_SERVICE_FROM, false);
             var useDbRoute = section.GetValue<bool>(SKYNET_CLOUD_SERVICE_ROUTE, false);
             var moduleAssmbly = section.GetValue<string>(SKYNET_CLOUD_SERVICE_ENTITY, "Skynet.Cloud.Framework");
             //"DB_Oracle_ConnStr"
@@ -67,9 +69,9 @@ namespace UWay.Skynet.Cloud.WebCore
                 }    
             }
 
-            if (!string.IsNullOrEmpty(useMainDb))
+            if (!string.IsNullOrEmpty(defaultContainer))
             {
-                AddMainDb(containerName, dbConnectionString, providerName, moduleAssmbly, loggerFactory);
+                AddMainDb(containerName, dbConnectionString, providerName, moduleAssmbly, isFromDB, defaultContainer, loggerFactory);
             }
 
             if (useDbRoute)
@@ -103,20 +105,37 @@ namespace UWay.Skynet.Cloud.WebCore
             return services;
         }
 
-        private static void AddMainDb(string container, string dbConnectionString, string providerName, string entityAssmbly, ILoggerFactory loggerFactory = null)
+        private static void AddMainDb(string container, string dbConnectionString, string providerName, string entityAssmbly, bool isFromDB, string defaultContainer, ILoggerFactory loggerFactory = null)
         {
             //var entityAssmbly = config.GetSection("appSettings").GetValue<string>("ENTITY_ASSMBLY");
-            var dbContextOption = GetMainDbContextOption(new DbContextOption
+            DbContextOption dbContextOption = null;
+            if(isFromDB)
             {
-                Container = container,
-                ConnectionString = dbConnectionString,
-                //ModuleAssemblyName = entityAssmbly,
-                Provider = providerName,
-                LogggerFactory = loggerFactory
-            });
-            //dbContextOption.ModuleAssemblyName = entityAssmbly;
+                dbContextOption = GetMainDbContextOption(new DbContextOption
+                {
+                    Container = container,
+                    ConnectionString = dbConnectionString,
+                    ModuleAssemblyName = entityAssmbly,
+                    Provider = providerName,
+                    LogggerFactory = loggerFactory
+                },defaultContainer);
+                //dbContextOption.ModuleAssemblyName = entityAssmbly;
+                
+            }
+            else
+            {
+                dbContextOption = new DbContextOption
+                {
+                    Container = defaultContainer,
+                    ConnectionString = dbConnectionString,
+                    ModuleAssemblyName = entityAssmbly,
+                    Provider = providerName,
+                    LogggerFactory = loggerFactory
+                };
+            }
+
             DbConfiguration.Configure(dbContextOption);
-            
+
         }
 
         private static void AddRouteDb(string defaultContainer, string defaultDbConnectionString, string defaultProviderName, string defaultEntityAssmbly, ILoggerFactory loggerFactory = null)
@@ -125,7 +144,7 @@ namespace UWay.Skynet.Cloud.WebCore
             {
                 Container = defaultContainer,
                 ConnectionString = defaultDbConnectionString,
-                //ModuleAssemblyName = defaultEntityAssmbly,
+                ModuleAssemblyName = defaultEntityAssmbly,
                 Provider = defaultProviderName,
                 LogggerFactory = loggerFactory
             });
@@ -198,15 +217,13 @@ namespace UWay.Skynet.Cloud.WebCore
             return RegistryService(config, services);
         }
 
-        private static DbContextOption GetMainDbContextOption(DbContextOption dbContextOption)
+        private static DbContextOption GetMainDbContextOption(DbContextOption dbContextOption, string defaultContainer)
         {
             
             using (var connContext = new ProtocolDbContext(dbContextOption))
             {
-                var containerName = "xxx";
-                var conn1 = connContext.Set<ProtocolInfo>().SingleOrDefault(p => p.Description == containerName);
                 //var conn2 = connContext.Set<ProtocolInfo>().SingleOrDefault(p => p.ContainerName== containerName);
-                var conn = connContext.Set<ProtocolInfo>().Where(p => p.ProtocalType == ProtocalType.DB && p.ContainerName.Equals("upms")).ToList();
+                var conn = connContext.Set<ProtocolInfo>().Where(p => p.ProtocalType == ProtocalType.DB && p.ContainerName.Equals(defaultContainer)).ToList();
 
                 if (conn != null && conn.Count > 0)
                 {
@@ -247,7 +264,7 @@ namespace UWay.Skynet.Cloud.WebCore
 
                 return new DbContextOption()
                 {
-                    Container = "upms",
+                    Container = defaultContainer,
                     Provider = dbContextOption.Provider,
                     ConnectionString = dbContextOption.ConnectionString,
                     ModuleAssemblyName = dbContextOption.ModuleAssemblyName,
