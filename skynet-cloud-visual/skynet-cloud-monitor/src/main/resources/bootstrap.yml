@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: monitor-back
+  profiles:
+    active: dev
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        format: FILES
+        enabled: true
+        watch:
+          enabled: true
+      discovery:
+        prefer-ip-address: true
+        heartbeat:
+          enabled: true
+  boot:
+    admin:
+      discovery:
+        ignored-services: consul
+server:
+  port: 8764
+
+---
+spring:
+  profiles: dev
+
+
+---
+spring:
+  profiles: test
+
+---
+spring:
+  profiles: prod

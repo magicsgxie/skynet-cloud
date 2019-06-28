@@ -54,6 +54,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{3ED9DD11-7779-4BBC-B44C-019982D9C27D}"
 	ProjectSection(SolutionItems) = preProject
 		config.yaml = config.yaml
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Cloud.CloudFoundryDemo", "01.Skynet.Cloud.Framework\3.Demo\Skynet.Cloud.Cloud.CloudFoundryDemo\Skynet.Cloud.Cloud.CloudFoundryDemo.csproj", "{F3EEA3D7-3E02-4D72-88AF-9B7ECD30AD33}"
@@ -82,7 +83,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Mvc", "01.Skyn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Security", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Security\Skynet.Cloud.Security.csproj", "{E77F880C-025E-424D-9D89-15C99596F6E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.WebCore.Test", "01.Skynet.Cloud.Framework\2.UnitTest\Skynet.Cloud.WebCore.Test\Skynet.Cloud.WebCore.Test.csproj", "{FC32CC06-5E07-4192-BFD0-2E176ECC693F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.WebCore.Test", "01.Skynet.Cloud.Framework\2.UnitTest\Skynet.Cloud.WebCore.Test\Skynet.Cloud.WebCore.Test.csproj", "{FC32CC06-5E07-4192-BFD0-2E176ECC693F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

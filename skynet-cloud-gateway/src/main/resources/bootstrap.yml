@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: skynet-cloud-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.15.125:8848
+        file-extension: yaml
+    sentinel:
+      transport:
+        dashboard: 192.168.15.125:8095
+        port: 7080
+      eager: true
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles: dev
+
+
+---
+spring:
+  profiles: test
+
+---
+spring:
+  profiles: prod

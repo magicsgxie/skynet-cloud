@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: skynet-cloud-zipkin
+  profiles:
+    active: dev
+server:
+  port: 5002

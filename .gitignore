@@ -339,3 +339,9 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /.svn
+/$tf
+
+*.iml
+*/*.iml
+*/**/*.iml
+target
