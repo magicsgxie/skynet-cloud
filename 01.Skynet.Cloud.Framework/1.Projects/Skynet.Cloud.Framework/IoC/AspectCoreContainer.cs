@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace UWay.Skynet.Cloud.IoC
 {
+    /// <summary>
+    /// IoC容器初始化
+    /// </summary>
     public class AspectCoreContainer
     {
         private static IServiceResolver resolver { get; set; }

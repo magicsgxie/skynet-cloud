@@ -22,6 +22,13 @@ namespace UWay.Skynet.Cloud.Extensions
 
         #region ToDictionary
 
+        /// <summary>
+        /// 转化字典
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="t">转化类</param>
+        /// <param name="dic">字典</param>
+        /// <returns>返回字典</returns>
         public static Dictionary<string, string> ToDictionary<T>(this T t, Dictionary<string, string> dic = null) where T : class
         {
             if (dic == null)
@@ -35,6 +42,14 @@ namespace UWay.Skynet.Cloud.Extensions
             return dic;
         }
 
+        /// <summary>
+        /// 转化字典
+        /// </summary>
+        /// <typeparam name="TInterface">接口</typeparam>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="t">实体</param>
+        /// <param name="dic">字典</param>
+        /// <returns></returns>
         public static Dictionary<string, string> ToDictionary<TInterface, T>(this TInterface t, Dictionary<string, string> dic = null) where T : class, TInterface
         {
             if (dic == null)

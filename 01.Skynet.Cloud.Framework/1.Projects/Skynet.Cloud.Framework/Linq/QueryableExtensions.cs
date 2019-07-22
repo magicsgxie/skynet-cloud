@@ -9,7 +9,7 @@ namespace UWay.Skynet.Cloud.Linq
     using System.Linq;
     using System.Linq.Expressions;
     using UWay.Skynet.Cloud.Extensions;
-    using UWay.Skynet.Cloud.DataSource;
+    using UWay.Skynet.Cloud.Request;
     using UWay.Skynet.Cloud.Linq.Impl;
     using UWay.Skynet.Cloud.Linq.Extentions;
     using UWay.Skynet.Cloud.Reflection;
@@ -18,7 +18,7 @@ namespace UWay.Skynet.Cloud.Linq
     using UWay.Skynet.Cloud.Linq.Impl.Grouping;
     using UWay.Skynet.Cloud.Linq.Impl.Internal;
     using System.Reflection;
-
+   
     /// <summary>
     /// Provides extension methods to process DataSourceRequest.
     /// </summary>
@@ -91,6 +91,8 @@ namespace UWay.Skynet.Cloud.Linq
             return dataTable.WrapAsEnumerable().ToDataSourceResult(request);
         }
 
+        
+
         public static DataSourceResult ToDataSourceResult(this IEnumerable enumerable, DataSourceRequest request)
         {
             return enumerable.AsQueryable().ToDataSourceResult(request);
@@ -107,7 +109,12 @@ namespace UWay.Skynet.Cloud.Linq
 
 
 
+        public static DataSourceResult<TResult> ToDataSoureceTResult<TResult>(this IQueryable queryable, DataSourceRequest request)
+        {
+            return queryable.CreateDataSourceTResult<TResult>(request);
+        }
 
+        
 
         public static DataSourceResult ToDataSourceResult(this IQueryable queryable, DataSourceRequest request)
         {
@@ -210,8 +217,121 @@ namespace UWay.Skynet.Cloud.Linq
 
             return result;
         }
-        
-        
+
+        private static DataSourceResult<TResult> CreateDataSourceTResult<TResult>(this IQueryable queryable, DataSourceRequest request)
+        {
+            var result = new DataSourceResult<TResult>();
+
+            var data = queryable;
+
+            var filters = new List<IFilterDescriptor>();
+
+            if (request.Filters != null)
+            {
+                filters.AddRange(request.Filters);
+            }
+
+            if (filters.Any())
+            {
+                data = data.Where(filters);
+            }
+
+            var sort = new List<SortDescriptor>();
+
+            if (request.Sorts != null)
+            {
+                sort.AddRange(request.Sorts);
+            }
+
+            var temporarySortDescriptors = new List<SortDescriptor>();
+
+            IList<GroupDescriptor> groups = new List<GroupDescriptor>();
+
+            if (request.Groups != null)
+            {
+                groups.AddRange(request.Groups);
+            }
+
+            var aggregates = new List<AggregateDescriptor>();
+
+            if (request.Aggregates != null)
+            {
+                aggregates.AddRange(request.Aggregates);
+            }
+
+            if (aggregates.Any())
+            {
+                var dataSource = data.AsQueryable();
+
+                var source = dataSource;
+                if (filters.Any())
+                {
+                    source = dataSource.Where(filters);
+                }
+
+                result.AggregateResults = source.Aggregate(aggregates.SelectMany(a => a.Aggregates));
+
+                if (groups.Any() && aggregates.Any())
+                {
+                    groups.ForEach(g => g.AggregateFunctions.AddRange(aggregates.SelectMany(a => a.Aggregates)));
+                }
+            }
+
+            result.Total = data.LongCount();
+
+            if (!sort.Any() && queryable.Provider.IsEntityFrameworkProvider())
+            {
+                // The Entity Framework provider demands OrderBy before calling Skip.
+                SortDescriptor sortDescriptor = new SortDescriptor
+                {
+                    Member = queryable.ElementType.FirstSortableProperty()
+                };
+                sort.Add(sortDescriptor);
+                temporarySortDescriptors.Add(sortDescriptor);
+            }
+
+            if (groups.Any())
+            {
+                groups.Reverse().ForEach(groupDescriptor =>
+                {
+                    var sortDescriptor = new SortDescriptor
+                    {
+                        Member = groupDescriptor.Member,
+                        SortDirection = groupDescriptor.SortDirection
+                    };
+
+                    sort.Insert(0, sortDescriptor);
+                    temporarySortDescriptors.Add(sortDescriptor);
+                });
+            }
+
+            if (sort.Any())
+            {
+                data = data.Sort(sort);
+            }
+
+            var notPagedData = data;
+
+            data = data.Page(request.Page - 1, request.PageSize);
+
+            if (groups.Any())
+            {
+                data = data.GroupBy(notPagedData, groups);
+            }
+
+            result.Data = data.ExecuteTResult<TResult, TResult>(null);
+
+            //if (modelState != null && !modelState.IsValid)
+            //{
+            //    result.Errors = modelState.SerializeErrors();
+            //}
+
+            temporarySortDescriptors.ForEach(sortDescriptor => sort.Remove(sortDescriptor));
+
+            return result;
+        }
+
+
 
         private static DataSourceResult CreateDataSourceResult<TModel, TResult>(this IQueryable queryable, DataSourceRequest request,  Func<TModel, TResult> selector)
         {
@@ -272,7 +392,7 @@ namespace UWay.Skynet.Cloud.Linq
                 }
             }
 
-            result.Total = data.Count();
+            result.Total = data.LongCount();
 
             if (!sort.Any() && queryable.Provider.IsEntityFrameworkProvider())
             {
@@ -363,7 +483,7 @@ namespace UWay.Skynet.Cloud.Linq
         /// <returns>
         /// An <see cref="IQueryable" /> whose elements are at the specified <paramref name="pageIndex"/>.
         /// </returns>
-        public static IQueryable Page(this IQueryable source, long pageIndex, int pageSize)
+        public static IQueryable Page(this IQueryable source, int pageIndex, int pageSize)
         {
             IQueryable query = source;
 
@@ -377,6 +497,29 @@ namespace UWay.Skynet.Cloud.Linq
             return query;
         }
 
+        /// <summary>
+        /// Pages through the elements of a sequence until the specified 
+        /// <paramref name="pageIndex"/> using <paramref name="pageSize"/>.
+        /// </summary>
+        /// <param name="source">A sequence of values to page.</param>
+        /// <param name="pageIndex">Index of the page.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <returns>
+        /// An <see cref="IQueryable" /> whose elements are at the specified <paramref name="pageIndex"/>.
+        /// </returns>
+        public static IQueryable Page(this IQueryable source, long pageIndex, long pageSize)
+        {
+            IQueryable query = source;
+
+            query = query.Skip(pageIndex * pageSize);
+
+            if (pageSize > 0)
+            {
+                query = query.Take(pageSize);
+            }
+
+            return query;
+        }
         /// <summary>
         /// Projects each element of a sequence into a new form.
         /// </summary>
@@ -522,6 +665,25 @@ namespace UWay.Skynet.Cloud.Linq
         /// </returns>
         /// <param name="source"> An <see cref="IQueryable" /> to filter.</param>
         /// <param name="predicate"> A function to test each element for a condition.</param>
+        public static IQueryable<TSource> Where<TSource>(this IQueryable<TSource> source, Expression predicate)
+        {
+            return source.Provider.CreateQuery<TSource>(
+               Expression.Call(
+                   typeof(Queryable),
+                   "Where",
+                   new[] { source.ElementType },
+                   source.Expression,
+                   Expression.Quote(predicate)));
+        }
+        /// <summary> 
+        /// Filters a sequence of values based on a predicate. 
+        /// </summary>
+        /// <returns>
+        /// An <see cref="IQueryable" /> that contains elements from the input sequence 
+        /// that satisfy the condition specified by <paramref name="predicate" />.
+        /// </returns>
+        /// <param name="source"> An <see cref="IQueryable" /> to filter.</param>
+        /// <param name="predicate"> A function to test each element for a condition.</param>
         public static IQueryable Where(this IQueryable source, Expression predicate)
         {
             return source.Provider.CreateQuery(
@@ -576,14 +738,23 @@ namespace UWay.Skynet.Cloud.Linq
                     source.Expression, Expression.Quote(lambda)));
         }
 
-        public static IQueryable<TSource> Where<TSource>(this IQueryable<TSource> sources, IEnumerable<IFilterDescriptor> filterDescriptors)
+        public static IQueryable<TSource> Where<TSource>(this IQueryable<TSource> source, IEnumerable<IFilterDescriptor> filterDescriptors)
         {
             if (filterDescriptors.Any())
             {
-                var seacher = new QueryableSearcher<TSource>();
-                return sources.Where<TSource>(seacher.GetExpression(filterDescriptors));
+                if (filterDescriptors.Any())
+                {
+                    var parameterExpression = Expression.Parameter(source.ElementType, "item");
+
+                    var expressionBuilder = new FilterDescriptorCollectionExpressionBuilder(parameterExpression, filterDescriptors);
+                    expressionBuilder.Options.LiftMemberAccessToNull = source.Provider.IsLinqToObjectsProvider();
+                    var predicate = expressionBuilder.CreateFilterExpression();
+                    return source.Where<TSource>(predicate);
+                }
+                //var seacher = new QueryableSearcher<TSource>();
+                //return sources.Where<TSource>(seacher.GetExpression(filterDescriptors));
             }
-            return sources;
+            return source;
         }
         /// <summary>
         /// Returns a specified number of contiguous elements from the start of a sequence.
@@ -606,6 +777,68 @@ namespace UWay.Skynet.Cloud.Linq
         }
 
         /// <summary>
+        /// Returns a specified number of contiguous elements from the start of a sequence.
+        /// </summary>
+        /// <returns>
+        /// An <see cref="IQueryable" /> that contains the specified number 
+        /// of elements from the start of <paramref name="source" />.
+        /// </returns>
+        /// <param name="source"> The sequence to return elements from.</param>
+        /// <param name="count"> The number of elements to return. </param>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is null. </exception>
+        public static IQueryable Take(this IQueryable source, long count)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            return source.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(QueryableExtensions), "Take",
+                    new Type[] { source.ElementType },
+                    source.Expression, Expression.Constant(count)));
+        }
+
+
+        private static MethodInfo s_Take_TSource_2;
+
+        public static MethodInfo Take_TSource_2(Type TSource) =>
+             (s_Take_TSource_2 ??
+             (s_Take_TSource_2 = new Func<IQueryable<object>, int, IQueryable<object>>(Queryable.Take).GetMethodInfo().GetGenericMethodDefinition()))
+              .MakeGenericMethod(TSource);
+
+
+        public static IQueryable<TSource> Take<TSource>(this IQueryable<TSource> source, long count)
+        {
+            //if (source == null)
+            //    throw Error.ArgumentNull(nameof(source));
+            Guard.NotNull(source, "source");
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    Take_TSource_2(typeof(TSource)),
+                    source.Expression, Expression.Constant(count)
+                    ));
+        }
+
+        /// <summary>
+        /// Returns a specified number of contiguous elements from the start of a sequence.
+        /// </summary>
+        /// <returns>
+        /// An <see cref="IQueryable" /> that contains the specified number 
+        /// of elements from the start of <paramref name="source" />.
+        /// </returns>
+        /// <param name="source"> The sequence to return elements from.</param>
+        /// <param name="count"> The number of elements to return. </param>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is null. </exception>
+        public static IQueryable Skip(this IQueryable source, int count)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            return source.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(Queryable), "Skip",
+                    new Type[] { source.ElementType },
+                    source.Expression, Expression.Constant(count)));
+        }
+
+        /// <summary>
         /// Bypasses a specified number of elements in a sequence 
         /// and then returns the remaining elements.
         /// </summary>
@@ -623,11 +856,28 @@ namespace UWay.Skynet.Cloud.Linq
         public static IQueryable Skip(this IQueryable source, long count)
         {
             if (source == null) throw new ArgumentNullException("source");
-            return source.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable), "Skip",
+            var expression = Expression.Call(
+                    typeof(QueryableExtensions), "Skip",
                     new Type[] { source.ElementType },
-                    source.Expression, Expression.Constant(count)));
+                    source.Expression, Expression.Constant(count));
+            return source.Provider.CreateQuery(expression);
+        }
+
+        private static MethodInfo s_Skip_TSource_2;
+        public static MethodInfo Skip_TSource_2(Type TSource) =>
+            (s_Skip_TSource_2 ??
+            (s_Skip_TSource_2 = new Func<IQueryable<object>, long, IQueryable<object>>(QueryableExtensions.Skip).GetMethodInfo().GetGenericMethodDefinition()))
+             .MakeGenericMethod(TSource);
+
+        public static IQueryable<TSource> Skip<TSource>(this IQueryable<TSource> source, long count)
+        {
+            Guard.NotNull(source, "source");
+            return source.Provider.CreateQuery<TSource>(
+                Expression.Call(
+                    null,
+                    Skip_TSource_2(typeof(TSource)),
+                    source.Expression, Expression.Constant(count)
+                    ));
         }
 
         /// <summary> Returns the number of elements in a sequence.</summary>
@@ -642,6 +892,21 @@ namespace UWay.Skynet.Cloud.Linq
             return source.Provider.Execute<int>(
                 Expression.Call(
                     typeof(Queryable), "Count",
+                    new Type[] { source.ElementType }, source.Expression));
+        }
+
+        /// <summary> Returns the number of elements in a sequence.</summary>
+        /// <returns> The number of elements in the input sequence.</returns>
+        /// <param name="source">
+        /// The <see cref="IQueryable" /> that contains the elements to be counted.
+        /// </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="source" /> is null.</exception>
+        public static long LongCount(this IQueryable source)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            return source.Provider.Execute<long>(
+                Expression.Call(
+                    typeof(Queryable), "LongCount",
                     new Type[] { source.ElementType }, source.Expression));
         }
 
@@ -690,6 +955,42 @@ namespace UWay.Skynet.Cloud.Linq
 
             return query;
         }
+
+        private static IEnumerable<TResult> ExecuteTResult<TModel, TResult>(this IQueryable source, Func<TModel, TResult> selector)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+
+
+
+            var type = source.ElementType;
+            if (selector != null)
+            {
+                var list = new List<TResult>();
+
+                foreach (TModel item in source)
+                {
+                    list.Add(selector(item));
+                }
+
+                return list;
+            }
+            else
+            {
+                IList<TResult> list = Activator.CreateInstance<List<TResult>>();
+                //var list = (IList<>)Activator.CreateInstance(typeof(List<>).MakeGenericType(type));
+
+                foreach (var item in source)
+                {
+                    list.Add(item.JsonSerialize().JsonDeserialize<TResult>());
+                }
+
+                return list;
+            }
+
+
+
+        }
+        
 
         private static IEnumerable Execute<TModel, TResult>(this IQueryable source, Func<TModel, TResult> selector)
         {

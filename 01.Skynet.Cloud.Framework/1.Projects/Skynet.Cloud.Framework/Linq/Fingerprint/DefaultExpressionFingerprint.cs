@@ -19,6 +19,11 @@ namespace UWay.Skynet.Cloud.Linq
             DefaultExpressionFingerprint fingerprint = obj as DefaultExpressionFingerprint;
             return ((fingerprint != null) && base.Equals((ExpressionFingerprint)fingerprint));
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
 

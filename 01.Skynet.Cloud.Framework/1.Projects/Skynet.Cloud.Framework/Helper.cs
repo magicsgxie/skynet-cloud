@@ -18,17 +18,26 @@ using UWay.Skynet.Cloud.Collections;
 using UWay.Skynet.Cloud.Reflection;
 using UWay.Skynet.Cloud.Steganogram;
 using UWay.Skynet.Cloud.Helpers;
+using UWay.Skynet.Cloud.Request;
+using UWay.Skynet.Cloud.Linq;
 
 namespace UWay.Skynet.Cloud
 {
 
    
 
-
+    /// <summary>
+    /// 枚举一次列表
+    /// </summary>
+    /// <typeparam name="T">枚举类型</typeparam>
     public class EnumerateOnce<T> : IEnumerable<T>, IEnumerable
     {
         IEnumerable<T> enumerable;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="enumerable"></param>
         public EnumerateOnce(IEnumerable<T> enumerable)
         {
             this.enumerable = enumerable;
@@ -49,6 +58,11 @@ namespace UWay.Skynet.Cloud
             return this.GetEnumerator();
         }
     }
+
+    /// <summary>
+    /// 普通可枚举类型
+    /// </summary>
+    /// <typeparam name="T">枚举类型</typeparam>
     class GenericEnumerable<T> : IEnumerable<T>
     {
         private readonly IEnumerable source;
@@ -76,6 +90,10 @@ namespace UWay.Skynet.Cloud
         }
     }
 
+
+    /// <summary>
+    /// 基础平台扩展类
+    /// </summary>
     public static partial class Helper
     {
 
@@ -132,6 +150,12 @@ namespace UWay.Skynet.Cloud
         private const string RegExpressionWithPrefix = @"(?<!\\{0}*)(?<={0})(?<exp>\w+)";
         private const string GroupName = "exp";
 
+        /// <summary>
+        /// string 匹配
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="reg"></param>
+        /// <returns></returns>
         public static bool Match(this string src, string reg)
         {
             Regex regex = new Regex(reg);
@@ -185,6 +209,28 @@ namespace UWay.Skynet.Cloud
         }
 
         /// <summary>
+        /// 字符串首字母小写
+        /// </summary>
+        /// <param name="src"></param>
+        /// <returns></returns>
+        public static string FirstLower(this string src)
+        {
+            Guard.NotNullOrEmpty(src, "scr");
+            return src[0].ToString().ToLower() + src.Remove(0, 1);
+        }
+
+        /// <summary>
+        /// 字符串首字母大写
+        /// </summary>
+        /// <param name="src"></param>
+        /// <returns></returns>
+        public static string FirstUpper(this string src)
+        {
+            Guard.NotNullOrEmpty(src, "scr");
+            return src[0].ToString().ToUpper() + src.Remove(0, 1);
+        }
+
+        /// <summary>
         /// 返回所有匹配前缀为'${'，后缀为'}'的蚂蚁表达式
         /// </summary>
         /// <exception cref="System.FormatException">
@@ -212,13 +258,13 @@ namespace UWay.Skynet.Cloud
         }
 
         /// <summary>
-        /// 
+        /// 字符扩展添加前缀
         /// </summary>
         /// <param name="prefix"></param>
         /// <param name="target"></param>
         /// <param name="suffix"></param>
         /// <returns></returns>
-        public static string Surround(string prefix, string target, string suffix)
+        public static string Surround(this string target, string prefix, string suffix)
         {
             return string.Format("{0}{1}{2}", prefix, target, suffix);
         }
@@ -276,6 +322,38 @@ namespace UWay.Skynet.Cloud
 
             return text.Substring(i + 1);
         }
+
+        public static string ToCondition(this IList<IFilterDescriptor> filters, IDictionary<string, object> paramaters)
+        {
+            if (paramaters == null)
+                paramaters = new Dictionary<string, object>();
+
+            IList<string> list = new List<string>();
+            foreach (var filter in filters)
+            {
+                list.Add(filter.CreateFilter(paramaters));
+            }
+            return list.Join(" AND ");
+        }
+
+        /// <summary>
+        /// 转化排序SQL
+        /// </summary>
+        /// <param name="sorts"></param>
+        /// <returns></returns>
+        public static string ToSort(this IList<SortDescriptor> sorts)
+        {
+            IList<string> list = new List<string>();
+            foreach (var sort in sorts)
+            {
+                list.Add(sort.ToSortString());
+            }
+            return string.Format(" order by  {0} ", list.Join(" , "));
+        }
+
+        //public static 
+
+
 
         /// <summary>
         /// 驼峰匹配截断
@@ -395,6 +473,11 @@ namespace UWay.Skynet.Cloud
         }
 
 
+        /// <summary>
+        /// 排序顺序获取
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <returns></returns>
         public static ListSortDirection? Next(this ListSortDirection? direction)
         {
             if (direction == ListSortDirection.Ascending)
@@ -568,6 +651,8 @@ namespace UWay.Skynet.Cloud
             return string.Compare(instance, comparing, StringComparison.OrdinalIgnoreCase) == 0;
         }
 
+
+        private const char SEPARATOR = '_';
         /// <summary>
         /// 转化为驼峰匹配
         /// </summary>
@@ -576,8 +661,80 @@ namespace UWay.Skynet.Cloud
         public static string ToCamelCase(this string instance)
         {
 
-            return instance[0].ToString().ToLowerInvariant() + instance.Substring(1);
+            if (instance == null)
+            {
+                return null;
+            }
+            instance = instance.ToLowerInvariant();
+            StringBuilder sb = new StringBuilder(instance.Length);
+            bool upperCase = false;
+            for (int i = 0; i < instance.Length; i++)
+            {
+                char c = instance.ToCharArray()[i];
+                if(i == 0)
+                {
+                    sb.Append(Char.ToUpperInvariant(c));
+                }
+                else if (c == SEPARATOR)
+                {
+                    upperCase = true;
+                }
+                else if (upperCase)
+                {
+                    sb.Append(Char.ToUpperInvariant(c));
+                    upperCase = false;
+                }
+                else
+                {
+                    sb.Append(char.ToLowerInvariant(c));
+                }
+            }
+
+            return sb.ToString();
         }
+
+        /// <summary>
+        /// 驼峰字符串转化为下划线字符串
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string ToUnderlineName(this string s)
+        {
+            if (s == null)
+            {
+                return null;
+            }
+            StringBuilder sb = new StringBuilder();
+            bool upperCase = false;
+            var charArray = s.ToCharArray();
+            for (int i = 0; i < s.Length; i++)
+            {
+                char c = charArray[i];
+                bool nextUpperCase = true;
+                if (i < (s.Length - 1))
+                {
+                    
+                    nextUpperCase = Char.IsUpper(charArray[i + 1]);
+                }
+                if ((i >= 0) && Char.IsUpper(c))
+                {
+                    if (!upperCase || !nextUpperCase)
+                    {
+                        if (i > 0) sb.Append(SEPARATOR);
+                    }
+                    upperCase = true;
+                }
+                else
+                {
+                    upperCase = false;
+                }
+
+                sb.Append(Char.ToLowerInvariant(c));
+            }
+
+            return sb.ToString();
+        }
+
 
 
         private static readonly Regex NameExpression = new Regex("([A-Z]+(?=$|[A-Z][a-z])|[A-Z]?[a-z]+)", RegexOptions.Compiled);
@@ -757,6 +914,13 @@ namespace UWay.Skynet.Cloud
             return (T)Enum.Parse(typeof(T), value, false);
         }
 
+        /// <summary>
+        /// 将字符转换成对应的枚举类型
+        /// </summary>
+        /// <typeparam name="T">枚举类型</typeparam>
+        /// <param name="value">字符</param>
+        /// <param name="defaultValue">枚举默认值</param>
+        /// <returns>对应的枚举值</returns>
         public static T ToEnum<T>(this string value, T defaultValue)
         {
             if (!value.HasValue())
@@ -774,12 +938,22 @@ namespace UWay.Skynet.Cloud
             }
         }
 
+        /// <summary>
+        /// 转化为Unix ticks
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         public static long ToUnixTicks(this DateTime dt)
         {
             var unixTimestampOrigin = new DateTime(1970, 1, 1);
             return (long)new TimeSpan(dt.Ticks - unixTimestampOrigin.Ticks).TotalMilliseconds;
         }
 
+        /// <summary>
+        /// 转化时间
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <returns></returns>
         public static DateTime? ToDateTime(this DateTimeOffset? offset)
         {
             if (offset.HasValue)
@@ -827,6 +1001,11 @@ namespace UWay.Skynet.Cloud
             return time;
         }
 
+        /// <summary>
+        /// 转化可空时间
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTime? ToNullDateTime(this string value)
         {
             DateTime time;
@@ -1086,6 +1265,13 @@ namespace UWay.Skynet.Cloud
         }
         //#endif
 
+        /// <summary>
+        /// 是否包含字符串
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <param name="comp"></param>
+        /// <returns></returns>
         public static bool Contains(this string source, string target, StringComparison comp)
         {
             return source.IndexOf(target, comp) > -1;
@@ -1336,15 +1522,15 @@ namespace UWay.Skynet.Cloud
             return jObj.Value<string>(prop);
         }
 
-        public static dynamic ToDynamic(this string json)
-        {
-            return JObject.Parse(json);
+        //public static dynamic ToDynamic(this string json)
+        //{
+        //    return JObject.Parse(json);
 
-        }
-        public static string ToJson(dynamic d)
-        {
-            return JObject.FromObject(d).ToString();
-        }
+        //}
+        //public static string ToJson(dynamic d)
+        //{
+        //    return JObject.FromObject(d).ToString();
+        //}
 
 
 
@@ -1631,7 +1817,7 @@ namespace UWay.Skynet.Cloud
 
 
         /// <summary>
-        /// 
+        /// 动态计算
         /// </summary>
         /// <typeparam name="TFirst"></typeparam>
         /// <typeparam name="TSecond"></typeparam>
@@ -1760,6 +1946,11 @@ namespace UWay.Skynet.Cloud
             return c.Any(i => i.Equals(t));
         }
 
+        /// <summary>
+        /// JSON OBJECT转化IDictionary
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public static IEnumerable<IDictionary<string, object>> ToJson(this IEnumerable<JsonObject> items)
         {
             return items.Select(i => i.ToJson());

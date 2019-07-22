@@ -1,8 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>UWay.Skynet.Cloud.Dcs.Entity</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\02.Skynet.Cloud.Upms\1.Projects\Skynet.Cloud.Upms.Entity\DictItem.cs" Link="DictItem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>UWay.Skynet.Cloud.Nom.Entity</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\02.Skynet.Cloud.Upms\1.Projects\Skynet.Cloud.Upms.Entity\CityInfo.cs" Link="CityInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="uway.cdma.normal.mapping.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="uway.gsm.normal.mapping.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="uway.lte.normal.mapping">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="uway.wcdma.normal.mapping.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

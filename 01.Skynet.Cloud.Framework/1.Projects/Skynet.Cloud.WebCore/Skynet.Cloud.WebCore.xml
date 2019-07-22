@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Skynet.Cloud.WebCore</name>
+    </assembly>
+    <members>
+        <member name="T:UWay.Skynet.Cloud.WebCore.BaseJobTrigger">
+            <summary>
+            作业基类
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.BaseJobTrigger.#ctor(System.TimeSpan,System.TimeSpan,UWay.Skynet.Cloud.Trigger.IJobExecutor,Microsoft.Extensions.Logging.ILogger{UWay.Skynet.Cloud.WebCore.BaseJobTrigger})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="dueTime">到期执行时间</param>
+            <param name="periodTime">间隔时间</param>
+            <param name="jobExcutor">任务执行者</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.BaseJobTrigger.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+             系统级任务执行启动
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.BaseJobTrigger.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+             系统级任务执行关闭
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.WebCore.ConfigNacosHostBuilderExtensions">
+            <summary>
+            Nacos Config Host扩展
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.ConfigNacosHostBuilderExtensions.AddConfigNacos(Microsoft.AspNetCore.Hosting.IWebHostBuilder,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Add Config Server and Cloud Foundry as application configuration sources. Add Config Server health check
+            contributor to the service container.
+            </summary>
+            <param name="hostBuilder"><see cref="T:Microsoft.AspNetCore.Hosting.IWebHostBuilder"/></param>
+            <param name="loggerFactory"><see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/></param>
+            <returns><see cref="T:Microsoft.AspNetCore.Hosting.IWebHostBuilder"/> with config server and Cloud Foundry Config Provider attached</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.ConfigNacosHostBuilderExtensions.GetProcessor">
+            <summary>
+            初始化配置处理类
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.ConfigNacosHostBuilderExtensions.GetHttpClientFactory">
+            <summary>
+            初始化Http访问工厂
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.WebCore.ConfigNacosServiceCollectionExtensions">
+            <summary>
+            Extension methods for adding services related to Spring Cloud Config Server.
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.ConfigNacosServiceCollectionExtensions.ConfigureConfigServerClientOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取配置服务信息
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.ConfigNacosServiceCollectionExtensions.AddConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            添加配置
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.WebCore.Constants">
+            <summary>
+            常量
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.WebCore.DiscoveryServiceCollectionExtensions">
+            <summary>
+            服务注册发现扩展类
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.DiscoveryServiceCollectionExtensions.AddDiscoveryClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,Steeltoe.Common.Discovery.DiscoveryOptions,Steeltoe.Common.Discovery.IDiscoveryLifecycle)">
+            <summary>
+            添加服务注册法相扩展
+            </summary>
+            <param name="services"></param>
+            <param name="discoveryOptions"></param>
+            <param name="lifecycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.DiscoveryServiceCollectionExtensions.AddDiscoveryClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Steeltoe.Common.Discovery.DiscoveryOptions},Steeltoe.Common.Discovery.IDiscoveryLifecycle)">
+            <summary>
+            添加服务注册法相扩展
+            </summary>
+            <param name="services"></param>
+            <param name="setupOptions"></param>
+            <param name="lifecycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.DiscoveryServiceCollectionExtensions.AddDiscoveryClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Steeltoe.Common.Discovery.IDiscoveryLifecycle)">
+            <summary>
+            添加服务注册法相扩展
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <param name="lifecycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.DiscoveryServiceCollectionExtensions.AddDiscoveryClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,Steeltoe.Common.Discovery.IDiscoveryLifecycle)">
+            <summary>
+            添加服务注册法相扩展
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <param name="serviceName"></param>
+            <param name="lifecycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.DiscoveryServiceCollectionExtensions.AddDiscoveryServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Steeltoe.CloudFoundry.Connector.Services.IServiceInfo,Microsoft.Extensions.Configuration.IConfiguration,Steeltoe.Common.Discovery.IDiscoveryLifecycle)">
+            <summary>
+            添加服务注册法相扩展
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <param name="info"></param>
+            <param name="lifecycle"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.WebCore.HttpGlobalExceptionFilter">
+            <summary>
+            全局异常过滤
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.WebCore.NacosConfigurationBuilderExtensionsCore">
+            <summary>
+            配置服务端获取扩展
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.NacosConfigurationBuilderExtensionsCore.AddConfigNacosServer(Microsoft.Extensions.Configuration.IConfigurationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment,System.Net.Http.IHttpClientFactory,UWay.Skynet.Cloud.Nacos.ILocalConfigInfoProcessor,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            添加配置服务器
+            </summary>
+            <param name="configurationBuilder">基础配置信息</param>
+            <param name="environment">环境</param>
+            <param name="clientFactory">Http客户端工厂</param>
+            <param name="processor">配置处理器</param>
+            <param name="logFactory">日志工厂</param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.WebCore.VerificationCode">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.VerificationCode.RndNum(System.Int32)">
+            <summary>  
+            该方法用于生成指定位数的随机数  
+            </summary>  
+            <param name="VcodeNum">参数是随机数的位数</param>  
+            <returns>返回一个随机数字符串</returns>  
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.VerificationCode.Create(System.String@,System.Int32)">
+            <summary>  
+            该方法是将生成的随机数写入图像文件  
+            </summary>  
+            <param name="code">code是一个随机数</param>
+            <param name="numbers">生成位数（默认4位）</param>  
+        </member>
+        <member name="T:UWay.Skynet.Cloud.WebCore.WebCoreServiceCollectionExtenstion">
+            <summary>
+            Service扩展类
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.WebCoreServiceCollectionExtenstion.UserRedis(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            使用Redistribution
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.WebCoreServiceCollectionExtenstion.UseOracle(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            使用Oracle
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <param name="serviceName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.WebCoreServiceCollectionExtenstion.AddCustomAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加验证跳转
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.WebCoreServiceCollectionExtenstion.AddCustomMvc(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            添加用户自定义Mvc，主要再建立MvcWeb网站时使用
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.WebCoreServiceCollectionExtenstion.UseMysql(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            使用Mysql数据库
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <param name="serviceName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.WebCore.WebCoreServiceCollectionExtenstion.UseSqlServer(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            使用SQL Server数据库
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <param name="serviceName"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1007,41 +1007,58 @@ namespace UWay.Skynet.Cloud.Data.Render
 			Expression(builder, term.Value);
 		}
 
-/*		protected void SelectModifiers(StringBuilder builder, SelectQuery query)
-		{
-		}
+        /*		protected void SelectModifiers(StringBuilder builder, SelectQuery query)
+                {
+                }
 
-		protected void GroupByModifiers(StringBuilder builder, SelectQuery query)
-		{
-		}
+                protected void GroupByModifiers(StringBuilder builder, SelectQuery query)
+                {
+                }
 
-		//protected void SelectStatement(StringBuilder builder, bool distinct, int top, SelectColumnCollection columns, FromClause from, WhereClause where, GroupByTermCollection groupBy, bool withCube, bool withRollup, OrderByTermCollection orderBy, WhereClause having)
-		protected void SelectStatement(StringBuilder builder, SelectQuery query)
-		{
-			query.Validate();
-			
-			StringBuilder selectBuilder = new StringBuilder();
+                //protected void SelectStatement(StringBuilder builder, bool distinct, int top, SelectColumnCollection columns, FromClause from, WhereClause where, GroupByTermCollection groupBy, bool withCube, bool withRollup, OrderByTermCollection orderBy, WhereClause having)
+                protected void SelectStatement(StringBuilder builder, SelectQuery query)
+                {
+                    query.Validate();
 
-			//Start the select statement
-			Select(selectBuilder, query.Distinct);
-			SelectModifiers(selectBuilder, query);
-			SelectColumns(selectBuilder, query.Columns);
+                    StringBuilder selectBuilder = new StringBuilder();
 
-			this.FromClause(selectBuilder, query.FromClause, query.TableSpace);
-			
-			this.Where(selectBuilder, query.WherePhrase);
-			this.WhereClause(selectBuilder, query.WherePhrase);
+                    //Start the select statement
+                    Select(selectBuilder, query.Distinct);
+                    SelectModifiers(selectBuilder, query);
+                    SelectColumns(selectBuilder, query.Columns);
 
-			GroupBy(selectBuilder, query.GroupByTerms);
-			GroupByTerms(selectBuilder, query.GroupByTerms);
-			GroupByModifiers(selectBuilder, query);
-			
-			Having(selectBuilder, query.HavingPhrase);
-			WhereClause(selectBuilder, query.HavingPhrase);
+                    this.FromClause(selectBuilder, query.FromClause, query.TableSpace);
 
-			OrderBy(selectBuilder, query.OrderByTerms);
-			OrderByTerms(selectBuilder, query.OrderByTerms);
-		}
-*/		
-	}
+                    this.Where(selectBuilder, query.WherePhrase);
+                    this.WhereClause(selectBuilder, query.WherePhrase);
+
+                    GroupBy(selectBuilder, query.GroupByTerms);
+                    GroupByTerms(selectBuilder, query.GroupByTerms);
+                    GroupByModifiers(selectBuilder, query);
+
+                    Having(selectBuilder, query.HavingPhrase);
+                    WhereClause(selectBuilder, query.HavingPhrase);
+
+                    OrderBy(selectBuilder, query.OrderByTerms);
+                    OrderByTerms(selectBuilder, query.OrderByTerms);
+                }
+        */
+        /// <summary>
+        /// 查询数据库中的所有表
+        /// </summary>
+        /// <returns></returns>
+        public abstract string QueryTable();
+
+        /// <summary>
+        /// 查询数据库中的所有表和表中对应的列条件
+        /// </summary>
+        /// <returns></returns>
+        public abstract string QueryTableByTableName();
+
+        /// <summary>
+        /// 查询数据库中的所有表
+        /// </summary>
+        /// <returns></returns>
+        public abstract string QueryTableColumns();
+    }
 }

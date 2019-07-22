@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -10,8 +10,10 @@
         <module>skynet-cloud-visual</module>
         <module>skynet-cloud-common</module>
         <module>skynet-cloud-auth</module>
-        <module>skynet-cloud-modules</module>
         <module>skynet-cloud-gateway</module>
+        <module>skynet-cloud-eureka</module>
+        <module>skynet-cloud-config</module>
+        <module>skynet-cloud-modules</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
@@ -24,9 +26,10 @@
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
         <spring-platform.version>Cairo-SR8</spring-platform.version>
         <lombok.version>1.16.14</lombok.version>
+        <guava.version>20.0</guava.version>
         <io.springfox.version>2.9.2</io.springfox.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <spring-boot-admin.version>2.1.5</spring-boot-admin.version>
+        <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
         <mybatis-plus-boot.version>3.1.0</mybatis-plus-boot.version>
         <fastjson.version>1.2.56</fastjson.version>
         <java.version>1.8</java.version>
@@ -48,6 +51,8 @@
 <!--        <security.oauth.auto.version>2.1.2.RELEASE</security.oauth.auto.version>-->
         <zipkin-storage-mysql.version>2.8.4</zipkin-storage-mysql.version>
         <jooq.version>3.11.9</jooq.version>
+        <swagger.models.version>1.5.21</swagger.models.version>
+        <swagger.bootstrapui.version>1.9.4</swagger.bootstrapui.version>
         <io.springfox.version>2.9.2</io.springfox.version>
         <joda.time.version>2.9.9</joda.time.version>
         <druid-spring-boot-starter.version>1.1.16</druid-spring-boot-starter.version>
@@ -173,13 +178,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- <dependency>
+            <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>0.9.0.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency> -->
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

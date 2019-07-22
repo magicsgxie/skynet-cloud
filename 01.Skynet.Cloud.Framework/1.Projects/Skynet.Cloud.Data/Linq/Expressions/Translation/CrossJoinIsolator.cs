@@ -58,6 +58,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return false;
         }
 
+        [System.Obsolete]
         private Expression MakeSubquery(Expression expression)
         {
             var newAlias = new TableAlias();

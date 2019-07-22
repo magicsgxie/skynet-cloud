@@ -58,6 +58,8 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     public abstract class DbExpression : Expression
     {
         public readonly DbExpressionType DbNodeType;
+
+        [Obsolete]
         protected DbExpression(DbExpressionType nodeType, Type type)
             : base((ExpressionType)nodeType, type)
         {
@@ -77,6 +79,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     {
         private readonly TableAlias alias;
 
+        [Obsolete]
         protected AliasedExpression(DbExpressionType nodeType, Type type, TableAlias alias)
             : base(nodeType, type)
         {
@@ -97,6 +100,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     {
         private readonly IEntityMapping entity;
 
+        [Obsolete]
         public TableExpression(TableAlias alias, IEntityMapping entity)
             : base(DbExpressionType.Table, typeof(void), alias)
         {
@@ -129,6 +133,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly IEntityMapping entity;
         private readonly Expression expression;
 
+        [Obsolete]
         public EntityExpression(IEntityMapping entity, Expression expression)
             : base(DbExpressionType.Entity, expression.Type)
         {
@@ -159,6 +164,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         SqlType sqlType;
         int hashCode;
 
+        [Obsolete]
         public ColumnExpression(Type type, SqlType sqlType, TableAlias alias, string name)
             : base(DbExpressionType.Column, type)
         {
@@ -362,6 +368,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression skip;
         private readonly bool reverse;
 
+        [Obsolete]
         public SelectExpression(
             TableAlias alias,
             IEnumerable<ColumnDeclaration> columns,
@@ -387,6 +394,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             this.reverse = reverse;
         }
 
+        [Obsolete]
         public SelectExpression(
             TableAlias alias,
             IEnumerable<ColumnDeclaration> columns,
@@ -399,6 +407,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         {
         }
 
+        [Obsolete]
         public SelectExpression(
             TableAlias alias, IEnumerable<ColumnDeclaration> columns,
             Expression from, Expression where
@@ -466,6 +475,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression right;
         private readonly Expression condition;
 
+        [Obsolete]
         public JoinExpression(JoinType joinType, Expression left, Expression right, Expression condition)
             : base(DbExpressionType.Join, typeof(void))
         {
@@ -506,6 +516,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression test;
         private readonly Expression expression;
 
+        [Obsolete]
         public OuterJoinedExpression(Expression test, Expression expression)
             : base(DbExpressionType.OuterJoined, expression.Type)
         {
@@ -531,6 +542,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     {
         private readonly SelectExpression select;
 
+        [Obsolete]
         protected SubqueryExpression(DbExpressionType nodeType, Type type, SelectExpression select)
             : base(nodeType, type)
         {
@@ -550,6 +562,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     [DebuggerDisplay("DbNodeType={DbNodeType},Select={Select}")]
     public class ScalarExpression : SubqueryExpression
     {
+        [Obsolete]
         public ScalarExpression(Type type, SelectExpression select)
             : base(DbExpressionType.Scalar, type, select)
         {
@@ -562,6 +575,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     [DebuggerDisplay("DbNodeType={DbNodeType},Select={Select}")]
     public class ExistsExpression : SubqueryExpression
     {
+        [Obsolete]
         public ExistsExpression(SelectExpression select)
             : base(DbExpressionType.Exists, typeof(bool), select)
         {
@@ -580,12 +594,14 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression expression;
         private readonly ReadOnlyCollection<Expression> values;  // either select or expressions are assigned
 
+        [Obsolete]
         public InExpression(Expression expression, SelectExpression select)
             : base(DbExpressionType.In, typeof(bool), select)
         {
             this.expression = expression;
         }
 
+        [Obsolete]
         public InExpression(Expression expression, IEnumerable<Expression> values)
             : base(DbExpressionType.In, typeof(bool), null)
         {
@@ -615,6 +631,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression argument;
         private readonly bool isDistinct;
 
+        [Obsolete]
         public AggregateExpression(Type type, string aggregateName, Expression argument, bool isDistinct)
             : base(DbExpressionType.Aggregate, type)
         {
@@ -646,6 +663,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression aggregateInGroupSelect;
         private readonly ScalarExpression aggregateAsSubquery;
 
+        [Obsolete]
         public AggregateSubqueryExpression(TableAlias groupByAlias, Expression aggregateInGroupSelect, ScalarExpression aggregateAsSubquery)
             : base(DbExpressionType.AggregateSubquery, aggregateAsSubquery.Type)
         {
@@ -680,6 +698,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
 
         internal  bool IsNot;
 
+        [Obsolete]
         public IsNullExpression(Expression expression)
             : base(DbExpressionType.IsNull, typeof(bool))
         {
@@ -699,6 +718,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression lower;
         private readonly Expression upper;
 
+        [Obsolete]
         public BetweenExpression(Expression expression, Expression lower, Expression upper)
             : base(DbExpressionType.Between, expression.Type)
         {
@@ -728,6 +748,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     {
         private readonly ReadOnlyCollection<OrderExpression> orderBy;
 
+        [Obsolete]
         public RowNumberExpression(IEnumerable<OrderExpression> orderBy)
             : base(DbExpressionType.RowCount, typeof(int))
         {
@@ -747,6 +768,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly SqlType sqlType;
         private readonly Expression value;
 
+        [Obsolete]
         public NamedValueExpression(string name, SqlType sqlType, Expression value)
             : base(DbExpressionType.NamedValue, value.Type)
         {
@@ -786,11 +808,13 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression projector;
         private readonly LambdaExpression aggregator;
 
+        [Obsolete]
         public ProjectionExpression(SelectExpression source, Expression projector)
             : this(source, projector, null)
         {
         }
 
+        [Obsolete]
         public ProjectionExpression(SelectExpression source, Expression projector, LambdaExpression aggregator)
             : base(DbExpressionType.Projection, aggregator != null ? aggregator.Body.Type : typeof(IEnumerable<>).MakeGenericType(projector.Type))
         {
@@ -834,6 +858,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly ReadOnlyCollection<Expression> innerKey;
         private readonly ProjectionExpression projection;
 
+        [Obsolete]
         public ClientJoinExpression(ProjectionExpression projection, IEnumerable<Expression> outerKey, IEnumerable<Expression> innerKey)
             : base(DbExpressionType.ClientJoin, projection.Type)
         {
@@ -864,6 +889,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression input;
         private readonly LambdaExpression operation;
 
+        [Obsolete]
         public BatchExpression(Expression input, LambdaExpression operation)
             : base(DbExpressionType.Batch, typeof(IEnumerable<>).MakeGenericType(operation.Body.Type))
         {
@@ -888,6 +914,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly string name;
         private readonly ReadOnlyCollection<Expression> arguments;
 
+        [Obsolete]
         public FunctionExpression(Type type, string name, params Expression[] arguments)
             : base(DbExpressionType.Function, type)
         {
@@ -908,6 +935,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
 
     public abstract class CommandExpression : DbExpression
     {
+        [Obsolete]
         protected CommandExpression(DbExpressionType nodeType, Type type)
             : base(nodeType, type)
         {
@@ -919,6 +947,8 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     {
         private readonly TableExpression table;
         private object instance;
+
+        [Obsolete]
         protected CDUCommandExpression(TableExpression table, object instance, DbExpressionType nodeType, Type type)
             : base(nodeType, type)
         {
@@ -942,7 +972,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
 
         private readonly ReadOnlyCollection<ColumnAssignment> assignments;
 
-
+        [Obsolete]
         public InsertCommand(TableExpression table, IEnumerable<ColumnAssignment> assignments, object instance)
             : base(table, instance, DbExpressionType.Insert, typeof(int))
         {
@@ -990,6 +1020,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression where;
         private readonly ReadOnlyCollection<ColumnAssignment> assignments;
 
+        [Obsolete]
         public UpdateCommand(TableExpression table, Expression where, object instance, bool supportsVersionCheck, IEnumerable<ColumnAssignment> assignments)
             : base(table, instance, DbExpressionType.Update, typeof(int))
         {
@@ -1016,6 +1047,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     {
         private readonly Expression where;
 
+        [Obsolete]
         public DeleteCommand(TableExpression table, Expression where, object instance, bool supportsVersionCheck)
             : base(table, instance, DbExpressionType.Delete, typeof(int))
         {
@@ -1039,6 +1071,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly Expression ifTrue;
         private readonly Expression ifFalse;
 
+        [Obsolete]
         public IFCommand(Expression check, Expression ifTrue, Expression ifFalse)
             : base(DbExpressionType.If, ifTrue.Type)
         {
@@ -1068,12 +1101,14 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     {
         private readonly ReadOnlyCollection<Expression> commands;
 
+        [Obsolete]
         public BlockCommand(IList<Expression> commands)
             : base(DbExpressionType.Block, commands[commands.Count - 1].Type)
         {
             this.commands = commands.ToReadOnly();
         }
 
+        [Obsolete]
         public BlockCommand(params Expression[] commands)
             : this((IList<Expression>)commands)
         {
@@ -1091,6 +1126,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         private readonly ReadOnlyCollection<VariableDeclaration> variables;
         private readonly SelectExpression source;
 
+        [Obsolete]
         public DeclarationCommand(IEnumerable<VariableDeclaration> variables, SelectExpression source)
             : base(DbExpressionType.Declaration, typeof(void))
         {

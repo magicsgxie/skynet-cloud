@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Skynet.Cloud.Upms.Test.Entity;
 using Skynet.Cloud.Upms.Test.Service.Interface;
+using UWay.Skynet.Cloud.Linq;
 
 namespace UWay.Skynet.Cloud.ApiDemo.Controllers
 {
@@ -24,6 +25,13 @@ namespace UWay.Skynet.Cloud.ApiDemo.Controllers
         {
             return new string[] { "value1", "value2" };
         }
+
+        //[HttpGet]
+        //public ActionResult<IEnumerable<string>> GetFilter()
+
+
+        //    return new string[] { "value1", "value2" };
+        //}
 
         // GET api/values/5
         [HttpGet("{id}")]

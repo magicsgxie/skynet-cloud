@@ -78,6 +78,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateEntity(entity, exp);
         }
 
+        [Obsolete]
         protected EntityExpression UpdateEntity(EntityExpression entity, Expression expression)
         {
             if (expression != entity.Expression)
@@ -142,6 +143,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateJoin(join, join.Join, left, right, condition);
         }
 
+        [Obsolete]
         protected JoinExpression UpdateJoin(JoinExpression join, JoinType joinType, Expression left, Expression right, Expression condition)
         {
             if (joinType != join.Join || left != join.Left || right != join.Right || condition != join.Condition)
@@ -205,6 +207,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateBetween(between, expr, lower, upper);
         }
 
+        [Obsolete]
         protected BetweenExpression UpdateBetween(BetweenExpression between, Expression expression, Expression lower, Expression upper)
         {
             if (expression != between.Expression || lower != between.Lower || upper != between.Upper)
@@ -220,6 +223,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateRowNumber(rowNumber, orderby);
         }
 
+        [Obsolete]
         protected RowNumberExpression UpdateRowNumber(RowNumberExpression rowNumber, IEnumerable<OrderExpression> orderBy)
         {
             if (orderBy != rowNumber.OrderBy)
@@ -308,6 +312,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateAggregateSubquery(aggregate, subquery);
         }
 
+        [Obsolete]
         protected AggregateSubqueryExpression UpdateAggregateSubquery(AggregateSubqueryExpression aggregate, ScalarExpression subquery)
         {
             if (subquery != aggregate.AggregateAsSubquery)
@@ -329,6 +334,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateProjection(proj, select, projector, proj.Aggregator);
         }
 
+        [Obsolete]
         protected ProjectionExpression UpdateProjection(ProjectionExpression proj, SelectExpression select, Expression projector, LambdaExpression aggregator)
         {
             if (select != proj.Select || projector != proj.Projector || aggregator != proj.Aggregator)
@@ -346,6 +352,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateClientJoin(join, projection, outerKey, innerKey);
         }
 
+        [Obsolete]
         protected ClientJoinExpression UpdateClientJoin(ClientJoinExpression join, ProjectionExpression projection, IEnumerable<Expression> outerKey, IEnumerable<Expression> innerKey)
         {
             if (projection != join.Projection || outerKey != join.OuterKey || innerKey != join.InnerKey)
@@ -431,6 +438,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateBatch(batch, batch.Input, operation);
         }
 
+        [Obsolete]
         protected BatchExpression UpdateBatch(BatchExpression batch, Expression input, LambdaExpression operation)
         {
             if (input != batch.Input || operation != batch.Operation)
@@ -500,6 +508,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateFunction(func, func.Name, arguments);
         }
 
+        [Obsolete]
         protected FunctionExpression UpdateFunction(FunctionExpression func, string name, IEnumerable<Expression> arguments)
         {
             if (name != func.Name || arguments != func.Arguments)

@@ -21,9 +21,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.WebEncoders;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Steeltoe.Security.DataProtection;
+using Steeltoe.CloudFoundry.Connector.Redis;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace UWay.Skynet.Cloud.WebCore
 {
+    /// <summary>
+    /// Service扩展类
+    /// </summary>
     public static class  WebCoreServiceCollectionExtenstion
     {
         private static readonly string SKYNET = "skynet";
@@ -35,6 +41,31 @@ namespace UWay.Skynet.Cloud.WebCore
         private static readonly string SKYNET_CLOUD_SERVICE_IMPL = "impl";
         private static readonly string SKYNET_CLOUD_SERVICE_ENTITY = "entity";
 
+        /// <summary>
+        /// 使用Redistribution
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        public static IServiceCollection UserRedis(this IServiceCollection services, IConfiguration config)
+        {
+            services.AddRedisConnectionMultiplexer(config);
+            services.AddDataProtection()
+                .PersistKeysToRedis()
+                .SetApplicationName("redis-keystore");
+
+            // Use Redis cache on CloudFoundry to store session data
+            services.AddDistributedRedisCache(config);
+            return services;
+        }
+
+        /// <summary>
+        /// 使用Oracle
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
         public static IServiceCollection UseOracle(this IServiceCollection services, IConfiguration config, string serviceName=null)
         {
             ILoggerFactory loggerFactory = services.BuildAspectCoreServiceProvider().GetService<ILoggerFactory>();
@@ -81,6 +112,11 @@ namespace UWay.Skynet.Cloud.WebCore
 
         }
 
+        /// <summary>
+        /// 添加验证跳转
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -95,6 +131,12 @@ namespace UWay.Skynet.Cloud.WebCore
             return services;
         }
 
+        /// <summary>
+        /// 添加用户自定义Mvc，主要再建立MvcWeb网站时使用
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddCustomMvc(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddOptions();
@@ -187,6 +229,13 @@ namespace UWay.Skynet.Cloud.WebCore
             return factory.CreateConnectionString();
         }
 
+        /// <summary>
+        /// 使用Mysql数据库
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
         public static IServiceCollection UseMysql(this IServiceCollection services, IConfiguration config, string serviceName = null)
         {
             ILoggerFactory loggerFactory = services.BuildAspectCoreServiceProvider().GetService<ILoggerFactory>();
@@ -207,7 +256,13 @@ namespace UWay.Skynet.Cloud.WebCore
             return services;
         }
         
-
+        /// <summary>
+        /// 使用SQL Server数据库
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
         public static IServiceCollection UseSqlServer(this IServiceCollection services, IConfiguration config, string serviceName = null)
         {
             ILoggerFactory loggerFactory = services.BuildAspectCoreServiceProvider().GetService<ILoggerFactory>();

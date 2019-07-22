@@ -103,7 +103,7 @@ namespace UWay.Skynet.Cloud.Linq
                 conditions.Add(string.Format(" (0) ", item.CreateFilter(dictionary)));
             }
             
-            return conditions.Join(this.LogicalOperator.ToString());
+            return string.Format("({0})", conditions.Join(this.LogicalOperator.ToString()));
         }
     }
 }

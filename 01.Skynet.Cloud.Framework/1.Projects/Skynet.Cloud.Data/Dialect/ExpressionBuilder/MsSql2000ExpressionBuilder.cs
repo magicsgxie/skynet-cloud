@@ -6,7 +6,7 @@ namespace UWay.Skynet.Cloud.Data.Dialect.ExpressionBuilder
 {
     class MsSqlExpressionBuilder : DbExpressionBuilder
     {
-
+        [System.Obsolete]
         public override Expression GetGeneratedIdExpression(IMemberMapping member)
         {
             return new FunctionExpression(member.MemberType, "SCOPE_IDENTITY()", null);

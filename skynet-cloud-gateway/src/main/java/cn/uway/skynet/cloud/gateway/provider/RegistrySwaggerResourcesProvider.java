@@ -16,11 +16,16 @@ import java.util.List;
 
 @Component
 @Primary
-@AllArgsConstructor
+//@AllArgsConstructor
 public class RegistrySwaggerResourcesProvider implements SwaggerResourcesProvider {
     public static final String API_URI = "/v2/api-docs";
     private final RouteLocator routeLocator;
     private final GatewayProperties gatewayProperties;
+
+    public  RegistrySwaggerResourcesProvider(RouteLocator routeLocator,GatewayProperties gatewayProperties ) {
+        this.routeLocator = routeLocator;
+        this.gatewayProperties = gatewayProperties;
+    }
 
 
     @Override

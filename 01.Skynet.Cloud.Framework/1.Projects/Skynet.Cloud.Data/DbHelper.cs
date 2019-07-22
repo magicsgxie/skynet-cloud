@@ -4,12 +4,17 @@ using System.Data;
 using System.Data.Common;
 using System.Text;
 using System.Threading.Tasks;
+using UWay.Skynet.Cloud;
 using UWay.Skynet.Cloud.Data.Common;
 using UWay.Skynet.Cloud.Data.Driver;
 using UWay.Skynet.Cloud.ExceptionHandle;
+using UWay.Skynet.Cloud.Request;
 
 namespace UWay.Skynet.Cloud.Data
 {
+    /// <summary>
+    /// 数据库操作类
+    /// </summary>
     class DbHelper : ConnectionHost, IDbHelper
     {
 
@@ -30,7 +35,12 @@ namespace UWay.Skynet.Cloud.Data
             }
         }
 
-
+        /// <summary>
+        /// 创建参数
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public DbParameter Parameter(string name, object value)
         {
             var p = dbConfiguration.DbProviderFactory.CreateParameter();
@@ -39,6 +49,13 @@ namespace UWay.Skynet.Cloud.Data
             return p;
         }
 
+        /// <summary>
+        /// 异步执行
+        /// </summary>
+        /// <param name="sql">执行语句</param>
+        /// <param name="namedParameters">动态参数</param>
+        /// <param name="isAutoClose">是否自动关闭连接</param>
+        /// <returns></returns>
         public Task<int> ExecuteNonQueryAsync(string sql, dynamic namedParameters, bool isAutoClose = true)
         {
             Guard.NotNullOrEmpty(sql, "sql");
@@ -47,22 +64,23 @@ namespace UWay.Skynet.Cloud.Data
             string cmdParams = string.Empty;
             try
             {
+
                 using (DbCommand cmd = Driver.CreateCommand(connection, sql, namedParameters))
                 {
-
+                    cmdParams = GetParameters(cmd.Parameters);
+                    cmdSql = cmd.CommandText;
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
-                    cmdParams = cmd.Parameters.JsonSerialize();
-                    cmdSql = cmd.CommandText;
+                    
                     return cmd.ExecuteNonQueryAsync();
                 }
             }
             catch (Exception ex)
             {
-                string jsonString = namedParameters.ToJson();
-                log.Log(LogLevel.Error, ex, GetSqlLogInfo("ExecuteNonQuery: sql:{0}\r\nparamters:{1}", sql, jsonString));
 
+                //log.Log(LogLevel.Error, ex, GetSqlLogInfo("ExecuteNonQuery: sql:{0}\r\nparamters:{1}", sql, jsonString));
+                err = ex;
                 throw new PersistenceException(ex.Message, ex);
             }
             finally
@@ -81,18 +99,25 @@ namespace UWay.Skynet.Cloud.Data
         }
 
 
-
+        /// <summary>
+        /// 同步执行
+        /// </summary>
+        /// <param name="sql">执行语句</param>
+        /// <param name="namedParameters">动态参数</param>
+        /// <param name="isAutoClose">是否自动关闭连接</param>
+        /// <returns></returns>
         public int ExecuteNonQuery(string sql, dynamic namedParameters, bool isAutoClose = true)
         {
             Guard.NotNullOrEmpty(sql, "sql");
             Exception err = null;
             string cmdSql = string.Empty;
-            string cmdParams = string.Empty;
+            string cmdParams =string.Empty;
             try
             {
                 using (DbCommand cmd = Driver.CreateCommand(connection, sql, namedParameters))
                 {
-                    
+                    cmdParams = GetParameters(cmd.Parameters);
+                    cmdSql = cmd.CommandText;
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
@@ -103,9 +128,9 @@ namespace UWay.Skynet.Cloud.Data
             }
             catch (Exception ex)
             {
-                string jsonString = namedParameters.ToJson();
-                log.Log(LogLevel.Error,ex, GetSqlLogInfo("ExecuteNonQuery: sql:{0}\r\nparamters:{1}", sql, jsonString));
-                
+                //string jsonString = namedParameters.ToJson();
+                //log.Log(LogLevel.Error,ex, GetSqlLogInfo("ExecuteNonQuery: sql:{0}\r\nparamters:{1}", sql, jsonString));
+                err = ex;
                 throw new PersistenceException(ex.Message, ex);
             }
             finally
@@ -123,6 +148,14 @@ namespace UWay.Skynet.Cloud.Data
 
         }
 
+
+        /// <summary>
+        /// 执行查询
+        /// </summary>
+        /// <param name="sql">执行语句</param>
+        /// <param name="namedParameters">动态参数</param>
+        /// <param name="isAutoClose">是否自动关闭连接</param>
+        /// <returns></returns>
         public DbDataReader ExecuteReader(string sql, dynamic namedParameters, bool isAutoClose = true)
         {
             Guard.NotNullOrEmpty(sql, "sql");
@@ -133,10 +166,8 @@ namespace UWay.Skynet.Cloud.Data
             {
                 using (DbCommand cmd = Driver.CreateCommand(connection, sql, namedParameters))
                 {
-                    if(cmd.Parameters != null && cmd.Parameters.Count > 0)
-                        cmdParams = cmd.Parameters.JsonSerialize();
+                    cmdParams = GetParameters(cmd.Parameters);
                     cmdSql = cmd.CommandText;
-                    //log.AddCommand(cmd.CommandText, cmd.Parameters);
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
@@ -163,6 +194,14 @@ namespace UWay.Skynet.Cloud.Data
             }
         }
 
+
+        /// <summary>
+        /// 异步执行
+        /// </summary>
+        /// <param name="sql">执行语句</param>
+        /// <param name="namedParameters">动态参数</param>
+        /// <param name="isAutoClose">是否自动关闭连接</param>
+        /// <returns></returns>
         public Task<DbDataReader> ExecuteReaderAsync(string sql, dynamic namedParameters, bool isAutoClose = true)
         {
             Guard.NotNullOrEmpty(sql, "sql");
@@ -173,10 +212,8 @@ namespace UWay.Skynet.Cloud.Data
             {
                 using (DbCommand cmd = Driver.CreateCommand(connection, sql, namedParameters))
                 {
-                    if (cmd.Parameters != null && cmd.Parameters.Count > 0)
-                        cmdParams = cmd.Parameters.JsonSerialize();
+                    cmdParams = GetParameters(cmd.Parameters);
                     cmdSql = cmd.CommandText;
-                    //log.AddCommand(cmd.CommandText, cmd.Parameters);
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
@@ -194,7 +231,7 @@ namespace UWay.Skynet.Cloud.Data
             finally
             {
                 LogSql(err, cmdSql, cmdParams);
-                err = null;
+                //err = null;
                 if (isAutoClose == true)
                 {
                     if (connection.State != ConnectionState.Closed)
@@ -203,25 +240,34 @@ namespace UWay.Skynet.Cloud.Data
             }
         }
 
+
+        /// <summary>
+        /// 同步执行查询获取DataTable
+        /// </summary>
+        /// <param name="sql">执行语句</param>
+        /// <param name="namedParameters">动态参数</param>
+        /// <param name="isAutoClose">是否自动关闭连接</param>
+        /// <returns></returns>
         public DataTable ExecuteDataTable(string sql, dynamic namedParameters, bool isAutoClose = true)
         {
 
             Guard.NotNullOrEmpty(sql, "sql");
             Exception err = null;
-            string cmdSql = string.Empty;
-            string cmdParams = string.Empty;
+            string cmdSql = sql;
+            string cmdParams = "";
             try
             {
-                using (var cmd = Driver.CreateCommand(connection, sql, namedParameters))
+                using (DbCommand cmd = Driver.CreateCommand(connection, sql, namedParameters))
                 {
-                    
+                    cmdParams = GetParameters(cmd.Parameters);
+                    cmdSql = cmd.CommandText;
                     cmd.CommandType = CommandType;
                     var adp = this.dbConfiguration.DbProviderFactory.CreateDataAdapter();
                     adp.SelectCommand = cmd;
                     var tb = new DataTable("Table1");
                     adp.Fill(tb);
-                    cmdParams = cmd.Parameters.JsonSerialize();
-                    cmdSql = cmd.CommandText;
+                    //if(cmd.Parameters != null && cmd.Parameters)
+
                     //log.Log(LogLevel.Information, GetSqlLogInfo("ExecuteReader: sql:{0}\r\nparamters:{1}", sqlString, jsonString));
                     return tb;
                 }
@@ -241,6 +287,19 @@ namespace UWay.Skynet.Cloud.Data
                         connection.Close();
                 }
             }
+        }
+
+        private string GetParameters(DbParameterCollection parameters)
+        {
+            var cmdParameters = new StringBuilder();
+            if (parameters != null && parameters.Count > 0)
+            {
+                foreach(DbParameter item in parameters)
+                {
+                    cmdParameters.AppendLine(item.ParameterName + ":" + item.Value);
+                }
+            }
+            return cmdParameters.ToString();
         }
 
         private void LogSql(Exception ex, string sql, string params1)
@@ -396,28 +455,33 @@ namespace UWay.Skynet.Cloud.Data
             }
         }
 
-        public DataTable ExecutePageDataTable(string sql, long skip, long take, dynamic nameparameters, out long rowCount, bool isAutoClose = true)
+        public DataSourceTableResult ExecutePage(string sql, long skip, long take, dynamic nameparameters, bool isAutoClose = true)
         {
 
             Guard.NotNullOrEmpty(sql, "sql");
             //sql = GetReplaceSql(sql);
             PagingHelper.SQLParts parts;
-            rowCount = 0;
-            
-            
+            //rowCount = 0;
+
+            DataSourceTableResult ds = new DataSourceTableResult();
             if (!PagingHelper.SplitSQL(sql, out parts))
             {
                 throw new Exception("Unable to parse SQL statement for paged query");
             }
             var sqlCount = parts.sqlCount;
-            var pageSql = Driver.BuildPageQuery(skip, take, parts, nameparameters);
+            var pageSql = sql;
+            if (take > 0)
+                pageSql = Driver.BuildPageQuery(skip, take, parts, nameparameters);
             if (connection.State != ConnectionState.Open)
                 connection.Open();
             var tempRowCount = 0;
             DataTable dt = null;
             try
             {
-                System.Threading.Tasks.Parallel.Invoke(() => tempRowCount = (int)ExecuteScalar(parts.sqlCount, nameparameters, false), () => dt = ExecuteDataTable(pageSql, nameparameters, false));
+                if (take > 0)
+                    System.Threading.Tasks.Parallel.Invoke(() => tempRowCount = (int)ExecuteScalar(parts.sqlCount, nameparameters, false), () => dt = ExecuteDataTable(pageSql, nameparameters, false));
+                else
+                    dt = ExecuteDataTable(pageSql, nameparameters, false);
             }
             catch (Exception ex)
             {  
@@ -430,10 +494,57 @@ namespace UWay.Skynet.Cloud.Data
                         connection.Close();
                 }
             }
-           
-            rowCount = tempRowCount;
-          
-            return dt;
+
+            ds.Total = tempRowCount;
+            ds.Data = dt;
+            return ds;
+        }
+
+
+        public DataSourceResult ExecutePage<T>(string sql, long skip, long take, dynamic nameparameters, bool isAutoClose = true) where T: new ()
+        {
+
+            Guard.NotNullOrEmpty(sql, "sql");
+            //sql = GetReplaceSql(sql);
+            PagingHelper.SQLParts parts;
+            //rowCount = 0;
+
+            DataSourceResult ds = new DataSourceResult();
+            if (!PagingHelper.SplitSQL(sql, out parts))
+            {
+                throw new Exception("Unable to parse SQL statement for paged query");
+            }
+            var sqlCount = parts.sqlCount;
+            var pageSql = sql;
+            if (take > 0)
+                pageSql = Driver.BuildPageQuery(skip, take, parts, nameparameters);
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
+            var tempRowCount = 0;
+            DbDataReader dr = null;
+            try
+            {
+                if (take > 0)
+                    System.Threading.Tasks.Parallel.Invoke(() => tempRowCount = (int)ExecuteScalar(parts.sqlCount, nameparameters, false), () => dr = ExecuteReader(pageSql, nameparameters, false));
+                else
+                    dr = ExecuteReader(pageSql, nameparameters, false);
+            }
+            catch (Exception ex)
+            {
+                throw new QueryException(ex.Message, ex);
+            }
+            finally
+            {
+                if (isAutoClose == true)
+                {
+                    if (connection.State != ConnectionState.Closed)
+                        connection.Close();
+                }
+            }
+
+            ds.Total = tempRowCount;
+            ds.Data = dr.ToList<T>();
+            return ds;
         }
 
 

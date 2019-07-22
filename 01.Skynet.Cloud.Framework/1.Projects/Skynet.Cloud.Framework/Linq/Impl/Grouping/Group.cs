@@ -75,4 +75,6 @@ namespace UWay.Skynet.Cloud.Linq.Impl.Grouping
         /// <value>The key for this group.</value>
         public object Key { get; set; }
     }
+
+    
 }

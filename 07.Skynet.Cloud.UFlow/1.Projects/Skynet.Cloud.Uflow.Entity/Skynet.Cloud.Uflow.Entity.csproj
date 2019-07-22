@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+   <PropertyGroup>
+      <TargetFramework>netstandard2.0</TargetFramework>
+      <RootNamespace>UWay.Skynet.Cloud.Uflow.Entity</RootNamespace>
+   </PropertyGroup>
+   <ItemGroup>
+      <ProjectReference Include ="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
+   </ItemGroup>
+</Project>

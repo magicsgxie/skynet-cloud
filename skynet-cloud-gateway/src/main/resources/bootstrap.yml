@@ -3,17 +3,70 @@ spring:
     name: skynet-cloud-gateway
   cloud:
     nacos:
-      config:
+      discovery:
         server-addr: 192.168.15.125:8848
-        file-extension: yaml
-    sentinel:
-      transport:
-        dashboard: 192.168.15.125:8095
-        port: 7080
-      eager: true
+    gateway:
+      locator:
+        enabled: true
+      routes:
+      # 认证中心
+      - id: skynet-cloud-auth
+        uri: lb://skynet-cloud-auth
+        predicates:
+          - Path=/auth/**
+        filters:
+          # 验证码处理
+          - ValidateCodeGatewayFilter
+          # 前端密码解密
+          - PasswordDecoderFilter
+      #UPMS 模块
+      - id: skynet-cloud-upms
+        uri: lb://skynet-cloud-upms
+        predicates:
+          - Path=/admin/**
+        filters:
+          # 限流配置
+          - name: RequestRateLimiter
+            args:
+              key-resolver: '#{@remoteAddrKeyResolver}'
+              redis-rate-limiter.replenishRate: 10
+              redis-rate-limiter.burstCapacity: 20
+            # 降级配置
+          - name: Hystrix
+            args:
+              name: default
+              fallbackUri: 'forward:/fallback'
   profiles:
     active: dev
+  redis:
+    password:
+    host: 192.168.15.
+#  # zipkin
+#  zipkin:
+#    enabled: true
+#    base-url: http://pig-zipkin
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      # 默认的采样比率为0.1，不能看到所有请求数据
+      # 更改采样比率为1，就能看到所有的请求数据了，但是这样会增加接口调用延迟
+      probability: 1.0
 
+security:
+  encode:
+    # 前端密码密钥，必须16位
+    key: 'thanks,pig4cloud'
+
+# 不校验验证码终端
+ignore:
+  clients:
+    - test
+# 加解密根密码
+jasypt:
+  encryptor:
+    password: pig #根密码
 ---
 spring:
   profiles: dev

@@ -131,6 +131,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return result;
         }
 
+        [Obsolete]
         protected override Expression VisitJoin(JoinExpression join)
         {
             // make sure order by expressions lifted up from the left side are not lost

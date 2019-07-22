@@ -82,6 +82,21 @@ namespace UWay.Skynet.Cloud.Extensions
             }
             return service;
         }
+
+        public static IServiceCollection AddScopServiceAssmbly(this IServiceCollection service)
+        {
+            var assemblys = RuntimeHelper.GetServicesAssembly();
+            foreach(var item in assemblys)
+            {
+                var interfaceAssmbly = RuntimeHelper.GetAssembly(item.GetName().Name + ".");    
+                if(interfaceAssmbly== null)
+                    interfaceAssmbly = RuntimeHelper.GetAssembly(item.GetName().Name + "s.");
+                service =service.AddScopeService(interfaceAssmbly, item);
+            }
+
+            return service;
+        }
+
         public static IServiceCollection AddSingletonAssembly(this IServiceCollection service, string interfaceAssemblyName)
         {
             if (service == null)
@@ -135,6 +150,11 @@ namespace UWay.Skynet.Cloud.Extensions
                 throw new DllNotFoundException($"the dll \"{implementAssemblyName}\" not be found");
             }
 
+            return service.AddScopeService(interfaceAssembly, implementAssembly);
+        }
+
+        private static IServiceCollection AddScopeService(this IServiceCollection service, Assembly interfaceAssembly, Assembly implementAssembly)
+        {
             //过滤掉非接口及泛型接口
             var types = interfaceAssembly.GetTypes().Where(t => t.GetTypeInfo().IsInterface && !t.GetTypeInfo().IsGenericType);
 

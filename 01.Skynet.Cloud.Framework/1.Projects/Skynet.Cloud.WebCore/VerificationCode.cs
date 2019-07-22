@@ -7,6 +7,9 @@ using UWay.Skynet.Cloud.Security;
 
 namespace UWay.Skynet.Cloud.WebCore
 {
+    /// <summary>
+    /// 验证码
+    /// </summary>
     public class VerificationCode : IVerificationCode
     {
         /// <summary>  

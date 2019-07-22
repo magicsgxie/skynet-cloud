@@ -99,5 +99,23 @@ namespace UWay.Skynet.Cloud.Data.Render
 		/// <param name="union">Union definition</param>
 		/// <returns>Generated SQL statement</returns>
 		string RenderUnion(SqlUnion union);
-	}
+
+        /// <summary>
+        /// 查询数据库中的所有表
+        /// </summary>
+        /// <returns></returns>
+        string QueryTable();
+
+        /// <summary>
+        /// 查询数据库中的所有表和表中对应的列条件
+        /// </summary>
+        /// <returns></returns>
+        string QueryTableByTableName();
+
+        /// <summary>
+        /// 查询数据库中的所有表
+        /// </summary>
+        /// <returns></returns>
+        string QueryTableColumns();
+    }
 }

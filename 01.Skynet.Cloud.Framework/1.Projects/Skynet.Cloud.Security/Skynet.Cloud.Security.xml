@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Skynet.Cloud.Security</name>
+    </assembly>
+    <members>
+        <member name="T:UWay.Skynet.Cloud.Security.ClaimsPrincipalExtentions">
+            <summary>
+            Claims extentions
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Security.ClaimsPrincipalExtentions.ToUserIdentity(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            ClaimsPrincipal 转 UserIdentity
+            </summary>
+            <param name="principal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Security.ClaimsPrincipalExtentions.ToClaims(UWay.Skynet.Cloud.Security.UserIdentity)">
+            <summary>
+            UserIdentity 转 Claim
+            </summary>
+            <param name="userIdentity"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Security.IVerificationCode">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Security.IPermissionStorageContainer">
+            <summary>
+            permission storage
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Security.IPermissionStorageContainer.GetPermissionAsync">
+            <summary>
+            异步获取用户权限
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Security.IPermissionStorageContainer.InitAsync">
+            <summary>
+            异步初始化权限
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Security.IStorageContainer">
+            <summary>
+            存储容器接口
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.IStorageContainer.Key">
+            <summary>
+            唯一标识
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Security.IStorageContainer.Store(System.Object)">
+            <summary>
+            存储
+            </summary>
+            <param name="obj">要存储的对象</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Security.IStorageContainer.Get">
+            <summary>
+            获取容器存储的数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Security.Menu">
+            <summary>
+            菜单
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.Menu.MenuId">
+            <summary>
+            菜单ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.Menu.ParentId">
+            <summary>
+            父级ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.Menu.SystemId">
+            <summary>
+            所属系统ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.Menu.MenuName">
+            <summary>
+            菜单名称
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.Menu.MenuUrl">
+            <summary>
+            菜单地址
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.Menu.MenuButton">
+            <summary>
+            菜单按钮实体
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Security.MenuButton">
+            <summary>
+            菜单按钮实体
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.MenuButton.Id">
+            <summary>
+            按钮ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.MenuButton.ButtonName">
+            <summary>
+            按钮名称
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.MenuButton.ButtonType">
+            <summary>
+            按钮类别
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.MenuButton.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.MenuButton.ButtonClass">
+            <summary>
+            按钮样式
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.MenuButton.Icon">
+            <summary>
+            按钮图标样式
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Security.PermissionStatusCodes">
+            <summary>
+            权限访问状态返回
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Security.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.Role.RoleId">
+            <summary>
+            角色ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.Role.SystemId">
+            <summary>
+            系统ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.Role.RoleName">
+            <summary>
+            角色名称
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Security.UserPermission">
+            <summary>
+            用户权限
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.UserPermission.Menus">
+            <summary>
+            菜单
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.UserPermission.Roles">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.UserPermission.Others">
+            <summary>
+            其他
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Security.UserIdentity">
+            <summary>
+            用户实体
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.UserIdentity.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.UserIdentity.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.UserIdentity.HeadImg">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.UserIdentity.Sex">
+            <summary>
+            用户性别
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.UserIdentity.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Security.UserIdentity.Other">
+            <summary>
+             其他属性
+            </summary>
+        </member>
+    </members>
+</doc>

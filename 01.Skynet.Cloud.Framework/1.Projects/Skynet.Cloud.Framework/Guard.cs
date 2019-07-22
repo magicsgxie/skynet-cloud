@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud
 {
+    /// <summary>
+    /// 断言函数
+    /// </summary>
     public static partial class Guard
     {
+        /// <summary>
+        /// 判断参数是否为空
+        /// </summary>
+        /// <param name="argumentValue"></param>
+        /// <param name="argumentName"></param>
         [DebuggerStepThrough]
         public static void NotNull(object argumentValue,
                                          string argumentName)
@@ -17,7 +25,11 @@ namespace UWay.Skynet.Cloud
             if (argumentValue == null) throw new ArgumentNullException(argumentName);
         }
 
-
+        /// <summary>
+        /// 参数不为空
+        /// </summary>
+        /// <param name="argumentValue"></param>
+        /// <param name="argumentName"></param>
         [DebuggerStepThrough]
         public static void NotNullOrEmpty(string argumentValue,
                                                  string argumentName)

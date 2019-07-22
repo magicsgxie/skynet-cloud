@@ -6,6 +6,9 @@ using System.Collections.Concurrent;
 namespace UWay.Skynet.Cloud.Cache.Redis
 {
 
+
+ 
+
     public class RedisClient : IDisposable
     {
         private readonly int DEFAULT_PORT = 6379;

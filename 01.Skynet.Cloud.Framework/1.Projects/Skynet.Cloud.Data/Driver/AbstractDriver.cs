@@ -8,28 +8,47 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using UWay.Skynet.Cloud.Data.Common;
+using UWay.Skynet.Cloud.Data.Render;
 using UWay.Skynet.Cloud.Mapping;
 using UWay.Skynet.Cloud.Reflection;
 
 namespace UWay.Skynet.Cloud.Data.Driver
 {
+    /// <summary>
+    /// 抽象驱动类
+    /// </summary>
     public class AbstractDriver : IDriver
     {
         private static readonly Regex OrderByAlias = new Regex(@"[\""\[\]\w]+\.([\[\]\""\w]+)", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
 
+        /// <summary>
+        /// SQL生成工厂
+        /// </summary>
+        public virtual ISqlOmRenderer Render
+        {
+            get
+            {
+                return new SqlServerRenderer();
+            }
+        }
 
-        //public virtual ISqlOmRenderer Render
-        //{
-        //    get
-        //    {
-        //        return new SqlServerRenderer();
-        //    }
-        //}
-
+        /// <summary>
+        /// 参数前缀
+        /// </summary>
         public virtual char NamedPrefix { get { return '@'; } }
+
+        /// <summary>
+        /// 是否允许多重读取
+        /// </summary>
         public virtual bool AllowsMultipleOpenReaders { get { return true; } }
 
+        /// <summary>
+        /// 添加参数
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="parameter"></param>
+        /// <param name="value"></param>
         public virtual void AddParameter(DbCommand command, NamedParameter parameter, object value)
         {
             IDbDataParameter p = command.CreateParameter();
@@ -37,6 +56,12 @@ namespace UWay.Skynet.Cloud.Data.Driver
             command.Parameters.Add(p);
         }
 
+        /// <summary>
+        /// 初始化参数
+        /// </summary>
+        /// <param name="p">数据参数</param>
+        /// <param name="parameter">传入参数</param>
+        /// <param name="value">参数值</param>
         protected virtual void InitializeParameter(IDbDataParameter p, NamedParameter parameter, object value)
         {
             p.ParameterName = parameter.Name;
@@ -89,6 +114,11 @@ namespace UWay.Skynet.Cloud.Data.Driver
             }
         }
 
+        /// <summary>
+        /// 本地类型转化为数据库类型
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="dbType"></param>
         protected virtual void ConvertDBTypeToNativeType(IDbDataParameter p, DBType dbType)
         {
             switch (dbType)
@@ -116,6 +146,11 @@ namespace UWay.Skynet.Cloud.Data.Driver
             }
         }
 
+        /// <summary>
+        /// 获取参数值
+        /// </summary>
+        /// <param name="command">数据库命令行</param>
+        /// <param name="paramValues">参数值</param>
         protected virtual void GetParameterValues(DbCommand command, object[] paramValues)
         {
             if (paramValues != null)

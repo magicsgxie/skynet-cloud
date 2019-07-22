@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Linq
 {
-    internal class BinaryExpressionFingerprint: ExpressionFingerprint
+    internal class BinaryExpressionFingerprint : ExpressionFingerprint
     {
         public BinaryExpressionFingerprint(ExpressionType nodeType, Type type, MethodInfo method) : base(nodeType, type)
         {
@@ -25,6 +25,11 @@ namespace UWay.Skynet.Cloud.Linq
         {
             BinaryExpressionFingerprint fingerprint = obj as BinaryExpressionFingerprint;
             return (((fingerprint != null) && object.Equals(this.Method, fingerprint.Method)) && base.Equals((ExpressionFingerprint)fingerprint));
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         // Properties

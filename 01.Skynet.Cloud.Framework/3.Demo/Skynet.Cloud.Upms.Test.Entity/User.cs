@@ -13,7 +13,7 @@ namespace Skynet.Cloud.Upms.Test.Entity
             get;
         }
 
-        [Column("INVALID")]
+        [Column("INVALID", DbType = DBType.NVarChar)]
         public  int Invalid
         {
             set;
@@ -42,7 +42,7 @@ namespace Skynet.Cloud.Upms.Test.Entity
             get;
         }
 
-        [Id("user_id")]
+        [Id("user_id", IsDbGenerated =true, SequenceName ="seq_user_id")]
         public  int UserID
         {
             set;

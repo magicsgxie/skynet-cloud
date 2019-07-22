@@ -1,24 +1,63 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.Common;
+using System.Reflection;
 using System.Text;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UWay.Skynet.Cloud.Data.Common;
+using UWay.Skynet.Cloud.Data.Render;
+using UWay.Skynet.Cloud.Reflection;
+using UWay.Skynet.Cloud.Mapping;
 
 namespace UWay.Skynet.Cloud.Data.Driver
 {
+    /// <summary>
+    /// Oracle 驱动
+    /// </summary>
     class OracleODPDriver : OracleDriver
     {
+        public override ISqlOmRenderer Render
+        {
+            get
+            {
+                return new OracleRenderer();
+            }
+        }
+
+
         private static readonly Regex OrderByAlias = new Regex(@"[\""\[\]\w]+\.([\[\]\""\w]+)", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnoreCase);
         private static readonly Regex chinaRegix = new Regex(@"[\u4e00-\u9fa5]", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnoreCase);
         public override void AddParameter(DbCommand command, NamedParameter parameter, object value)
         {
+            //Oracle.ManagedDataAccess.Client.OracleConnection
             //IDbDataParameter p = command.CreateParameter();
             OracleParameter p = new OracleParameter();
             InitializeParameter(p, parameter, value);
             command.Parameters.Add(p);
         }
+
+        protected override void AddParameter(DbCommand cmd, string name, object item)
+        {
+            OracleParameter p = new OracleParameter();
+            p.ParameterName = name;
+            if (item == null)
+                p.Value = DBNull.Value;
+            else
+            {
+                var type = item.GetType();
+                if (type.IsNullable())
+                    item = Converter.Convert(item, Nullable.GetUnderlyingType(type));
+
+                InitializeParameter(item, p, type);
+            }
+            cmd.Parameters.Add(p);
+        }
+
 
         protected void InitializeParameter(OracleParameter p, NamedParameter parameter, object value)
         {
@@ -176,6 +215,53 @@ namespace UWay.Skynet.Cloud.Data.Driver
             if (NamedPrefix != '@')
                 sql = ParameterHelper.rxParamsPrefix.Replace(sql, m => NamedPrefix + m.Value.Substring(1));
             return sql.Replace("@@", "@");
+        }
+
+        public override void AddParameters(DbCommand cmd, object namedParameters)
+        {
+            var type = namedParameters.GetType();
+            var dic = namedParameters as IDictionary<string, object>;
+            if (dic != null)
+            {
+                foreach (var key in dic.Keys)
+                    this.AddParameter(cmd, key, dic[key]);
+                return;
+            }
+
+            var nvc = namedParameters as NameValueCollection;
+            if (nvc != null)
+            {
+                foreach (string key in nvc.Keys)
+                    AddParameter(cmd, key, nvc[key]);
+                return;
+            }
+
+            var hs = namedParameters as Hashtable;
+            if (hs != null)
+            {
+                foreach (string key in hs.Keys.OfType<string>())
+                    AddParameter(cmd, key, hs[key]);
+                return;
+            }
+
+
+
+            const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance;
+            var items = from m in type
+                       .GetFields(bindingFlags)
+                       .Where(p => !p.HasAttribute<IgnoreAttribute>(true))
+                       .Where(p => !p.Name.Contains("k__BackingField"))
+                       .Cast<MemberInfo>()
+                       .Union(type
+                           .GetProperties(bindingFlags)
+                           .Where(p => p.CanRead)
+                           .Where(p => !p.HasAttribute<IgnoreAttribute>(true))
+                           .Cast<MemberInfo>()
+                           ).Distinct()
+                        select m;
+
+            foreach (var item in items.ToArray())
+                AddParameter(cmd, item.Name, item.GetGetter()(namedParameters));
         }
 
     }

@@ -27,6 +27,11 @@ namespace UWay.Skynet.Cloud.Linq
             return (((fingerprint != null) && (this.ParameterIndex == fingerprint.ParameterIndex)) && base.Equals((ExpressionFingerprint)fingerprint));
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         // Properties
         public int ParameterIndex { get; private set; }
     }

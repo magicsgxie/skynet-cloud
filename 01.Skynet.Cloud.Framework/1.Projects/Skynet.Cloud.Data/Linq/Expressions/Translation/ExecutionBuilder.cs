@@ -402,6 +402,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Translation
             return base.VisitFunction(func);
         }
 
+        [Obsolete]
         protected override Expression VisitExists(ExistsExpression exists)
         {
             // how did we get here? Translate exists into count query
@@ -422,6 +423,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Translation
             return this.Visit(expression);
         }
 
+        [Obsolete]
         protected override Expression VisitDeclaration(DeclarationCommand decl)
         {
             if (decl.Source != null)
@@ -600,12 +602,14 @@ namespace UWay.Skynet.Cloud.Data.Linq.Translation
                 return op.Visit(expr);
             }
 
+            [Obsolete]
             protected override Expression VisitProjection(ProjectionExpression proj)
             {
                 SelectExpression select = (SelectExpression)this.Visit(proj.Select);
                 return this.UpdateProjection(proj, select, proj.Projector, proj.Aggregator);
             }
 
+            [Obsolete]
             protected override Expression VisitColumn(ColumnExpression column)
             {
                 if (column.Alias == this.outerAlias)

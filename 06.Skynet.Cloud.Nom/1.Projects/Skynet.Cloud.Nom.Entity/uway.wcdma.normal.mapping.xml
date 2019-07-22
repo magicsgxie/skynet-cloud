@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Mapping xlmns="urn:ulinq-mapping-1.0"
+         Namespace="UWay.Skynet.Cloud.Nom.Entity"
+         AssemblyName="UWay.Skynet.Cloud.Nom.Entity">
+
+  <Table Name="NE_BTS_W" Class="NeBts">
+    <Id Name = "NE_BTS_ID" Member="NeBtsID" IsDbGenerated ="false"/>
+    <Column Name = "BSC_ID" Member="BscOrMmeID" />
+    <Column Name = "BTS_ID" Member="BtsID" />
+    <Column Name="BTS_NAME" Member="NeName"/>
+    <Column Name="CITY_ID" Member="CityID"/>
+    <Column Name="CITY_NAME" Member="CityName"/>
+    <Column Name = "ADMIN_REGIONS" Member="CountyID" />
+    <Column Name = "ADM_AREA" Member="CountyName" />
+    <Column Name="bsc_name" Member="BscOrMmeName"/>
+    <Column Name="NE_BSC_ID" Member="NeBscID"/>
+    <Column Name="Longitude" Member="Longitude"/>
+    <Column Name="Latitude" Member="Latitude"/>
+    <Column Name = "NE_MSC_ID" Member="NeOmcID" />
+    <Ignore Member="VendorName"/>
+  </Table>
+
+  <Table Name="NE_CELL_W" Class="NeCell">
+    <Id Name = "NE_CELL_ID" Member="NeCellID" IsDbGenerated ="false"/>
+    <Column Name = "BSC_ID" Member="BscOrMmeID" />
+    <Column Name = "LAC" Member="BtsID" />
+    <Column Name = "BTS_Name" Member="BtsName" />
+    <Column Name = "NE_BTS_ID" Member="NeBtsID" />
+    <Column Name = "DIR" Member="AntAzimuth" />
+    <Column Name="CELL_NAME" Member="NeName"/>
+    <Column Name="CITY_ID" Member="CityID"/>
+    <Column Name="CITY_NAME" Member="CityName"/>
+    <Column Name = "ADMIN_REGIONS" Member="CountyID" />
+    <Column Name = "ADM_AREA" Member="CountyName" />
+    <Column Name="bsc_name" Member="BscOrMmeName"/>
+    <Column Name="NE_BSC_ID" Member="NeBscID"/>
+    <Column Name="Longitude" Member="Longitude"/>
+    <Column Name="Latitude" Member="Latitude"/>
+    <Column Name = "NE_MSC_ID" Member="NeOmcID" />
+    <Column Name="COVERTYPE" Member="CellType"/>
+    <Ignore Member="LocationType" />
+    <Ignore Member="BusType" />
+    <Column Name = "CI"  Member="SectorID" />
+    <Ignore Member="PhysicalSigns" />
+    <Ignore Member="BorderType" />
+    <Ignore Member="VendorName"/>
+    <Ignore Member="FrequencyBand"/>
+  </Table>
+</Mapping>

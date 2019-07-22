@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UWay.Skynet.Cloud.Upms.Entity;
 using UWay.Skynet.Cloud.Data;
-using UWay.Skynet.Cloud.DataSource;
+using UWay.Skynet.Cloud.Request;
 using UWay.Skynet.Cloud.Linq;
 
 namespace UWay.Skynet.Cloud.Upms.Repository

@@ -14,11 +14,13 @@ namespace UWay.Skynet.Cloud.Data.Dialect.ExpressionBuilder
             return expression;
         }
 
+        [System.Obsolete]
         public override Expression GetGeneratedIdExpression(IMemberMapping member)
         {
             return new FunctionExpression(member.MemberType, "last_insert_rowid()", null);
         }
 
+        [System.Obsolete]
         public override Expression GetRowsAffectedExpression(Expression command)
         {
             return new FunctionExpression(typeof(int), "changes()", null);

@@ -64,6 +64,11 @@ namespace UWay.Skynet.Cloud.Linq
             return "{0}-{1}".FormatWith(Member, SortDirection == ListSortDirection.Ascending ? "asc" : "desc");
         }
 
+        public string ToSortString()
+        {
+            return string.Format("{0} {1}", Member, SortDirection == ListSortDirection.Ascending ? "asc" : "desc");
+        }
+
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
             json["field"] = Member;

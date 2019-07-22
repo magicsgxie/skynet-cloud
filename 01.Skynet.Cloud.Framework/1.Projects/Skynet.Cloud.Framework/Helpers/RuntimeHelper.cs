@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace UWay.Skynet.Cloud.Helpers
 {
+    /// <summary>
+    /// 运行时帮助类
+    /// </summary>
     public class RuntimeHelper
     {
         /// <summary>
@@ -40,8 +43,19 @@ namespace UWay.Skynet.Cloud.Helpers
 
         public static IEnumerable<Assembly> GetServicesAssembly()
         {
-            return GetAllAssemblies().Where(assembly => assembly.FullName.Match("*.services.???"));
+            return GetAllAssemblies().Where(assembly => assembly.FullName.Match("((?:[a-z][a-z0-9_]*))(\\.)(Service)(,)")|| assembly.FullName.Match("((?:[a-z][a-z0-9_]*))(\\.)(Services)(,)"));
         }
+
+        //public static IEnumerable<Assembly> GetServiceInterfacesAssembly()
+        //{
+        //    return GetAllAssemblies().Where(assembly => assembly.FullName.Match("*.Service.Interface.???") || assembly.FullName.Match("*.Services.Interface.???"));
+        //}
+
+        //public static Assembly GetServiceInterfacesAssembly(string name)
+        //{
+        //    return GetAllAssemblies().FirstOrDefault(assembly => assembly.FullName.Contains(name));
+        //}
+
 
         public static IList<Type> GetAllTypes()
         {

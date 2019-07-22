@@ -30,6 +30,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return new AggregateRewriter(dialect, expr).Visit(expr);
         }
 
+        [System.Obsolete]
         protected override Expression VisitSelect(SelectExpression select)
         {
             select = (SelectExpression)base.VisitSelect(select);

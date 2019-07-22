@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
+using System.Data.Common;
+using System.Reflection;
+using System.Linq;
+
+using UWay.Skynet.Cloud.Reflection;
 
 namespace UWay.Skynet.Cloud.Data
 {
@@ -166,6 +170,117 @@ namespace UWay.Skynet.Cloud.Data
                 }
                 return (T)value;
             }
+        }
+
+        /// <summary>
+        /// Read entity list by reader
+        /// </summary>
+        /// <typeparam name="T">entity</typeparam>
+        /// <param name="reader">data reader</param>
+        /// <returns>entity</returns>
+        public static IEnumerable<T> ToList<T>(this DbDataReader reader) where T : new()
+        {
+            IList<T> list = new List<T>();
+            using (reader)
+            {
+                while (reader.Read())
+                {
+                    T inst = new T();
+                    const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance;
+                    var items = from m in typeof(T)
+                                   .GetProperties(bindingFlags)
+                                   .Where(p => p.CanRead)
+                                   .Where(p => p.CanWrite)
+                                   .Where(p => !p.HasAttribute<IgnoreAttribute>(true))
+                                   .Distinct()
+                                select m;
+                    foreach (var pi in items)
+                    {
+                        var obj = new object();
+                        var columnName = pi.Name.ToUnderlineName();
+                        try
+                        {
+                            obj = reader[columnName];
+                        }
+                        catch (Exception ex)
+                        {
+                            if (!reader.IsClosed)
+                                reader.Close();
+                            throw ex;
+                            //continue;
+                        }
+
+                        if (obj == DBNull.Value || obj == null)
+                            continue;
+                        var si = pi.GetSetMethod();
+                        if (si == null)
+                            continue;
+                        pi.SetValue(inst, obj, null);
+                    }
+                    list.Add(inst);
+                }
+            }
+            if (!reader.IsClosed)
+                reader.Close();
+            return list;
+        }
+
+        /// <summary>
+        /// Read entity list by reader
+        /// </summary>
+        /// <typeparam name="T">entity</typeparam>
+        /// <param name="reader">data reader</param>
+        /// <returns>entity</returns>
+        public static T SingleOrDefault<T>(this DbDataReader reader) where T : new()
+        {
+            //IList<T> list = new List<T>();
+       
+            using (reader)
+            {
+                if (reader.Read())
+                {
+                    T inst = new T();
+                    const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance;
+                    var items = from m in typeof(T)
+                                   .GetProperties(bindingFlags)
+                                   .Where(p => p.CanRead)
+                                   .Where(p => p.CanWrite)
+                                   .Where(p => !p.HasAttribute<IgnoreAttribute>(true))
+                                   .Distinct()
+                                select m;
+                    foreach (var pi in items)
+                    {
+                        var obj = new object();
+                        var columnName = pi.Name.ToUnderlineName();
+                        try
+                        {
+                            obj = reader[columnName];
+                        }
+                        catch (Exception ex)
+                        {
+                            if (!reader.IsClosed)
+                                reader.Close();
+                            throw ex;
+                        }
+
+                        if (obj == DBNull.Value || obj == null)
+                            continue;
+                        var si = pi.GetSetMethod();
+                        if (si == null)
+                            continue;
+                        pi.SetValue(inst, obj, null);
+                    }
+                  
+                    return inst;
+                    //list.Add(inst);
+                } else
+                {
+                    return default(T);
+                }
+            }
+            //if (!reader.IsClosed)
+            //    reader.Close();
+            //return list;
         }
     }
 }

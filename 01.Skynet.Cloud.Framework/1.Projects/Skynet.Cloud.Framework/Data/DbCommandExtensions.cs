@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +71,68 @@ namespace UWay.Skynet.Cloud.Data
                 items.Add(fun(reader));
             return items;
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <typeparam name="TEntity"></typeparam>
+        ///// <modelExp name="reader"></modelExp>
+        ///// <returns></returns>
+        //public static IEnumerable<TEntity> ToList<TEntity>(this DbDataReader reader)
+        //{
+        //    Guard.NotNull(reader, "reader");
+        //    var type = typeof(TEntity);
+
+        //    var items = new List<TEntity>();
+        //    if (Types.IDictionaryOfStringAndObject.IsAssignableFrom(type) || type == Types.Object)
+        //    {
+        //        var tb = new Table(reader);
+        //        while (reader.Read())
+        //        {
+        //            var row = new object[tb.Fields.Count];
+        //            reader.GetValues(row);
+        //            items.Add((TEntity)(object)new DynamicRow(tb, row));
+        //        }
+        //        return items;
+        //    }
+
+
+        //    var fun = RowMapper.GetRowMapper<TEntity>(reader);
+        //    while (reader.Read())
+        //        items.Add(fun(reader));
+        //    return items;
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <typeparam name="TEntity"></typeparam>
+        ///// <modelExp name="reader"></modelExp>
+        ///// <returns></returns>
+        //public static TEntity SingleOrDefault<TEntity>(this DbDataReader reader)
+        //{
+        //    Guard.NotNull(reader, "reader");
+        //    var type = typeof(TEntity);
+
+        //    var items = new List<TEntity>();
+        //    if (Types.IDictionaryOfStringAndObject.IsAssignableFrom(type) || type == Types.Object)
+        //    {
+        //        var tb = new Table(reader);
+        //        while (reader.Read())
+        //        {
+        //            var row = new object[tb.Fields.Count];
+        //            reader.GetValues(row);
+        //            items.Add((TEntity)(object)new DynamicRow(tb, row));
+        //        }
+        //        return items;
+        //    }
+
+
+        //    var fun = RowMapper.GetRowMapper<TEntity>(reader);
+        //    while (reader.Read())
+        //        items.Add(fun(reader));
+        //    return items;
+        //}
 
         /// <summary>
         /// 

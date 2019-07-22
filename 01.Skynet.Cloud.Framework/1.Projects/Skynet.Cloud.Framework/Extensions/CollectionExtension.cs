@@ -5,6 +5,9 @@ using System.Linq.Expressions;
 
 namespace UWay.Skynet.Cloud.Extensions
 {
+    /// <summary>
+    /// 集合扩展
+    /// </summary>
     public static class CollectionExtension
     {
         /// <summary>
@@ -124,7 +127,7 @@ namespace UWay.Skynet.Cloud.Extensions
         void Clear();
     }
     /// <summary>
-    /// 
+    /// 数据处理上下文
     /// </summary>
     public interface IDataContext
     {

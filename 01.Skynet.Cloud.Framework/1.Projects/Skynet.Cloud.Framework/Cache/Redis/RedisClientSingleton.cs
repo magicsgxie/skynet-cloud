@@ -3,7 +3,7 @@ using StackExchange.Redis;
 
 namespace UWay.Skynet.Cloud.Cache.Redis
 {
-    
+
     /// <summary>
     /// 单例
     /// </summary>

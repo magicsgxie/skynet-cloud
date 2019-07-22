@@ -19,6 +19,11 @@ namespace UWay.Skynet.Cloud.Linq
             LambdaExpressionFingerprint fingerprint = obj as LambdaExpressionFingerprint;
             return ((fingerprint != null) && base.Equals((ExpressionFingerprint)fingerprint));
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
 

@@ -121,67 +121,97 @@ namespace UWay.Skynet.Cloud.Data.Render
 			countQuery.FromClause.BaseTable = FromTerm.SubQuery(baseSql, "t");
 			return RenderSelect(countQuery).Replace("\"", "").SimplifyBracket();
 		}
-/*
-		/// <summary>
-		/// Renders a SELECT statement which a result-set page
-		/// </summary>
-		/// <param name="pageIndex">The zero based index of the page to be returned</param>
-		/// <param name="pageSize">The size of a page</param>
-		/// <param name="totalRowCount">Total number of rows the query would yeild if not paged</param>
-		/// <param name="query">Query definition to apply paging on</param>
-		/// <returns>Generated SQL statement</returns>
-		/// <remarks>
-		/// To generate pagination SQL on SqlServer 2000 you must supply <paramref name="totalRowCount"/>.
-		/// To aquire the total number of rows use the <see cref="RenderRowCount"/> method.
-		/// </remarks>
-		public override string RenderPage(int pageIndex, int pageSize, int totalRowCount, SelectQuery query)
-		{
-			if (query.OrderByTerms.Count == 0)
-				throw new InvalidQueryException("OrderBy must be specified for paging to work on SqlServer.");
 
-			int currentPageSize = pageSize;
-			if (pageSize * (pageIndex + 1) > totalRowCount)
-				currentPageSize = totalRowCount - pageSize * pageIndex;
+        public override string QueryTable()
+        {
+            return @"select * from (
+			select cast(so.name as varchar(500)) as tableName, 'mssql' as engine,cast(sep.value as varchar(500)) as tableComment, getDate() as createTime
+			from sysobjects so
+			left JOIN sys.extended_properties sep on sep.major_id=so.id and sep.minor_id=0
+			where (xtype='U' or xtype='v')
+		) t";
+        }
 
-			SelectQuery baseQuery = query.Clone();
-			
-			baseQuery.Top = (pageIndex + 1) * pageSize;
-			baseQuery.Columns.Clear();
-			baseQuery.Columns.Add(new SelectColumn("*"));
+        public override string QueryTableByTableName()
+        {
+            return @"select * from (
+			select cast(so.name as varchar(500)) as tableName, 'mssql' as engine,cast(sep.value as varchar(500)) as tableComment, getDate() as createTime
+			from sysobjects so
+			left JOIN sys.extended_properties sep on sep.major_id=so.id and sep.minor_id=0
+			where (xtype='U' or xtype='v')
+		    ) t where t.tableName=@tableName";
+        }
 
-			string baseSql = RenderSelect(baseQuery);
-			
-			SelectQuery reverseQuery = new SelectQuery();
-			reverseQuery.Columns.Add(new SelectColumn("*"));
-			reverseQuery.Top = currentPageSize;
-			reverseQuery.FromClause.BaseTable = FromTerm.SubQuery(baseSql, "r");
-			ApplyOrderBy(baseQuery.OrderByTerms, reverseQuery, false, reverseQuery.FromClause.BaseTable.Alias);
-			string reverseSql = RenderSelect(reverseQuery);
+        public override string QueryTableColumns()
+        {
+            return @"select * from (
+            select cast(so.name as varchar(500)) as tableName, 'mssql' as engine,cast(sep.value as varchar(500)) as tableComment, getDate() as createTime
+            from sysobjects so
+            left JOIN sys.extended_properties sep on sep.major_id = so.id and sep.minor_id = 0
+            where(xtype = 'U' or xtype = 'v')
+		        ) t where t.tableName =@tableName";
+        }
+        /*
+       /// <summary>
+       /// Renders a SELECT statement which a result-set page
+       /// </summary>
+       /// <param name="pageIndex">The zero based index of the page to be returned</param>
+       /// <param name="pageSize">The size of a page</param>
+       /// <param name="totalRowCount">Total number of rows the query would yeild if not paged</param>
+       /// <param name="query">Query definition to apply paging on</param>
+       /// <returns>Generated SQL statement</returns>
+       /// <remarks>
+       /// To generate pagination SQL on SqlServer 2000 you must supply <paramref name="totalRowCount"/>.
+       /// To aquire the total number of rows use the <see cref="RenderRowCount"/> method.
+       /// </remarks>
+       public override string RenderPage(int pageIndex, int pageSize, int totalRowCount, SelectQuery query)
+       {
+           if (query.OrderByTerms.Count == 0)
+               throw new InvalidQueryException("OrderBy must be specified for paging to work on SqlServer.");
 
-			SelectQuery forwardQuery = new SelectQuery();
-			forwardQuery.Columns.AddRange(query.Columns);
-			forwardQuery.Top = currentPageSize;
-			forwardQuery.FromClause.BaseTable = FromTerm.SubQuery(reverseSql, "f");
-			ApplyOrderBy(baseQuery.OrderByTerms, forwardQuery, true, forwardQuery.FromClause.BaseTable.Alias);
+           int currentPageSize = pageSize;
+           if (pageSize * (pageIndex + 1) > totalRowCount)
+               currentPageSize = totalRowCount - pageSize * pageIndex;
 
-			return RenderSelect(forwardQuery);
-		}
+           SelectQuery baseQuery = query.Clone();
 
-		void ApplyOrderBy(OrderByTermCollection terms, SelectQuery orderQuery, bool forward, string tableAlias)
-		{
-			foreach(OrderByTerm expr in terms)
-			{
-				OrderByDirection dir = expr.Direction;
-				
-				//Reverse order direction if required
-				if (!forward && dir == OrderByDirection.Ascending) 
-					dir = OrderByDirection.Descending;
-				else if (!forward && dir == OrderByDirection.Descending) 
-					dir = OrderByDirection.Ascending;
-					
-				orderQuery.OrderByTerms.Add(new OrderByTerm(expr.Field.ToString(), FromTerm.TermRef(tableAlias) , dir));
-			}
-		}
-*/		
-	}
+           baseQuery.Top = (pageIndex + 1) * pageSize;
+           baseQuery.Columns.Clear();
+           baseQuery.Columns.Add(new SelectColumn("*"));
+
+           string baseSql = RenderSelect(baseQuery);
+
+           SelectQuery reverseQuery = new SelectQuery();
+           reverseQuery.Columns.Add(new SelectColumn("*"));
+           reverseQuery.Top = currentPageSize;
+           reverseQuery.FromClause.BaseTable = FromTerm.SubQuery(baseSql, "r");
+           ApplyOrderBy(baseQuery.OrderByTerms, reverseQuery, false, reverseQuery.FromClause.BaseTable.Alias);
+           string reverseSql = RenderSelect(reverseQuery);
+
+           SelectQuery forwardQuery = new SelectQuery();
+           forwardQuery.Columns.AddRange(query.Columns);
+           forwardQuery.Top = currentPageSize;
+           forwardQuery.FromClause.BaseTable = FromTerm.SubQuery(reverseSql, "f");
+           ApplyOrderBy(baseQuery.OrderByTerms, forwardQuery, true, forwardQuery.FromClause.BaseTable.Alias);
+
+           return RenderSelect(forwardQuery);
+       }
+
+       void ApplyOrderBy(OrderByTermCollection terms, SelectQuery orderQuery, bool forward, string tableAlias)
+       {
+           foreach(OrderByTerm expr in terms)
+           {
+               OrderByDirection dir = expr.Direction;
+
+               //Reverse order direction if required
+               if (!forward && dir == OrderByDirection.Ascending) 
+                   dir = OrderByDirection.Descending;
+               else if (!forward && dir == OrderByDirection.Descending) 
+                   dir = OrderByDirection.Ascending;
+
+               orderQuery.OrderByTerms.Add(new OrderByTerm(expr.Field.ToString(), FromTerm.TermRef(tableAlias) , dir));
+           }
+       }
+*/
+    }
 }

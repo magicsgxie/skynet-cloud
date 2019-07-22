@@ -57,6 +57,7 @@ namespace UWay.Skynet.Cloud.Data
         GSM = 2,
         WCDMA = 3,
         LTE = 4,
+        FIVEG=5,
     }
 
     public enum NeLevel

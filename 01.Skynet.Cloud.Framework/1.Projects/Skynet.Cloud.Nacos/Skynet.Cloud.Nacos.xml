@@ -1,0 +1,964 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Skynet.Cloud.Nacos</name>
+    </assembly>
+    <members>
+        <member name="M:UWay.Skynet.Cloud.Nacos.BaseRequest.ToQueryString">
+            <summary>
+            Convert request to params of API
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.BaseRequest.CheckParam">
+            <summary>
+            Checks whether request is valid
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.ClientName">
+            <summary>
+            default httpclient name
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.DefaultGroup">
+            <summary>
+            default group 
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.LongPullingTimeout">
+            <summary>
+            default long pulling timeout
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.CLIENT_INVALID_PARAM">
+            <summary>
+            invalid param
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.CLIENT_OVER_THRESHOLD">
+            <summary>
+            over client threshold
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.INVALID_PARAM">
+            <summary>
+            invalid param
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.NO_RIGHT">
+            <summary>
+            no right
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.NOT_FOUND">
+            <summary>
+             not found
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.CONFLICT">
+            <summary>
+            conflict
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.SERVER_ERROR">
+            <summary>
+            conflict
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.BAD_GATEWAY">
+            <summary>
+            bad gateway
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Nacos.ConstValue.OVER_THRESHOLD">
+            <summary>
+            over threshold
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosClientConfiguration.ServerAddresses">
+            <summary>
+            Nacos server addresses.
+            </summary>
+            <example>
+            10.1.12.123:8848,10.1.12.124:8848
+            </example>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosClientConfiguration.DefaultTimeOut">
+            <summary>
+            default timeout, unit is second.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosClientConfiguration.Namespace">
+            <summary>
+            default namespace
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosClientConfiguration.Port">
+            <summary>
+            listen interval, unit is millisecond.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosClientConfiguration.ServiceName">
+            <summary>
+            the name of the service.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosClientConfiguration.GroupName">
+            <summary>
+            the name of the service.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosClientConfiguration.ClusterName">
+            <summary>
+            the name of the service.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosClientConfiguration.Interval">
+            <summary>
+            the name of the service.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.AddListenerRequest.Tenant">
+            <summary>
+            Tenant information. It corresponds to the Namespace field in UWay.Skynet.Cloud.Nacos.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.AddListenerRequest.DataId">
+            <summary>
+            Configuration ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.AddListenerRequest.Group">
+            <summary>
+            Configuration group
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.AddListenerRequest.Callbacks">
+            <summary>
+            Callbacks when configuration was changed
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.AddListenerRequest.Content">
+            <summary>
+            Configuraton value.
+            </summary>
+            <value>The content.</value>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.AddListenerRequest.ContentMD5">
+            <summary>
+            A packet field indicating the MD5 value of the configuration.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.AddListenerRequest.ListeningConfigs">
+            <summary>
+            A request to listen for data packets
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetConfigRequest.Tenant">
+            <summary>
+            Tenant information. It corresponds to the Namespace field in UWay.Skynet.Cloud.Nacos.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetConfigRequest.DataId">
+            <summary>
+            Configuration ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetConfigRequest.Group">
+            <summary>
+            Configuration group
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListenerConfigRequest.DataId">
+            <summary>
+            A packet field indicating the configuration ID.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListenerConfigRequest.Group">
+            <summary>
+            A packet field indicating the configuration group.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListenerConfigRequest.ContentMD5">
+            <summary>
+            A packet field indicating the MD5 value of the configuration.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListenerConfigRequest.Tenant">
+            <summary>
+            A packet field indicating tenant information. It corresponds to the Namespace field in UWay.Skynet.Cloud.Nacos.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListenerConfigRequest.Content">
+            <summary>
+            The configuration value
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListenerConfigRequest.ListeningConfigs">
+            <summary>
+            A request to listen for data packets
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.PublishConfigRequest.Tenant">
+            <summary>
+            The tenant, corresponding to the namespace field of UWay.Skynet.Cloud.Nacos
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.PublishConfigRequest.DataId">
+            <summary>
+            Configuration ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.PublishConfigRequest.Group">
+            <summary>
+            Configuration group
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.PublishConfigRequest.Content">
+            <summary>
+            Configuration content
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveConfigRequest.Tenant">
+            <summary>
+            The tenant, corresponding to the namespace field of UWay.Skynet.Cloud.Nacos
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveConfigRequest.DataId">
+            <summary>
+            Configuration ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveConfigRequest.Group">
+            <summary>
+            Configuration group
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveListenerRequest.Tenant">
+            <summary>
+            Tenant information. It corresponds to the Namespace field in UWay.Skynet.Cloud.Nacos.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveListenerRequest.DataId">
+            <summary>
+            Configuration ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveListenerRequest.Group">
+            <summary>
+            Configuration group
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveListenerRequest.Callbacks">
+            <summary>
+            Callbacks when configuration was changed
+            </summary>
+            <value>The callbacks.</value>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosConfigClient.GetConfigAsync(UWay.Skynet.Cloud.Nacos.GetConfigRequest)">
+            <summary>
+            Gets configurations in Nacos
+            </summary>
+            <param name="request">request</param>        
+            <returns></returns>        
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosConfigClient.PublishConfigAsync(UWay.Skynet.Cloud.Nacos.PublishConfigRequest)">
+            <summary>
+            Publishes configurations in Nacos
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosConfigClient.RemoveConfigAsync(UWay.Skynet.Cloud.Nacos.RemoveConfigRequest)">
+            <summary>
+            Deletes configurations in Nacos
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosConfigClient.AddListenerAsync(UWay.Skynet.Cloud.Nacos.AddListenerRequest)">
+            <summary>
+            Listen configuration.
+            </summary>
+            <param name="request">request.</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosConfigClient.RemoveListenerAsync(UWay.Skynet.Cloud.Nacos.RemoveListenerRequest)">
+            <summary>
+            Delete Listening
+            </summary>
+            <param name="request">request.</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.RegisterInstanceAsync(UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest)">
+            <summary>
+            Register an instance to service
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.RemoveInstanceAsync(UWay.Skynet.Cloud.Nacos.RemoveInstanceRequest)">
+            <summary>
+            Delete instance from service
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.ModifyInstanceAsync(UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest)">
+            <summary>
+            Modify an instance of service
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.ListInstancesAsync(UWay.Skynet.Cloud.Nacos.ListInstancesRequest)">
+            <summary>
+            Query instance list of service
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.GetInstanceAsync(UWay.Skynet.Cloud.Nacos.GetInstanceRequest)">
+            <summary>
+            Query instance details of service
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.SendHeartbeatAsync(UWay.Skynet.Cloud.Nacos.SendHeartbeatRequest)">
+            <summary>
+            Send instance beat
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.ModifyInstanceHealthStatusAsync(UWay.Skynet.Cloud.Nacos.ModifyInstanceHealthStatusRequest)">
+            <summary>
+            Update instance health status, only works when the cluster health checker is set to NONE
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.CreateServiceAsync(UWay.Skynet.Cloud.Nacos.CreateServiceRequest)">
+            <summary>
+            Create service
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.RemoveServiceAsync(UWay.Skynet.Cloud.Nacos.RemoveServiceRequest)">
+            <summary>
+            Delete a service, only permitted when instance count is 0
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.ModifyServiceAsync(UWay.Skynet.Cloud.Nacos.ModifyServiceRequest)">
+            <summary>
+            Update a service
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.GetServiceAsync(UWay.Skynet.Cloud.Nacos.GetServiceRequest)">
+            <summary>
+            Query a service
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.ListServiceAsync">
+            <summary>
+            Query a service
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.ListServicesAsync(UWay.Skynet.Cloud.Nacos.ListServicesRequest)">
+            <summary>
+            Query service list
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.GetSwitchesAsync">
+            <summary>
+            Query system switches
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.ModifySwitchesAsync(UWay.Skynet.Cloud.Nacos.ModifySwitchesRequest)">
+            <summary>
+            Update system switch
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.ListClusterServersAsync(UWay.Skynet.Cloud.Nacos.ListClusterServersRequest)">
+            <summary>
+            Query server list
+            </summary>
+            <param name="request">request</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.GetCurrentClusterLeaderAsync">
+            <summary>
+            Query the leader of current cluster
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Nacos.INacosNamingClient.GetMetricsAsync">
+            <summary>
+            Query system metrics
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Enabled">
+            <summary>
+            Gets or sets a value indicating whether Nacos Discovery client is enabled
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Ephemeral">
+            <summary>
+            Gets or sets a value indicating whether Nacos Discovery client is enabled
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Healthy">
+            <summary>
+            Gets or sets a value indicating whether Nacos Discovery client is enabled
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Namespace">
+            <summary>
+            Gets or sets a value indicating whether Nacos Discovery client is enabled
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.HostName">
+            <summary>
+            Gets or sets Hostname to use when accessing server
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.IpAddress">
+            <summary>
+            Gets or sets IP address to use when accessing service (must also set preferIpAddress to use)
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Port">
+            <summary>
+            Gets or sets Port to register the service under (defaults to listening port)
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.PreferIpAddress">
+            <summary>
+            Gets or sets a value indicating whether gets or sets Use ip address rather than hostname
+            during registration
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.ServiceName">
+            <summary>
+            Gets or sets Service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.TimeOut">
+            <summary>
+            Gets or sets the instance groupt to use during registration
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.GroupName">
+            <summary>
+            Gets or sets the instance groupt to use during registration
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Register">
+            <summary>
+            Gets or sets a value indicating whether gets or sets Register as a service in Nacos.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Deregister">
+            <summary>
+            Gets or sets a value indicating whether gets or sets Deregister automatic de-registration
+            of service in Nacos.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.IsSecure">
+            <summary>
+            Gets or sets a value indicating whether gets or sets Deregister automatic de-registration
+            of service in Nacos.
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.CreateServiceRequest.ServiceName">
+            <summary>
+            service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.CreateServiceRequest.NamespaceId">
+            <summary>
+            namespace id
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.CreateServiceRequest.ProtectThreshold">
+            <summary>
+            Protect threshold, set value from 0 to 1, default 0
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.CreateServiceRequest.Selector">
+            <summary>
+            visit strategy, a JSON string
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.CreateServiceRequest.Metadata">
+            <summary>
+            metadata of service
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.CreateServiceRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceRequest.Ip">
+            <summary>
+            IP of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceRequest.Port">
+            <summary>
+            Port of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceRequest.ServiceName">
+            <summary>
+            Service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceRequest.NamespaceId">
+            <summary>
+            ID of namespace
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceRequest.HealthyOnly">
+            <summary>
+            Return healthy instance or not
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceRequest.Cluster">
+            <summary>
+            Cluster name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceRequest.Ephemeral">
+            <summary>
+            if instance is ephemeral
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetServiceRequest.ServiceName">
+            <summary>
+            service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetServiceRequest.NamespaceId">
+            <summary>
+            namespace id
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetServiceRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListClusterServersRequest.Healthy">
+            <summary>
+            if return healthy servers only
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListInstancesRequest.ServiceName">
+            <summary>
+            Service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListInstancesRequest.NamespaceId">
+            <summary>
+            ID of namespace
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListInstancesRequest.Clusters">
+            <summary>
+            Cluster name, splited by comma
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListInstancesRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListInstancesRequest.HealthyOnly">
+            <summary>
+            Return healthy instance or not
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListServicesRequest.PageNo">
+            <summary>
+            current page number
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListServicesRequest.PageSize">
+            <summary>
+            page size
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListServicesRequest.NamespaceId">
+            <summary>
+            namespace id
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListServicesRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceHealthStatusRequest.Ip">
+            <summary>
+            ip of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceHealthStatusRequest.Port">
+            <summary>
+            port of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceHealthStatusRequest.ServiceName">
+            <summary>
+            service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceHealthStatusRequest.NamespaceId">
+            <summary>
+            namespace id
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceHealthStatusRequest.Healthy">
+            <summary>
+            if healthy
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceHealthStatusRequest.ClusterName">
+            <summary>
+            cluster name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceHealthStatusRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest.Ip">
+            <summary>
+            IP of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest.Port">
+            <summary>
+            Port of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest.ServiceName">
+            <summary>
+            Service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest.NamespaceId">
+            <summary>
+            ID of namespace
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest.Weight">
+            <summary>
+            Weight
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest.Metadata">
+            <summary>
+            Extended information, a JSON string
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest.ClusterName">
+            <summary>
+            Cluster name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyInstanceRequest.Ephemeral">
+            <summary>
+            if instance is ephemeral
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyServiceRequest.ServiceName">
+            <summary>
+            service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyServiceRequest.NamespaceId">
+            <summary>
+            namespace id
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyServiceRequest.ProtectThreshold">
+            <summary>
+            Protect threshold, set value from 0 to 1, default 0
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyServiceRequest.Selector">
+            <summary>
+            visit strategy, a JSON string
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyServiceRequest.Metadata">
+            <summary>
+            metadata of service
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifyServiceRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifySwitchesRequest.Entry">
+            <summary>
+            switch name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifySwitchesRequest.Value">
+            <summary>
+            switch value
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ModifySwitchesRequest.Debug">
+            <summary>
+            if affect the local server, true means yes, false means no, default true
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.Ip">
+            <summary>
+            IP of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.Port">
+            <summary>
+            Port of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.ServiceName">
+            <summary>
+            service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.NamespaceId">
+            <summary>
+            ID of namespace
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.Weight">
+            <summary>
+            Weight
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.Enable">
+            <summary>
+            enabled or not
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.Healthy">
+            <summary>
+            healthy or not
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.Metadata">
+            <summary>
+            extended information
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.ClusterName">
+            <summary>
+            cluster name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RegisterInstanceRequest.Ephemeral">
+            <summary>
+            if instance is ephemeral
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveInstanceRequest.Ip">
+            <summary>
+            IP of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveInstanceRequest.Port">
+            <summary>
+            Port of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveInstanceRequest.ServiceName">
+            <summary>
+            Service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveInstanceRequest.NamespaceId">
+            <summary>
+            ID of namespace
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveInstanceRequest.ClusterName">
+            <summary>
+            Cluster name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveInstanceRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveInstanceRequest.Ephemeral">
+            <summary>
+            if instance is ephemeral
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveServiceRequest.ServiceName">
+            <summary>
+            service name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveServiceRequest.NamespaceId">
+            <summary>
+            namespace id
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.RemoveServiceRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.SendHeartbeatRequest.ServiceName">
+            <summary>
+            Service Name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.SendHeartbeatRequest.Beat">
+            <summary>
+            beat content
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.SendHeartbeatRequest.BeatInfo">
+            <summary>
+            beat info
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.SendHeartbeatRequest.GroupName">
+            <summary>
+            group name
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.SendHeartbeatRequest.Ephemeral">
+            <summary>
+            if instance is ephemeral
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.Cluster.HealthChecker">
+            <summary>
+            Health check config of this cluster
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.Cluster.Metadata">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.Cluster.Name">
+            <summary>
+            Name of cluster
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ClusterLeader.State">
+            <summary>
+            1. LEADER     Leader of the cluster, only one leader stands in a cluster
+            2. FOLLOWER   Follower of the cluster, report to and copy from leader
+            3. CANDIDATE  Candidate leader to be elected 
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceResult.Metadata">
+            <summary>
+            user extended attributes
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceResult.InstanceId">
+            <summary>
+            unique id of this instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceResult.Port">
+            <summary>
+            instance port
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceResult.Service">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceResult.Healthy">
+            <summary>
+            instance health status
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceResult.Ip">
+            <summary>
+            instance ip
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceResult.ClusterName">
+            <summary>
+            cluster information of instance
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetInstanceResult.Weight">
+            <summary>
+            instance weight
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.GetServiceResult.ProtectThreshold">
+            <summary>
+            protect threshold
+            保护阈值
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.ListInstancesResult.Metadata">
+            <summary>
+            user extended attributes
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.Selector.Type">
+            <summary>
+            The types of selector accepted by UWay.Skynet.Cloud.Nacos
+            
+            1. unknown  not match any type
+            2. none     not filter out any entity
+            3. label    select by label
+            
+            </summary>
+        </member>
+    </members>
+</doc>

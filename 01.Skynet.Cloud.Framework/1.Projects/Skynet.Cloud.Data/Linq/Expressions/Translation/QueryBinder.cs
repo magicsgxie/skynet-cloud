@@ -81,7 +81,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         {
             var methodName = m.Method.Name;
             var type = m.Method.DeclaringType;
-            if (type == typeof(Queryable) || type == typeof(Enumerable))
+            if (type == typeof(Queryable) || type == typeof(Enumerable) || type == typeof(QueryableExtensions))
             {
                 switch (methodName)
                 {
@@ -705,6 +705,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return aggregateName == "Count" || aggregateName == "LongCount";
         }
 
+        [Obsolete]
         private Expression BindAggregate(Expression queryable, string aggName, Type returnType, LambdaExpression argument, bool isRoot)
         {
             bool hasPredicateArg = AggregateArgumentIsPredicate(aggName);
@@ -845,6 +846,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return expression.Type;
         }
 
+        [Obsolete]
         private Expression BindFirst(Expression queryable, LambdaExpression predicate, string methodName, bool isRoot)
         {
             ProjectionExpression projection = this.VisitSequence(queryable);
@@ -876,6 +878,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return projection;
         }
 
+        [Obsolete]
         private Expression BindAnyAll(Expression queryable, MethodInfo method, LambdaExpression predicate, bool isRoot)
         {
             bool isAll = method.Name == "All";
@@ -968,6 +971,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             }
         }
 
+        [Obsolete]
         private Expression GetSingletonSequence(Expression expr, string aggregator)
         {
             ParameterExpression p = Expression.Parameter(typeof(IEnumerable<>).MakeGenericType(expr.Type), "p");
@@ -1141,6 +1145,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return false;
         }
 
+        [Obsolete]
         public static Expression BindMember(Expression source, MemberInfo member)
         {
             switch (source.NodeType)

@@ -80,6 +80,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return ProjectColumns(expression, existingColumns, newAlias, (IEnumerable<TableAlias>)existingAliases);
         }
 
+        [Obsolete]
         public override Expression Visit(Expression expression)
         {
             if (this.candidates.Contains(expression))

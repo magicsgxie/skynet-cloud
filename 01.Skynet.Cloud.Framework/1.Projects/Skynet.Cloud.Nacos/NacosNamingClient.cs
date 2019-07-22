@@ -23,7 +23,7 @@ namespace UWay.Skynet.Cloud.Nacos
         protected readonly NacosDiscoveryOptions _options;
         internal readonly IHttpClientFactory _clientFactory;
         //internal readonly ILocalConfigInfoProcessor _processor;
-        internal readonly List<Listener> listeners;
+        //internal readonly List<Listener> listeners;
         internal readonly ServerAddressManager _serverAddressManager;
 
         

@@ -27,8 +27,14 @@ namespace UWay.Skynet.Cloud.Linq
             return (((fingerprint != null) && object.Equals(this.TypeOperand, fingerprint.TypeOperand)) && base.Equals((ExpressionFingerprint)fingerprint));
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         // Properties
         public Type TypeOperand { get; private set; }
+
     }
 
 

@@ -24,12 +24,22 @@ using UWay.Skynet.Cloud.Nacos;
 
 namespace UWay.Skynet.Cloud.WebCore
 {
+    /// <summary>
+    /// 服务注册发现扩展类
+    /// </summary>
     public static class DiscoveryServiceCollectionExtensions
     {
         public const string EUREKA_PREFIX = "eureka";
         public const string CONSUL_PREFIX = "consul";
         public const string NACOS_PREFIX = "nacos";
 
+        /// <summary>
+        /// 添加服务注册法相扩展
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="discoveryOptions"></param>
+        /// <param name="lifecycle"></param>
+        /// <returns></returns>
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, DiscoveryOptions discoveryOptions, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -71,7 +81,13 @@ namespace UWay.Skynet.Cloud.WebCore
             services.TryAddTransient<DiscoveryHttpMessageHandler>();
             return services;
         }
-
+        /// <summary>
+        /// 添加服务注册法相扩展
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="setupOptions"></param>
+        /// <param name="lifecycle"></param>
+        /// <returns></returns>
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, Action<DiscoveryOptions> setupOptions, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -89,7 +105,13 @@ namespace UWay.Skynet.Cloud.WebCore
 
             return services.AddDiscoveryClient(options, lifecycle);
         }
-
+        /// <summary>
+        /// 添加服务注册法相扩展
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <param name="lifecycle"></param>
+        /// <returns></returns>
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -108,7 +130,14 @@ namespace UWay.Skynet.Cloud.WebCore
 
             return services;
         }
-
+        /// <summary>
+        /// 添加服务注册法相扩展
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <param name="serviceName"></param>
+        /// <param name="lifecycle"></param>
+        /// <returns></returns>
         public static IServiceCollection AddDiscoveryClient(this IServiceCollection services, IConfiguration config, string serviceName, IDiscoveryLifecycle lifecycle = null)
         {
             if (services == null)
@@ -133,6 +162,14 @@ namespace UWay.Skynet.Cloud.WebCore
             return services;
         }
 
+        /// <summary>
+        /// 添加服务注册法相扩展
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <param name="info"></param>
+        /// <param name="lifecycle"></param>
+        /// <returns></returns>
         private static void AddDiscoveryServices(IServiceCollection services, IServiceInfo info, IConfiguration config, IDiscoveryLifecycle lifecycle)
         {
             if (IsEurekaConfigured(config, info))

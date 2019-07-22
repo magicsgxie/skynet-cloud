@@ -19,6 +19,11 @@ namespace UWay.Skynet.Cloud.Linq
             ConditionalExpressionFingerprint fingerprint = obj as ConditionalExpressionFingerprint;
             return ((fingerprint != null) && base.Equals((ExpressionFingerprint)fingerprint));
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
 

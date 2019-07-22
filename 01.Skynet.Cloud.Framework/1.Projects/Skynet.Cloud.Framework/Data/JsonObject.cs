@@ -8,6 +8,9 @@ namespace UWay.Skynet.Cloud.Collections
 {
     using System.Collections.Generic;
 
+    /// <summary>
+    /// JSON Object
+    /// </summary>
     public abstract class JsonObject
     {
         public IDictionary<string, object> ToJson()

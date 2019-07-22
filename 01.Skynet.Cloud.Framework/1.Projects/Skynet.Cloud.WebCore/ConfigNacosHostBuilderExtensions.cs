@@ -10,6 +10,9 @@ using UWay.Skynet.Cloud.Nacos;
 
 namespace UWay.Skynet.Cloud.WebCore
 {
+    /// <summary>
+    /// Nacos Config Host扩展
+    /// </summary>
     public static class ConfigNacosHostBuilderExtensions
     {
         /// <summary>
@@ -39,8 +42,12 @@ namespace UWay.Skynet.Cloud.WebCore
 
 
 
+        /// <summary>
+        /// 初始化配置处理类
+        /// </summary>
+        /// <returns></returns>
 
-        public static ILocalConfigInfoProcessor GetProcessor()
+        private static ILocalConfigInfoProcessor GetProcessor()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.TryAddSingleton<ILocalConfigInfoProcessor, MemoryLocalConfigInfoProcessor>();
@@ -48,6 +55,10 @@ namespace UWay.Skynet.Cloud.WebCore
             return serviceCollection.BuildServiceProvider().GetService<ILocalConfigInfoProcessor>();
         }
 
+        /// <summary>
+        /// 初始化Http访问工厂
+        /// </summary>
+        /// <returns></returns>
         public static IHttpClientFactory GetHttpClientFactory()
         {
             IServiceCollection collection = new ServiceCollection();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UWay.Skynet.Cloud.DataSource;
+using UWay.Skynet.Cloud.Request;
 using UWay.Skynet.Cloud.Upms.Entity;
 
 namespace UWay.Skynet.Cloud.Upms.Service.Interface

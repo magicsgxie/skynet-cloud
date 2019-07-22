@@ -132,17 +132,17 @@ namespace UWay.Skynet.Cloud.Data.Common
             }
             catch (ConnectionException ex)
             {
-                throw;
+                throw ex;
             }
             catch (QueryException ex)
             {
                 
-                throw;
+                throw ex;
             }
             catch (ProjectionException ex)
             {
                 
-                throw;
+                throw ex;
             }
 
             catch (Exception ex)

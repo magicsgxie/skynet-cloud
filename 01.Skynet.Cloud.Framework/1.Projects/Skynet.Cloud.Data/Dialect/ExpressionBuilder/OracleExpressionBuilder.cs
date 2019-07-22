@@ -19,12 +19,14 @@ namespace UWay.Skynet.Cloud.Data.Dialect.ExpressionBuilder
             return expression;
         }
 
+        [Obsolete]
         public override Expression GetGeneratedIdExpression(IMemberMapping member)
         {
             var sequenceName = string.IsNullOrEmpty(member.SequenceName) ? "NEXTID" : member.SequenceName;
             return new FunctionExpression(member.MemberType, sequenceName + ".CURRVAL", null);
         }
 
+        [Obsolete]
         protected override List<ColumnAssignment> GetInsertColumnAssignments(Expression table, Expression instance, IEntityMapping entity, Func<IMemberMapping, bool> fnIncludeColumn)
         {
             var items = base.GetInsertColumnAssignments(table, instance, entity, fnIncludeColumn);

@@ -47,6 +47,7 @@ namespace UWay.Skynet.Cloud.Data.Dialect.ExpressionBuilder
             return Expression.Constant(1, typeof(int?));
         }
 
+        [Obsolete]
         public virtual ProjectionExpression AddOuterJoinTest(ProjectionExpression proj)
         {
             var test = this.GetOuterJoinTest(proj.Select);
@@ -453,6 +454,7 @@ namespace UWay.Skynet.Cloud.Data.Dialect.ExpressionBuilder
             return pe;
         }
 
+        [Obsolete]
         internal DeclarationCommand GetGeneratedIdCommand(IEntityMapping mapping, List<IMemberMapping> members, Dictionary<MemberInfo, Expression> map)
         {
             var columns = new List<ColumnDeclaration>();
@@ -619,6 +621,7 @@ namespace UWay.Skynet.Cloud.Data.Dialect.ExpressionBuilder
             return new ExistsExpression(new SelectExpression(new TableAlias(), null, tq.Select, where));
         }
 
+        [Obsolete]
         internal Expression GetUpdateResult(IEntityMapping mapping, Expression instance, LambdaExpression selector)
         {
             var tq = this.GetQueryExpression(mapping);
@@ -799,6 +802,7 @@ namespace UWay.Skynet.Cloud.Data.Dialect.ExpressionBuilder
             return exp;
         }
 
+        [Obsolete]
         internal void GetColumns(IEntityMapping mapping, Dictionary<string, TableAlias> aliases, List<ColumnDeclaration> columns)
         {
             foreach (var mi in mapping.Members)

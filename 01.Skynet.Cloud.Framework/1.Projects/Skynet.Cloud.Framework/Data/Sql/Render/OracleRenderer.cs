@@ -20,14 +20,14 @@ using UWay.Skynet.Cloud.Linq;
 
 namespace UWay.Skynet.Cloud.Data.Render
 {
-	/// <summary>
-	/// Renderer for Oracle
-	/// </summary>
-	/// <remarks>
-	/// Use OracleRenderer to render SQL statements for Oracle database.
-	/// This version of Sql.Net has been tested with Oracle 9i.
-	/// </remarks>
-	public class OracleRenderer : SqlOmRenderer
+    /// <summary>
+    /// Renderer for Oracle
+    /// </summary>
+    /// <remarks>
+    /// Use OracleRenderer to render SQL statements for Oracle database.
+    /// This version of Sql.Net has been tested with Oracle 9i.
+    /// </remarks>
+    public class OracleRenderer : SqlOmRenderer
 	{
 
         protected override string PrefixNamed
@@ -186,5 +186,66 @@ namespace UWay.Skynet.Cloud.Data.Render
             }
             builder.AppendFormat(" {0}", dir);
         }
-	}
+
+        public override string QueryTable()
+        {
+            
+            return @"select dt.table_name tableName,
+            dtc.comments tableComment,
+            uo.created createTime
+            from user_tables dt,
+		    user_tab_comments dtc,
+            user_objects uo
+            where dt.table_name = dtc.table_name and dt.table_name = uo.object_name and uo.object_type = 'TABLE'";
+        }
+
+        public override string QueryTableByTableName()
+        {
+            return @"select dt.table_name tableName,
+		        dtc.comments tableComment,
+		        uo.created createTime
+		        from user_tables dt,
+		        user_tab_comments dtc,
+		        user_objects uo
+		        where dt.table_name = dtc.table_name and dt.table_name = uo.object_name and uo.object_type='TABLE'
+
+                    and dt.table_name like concat(:tableName, '%')
+                order by uo.CREATED desc";
+        }
+
+        public override string QueryTableColumns()
+        {
+            return @"select temp.column_name columnname,
+              temp.data_type dataType,
+              temp.comments columnComment,
+               temp.nullable nullable,
+                case temp.constraint_type when 'P' then 'PRI' when 'C' then 'UNI' else '' end COLUMNKEY,
+                '' EXTRA
+                from(
+                select col.column_id,
+                col.column_name,
+                col.data_type,
+                colc.comments,
+                col.nullable,
+                uc.constraint_type,
+                --ШЅжи
+                row_number() over(partition by col.column_name order by uc.constraint_type desc) as row_flg
+                from user_tab_columns col
+                left
+                join user_col_comments colc
+
+           on colc.table_name = col.table_name
+
+           and colc.column_name = col.column_name
+                left join user_cons_columns ucc
+                on ucc.table_name = col.table_name
+                and ucc.column_name = col.column_name
+                left join user_constraints uc
+                on uc.constraint_name = ucc.constraint_name
+                where col.table_name =  :tableName
+                ) temp
+                where temp.row_flg = 1
+                order by temp.column_id";
+        }
+    }
 }

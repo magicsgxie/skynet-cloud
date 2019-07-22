@@ -52,8 +52,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return e != null && e.NodeType == ExpressionType.Constant || e.NodeType == ExpressionType.Parameter;
         }
 
-
-
+        [Obsolete]
         protected override Expression VisitBinary(BinaryExpression b)
         {
             Expression left = this.Visit(b.Left);
@@ -75,6 +74,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return this.UpdateBinary(b, left, right, b.Conversion, b.IsLiftedToNull, b.Method);
         }
 
+        [Obsolete]
         protected override ColumnAssignment VisitColumnAssignment(ColumnAssignment ca)
         {
             ca = base.VisitColumnAssignment(ca);

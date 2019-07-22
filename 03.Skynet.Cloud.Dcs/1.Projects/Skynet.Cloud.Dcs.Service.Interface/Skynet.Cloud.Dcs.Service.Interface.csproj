@@ -1,8 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>UWay.Skynet.Cloud.Dcs.Service.Interface</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Skynet.Cloud.Dcs.Entity\Skynet.Cloud.Dcs.Entity.csproj" />
+  </ItemGroup>
 
 </Project>

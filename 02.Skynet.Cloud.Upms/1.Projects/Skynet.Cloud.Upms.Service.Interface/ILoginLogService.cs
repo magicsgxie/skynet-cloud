@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using UWay.Skynet.Cloud.DataSource;
+using UWay.Skynet.Cloud.Request;
 using UWay.Skynet.Cloud.Upms.Entity;
 
 namespace UWay.Skynet.Cloud.Upms.Service.Interface

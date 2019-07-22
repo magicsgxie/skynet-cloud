@@ -82,5 +82,16 @@ namespace UWay.Skynet.Cloud.Linq
 
             return result.ToString();
         }
+
+
+        //public string CreateQuery()
+        //{
+        //    foreach (var aggregate in aggregates)
+        //    {
+        //        result.Append("-");
+        //        result.Append(aggregate);
+        //    }
+
+        //}
     }
 }

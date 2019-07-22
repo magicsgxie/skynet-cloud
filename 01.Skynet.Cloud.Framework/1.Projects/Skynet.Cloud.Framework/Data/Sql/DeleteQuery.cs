@@ -21,6 +21,7 @@ namespace UWay.Skynet.Cloud.Data
 {
 	/// <summary>
 	/// Encapsulates a SQL DELETE statement
+    /// 
 	/// </summary>
 	/// <remarks>
 	/// Use DeleteQuery to delete a row in database table.

@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>UWay.Skynet.Cloud.Nom.Service</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Skynet.Cloud.Nom.Repository\Skynet.Cloud.Nom.Repository.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Nom.Service.Interface\Skynet.Cloud.Nom.Service.Interface.csproj" />
+  </ItemGroup>
+
+</Project>

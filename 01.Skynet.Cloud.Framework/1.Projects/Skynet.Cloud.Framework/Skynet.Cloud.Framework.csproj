@@ -5,6 +5,10 @@
     <RootNamespace>UWay.Skynet.Cloud</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\workspace\svn\trunk\skynet-cloud\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Framework\Skynet.Cloud.Framework.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="AspectCore.Extensions.Autofac" Version="1.2.0" />
     <PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="1.2.0" />
@@ -16,6 +20,7 @@
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SharpCompress" Version="0.23.0" />
     <PackageReference Include="StackExchange.Redis.Extensions.JilCore" Version="1.0.1" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />

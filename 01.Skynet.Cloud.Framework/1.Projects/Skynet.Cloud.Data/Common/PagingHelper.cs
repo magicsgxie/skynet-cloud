@@ -7,21 +7,63 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Data.Common
 {
+    /// <summary>
+    /// 分页帮助类
+    /// </summary>
     public class PagingHelper
     {
+        /// <summary>
+        /// 查询列匹配方式
+        /// </summary>
         public static Regex rxColumns = new Regex(@"\A\s*SELECT\s+((?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|.)*?)(?<!,\s+)\bFROM\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
+
+        /// <summary>
+        /// 排序列匹配方式
+        /// </summary>
         public static Regex rxOrderBy = new Regex(@"\bORDER\s+BY\s+(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\w\.\[\] ""`])+(?:\s+(?:ASC|DESC))?(?:\s*,\s*(?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|[\w\.\[\] ""`])+(?:\s+(?:ASC|DESC))?)*(?!.*FROM)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
 
+        /// <summary>
+        /// 分页SQL
+        /// </summary>
         public struct SQLParts
         {
+            /// <summary>
+            /// SQL
+            /// </summary>
             public string sql;
+
+            /// <summary>
+            /// COUNT SQL
+            /// </summary>
             public string sqlCount;
+
+            /// <summary>
+            /// SQL SELECT Remove
+            /// </summary>
             public string sqlSelectRemoved;
+
+            /// <summary>
+            /// sql排序
+            /// </summary>
             public string sqlOrderBy;
+
+            /// <summary>
+            /// SQL不排序
+            /// </summary>
             public string sqlUnordered;
+
+            /// <summary>
+            /// SQL列
+            /// </summary>
             public string sqlColumns;
         }
 
+        /// <summary>
+        /// 分割SQL
+        /// </summary>
+        /// <param name="sql">主SQL</param>
+        /// <param name="parts">分页SQL信息</param>
+        /// <returns></returns>
         public static bool SplitSQL(string sql, out SQLParts parts)
         {
             parts.sql = sql;

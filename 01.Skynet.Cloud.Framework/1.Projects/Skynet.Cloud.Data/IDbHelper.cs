@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Common;
 using System.Threading.Tasks;
+using UWay.Skynet.Cloud.Request;
 
 #if SDK4
 using System.Dynamic;
@@ -95,7 +96,12 @@ namespace UWay.Skynet.Cloud.Data
         /// <param name="nameparameters">参数</param>
         /// <param name="isAutoClose">是否自动关闭连接，使用事务时设置不自动关闭</param>
         /// <returns></returns>
-        DataTable ExecutePageDataTable(string sql, long skip, long take, dynamic nameparameters, out long rowCount,bool isAutoClose = true);
+        DataSourceTableResult ExecutePage(string sql, long skip, long take, dynamic nameparameters, bool isAutoClose = true);
+
+        DataSourceResult ExecutePage<T>(string sql, long skip, long take, dynamic nameparameters, bool isAutoClose = true) where T : new();
+
+
+
     }
 }
 

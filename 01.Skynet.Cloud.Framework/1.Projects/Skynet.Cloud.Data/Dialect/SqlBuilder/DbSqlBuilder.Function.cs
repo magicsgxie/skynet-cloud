@@ -33,6 +33,7 @@ namespace UWay.Skynet.Cloud.Data.Dialect.SqlBuilder
             throw new NotSupportedException(string.Format("The member access '{0}' is not supported", m.Member));
         }
 
+        [Obsolete]
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
             var methodName = m.Method.Name;
@@ -424,6 +425,7 @@ namespace UWay.Skynet.Cloud.Data.Dialect.SqlBuilder
             return u;
         }
 
+        [Obsolete]
         protected override Expression VisitBinary(BinaryExpression b)
         {
             string op = this.GetOperator(b);

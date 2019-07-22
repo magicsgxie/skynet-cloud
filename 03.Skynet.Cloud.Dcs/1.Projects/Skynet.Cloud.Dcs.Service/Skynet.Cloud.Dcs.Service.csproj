@@ -5,4 +5,11 @@
     <RootNamespace>UWay.Skynet.Cloud.Dcs.Service</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Discovery.Abstract\Skynet.Cloud.Discovery.Abstract.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Dcs.Common\Skynet.Cloud.Dcs.Common.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Dcs.Repository\Skynet.Cloud.Dcs.Repository.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Dcs.Service.Interface\Skynet.Cloud.Dcs.Service.Interface.csproj" />
+  </ItemGroup>
+
 </Project>

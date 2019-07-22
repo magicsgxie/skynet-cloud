@@ -53,6 +53,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return e;
         }
 
+        [System.Obsolete]
         protected override Expression VisitProjection(ProjectionExpression proj)
         {
             SelectExpression save = this.currentSelect;
@@ -220,6 +221,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 return new SelectExpression(newAlias, select.Columns, select.From, select.Where, select.OrderBy, select.GroupBy, select.IsDistinct, select.Skip, select.Take, select.IsReverse);
             }
 
+            [System.Obsolete]
             protected override Expression VisitColumn(ColumnExpression column)
             {
                 TableAlias newAlias;

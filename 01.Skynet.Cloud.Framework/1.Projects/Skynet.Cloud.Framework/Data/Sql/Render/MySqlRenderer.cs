@@ -165,5 +165,24 @@ namespace UWay.Skynet.Cloud.Data.Render
 		{
 			return RenderSelect(query, false, pageIndex * pageSize, pageSize).Replace("\"", "").SimplifyBracket();		
 		}
-	}
+
+        public override string QueryTable()
+        {
+            return @"select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables
+		where table_schema = (select database()) order by create_time desc";
+        }
+
+        public override string QueryTableByTableName()
+        {
+            return @"select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables
+
+        where table_schema = (select database()) and table_name like concat('%',  :tableName, '%') order by create_time desc";
+        }
+
+        public override string QueryTableColumns()
+        {
+            return @"select column_name columnName, data_type dataType, column_comment columnComment, column_key columnKey, extra from information_schema.columns
+ 			where table_name = :tableName and table_schema = (select database()) order by ordinal_position";
+        }
+    }
 }

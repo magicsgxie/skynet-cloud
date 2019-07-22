@@ -47,6 +47,8 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
 
                 if (select.Take != null)
                 {
+                 
+
                     where = new BetweenExpression(rnCol, Expression.Add(select.Skip, Expression.Constant(1)), Expression.Add(select.Skip, select.Take));
                 }
                 else

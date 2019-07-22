@@ -3,8 +3,14 @@ using Autofac;
 
 namespace UWay.Skynet.Cloud.IoC
 {
+    /// <summary>
+    /// 服务查询类
+    /// </summary>
     public class ServiceLocator
     {
+        /// <summary>
+        /// 当前容器
+        /// </summary>
         public static IContainer Current { get; set; }
 
         public static T GetService<T>()

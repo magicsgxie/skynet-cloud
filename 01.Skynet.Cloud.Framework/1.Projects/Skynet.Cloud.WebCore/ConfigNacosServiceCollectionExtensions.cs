@@ -13,6 +13,12 @@ namespace UWay.Skynet.Cloud.WebCore
     /// </summary>
     public static class ConfigNacosServiceCollectionExtensions
     {
+        /// <summary>
+        /// 获取配置服务信息
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public static IServiceCollection ConfigureConfigServerClientOptions(this IServiceCollection services, IConfiguration config)
         {
             if (services == null)
@@ -34,6 +40,12 @@ namespace UWay.Skynet.Cloud.WebCore
         }
 
       
+        /// <summary>
+        /// 添加配置
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
 
         [Obsolete("No longer necessary; IConfiguration added by default")]
         public static IServiceCollection AddConfiguration(this IServiceCollection services, IConfiguration config)
