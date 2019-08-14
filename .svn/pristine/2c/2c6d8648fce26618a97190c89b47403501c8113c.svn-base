@@ -1,8 +1,0 @@
-﻿using System;
-
-namespace Skynet.Cloud.Upms.Service
-{
-    public class Class1
-    {
-    }
-}
