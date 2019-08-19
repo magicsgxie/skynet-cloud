@@ -2,8 +2,8 @@
 * Copyright (c) 2019-07-11 12:02:48 优网科技 All Rights Reserved.
 * CLR版本： .Standard 2.x
 * 公司名称：优网科技
-* 命名空间：UWay.Skynet.Cloud.Uflow.Service.Interface
-* 文件名：  UWay.Skynet.Cloud.Uflow.Service.Interface.CfgWorktime.cs
+* 命名空间：UWay.Skynet.Cloud.Uflow.Service
+* 文件名：  UWay.Skynet.Cloud.Uflow.Service.CfgWorktimeService.cs
 * 版本号：  V1.0.0.0
 * 唯一标识：ae55e50c-89c3-44bb-930f-45c11b2c4ae2
 * 创建人：  magic.s.g.xie

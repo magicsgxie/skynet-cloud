@@ -1,11 +1,11 @@
 package cn.uway.skynet.cloud.common.core.util;
 
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.util.StrUtil;
 import cn.uway.skynet.cloud.common.core.exception.CheckedException;
 import cn.hutool.json.JSONUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -152,25 +152,25 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
     public static String getIP(HttpServletRequest request) {
         Assert.notNull(request, "HttpServletRequest is null");
         String ip = request.getHeader("X-Requested-For");
-        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+        if (StrUtil.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Forwarded-For");
         }
-        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+        if (StrUtil.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+        if (StrUtil.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+        if (StrUtil.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_CLIENT_IP");
         }
-        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+        if (StrUtil.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_X_FORWARDED_FOR");
         }
-        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+        if (StrUtil.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
-        return StringUtils.isBlank(ip) ? null : ip.split(",")[0];
+        return StrUtil.isBlank(ip) ? null : ip.split(",")[0];
     }
 
     /**

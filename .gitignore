@@ -345,3 +345,4 @@ healthchecksdb
 */*.iml
 */**/*.iml
 target
+/.vscode

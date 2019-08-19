@@ -26,7 +26,7 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    @Value(("${spring.appplication.name"))
+    @Value("${spring.application.name}")
     private String title;
 
     @Bean
@@ -53,7 +53,7 @@ public class SwaggerConfig {
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title(title)
-                .contact(new Contact("深圳市优网精蜂网络科技有限公司","https://uway.cn","xiesg@uway.cn"))
+                .contact(new Contact("深圳市优网精蜂网络科技有限公司","http://www.uway.cn/","xiesg@uway.cn"))
                 .version("1.0")
                 .build();
     }

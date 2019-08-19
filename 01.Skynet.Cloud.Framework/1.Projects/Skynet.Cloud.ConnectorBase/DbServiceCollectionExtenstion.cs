@@ -1,36 +1,21 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
+using Steeltoe.CloudFoundry.Connector.Services;
+using Steeltoe.CloudFoundry.Connector;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UWay.Skynet.Cloud.Data;
 using UWay.Skynet.Cloud.Extensions;
 using UWay.Skynet.Cloud.Protocal;
-using UWay.Skynet.Cloud;
-using Steeltoe.CloudFoundry.Connector.Services;
-using Steeltoe.CloudFoundry.Connector;
-using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.MySql;
-using System.Data.Common;
 using Steeltoe.CloudFoundry.Connector.SqlServer;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.WebEncoders;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using Steeltoe.Security.DataProtection;
-using Steeltoe.CloudFoundry.Connector.Redis;
-using Microsoft.AspNetCore.DataProtection;
 
-namespace UWay.Skynet.Cloud.WebCore
+namespace UWay.Skynet.Cloud.Extensions
 {
-    /// <summary>
-    /// Service扩展类
-    /// </summary>
-    public static class  WebCoreServiceCollectionExtenstion
+    public static class DbServiceCollectionExtenstion
     {
         private static readonly string SKYNET = "skynet";
         private static readonly string SKYNET_CLOUD = "cloud";
@@ -42,31 +27,13 @@ namespace UWay.Skynet.Cloud.WebCore
         private static readonly string SKYNET_CLOUD_SERVICE_ENTITY = "entity";
 
         /// <summary>
-        /// 使用Redistribution
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="config"></param>
-        /// <returns></returns>
-        public static IServiceCollection UserRedis(this IServiceCollection services, IConfiguration config)
-        {
-            services.AddRedisConnectionMultiplexer(config);
-            services.AddDataProtection()
-                .PersistKeysToRedis()
-                .SetApplicationName("redis-keystore");
-
-            // Use Redis cache on CloudFoundry to store session data
-            services.AddDistributedRedisCache(config);
-            return services;
-        }
-
-        /// <summary>
         /// 使用Oracle
         /// </summary>
         /// <param name="services"></param>
         /// <param name="config"></param>
         /// <param name="serviceName"></param>
         /// <returns></returns>
-        public static IServiceCollection UseOracle(this IServiceCollection services, IConfiguration config, string serviceName=null)
+        public static IServiceCollection UseOracle(this IServiceCollection services, IConfiguration config, string serviceName = null)
         {
             ILoggerFactory loggerFactory = services.BuildAspectCoreServiceProvider().GetService<ILoggerFactory>();
             AddDataBaseInfo(config, "DB_Oracle_ConnStr", DbProviderNames.Oracle_Managed_ODP, serviceName, loggerFactory);
@@ -74,6 +41,31 @@ namespace UWay.Skynet.Cloud.WebCore
         }
 
 
+        /// <summary>
+        /// 使用Mysql数据库
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
+        public static IServiceCollection UseMysql(this IServiceCollection services, IConfiguration config, string serviceName = null)
+        {
+            ILoggerFactory loggerFactory = services.BuildAspectCoreServiceProvider().GetService<ILoggerFactory>();
+
+            AddDataBaseInfo(config, "DB_MySql_ConnStr", DbProviderNames.MySQL, serviceName, loggerFactory);
+            return RegistryService(config, services);
+        }
+
+        private static IServiceCollection RegistryService(IConfiguration config, IServiceCollection services)
+        {
+            var section = config.GetSection(SKYNET).GetSection(SKYNET_CLOUD);
+            var serviceInterfaceAssmbly = section.GetValue<string>(SKYNET_CLOUD_SERVICE_INTERFACE);
+            var serviceImplAssembly = section.GetValue<string>(SKYNET_CLOUD_SERVICE_IMPL);
+            if (!serviceInterfaceAssmbly.IsNullOrEmpty() && !serviceImplAssembly.IsNullOrEmpty())
+                services
+                    .AddScopedAssembly(serviceInterfaceAssmbly, serviceImplAssembly);
+            return services;
+        }
 
         private static void AddDataBaseInfo(IConfiguration config, string containerName, string providerName, string serviceName = null, ILoggerFactory loggerFactory = null)
         {
@@ -86,7 +78,7 @@ namespace UWay.Skynet.Cloud.WebCore
             var dbConnectionString = config.GetConnectionString(containerName);
             if (dbConnectionString.IsNullOrEmpty())
             {
-                switch(providerName)
+                switch (providerName)
                 {
                     case DbProviderNames.Oracle:
                         dbConnectionString = BuildeOracleConnectionString(config, serviceName);
@@ -97,7 +89,7 @@ namespace UWay.Skynet.Cloud.WebCore
                     case DbProviderNames.SqlServer:
                         dbConnectionString = BuildeSqlServerConnectionString(config, serviceName);
                         break;
-                }    
+                }
             }
 
             if (!string.IsNullOrEmpty(defaultContainer))
@@ -112,46 +104,12 @@ namespace UWay.Skynet.Cloud.WebCore
 
         }
 
-        /// <summary>
-        /// 添加验证跳转
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services)
-        {
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-            {
-                options.LoginPath = new PathString("/Sys/User/Login");
-                options.AccessDeniedPath = new PathString("/Error/NoAuth");
-                options.LogoutPath = new PathString("/Sys/User/LogOut");
-                options.ExpireTimeSpan = TimeSpan.FromHours(2);
-            });
-
-            return services;
-        }
-
-        /// <summary>
-        /// 添加用户自定义Mvc，主要再建立MvcWeb网站时使用
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="configuration"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddCustomMvc(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddOptions();
-            services.Configure<WebEncoderOptions>(options => options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs));
-            services.AddMvc(option => option.Filters.Add(typeof(HttpGlobalExceptionFilter))).AddJsonOptions(op => op.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());//修改默认首字母为大写
-            services.AddMemoryCache();
-            services.AddSession();
-            return services;
-        }
 
         private static void AddMainDb(string container, string dbConnectionString, string providerName, string entityAssmbly, bool isFromDB, string defaultContainer, ILoggerFactory loggerFactory = null)
         {
             //var entityAssmbly = config.GetSection("appSettings").GetValue<string>("ENTITY_ASSMBLY");
             DbContextOption dbContextOption = null;
-            if(isFromDB)
+            if (isFromDB)
             {
                 dbContextOption = GetMainDbContextOption(new DbContextOption
                 {
@@ -160,9 +118,9 @@ namespace UWay.Skynet.Cloud.WebCore
                     ModuleAssemblyName = entityAssmbly,
                     Provider = providerName,
                     LogggerFactory = loggerFactory
-                },defaultContainer);
+                }, defaultContainer);
                 //dbContextOption.ModuleAssemblyName = entityAssmbly;
-                
+
             }
             else
             {
@@ -213,7 +171,7 @@ namespace UWay.Skynet.Cloud.WebCore
                     : config.GetRequiredServiceInfo<MySqlServiceInfo>(serviceName);
             MySqlProviderConnectorOptions mySqlConfig = new MySqlProviderConnectorOptions(config);
             MySqlProviderConnectorFactory factory = new MySqlProviderConnectorFactory(info, mySqlConfig, null);
-            return factory.CreateConnectionString();            
+            return factory.CreateConnectionString();
         }
 
         private static string BuildeSqlServerConnectionString(IConfiguration config, string serviceName = null)
@@ -229,33 +187,9 @@ namespace UWay.Skynet.Cloud.WebCore
             return factory.CreateConnectionString();
         }
 
-        /// <summary>
-        /// 使用Mysql数据库
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="config"></param>
-        /// <param name="serviceName"></param>
-        /// <returns></returns>
-        public static IServiceCollection UseMysql(this IServiceCollection services, IConfiguration config, string serviceName = null)
-        {
-            ILoggerFactory loggerFactory = services.BuildAspectCoreServiceProvider().GetService<ILoggerFactory>();
-           
-            AddDataBaseInfo(config, "DB_MySql_ConnStr", DbProviderNames.MySQL, serviceName, loggerFactory);
-            return RegistryService(config, services);
-        }
 
 
-        private static IServiceCollection RegistryService(IConfiguration config, IServiceCollection services)
-        {
-            var section = config.GetSection(SKYNET).GetSection(SKYNET_CLOUD);
-            var serviceInterfaceAssmbly = section.GetValue<string>(SKYNET_CLOUD_SERVICE_INTERFACE);
-            var serviceImplAssembly = section.GetValue<string>(SKYNET_CLOUD_SERVICE_IMPL);
-            if (!serviceInterfaceAssmbly.IsNullOrEmpty() && !serviceImplAssembly.IsNullOrEmpty())
-                services
-                    .AddScopedAssembly(serviceInterfaceAssmbly, serviceImplAssembly);
-            return services;
-        }
-        
+
         /// <summary>
         /// 使用SQL Server数据库
         /// </summary>
@@ -274,7 +208,7 @@ namespace UWay.Skynet.Cloud.WebCore
 
         private static DbContextOption GetMainDbContextOption(DbContextOption dbContextOption, string defaultContainer)
         {
-            
+
             using (var connContext = new ProtocolDbContext(dbContextOption))
             {
                 //var conn2 = connContext.Set<ProtocolInfo>().SingleOrDefault(p => p.ContainerName== containerName);
@@ -488,7 +422,5 @@ namespace UWay.Skynet.Cloud.WebCore
                 url, database, uid, pwd);
         }
         #endregion
-
-
     }
 }

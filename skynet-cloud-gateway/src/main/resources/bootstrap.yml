@@ -5,6 +5,10 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.15.125:8848
+    sentinel:
+      transport:
+        dashboard: 192.168.15.114:8905
+        port: 7080
     gateway:
       locator:
         enabled: true
@@ -19,6 +23,11 @@ spring:
           - ValidateCodeGatewayFilter
           # 前端密码解密
           - PasswordDecoderFilter
+       #csharp test 模块
+      - id: csharp-test
+        uri: lb://csharp-test
+        predicates:
+          - Path=/test/**
       #UPMS 模块
       - id: skynet-cloud-upms
         uri: lb://skynet-cloud-upms
@@ -39,8 +48,8 @@ spring:
   profiles:
     active: dev
   redis:
-    password:
-    host: 192.168.15.
+    password: 123456
+    host: 192.168.15.126
 #  # zipkin
 #  zipkin:
 #    enabled: true
@@ -59,6 +68,7 @@ security:
     # 前端密码密钥，必须16位
     key: 'thanks,pig4cloud'
 
+
 # 不校验验证码终端
 ignore:
   clients:
@@ -67,6 +77,10 @@ ignore:
 jasypt:
   encryptor:
     password: pig #根密码
+
+feign:
+  sentinel:
+    enabled: true
 ---
 spring:
   profiles: dev

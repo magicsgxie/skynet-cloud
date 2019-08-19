@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UWay.Skynet.Cloud.WebCore
+namespace UWay.Skynet.Cloud.Mvc
 {
     /// <summary>
     /// 常量

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.WebCore\Skynet.Cloud.WebCore.csproj" />
+    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.Mvc\Skynet.Cloud.Mvc.csproj" />
   </ItemGroup>
 
 </Project>

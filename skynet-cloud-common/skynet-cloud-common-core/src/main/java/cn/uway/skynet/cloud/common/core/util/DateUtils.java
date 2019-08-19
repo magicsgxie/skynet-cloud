@@ -1,6 +1,6 @@
 package cn.uway.skynet.cloud.common.core.util;
 
-import org.apache.commons.lang.StringUtils;
+import io.micrometer.core.instrument.util.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;

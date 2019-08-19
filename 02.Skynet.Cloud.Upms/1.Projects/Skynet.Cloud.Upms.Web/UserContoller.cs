@@ -11,7 +11,7 @@ using UWay.Skynet.Cloud.Mvc;
 
 namespace UWay.Skynet.Cloud.Upms.Contollers
 {
-    public class UserContoller:BaseController
+    public class UserContoller
     {
     }
 }

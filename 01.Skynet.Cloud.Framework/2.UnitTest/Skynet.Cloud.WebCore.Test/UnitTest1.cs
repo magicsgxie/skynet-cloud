@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Steeltoe.Common.Discovery;
-using UWay.Skynet.Cloud.WebCore;
+using UWay.Skynet.Cloud.Mvc;
 using System;
 using System.IO;
 using Xunit;
@@ -10,7 +10,7 @@ using Steeltoe.Discovery.Nacos.Registry;
 using Steeltoe.Common.HealthChecks;
 using System.Net.Http;
 
-namespace UWay.Skynet.Cloud.WebCore.Test
+namespace UWay.Skynet.Cloud.Mvc.Test
 {
     public class UnitTest1
     {

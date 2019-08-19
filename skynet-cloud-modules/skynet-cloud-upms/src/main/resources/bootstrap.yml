@@ -10,16 +10,20 @@ spring:
         server-addr: 192.168.15.125:8848
     sentinel:
       transport:
-        dashboard: 192.168.15.125:8095
+        dashboard: 192.168.15.114:8905
         port: 7080
       eager: true
   profiles:
     active: dev
+#  sleuth:
+#    web:
+#      client:
+#        enabled: true
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: cn.uway.skynet.cloud.entity,cn.uway.skynet.cloud.vo
+  typeAliasesPackage: cn.uway.skynet.cloud.upms.entity,cn.uway.skynet.cloud.vo
   global-config:
     db-config:
       #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
@@ -46,9 +50,11 @@ mybatis-plus:
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
 
-skynet:
-  cloud:
-    mapper: "cn.uway.skynet.cloud.upms.mapper"
+ribbon:
+  nacos:
+    enabled: true
+  eureka:
+    enabled: false
 # 直接放行URL
 ignore:
   urls:
@@ -56,6 +62,11 @@ ignore:
     - /user/info/*
     - /log/**
     - /swagger-ui.html
+    - /webjars/**
+    - /swagger-resources/**
+    - v2/api-docs
+    - /
+    - /**
 security:
   oauth2:
     client:
@@ -65,8 +76,24 @@ security:
     resource:
       loadBalanced: true
       token-info-uri: http://skynet-cloud-auth/oauth/check_token
+
 # 加解密根密码
 jasypt:
   encryptor:
     password: pig #根密码
+feign:
+  sentinel:
+    enabled: true
+---
+spring:
+  profiles: dev
 
+
+
+---
+spring:
+  profiles: test
+
+---
+spring:
+  profiles: prod

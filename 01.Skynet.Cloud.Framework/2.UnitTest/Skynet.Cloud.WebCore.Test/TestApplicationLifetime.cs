@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Threading;
 
-namespace UWay.Skynet.Cloud.WebCore.Test
+namespace UWay.Skynet.Cloud.Mvc.Test
 {
     public class TestApplicationLifetime : IApplicationLifetime
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace UWay.Skynet.Cloud.WebCore
+namespace UWay.Skynet.Cloud.Mvc
 {
     /// <summary>
     /// 全局异常过滤

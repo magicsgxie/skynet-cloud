@@ -57,8 +57,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{3ED9DD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Cloud.CloudFoundryDemo", "01.Skynet.Cloud.Framework\3.Demo\Skynet.Cloud.Cloud.CloudFoundryDemo\Skynet.Cloud.Cloud.CloudFoundryDemo.csproj", "{F3EEA3D7-3E02-4D72-88AF-9B7ECD30AD33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.WebCore", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.WebCore\Skynet.Cloud.WebCore.csproj", "{754EB7BD-A6AA-4411-A580-C6B861CD76DD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Dcs.Repository", "03.Skynet.Cloud.Dcs\1.Projects\Skynet.Cloud.Dcs.Repository\Skynet.Cloud.Dcs.Repository.csproj", "{C35F3194-4FB1-429A-9B2E-F62D2654C47E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Dcs.Entity", "03.Skynet.Cloud.Dcs\1.Projects\Skynet.Cloud.Dcs.Entity\Skynet.Cloud.Dcs.Entity.csproj", "{758A545F-FFD2-4583-9F7C-749BA08AA704}"
@@ -148,7 +146,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Unittest", "2.Unittest", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Demo", "3.Demo", "{ADA5E92E-5087-4EB7-AFD3-96B82BB554E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Nom.XUnitTest", "06.Skynet.Cloud.Nom\2.Unittest\Skynet.Cloud.Nom.XUnitTest\Skynet.Cloud.Nom.XUnitTest.csproj", "{4DCE8A99-A714-4D86-99B4-AD24E84D6CC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Nom.XUnitTest", "06.Skynet.Cloud.Nom\2.Unittest\Skynet.Cloud.Nom.XUnitTest\Skynet.Cloud.Nom.XUnitTest.csproj", "{4DCE8A99-A714-4D86-99B4-AD24E84D6CC7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Uflow.Service.XUnitTest", "07.Skynet.Cloud.UFlow\2.Unittest\Skynet.Cloud.Uflow.Service.XUnitTest\Skynet.Cloud.Uflow.Service.XUnitTest.csproj", "{016EEFA9-68D0-4D05-8632-C8C0906AD9D1}"
 EndProject
@@ -208,10 +206,6 @@ Global
 		{F3EEA3D7-3E02-4D72-88AF-9B7ECD30AD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3EEA3D7-3E02-4D72-88AF-9B7ECD30AD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3EEA3D7-3E02-4D72-88AF-9B7ECD30AD33}.Release|Any CPU.Build.0 = Release|Any CPU
-		{754EB7BD-A6AA-4411-A580-C6B861CD76DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{754EB7BD-A6AA-4411-A580-C6B861CD76DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{754EB7BD-A6AA-4411-A580-C6B861CD76DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{754EB7BD-A6AA-4411-A580-C6B861CD76DD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C35F3194-4FB1-429A-9B2E-F62D2654C47E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C35F3194-4FB1-429A-9B2E-F62D2654C47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C35F3194-4FB1-429A-9B2E-F62D2654C47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -362,7 +356,6 @@ Global
 		{F2C43EEB-F392-45D0-ADDC-6C2161D56FC1} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{1ECCD4FC-B03C-41E4-8133-7427B3BB9DD7} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{F3EEA3D7-3E02-4D72-88AF-9B7ECD30AD33} = {8C95A5A5-36BF-432F-A4A1-3AB922FC35E5}
-		{754EB7BD-A6AA-4411-A580-C6B861CD76DD} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{C35F3194-4FB1-429A-9B2E-F62D2654C47E} = {29EDEB1A-E332-459C-8137-3B6129EEFF8F}
 		{758A545F-FFD2-4583-9F7C-749BA08AA704} = {29EDEB1A-E332-459C-8137-3B6129EEFF8F}
 		{ACA453DA-5BD0-4363-B86C-4CC856CA3387} = {29EDEB1A-E332-459C-8137-3B6129EEFF8F}

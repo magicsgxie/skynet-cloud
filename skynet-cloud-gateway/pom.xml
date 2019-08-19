@@ -48,11 +48,6 @@
             <version>${swagger.models.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-models</artifactId>
-            <version>${swagger.models.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>swagger-bootstrap-ui</artifactId>
             <version>${swagger.bootstrapui.version}</version>
@@ -80,7 +75,7 @@
 
         <dependency>
 
-            <groupId>org.springframework.cloud</groupId>
+            <groupId>com.alibaba.cloud</groupId>
 
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
 

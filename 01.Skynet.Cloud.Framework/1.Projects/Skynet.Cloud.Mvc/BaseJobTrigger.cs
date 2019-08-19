@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UWay.Skynet.Cloud.Trigger;
 
-namespace UWay.Skynet.Cloud.WebCore
+namespace UWay.Skynet.Cloud.Mvc
 {
     /// <summary>
     /// 作业基类

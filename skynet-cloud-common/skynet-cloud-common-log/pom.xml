@@ -15,8 +15,8 @@
         <!--工具类核心包-->
         <!--安全依赖获取上下文信息-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-starter-security</artifactId>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-security</artifactId>-->
         <!--</dependency>-->
         <!--安全依赖获取上下文信息-->
         <dependency>

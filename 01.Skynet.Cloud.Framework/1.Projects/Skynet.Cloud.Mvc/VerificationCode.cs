@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using UWay.Skynet.Cloud.Security;
 
-namespace UWay.Skynet.Cloud.WebCore
+namespace UWay.Skynet.Cloud.Mvc
 {
     /// <summary>
     /// 验证码

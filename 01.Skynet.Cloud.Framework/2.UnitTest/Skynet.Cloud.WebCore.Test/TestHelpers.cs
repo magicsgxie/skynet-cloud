@@ -2,7 +2,7 @@
 
 using System.IO;
 
-namespace UWay.Skynet.Cloud.WebCore.Test
+namespace UWay.Skynet.Cloud.Mvc.Test
 {
     public static class TestHelpers
     {

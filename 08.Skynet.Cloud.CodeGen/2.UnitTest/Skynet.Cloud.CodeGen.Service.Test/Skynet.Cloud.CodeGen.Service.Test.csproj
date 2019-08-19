@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.WebCore\Skynet.Cloud.WebCore.csproj" />
     <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.CodeGen.Service.Interface\Skynet.Cloud.CodeGen.Service.Interface.csproj" />
     <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.CodeGen.Service\Skynet.Cloud.CodeGen.Service.csproj" />
   </ItemGroup>

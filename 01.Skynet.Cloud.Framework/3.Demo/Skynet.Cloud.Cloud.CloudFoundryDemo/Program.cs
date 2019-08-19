@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using UWay.Skynet.Cloud.WebCore;
+using UWay.Skynet.Cloud.Mvc;
 using Microsoft.AspNetCore;
 
 namespace Skynet.Cloud.Cloud.CloudFoundryDemo

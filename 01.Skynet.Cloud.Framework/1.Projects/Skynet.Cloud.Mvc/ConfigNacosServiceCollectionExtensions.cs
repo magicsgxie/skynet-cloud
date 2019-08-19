@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace UWay.Skynet.Cloud.WebCore
+namespace UWay.Skynet.Cloud.Mvc
 {
     /// <summary>
     /// Extension methods for adding services related to Spring Cloud Config Server.

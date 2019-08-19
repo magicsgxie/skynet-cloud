@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using UWay.Skynet.Cloud.Nacos;
 
-namespace UWay.Skynet.Cloud.WebCore
+namespace UWay.Skynet.Cloud.Mvc
 {
     /// <summary>
     /// 配置服务端获取扩展

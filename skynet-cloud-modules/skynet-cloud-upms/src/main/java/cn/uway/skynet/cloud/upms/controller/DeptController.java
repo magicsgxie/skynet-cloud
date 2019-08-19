@@ -20,6 +20,7 @@ import cn.uway.skynet.cloud.upms.entity.SysDept;
 import cn.uway.skynet.cloud.upms.service.SysDeptService;
 import cn.uway.skynet.cloud.common.core.util.R;
 import cn.uway.skynet.cloud.common.log.annotation.SysLog;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,7 @@ import java.time.LocalDateTime;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/dept")
+@Api("Api Documentation")
 public class DeptController {
 	private final SysDeptService sysDeptService;
 

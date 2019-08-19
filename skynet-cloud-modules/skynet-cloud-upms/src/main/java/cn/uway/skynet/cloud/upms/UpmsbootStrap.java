@@ -4,20 +4,19 @@ import cn.uway.skynet.cloud.common.security.annotation.EnableSkynetCloudFeignCli
 import cn.uway.skynet.cloud.common.security.annotation.EnableSkynetCloudResourceServer;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
 
-@SpringCloudApplication
-@MapperScan("cn.uway.skynet.cloud.upms.mapper")
-@ComponentScan("cn.uway.skynet.cloud")
+@SpringBootApplication
 @EnableSkynetCloudFeignClients
 @EnableSkynetCloudResourceServer
+@ComponentScan(basePackages = {"cn.uway.skynet.cloud"})
+@EnableDiscoveryClient
 public class UpmsbootStrap {
     public static void main(String[] args) {
-        //org.springframework.cloud.openfeign.FeignClientProperties xx1;
-        //DynamicServerListLoadBalancer
-        //FeignContext
         SpringApplication.run(UpmsbootStrap.class, args);
     }
 }

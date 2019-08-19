@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using UWay.Skynet.Cloud.Nacos;
 
-namespace UWay.Skynet.Cloud.WebCore
+namespace UWay.Skynet.Cloud.Mvc
 {
     /// <summary>
     /// Nacos Config Host扩展

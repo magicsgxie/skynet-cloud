@@ -4,7 +4,7 @@ using Steeltoe.Common.Discovery;
 using System;
 using UWay.Skynet.Cloud.Nacos;
 
-namespace UWay.Skynet.Cloud.WebCore
+namespace UWay.Skynet.Cloud.Mvc
 {
     public static class DiscoveryApplicationBuilderExtensions
     {

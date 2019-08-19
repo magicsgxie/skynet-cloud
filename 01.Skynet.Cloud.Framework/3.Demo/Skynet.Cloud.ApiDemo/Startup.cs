@@ -18,7 +18,6 @@ using UWay.Skynet.Cloud.Data;
 using UWay.Skynet.Cloud.Helpers;
 using UWay.Skynet.Cloud.Extensions;
 using UWay.Skynet.Cloud.IoC;
-using UWay.Skynet.Cloud.WebCore;
 using UWay.Skynet.Cloud.Mvc;
 using Microsoft.AspNetCore.Http;
 
@@ -55,7 +54,7 @@ namespace UWay.Skynet.Cloud.ApiDemo
 
         public void RegistrySwagger(IServiceCollection services)
         {
-            services.AddMySwagger();
+            //services.AddMySwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,8 +83,8 @@ namespace UWay.Skynet.Cloud.ApiDemo
 
         public void ConfigureSwagger(IApplicationBuilder app)
         {
-            app.UseSwagger();
-            app.UseSwaggerUi3();
+            //app.UseSwagger();
+            //app.UseSwaggerUi3();
         }
 
         public void ConfigureMvc(IApplicationBuilder app)
@@ -101,6 +100,7 @@ namespace UWay.Skynet.Cloud.ApiDemo
         /// <returns></returns>
         private IServiceProvider InitIoC(IServiceCollection services)
         {
+            
             services.UseOracle(Configuration);
             //services.UseMysql(Configuration);
             //services.UseSqlServer(Configuration);

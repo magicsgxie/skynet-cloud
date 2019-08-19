@@ -71,7 +71,7 @@ spring:
         server-addr: 192.168.15.125:8848
     sentinel:
       transport:
-        dashboard: 192.168.15.125:8095
+        dashboard: 192.168.15.114:8905
         port: 7080
       eager: true
   profiles:

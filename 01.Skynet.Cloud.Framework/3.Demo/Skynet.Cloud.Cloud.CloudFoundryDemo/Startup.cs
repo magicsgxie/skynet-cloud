@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,10 +6,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using UWay.Skynet.Cloud.Extensions;
 using Steeltoe.Security.Authentication.CloudFoundry;
-using UWay.Skynet.Cloud.WebCore;
 using UWay.Skynet.Cloud.Mvc;
 namespace Skynet.Cloud.Cloud.CloudFoundryDemo
 {
@@ -30,8 +25,11 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddCloudFoundryJwtBearer(Configuration);
+            services.AddAuthorization(options => {
+                options.AddPolicy("Values", policy => policy.RequireClaim("values.me"));
+            });
             services.AddDiscoveryClient(Configuration);
-            services.AddMySwagger();
+            //services.AddMySwagger();
             services.UseMysql(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -53,8 +51,8 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo
             app.UseDiscoveryClient();
             //app.UseJwtBearerAuthentication()
             //app.UseHttpsRedirection();
-            app.UseSwagger();
-            app.UseSwaggerUi3();
+            //app.UseSwagger();
+            //app.UseSwaggerUi3();
             app.UseMvc();
             
         }
