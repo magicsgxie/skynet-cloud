@@ -5,6 +5,7 @@ import cn.uway.skynet.cloud.common.core.constant.CommonConstants;
 import cn.uway.skynet.cloud.common.core.constant.SecurityConstants;
 import cn.uway.skynet.cloud.common.security.component.SkynetCloudWebResponseExceptionTranslator;
 import cn.uway.skynet.cloud.common.security.service.SkynetCloudClientDetailsServiceImpl;
+import cn.uway.skynet.cloud.common.security.service.UserDetailIpml;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
@@ -60,11 +62,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), jwtAccessTokenConverter()));
         endpoints
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
+
                 .tokenStore(tokenStore())
-                .tokenEnhancer(tokenEnhancer())
-                .accessTokenConverter(jwtAccessTokenConverter())
+                .tokenEnhancer(tokenEnhancerChain)
+//                .tokenEnhancer(tokenEnhancer())
+//                .accessTokenConverter(jwtAccessTokenConverter())
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager)
                 .reuseRefreshTokens(false)
@@ -90,6 +96,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return (accessToken, authentication) -> {
             final Map<String, Object> additionalInfo = new HashMap<>(1);
             additionalInfo.put("license", SecurityConstants.PROJECT_LICENSE);
+            UserDetailIpml user = (UserDetailIpml)authentication.getUserAuthentication().getPrincipal();
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
             return accessToken;
         };

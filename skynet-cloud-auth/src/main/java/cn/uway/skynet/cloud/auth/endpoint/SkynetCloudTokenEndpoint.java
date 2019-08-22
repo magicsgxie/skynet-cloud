@@ -69,7 +69,8 @@ public class SkynetCloudTokenEndpoint {
         tokenStore.removeAccessToken(accessToken);
 
         OAuth2RefreshToken refreshToken = tokenStore.readRefreshToken(tokenValue);
-        tokenStore.removeRefreshToken(refreshToken);
+        if(refreshToken != null)
+            tokenStore.removeRefreshToken(refreshToken);
 
         return R.<Boolean>builder()
                 .code(CommonConstants.SUCCESS)
