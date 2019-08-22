@@ -1,5 +1,7 @@
 package cn.uway.skynet.cloud.auth.config;
 
+import cn.uway.skynet.cloud.auth.dto.SkynetCloudJwtAccessTokenConvertor;
+import cn.uway.skynet.cloud.common.core.constant.CommonConstants;
 import cn.uway.skynet.cloud.common.core.constant.SecurityConstants;
 import cn.uway.skynet.cloud.common.security.component.SkynetCloudWebResponseExceptionTranslator;
 import cn.uway.skynet.cloud.common.security.service.SkynetCloudClientDetailsServiceImpl;
@@ -18,8 +20,10 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import javax.sql.DataSource;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,12 +64,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
                 .tokenStore(tokenStore())
                 .tokenEnhancer(tokenEnhancer())
+                .accessTokenConverter(jwtAccessTokenConverter())
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager)
                 .reuseRefreshTokens(false)
                 .exceptionTranslator(new SkynetCloudWebResponseExceptionTranslator());
     }
 
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        SkynetCloudJwtAccessTokenConvertor jwtAccessTokenConvertor = new SkynetCloudJwtAccessTokenConvertor();
+        jwtAccessTokenConvertor.setSigningKey(CommonConstants.SIGN_KEY);
+        return jwtAccessTokenConvertor;
+    }
 
     @Bean
     public TokenStore tokenStore() {

@@ -93,4 +93,6 @@ public interface CommonConstants {
     String SECURITY_USERNAME="username";
 
     String SECURITY_PASSWORD = "password";
+
+    String SIGN_KEY="uway";
 }
