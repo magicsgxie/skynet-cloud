@@ -152,11 +152,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Nom.Entity", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Demo.Service.Test", "01.Skynet.Cloud.Framework\2.UnitTest\Skynet.Cloud.Demo.Service.Test\Skynet.Cloud.Demo.Service.Test.csproj", "{798A334C-DBCE-45D3-8F35-C55CFB7CAEBE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtTokenWebDemo", "01.Skynet.Cloud.Framework\3.Demo\JwtTokenWebDemo\JwtTokenWebDemo.csproj", "{C2942C3B-85B0-4C59-82B0-1D12F5F2AA34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Authentication.CloudFoundryBase", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Authentication.CloudFoundryBase\Skynet.Cloud.Authentication.CloudFoundryBase.csproj", "{DC8F70A2-E1BB-404A-81FF-631AD47101B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Authentication.CloudFoundryBase", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Authentication.CloudFoundryBase\Skynet.Cloud.Authentication.CloudFoundryBase.csproj", "{DC8F70A2-E1BB-404A-81FF-631AD47101B3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Authentication.CloudFoundryCore", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Authentication.CloudFoundryCore\Skynet.Cloud.Authentication.CloudFoundryCore.csproj", "{B4C33E5C-0ED2-4AAD-A41F-2F316B0E3B2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Authentication.CloudFoundryCore", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Authentication.CloudFoundryCore\Skynet.Cloud.Authentication.CloudFoundryCore.csproj", "{B4C33E5C-0ED2-4AAD-A41F-2F316B0E3B2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -336,10 +334,6 @@ Global
 		{798A334C-DBCE-45D3-8F35-C55CFB7CAEBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{798A334C-DBCE-45D3-8F35-C55CFB7CAEBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{798A334C-DBCE-45D3-8F35-C55CFB7CAEBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2942C3B-85B0-4C59-82B0-1D12F5F2AA34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2942C3B-85B0-4C59-82B0-1D12F5F2AA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2942C3B-85B0-4C59-82B0-1D12F5F2AA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2942C3B-85B0-4C59-82B0-1D12F5F2AA34}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DC8F70A2-E1BB-404A-81FF-631AD47101B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC8F70A2-E1BB-404A-81FF-631AD47101B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC8F70A2-E1BB-404A-81FF-631AD47101B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -413,7 +407,6 @@ Global
 		{016EEFA9-68D0-4D05-8632-C8C0906AD9D1} = {2145D241-E761-4908-A682-CB831A803C06}
 		{CF11E8E4-CEB1-4A64-95C6-BE26FAE79C37} = {650D219D-8000-4695-BD9B-DC48B3002126}
 		{798A334C-DBCE-45D3-8F35-C55CFB7CAEBE} = {B3AB008A-3C44-449A-9B1E-AB594D486B9A}
-		{C2942C3B-85B0-4C59-82B0-1D12F5F2AA34} = {8C95A5A5-36BF-432F-A4A1-3AB922FC35E5}
 		{DC8F70A2-E1BB-404A-81FF-631AD47101B3} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{B4C33E5C-0ED2-4AAD-A41F-2F316B0E3B2B} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 	EndGlobalSection
