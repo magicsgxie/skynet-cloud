@@ -224,8 +224,11 @@ ULinq.Xsd 定义了Mapping、Table、Id、Column、ComputedColumn、Association�
 ### 使用spring cloud Hytrix
 
 ### 使用Security
-
-
+1. Java模组权限验证
+![img](/image/java_web_api权限验证.png)
+2. .net core 模组权限验证
+![img](/image/aspnetcore增加权限验证.png)
+![img](/image/api权限验证.png)
 
 ### 使用spring cloud 构建微服务时的配置文件
 [配置文件例子](/config.yaml)
