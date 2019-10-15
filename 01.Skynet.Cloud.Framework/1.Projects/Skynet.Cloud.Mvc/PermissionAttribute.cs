@@ -94,8 +94,8 @@ namespace UWay.Skynet.Cloud.Mvc
                     }
                 }
                 menuUrl = menuUrl.Trim();
-                var authorities = context.HttpContext.User.Claims.Where(p => p.Type.Equals( "authorities")).Select(o => o.Value).ToList();
-                if(authorities.Any(p => p.Equals(menuUrl,StringComparison.InvariantCultureIgnoreCase)))
+                //var authorities = context.HttpContext.User.Claims.Where(p => p.Type.Equals( "authorities")).Select(o => o.Value).ToList();
+                if(context.HttpContext.User.HasPermission(menuUrl))
                 {
                     await next();
                 } else
