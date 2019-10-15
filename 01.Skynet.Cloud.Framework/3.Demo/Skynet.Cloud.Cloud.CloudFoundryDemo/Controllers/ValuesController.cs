@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UWay.Skynet.Cloud.Security.Filters;
+using UWay.Skynet.Cloud.Mvc;
+//using UWay.Skynet.Cloud.Security.Filters;
 
 namespace Skynet.Cloud.Cloud.CloudFoundryDemo.Controllers
 {
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -20,10 +24,11 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        [PermissionFilter("Get")]
+        [Permission]
         public ActionResult<string> Get(int id)
         {
             var name = HttpContext.User.Identity.Name;
+            var authorities = HttpContext.User.Claims.Where(p => p.Type.Equals("authorities"));
             return "value";
         }
 

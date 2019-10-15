@@ -7117,6 +7117,15 @@
             基础平台扩展类
             </summary>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Helper.Paging``1(System.Linq.IQueryable{``0},UWay.Skynet.Cloud.Linq.Pagination)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="paging"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Helper.GetDescriptionByName``1(``0)">
             <summary>
             get enum description by name
@@ -8896,6 +8905,204 @@
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.Impl.Internal.UnboxT`1.ValueField(System.Object)">
             <exception cref="T:System.InvalidCastException"><c>InvalidCastException</c>.</exception>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.Pagination">
+            <summary>
+            查询分页定义
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.Pagination.Paging">
+            <summary>
+            是否分页
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.Pagination.ApplicationId">
+            <summary>
+            系统ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.Pagination.RowCount">
+            <summary>
+            数据数量，涉及总行数变更的查询时,赋值为null。备注：为NULL是查询总行数
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.Pagination.PageSize">
+            <summary>
+            每页大小
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.Pagination.CurrentPageIndex">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.Pagination.PageCount">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.Pagination.SortExpress">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.Pagination.GroupExpress">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.OrderBy(System.String)">
+            <summary>
+            按照指定字段排序，如果字段已经存在排序表达式中，则逆反排序方向,只适用Linq
+            </summary>
+            <param name="expression">排序字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.OrderBy(System.String,System.Boolean)">
+            <summary>
+            排序，只适用于EF框架
+            </summary>
+            <param name="expression"></param>
+            <param name="desc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.OrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+            <summary>
+            增加一个排序项，只适用于EF框架
+            </summary>
+            <typeparam name="T">排序类型</typeparam>
+            <param name="expression">排序表达式</param>
+            <returns><see cref="T:UWay.Skynet.Cloud.Linq.Pagination"/></returns>
+            <example>
+            <code><![CDATA[
+               var paging = new Pagination();
+               paging.Paging = true;
+               paging.PageSize = 25;
+               paging.OrderBy<Customer>(c => c.ContactName);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.GroupBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+            <summary>
+            只适用于EF框架
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="expression"></param>
+            <param name="desc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.OrderByDesc``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+            <summary>
+            增加一个倒排序项,只适用于EF框架
+            </summary>
+            <typeparam name="T">排序类型</typeparam>
+            <param name="expression">排序表达式</param>
+            <returns><see cref="T:UWay.Skynet.Cloud.Linq.Pagination"/></returns>
+            <example>
+            <code><![CDATA[
+               var paging = new Pagination();
+               paging.Paging = true;
+               paging.PageSize = 25;
+               paging.OrderByDesc<Customer>(c => c.ContactName);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.OrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[],System.Boolean)">
+            <summary>
+            只适用于EF框架
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="expression"></param>
+            <param name="desc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.ParseQueryPaging``1(System.Linq.IQueryable)">
+            <summary>
+            只适用于EF框架
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.ParseQuery(System.Linq.IQueryable)">
+             <summary>
+             将排序应用到<seealso cref="T:System.Linq.IQueryable"/>只适用于EF框架
+             </summary>
+             <param name="query"><seealso cref="T:System.Linq.IQueryable"/></param>
+             <returns><seealso cref="T:System.Linq.IQueryable"/></returns>
+             <example>
+             <code>
+             <![CDATA[
+              public List<CustomerOrderView> GetCustomerOrders( UWay.Ufa.Framework.Query.Pagination pagenation)
+              {
+                  var cs = CreateQuery<Customer>();//EF需要先将查询对象定义成变量，否则会出现无法解析的错误
+                  var os = CreateQuery<Order>();//EF需要先将查询对象定义成变量，否则会出现无法解析的错误
+              
+                  var q = from c in cs
+                          from o in os
+                          where c.CustomerID == o.CustomerID
+                          select new { o.CustomerID, o.OrderID, c.ContactName }; //先查询一个匿名对象，不支持直接返回视图对象。
+              
+                  var count = q.Count();
+              
+                  q = q.Paging(pagenation);
+              
+                  return (from c in q
+                          select new CustomerOrderView { CustomerId = c.CustomerID,
+                                                         CustomerName = c.ContactName, 
+                                                         OrderId = c.OrderID }
+                         ).ToList();//返回视图对象。
+              }
+              
+             //.....
+             using (var scope = new DbConnectionScope(ConnectionName))
+             {
+                 using (var repository = new CustomerRepository())
+                 {
+                     var p = new UWay.Ufa.Framework.Query.Pagination() { Paging = true, 
+                                                                         PageSize = 25 };
+                     p.OrderBy<Customer>(c => c.ContactName);
+            
+                     var result = repository.GetCustomerOrders(p);
+                     
+                     Assert.IsTrue(p.RowCount.HasValue && p.RowCount.Value > 0);
+                 }
+             }
+             ]]>
+             </code>
+             </example> 
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.ApplyTo(UWay.Skynet.Cloud.Linq.Pagination)">
+            <summary>
+            将当前分页信息复制到另一个分页实例
+            </summary>
+            <param name="paging">目标实例</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.Clone">
+            <summary>
+            浅表Clone
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.Pagination.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Linq.QueryableExtensions">
             <summary>

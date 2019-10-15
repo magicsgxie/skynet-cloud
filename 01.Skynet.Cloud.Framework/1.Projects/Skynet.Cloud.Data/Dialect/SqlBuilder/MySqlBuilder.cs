@@ -33,6 +33,12 @@ namespace UWay.Skynet.Cloud.Data.Dialect.SqlBuilder
 
         }
 
+        protected override void AppendParameterName(string name)
+        {
+            this.Append("?");
+            this.Append(name);
+        }
+
         protected override Expression VisitSelect(SelectExpression select)
         {
             this.AddAliases(select.From);

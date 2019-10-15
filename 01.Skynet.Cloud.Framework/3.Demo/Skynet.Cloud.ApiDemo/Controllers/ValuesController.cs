@@ -37,7 +37,7 @@ namespace UWay.Skynet.Cloud.ApiDemo.Controllers
         [HttpGet("{id}")]
         public ActionResult<User> Get(int id)
         {
-            userService.Single("admin");
+            userService.Page("admin");
             return userService.GetById(id);
         }
 

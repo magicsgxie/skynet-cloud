@@ -101,7 +101,7 @@ namespace UWay.Skynet.Cloud.ApiDemo
         private IServiceProvider InitIoC(IServiceCollection services)
         {
             
-            services.UseOracle(Configuration);
+            //services.UseOracle(Configuration);
             //services.UseMysql(Configuration);
             //services.UseSqlServer(Configuration);
             return AspectCoreContainer.BuildServiceProvider(services);//接入AspectCore.Injector

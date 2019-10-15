@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UWay.Skynet.Cloud.Extensions;
-using Steeltoe.Security.Authentication.CloudFoundry;
 using UWay.Skynet.Cloud.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.IdentityModel.Tokens.Jwt;
+
 namespace Skynet.Cloud.Cloud.CloudFoundryDemo
 {
     public class Startup
@@ -23,15 +25,15 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddCloudFoundryJwtBearer(Configuration);
-            services.AddAuthorization(options => {
-                options.AddPolicy("Values", policy => policy.RequireClaim("values.me"));
-            });
+            //JwtSecurityTokenHandler
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDiscoveryClient(Configuration);
             //services.AddMySwagger();
             services.UseMysql(Configuration);
+            services.AddCustomAuthentication(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCustomMvc(Configuration);
+            services.AddSwaggerDocumentation(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +42,7 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwaggerDocumentation(Configuration);
             }
             else
             {
@@ -47,12 +50,8 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo
                 app.UseHsts();
             }
             
-            app.UseAuthentication();
             app.UseDiscoveryClient();
-            //app.UseJwtBearerAuthentication()
-            //app.UseHttpsRedirection();
-            //app.UseSwagger();
-            //app.UseSwaggerUi3();
+            app.UseAuthentication();
             app.UseMvc();
             
         }

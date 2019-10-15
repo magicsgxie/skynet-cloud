@@ -22,7 +22,7 @@ namespace Skynet.Cloud.ConnectorBase.Test
             ConfigurationBuilder builder = new ConfigurationBuilder();
             builder.AddCloudFoundry();
             var config = builder.Build();
-            var connection = GetConnection(config);
+            var connection = GetSSo(config);
         }
 
         private static string GetConnection(IConfiguration config, string serviceName = null)
@@ -36,6 +36,17 @@ namespace Skynet.Cloud.ConnectorBase.Test
             OracleProviderConnectorFactory factory = new OracleProviderConnectorFactory(info, mySqlConfig, null);
 
             return factory.CreateConnectionString();
+        }
+
+        private static string GetSSo(IConfiguration config, string serviceName = null)
+        {
+            SsoServiceInfo info = string.IsNullOrEmpty(serviceName)
+                ? config.GetSingletonServiceInfo<SsoServiceInfo>()
+                : config.GetRequiredServiceInfo<SsoServiceInfo>(serviceName);
+
+            
+
+            return info.ToString();
         }
     }
 }

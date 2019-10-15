@@ -2195,7 +2195,13 @@
             Rewrites an expression tree so that locally isolatable sub-expressions are evaluated and converted into ConstantExpression nodes.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.Eval(System.Linq.Expressions.Expression)" -->
+        <member name="M:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.Eval(System.Linq.Expressions.Expression)">
+            <summary>
+            Performs evaluation or replacement of independent sub-trees
+            </summary>
+            <param name="expression">The root of the expression tree.</param>
+            <returns>A new tree with sub-trees evaluated and replaced.</returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.Eval(System.Linq.Expressions.Expression,System.Func{System.Linq.Expressions.Expression,System.Boolean})" -->
         <!-- Badly formed XML comment ignored for member "T:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.SubtreeEvaluator" -->
         <member name="T:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.Nominator">

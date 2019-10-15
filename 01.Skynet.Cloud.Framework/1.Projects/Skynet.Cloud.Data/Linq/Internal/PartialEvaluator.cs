@@ -15,7 +15,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Internal
     static class PartialEvaluator
     {
         /// <summary>
-        /// Performs evaluation & replacement of independent sub-trees
+        /// Performs evaluation or replacement of independent sub-trees
         /// </summary>
         /// <param name="expression">The root of the expression tree.</param>
         /// <returns>A new tree with sub-trees evaluated and replaced.</returns>

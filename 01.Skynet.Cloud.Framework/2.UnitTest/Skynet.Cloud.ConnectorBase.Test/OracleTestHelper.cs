@@ -29,7 +29,12 @@ namespace Skynet.Cloud.ConnectorBase.Test
             'relational'
           ]
         }
-      ]
+      ],
+      'p-sso': [{
+        'clientId': 'pig',
+        'clientSecret': 'schealth365skynetcloud',
+        'authDomain': 'http://skynet-cloud-auth/oauth/token'
+      }]
 }";
 
         public static string TwoServerVCAP = @"

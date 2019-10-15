@@ -12,15 +12,19 @@
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Discovery.ConsulBase" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="2.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Skynet.Cloud.Authentication.CloudFoundryCore\Skynet.Cloud.Authentication.CloudFoundryCore.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.ConnectorBase\Skynet.Cloud.ConnectorBase.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Data\Skynet.Cloud.Data.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
-    <ProjectReference Include="..\Skynet.Cloud.Security\Skynet.Cloud.Security.csproj" />
     <ProjectReference Include="..\Steeltoe.Configuration.NacosServerBase\Steeltoe.Configuration.NacosServerBase.csproj" />
     <ProjectReference Include="..\Steeltoe.Discovery.NacosBase\Steeltoe.Discovery.NacosBase.csproj" />
   </ItemGroup>
