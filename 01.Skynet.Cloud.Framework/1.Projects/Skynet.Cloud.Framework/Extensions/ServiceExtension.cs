@@ -156,18 +156,28 @@ namespace UWay.Skynet.Cloud.Extensions
         private static IServiceCollection AddScopeService(this IServiceCollection service, Assembly interfaceAssembly, Assembly implementAssembly)
         {
             //过滤掉非接口及泛型接口
-            var types = interfaceAssembly.GetTypes().Where(t => t.GetTypeInfo().IsInterface && !t.GetTypeInfo().IsGenericType);
+            var types = interfaceAssembly.GetTypes().Where(t => t.GetTypeInfo().IsInterface && !t.GetTypeInfo().IsGenericType&& t.Name.EndsWith("Service"));
 
             foreach (var type in types)
             {
                 //过滤掉抽象类、泛型类以及非class
-                var implementType = implementAssembly.DefinedTypes
-                    .FirstOrDefault(t => t.IsClass && !t.IsAbstract && !t.IsGenericType &&
+                var implementTypes = implementAssembly.DefinedTypes
+                    .Where(t => t.IsClass && !t.IsAbstract && !t.IsGenericType &&
                                          t.GetInterfaces().Any(b => b.Name == type.Name));
-                if (implementType != null)
+                foreach(var item in implementTypes)
                 {
-                    service.AddScoped(type, implementType.AsType());
+                    service.AddSingleton(type, item.AsType());
                 }
+                //if (implementType != null && implementType.Count() == 1)
+                //{
+                //    service.AddSingleton(type, implementType.FirstOrDefault().AsType());
+                //} else
+                //{
+                //    foreach(var item in implementType)
+                //    {
+                //        service.AddSingleton(type, item.AsType());
+                //    }
+                //}
             }
 
             return service;

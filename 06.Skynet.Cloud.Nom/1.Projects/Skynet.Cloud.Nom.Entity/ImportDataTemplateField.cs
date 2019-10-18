@@ -25,17 +25,30 @@
  * 
  ************************************************************************************/
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+using UWay.Skynet.Cloud.Data;
+using UWay.Skynet.Cloud.Upms.Entity;
 
-namespace UWay.Ufa.Enterprise.Entity
+namespace UWay.Skynet.Cloud.Nom.Entity
 {
     
     public class ImportDataTemplateField
     {
         /// <summary>
+        /// 表名
+        /// <summary>
+        [Ignore]
+        public string TableName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 是否GIS分析字段
         /// <summary>
-      
+
         public int? IsGisAnalysis
         {
             get;
@@ -266,6 +279,7 @@ namespace UWay.Ufa.Enterprise.Entity
             get;
             set;
         }
+
     }
 }
 

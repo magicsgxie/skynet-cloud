@@ -97,7 +97,7 @@ namespace UWay.Skynet.Cloud.Mvc.Test
             };
 
             // Verify token
-            IdentityModelEventSource.ShowPII = true;
+            //IdentityModelEventSource.ShowPII = true;
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
             var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB1d2F5IiwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJzZXJ2ZXIiXSwiZXhwIjoxNTcxMDg2NTkzLCJhdXRob3JpdGllcyI6WyJzeXNfY2xpZW50X2VkaXQiLCJzeXNfZGljdF9hZGQiLCJST0xFXzEiLCJzeXNfZGVwdF9kZWwiLCJzeXNfdXNlcl9kZWwiLCJzeXNfbWVudV9hZGQiLCJzeXNfcm9sZV9hZGQiLCJzeXNfY2xpZW50X2FkZCIsInN5c19kZXB0X2VkaXQiLCJzeXNfdXNlcl9lZGl0Iiwic3lzX2RpY3RfZWRpdCIsInN5c19tZW51X2RlbCIsInN5c19tZW51X2VkaXQiLCJzeXNfcm9sZV9lZGl0Iiwic3lzX3JvbGVfcGVybSIsInN5c191c2VyX2FkZCIsInN5c190b2tlbl9kZWwiLCJzeXNfZGVwdF9hZGQiLCJzeXNfbG9nX2RlbCIsInN5c19yb2xlX2RlbCIsInN5c19jbGllbnRfZGVsIiwic3lzX2RpY3RfZGVsIl0sImp0aSI6Ijg5MTNhNzBlLTY3ODQtNDdhZC05OTYwLTdhZDk5NTMzNjliYiIsImNsaWVudF9pZCI6InBpZyJ9.uDfO8Ulx6HAznNLcHWeZ227iOLUPx9I7IuiZ1Saw9Ts";
             // exception is thrown on the next line:

@@ -18,15 +18,21 @@ namespace UWay.Skynet.Cloud.Data
 
         public IdAttribute(string name) : base(name) { }
 
+        public IdAttribute(string name,string commment) : base(name, commment) { }
 
-        
+        public IdAttribute(string name,DBType dBType, string commment) : base(name, dBType, commment) { }
+
+
+
         /// <summary>
         /// 得到或设置数据表的主键是否为自增的
         /// </summary>
         public bool IsDbGenerated { get; set; }
+
         /// <summary>
         /// 得到或设置序列名称
         /// </summary>
         public string SequenceName { get; set; }
+
     }
 }

@@ -26,9 +26,9 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace UWay.Ufa.Enterprise.Entity
+namespace UWay.Skynet.Cloud.Nom.Entity
 {
-   [DataContract]
+   
    public class BasedataChangedRecord
     {
     

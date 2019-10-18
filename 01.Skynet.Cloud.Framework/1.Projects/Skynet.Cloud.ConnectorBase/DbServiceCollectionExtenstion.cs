@@ -12,6 +12,7 @@ using UWay.Skynet.Cloud.Extensions;
 using UWay.Skynet.Cloud.Protocal;
 using Steeltoe.CloudFoundry.Connector.MySql;
 using Steeltoe.CloudFoundry.Connector.SqlServer;
+using UWay.Skynet.Cloud.ConnectorBase;
 
 namespace UWay.Skynet.Cloud.Extensions
 {
@@ -64,6 +65,16 @@ namespace UWay.Skynet.Cloud.Extensions
             if (!serviceInterfaceAssmbly.IsNullOrEmpty() && !serviceImplAssembly.IsNullOrEmpty())
                 services
                     .AddScopedAssembly(serviceInterfaceAssmbly, serviceImplAssembly);
+            
+            //var multiServices = section.GetValue<IList<MultiService>>("multi");
+            //if(multiServices.Count > 0)
+            //{
+            //    foreach(var item in multiServices)
+            //    {
+            //        var baseType = item.GetType();
+            //        baseType
+            //    }
+            //}
             return services;
         }
 

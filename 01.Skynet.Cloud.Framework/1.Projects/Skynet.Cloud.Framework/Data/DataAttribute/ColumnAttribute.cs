@@ -18,10 +18,21 @@ namespace UWay.Skynet.Cloud.Data
             IsNullable = true;
         }
 
-        public ColumnAttribute(string name)
+        public ColumnAttribute(string name):this(name, DBType.Unkonw, string.Empty)
+        {
+            
+        }
+
+        public ColumnAttribute(string name, string comment) : this(name, DBType.Unkonw, comment)
+        {
+
+        }
+
+        public ColumnAttribute(string name, DBType dBType, string comment)
         {
             Name = name;
             DbType = DBType.Unkonw;
+            Comment = comment;
             IsNullable = true;
         }
 
@@ -58,6 +69,13 @@ namespace UWay.Skynet.Cloud.Data
         /// 是否壮话Utc时间
         /// </summary>
         public bool ForceToUtc { get; set; }
+
+        /// <summary>
+        /// 注释
+        /// </summary>
+        public string Comment { set; get; }
+
+        
     }
     
 }

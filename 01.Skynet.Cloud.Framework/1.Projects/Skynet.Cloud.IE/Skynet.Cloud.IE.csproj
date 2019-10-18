@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>UWay.Skynet.Cloud.IE</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspose.Cells" Version="19.9.0" />
+    <PackageReference Include="Aspose.Words" Version="19.10.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Word\" />
+    <Folder Include="Pdf\" />
+    <Folder Include="Html\" />
+    <Folder Include="Csv\" />
+  </ItemGroup>
+
+</Project>

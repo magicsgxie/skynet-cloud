@@ -24,9 +24,10 @@
  * 
  ************************************************************************************/
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace UWay.Ufa.Enterprise.Entity
+namespace UWay.Skynet.Cloud.Nom.Entity
 {    
     public class ImportDataTemplate
     {
@@ -274,6 +275,18 @@ namespace UWay.Ufa.Enterprise.Entity
         {
             get;
             set;
+        }
+
+        public string DataSourceId
+        {
+            set;
+            get;
+        }
+
+        public IList<ImportDataTemplateField> DataFields
+        {
+            set;
+            get;
         }
 
     }

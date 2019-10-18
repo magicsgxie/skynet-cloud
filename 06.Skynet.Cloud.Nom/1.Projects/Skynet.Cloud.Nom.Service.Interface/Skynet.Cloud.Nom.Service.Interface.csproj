@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.IE\Skynet.Cloud.IE.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Nom.Entity\Skynet.Cloud.Nom.Entity.csproj" />
   </ItemGroup>
 

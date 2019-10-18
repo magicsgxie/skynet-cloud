@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Nom.Entity
 {
-    class ExcelImport
-    {
-    }
+    //class ExcelImport
+    //{
+    //}
 }

@@ -152,9 +152,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Nom.Entity", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Demo.Service.Test", "01.Skynet.Cloud.Framework\2.UnitTest\Skynet.Cloud.Demo.Service.Test\Skynet.Cloud.Demo.Service.Test.csproj", "{798A334C-DBCE-45D3-8F35-C55CFB7CAEBE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Authentication.CloudFoundryBase", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Authentication.CloudFoundryBase\Skynet.Cloud.Authentication.CloudFoundryBase.csproj", "{DC8F70A2-E1BB-404A-81FF-631AD47101B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.IE", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.IE\Skynet.Cloud.IE.csproj", "{BCCCCE58-27C1-4ACD-9498-DC5CCE486345}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Authentication.CloudFoundryCore", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Authentication.CloudFoundryCore\Skynet.Cloud.Authentication.CloudFoundryCore.csproj", "{B4C33E5C-0ED2-4AAD-A41F-2F316B0E3B2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.IE.Test", "01.Skynet.Cloud.Framework\2.UnitTest\Skynet.Cloud.IE.Test\Skynet.Cloud.IE.Test.csproj", "{25ADC388-3AF0-4AC0-B032-C5775AB7FB9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -342,6 +342,14 @@ Global
 		{B4C33E5C-0ED2-4AAD-A41F-2F316B0E3B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4C33E5C-0ED2-4AAD-A41F-2F316B0E3B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4C33E5C-0ED2-4AAD-A41F-2F316B0E3B2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCCCCE58-27C1-4ACD-9498-DC5CCE486345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCCCCE58-27C1-4ACD-9498-DC5CCE486345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCCCCE58-27C1-4ACD-9498-DC5CCE486345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCCCCE58-27C1-4ACD-9498-DC5CCE486345}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25ADC388-3AF0-4AC0-B032-C5775AB7FB9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25ADC388-3AF0-4AC0-B032-C5775AB7FB9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25ADC388-3AF0-4AC0-B032-C5775AB7FB9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25ADC388-3AF0-4AC0-B032-C5775AB7FB9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -409,6 +417,8 @@ Global
 		{798A334C-DBCE-45D3-8F35-C55CFB7CAEBE} = {B3AB008A-3C44-449A-9B1E-AB594D486B9A}
 		{DC8F70A2-E1BB-404A-81FF-631AD47101B3} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{B4C33E5C-0ED2-4AAD-A41F-2F316B0E3B2B} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
+		{BCCCCE58-27C1-4ACD-9498-DC5CCE486345} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
+		{25ADC388-3AF0-4AC0-B032-C5775AB7FB9E} = {B3AB008A-3C44-449A-9B1E-AB594D486B9A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE362151-8B43-49C2-ABD3-060B24911784}

@@ -702,6 +702,11 @@
             是否壮话Utc时间
             </summary>
         </member>
+        <member name="P:UWay.Skynet.Cloud.Data.ColumnAttribute.Comment">
+            <summary>
+            注释
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.DataAttribute.ComponentAttribute">
             <summary>
             被标记为一个“组件”,该组件实现了一个或多个“契约”，如果没有实现任何“契约”，那么该组件也作为“契约”进行注册
@@ -783,6 +788,13 @@
             </summary>
             <param name="name"></param>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Data.TableAttribute.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="comment">注释</param>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Data.TableAttribute.Schema">
             <summary>
             得到或设置数据库表的Schema
@@ -791,6 +803,11 @@
         <member name="P:UWay.Skynet.Cloud.Data.TableAttribute.Name">
             <summary>
             得到或设置表名
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.TableAttribute.Comment">
+            <summary>
+            表注释
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.TableAttribute.Readonly">
@@ -7315,7 +7332,7 @@
             <param name="value">字符串</param>
             <returns></returns>
         </member>
-        <member name="M:UWay.Skynet.Cloud.Helper.Join``1(System.Collections.Generic.IEnumerable{``0},System.String,System.Boolean)">
+        <member name="M:UWay.Skynet.Cloud.Helper.JoinString``1(System.Collections.Generic.IEnumerable{``0},System.String,System.Boolean)">
             <summary>
             集合连接成字符串
             </summary>

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="2.2.0" />
@@ -19,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Skynet.Cloud.Authentication.CloudFoundryCore\Skynet.Cloud.Authentication.CloudFoundryCore.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.ConnectorBase\Skynet.Cloud.ConnectorBase.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Data\Skynet.Cloud.Data.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />

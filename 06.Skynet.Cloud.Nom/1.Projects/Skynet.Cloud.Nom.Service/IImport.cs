@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using UWay.Skynet.Cloud.Data;
-using UWay.Skynet.Cloud.Nom.Entity;
-using UWay.Skynet.Cloud.Upms.Entity;
-using UWay.Ufa.Enterprise.Entity;
 
 namespace UWay.Skynet.Cloud.Nom.Service
 {
-    internal interface IImport
-    {
-        void Import(NetType netType,ExcelInfo excel, ImportDataTemplate template, ImportDataTemplateField fields, IList<CityInfo> cityIds, string user);
-    }
+    //internal interface IImport
+    //{
+    //    ImportMsgResult Import(string filename, ImportDataTemplate template, string user);
+
+    //    ImportMsgResult Import(Stream fileStream, ImportDataTemplate template, string user);
+
+    //    ImportMsgResult Import(ExcelInfo excel, ImportDataTemplate template, string user);
+    //}
 }

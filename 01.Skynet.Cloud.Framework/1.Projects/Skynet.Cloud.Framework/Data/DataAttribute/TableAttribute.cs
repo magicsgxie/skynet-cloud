@@ -34,7 +34,16 @@ namespace UWay.Skynet.Cloud.Data
         {
             Name = name;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="comment">注释</param>
+        public TableAttribute(string name, string comment)
+        {
+            Name = name;
+            Comment = comment;
+        }
         /// <summary>
         /// 得到或设置数据库表的Schema
         /// </summary>
@@ -43,6 +52,12 @@ namespace UWay.Skynet.Cloud.Data
         /// 得到或设置表名
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// 表注释
+        /// </summary>
+        public string Comment { get; set; }
+
         /// <summary>
         /// 得到或设置表是否是只读的
         /// </summary>

@@ -345,7 +345,7 @@ namespace UWay.Skynet.Cloud
             {
                 list.Add(filter.CreateFilter(paramaters));
             }
-            return list.Join(" AND ");
+            return list.JoinString(" AND ");
         }
 
         /// <summary>
@@ -360,7 +360,7 @@ namespace UWay.Skynet.Cloud
             {
                 list.Add(sort.ToSortString());
             }
-            return string.Format(" order by  {0} ", list.Join(" , "));
+            return string.Format(" order by  {0} ", list.JoinString(" , "));
         }
 
         //public static 
@@ -630,7 +630,7 @@ namespace UWay.Skynet.Cloud
         /// <param name="splite">分割符</param>
         /// <param name="isAddMark"></param>
         /// <returns></returns>
-        public static string Join<T>(this IEnumerable<T> objs, string splite = ",", bool isAddMark = false)
+        public static string JoinString<T>(this IEnumerable<T> objs, string splite = ",", bool isAddMark = false)
         {
             if (!objs.Any())
                 return string.Empty;

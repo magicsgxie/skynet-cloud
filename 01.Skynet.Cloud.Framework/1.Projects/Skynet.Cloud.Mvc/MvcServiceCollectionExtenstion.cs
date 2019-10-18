@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.WebEncoders;
 using System.Text.Encodings.Web;
@@ -11,7 +10,6 @@ using Steeltoe.CloudFoundry.Connector.Redis;
 using Microsoft.AspNetCore.DataProtection;
 using UWay.Skynet.Cloud.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using UWay.Skynet.Cloud.Authentication.CloudFoundry;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;

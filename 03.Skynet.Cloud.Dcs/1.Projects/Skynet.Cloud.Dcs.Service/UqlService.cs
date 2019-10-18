@@ -1844,7 +1844,7 @@ namespace Skynet.Cloud.Dcs.Service
 
             if (template.FrequencyBands != null && template.FrequencyBands.Length > 0 && template.NeLevel == (int)NeLevel.Cell)
             {
-                clause.Terms.Add(WhereTerm.CustomSql(string.Format("  tb0.FREQUENCY_BAND in ({0}) ", template.FrequencyBands.Join(",", true))));
+                clause.Terms.Add(WhereTerm.CustomSql(string.Format("  tb0.FREQUENCY_BAND in ({0}) ", template.FrequencyBands.JoinString(",", true))));
             }
 
             //增加载频条件
