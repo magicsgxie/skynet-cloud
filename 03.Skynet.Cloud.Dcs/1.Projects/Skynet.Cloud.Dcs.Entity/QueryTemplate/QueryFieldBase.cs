@@ -60,6 +60,12 @@ namespace UWay.Skynet.Cloud.Dcs.Entity
             set; get;
         }
 
+        public string FieldCnName 
+        { 
+            set; 
+            get; 
+        }
+
         /// <summary>
         /// 字段名
         /// </summary>
@@ -70,8 +76,8 @@ namespace UWay.Skynet.Cloud.Dcs.Entity
             get;
         }
 
-        [Ignore]
-        public NeLevel NeLevel { set; get; }
+        //[Ignore]
+        //public NeLevel NeLevel { set; get; }
 
         ///// <summary>
         ///// 是否BSC指标
