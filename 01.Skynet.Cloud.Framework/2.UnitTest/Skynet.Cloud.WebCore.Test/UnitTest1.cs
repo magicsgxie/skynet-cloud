@@ -89,7 +89,7 @@ namespace UWay.Skynet.Cloud.Mvc.Test
             //});
             var validationParameters = new TokenValidationParameters
             {
-                ClockSkew = TimeSpan.FromMinutes(1),
+                //ClockSkew = TimeSpan.FromMinutes(1),
                 ValidateAudience = false,
                 ValidateIssuer = false,
                 ValidIssuer = "made by uway",

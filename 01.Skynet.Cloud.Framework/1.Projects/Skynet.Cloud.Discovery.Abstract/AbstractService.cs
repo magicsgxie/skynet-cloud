@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Steeltoe.Common.Discovery;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -15,110 +13,86 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Discovery.Abstract
 {
-    public abstract class AbstractService
+    public abstract class BaseDiscoveryService
     {
         protected DiscoveryHttpClientHandler _handler;
-        protected ILogger<AbstractService> _logger;
-        protected IHttpContextAccessor _context;
+        protected ILogger _logger;
 
-        public AbstractService(IDiscoveryClient client, ILogger<AbstractService> logger, IHttpContextAccessor context)
+        public BaseDiscoveryService(IDiscoveryClient client, ILogger logger)
         {
-            _handler = new DiscoveryHttpClientHandler(client)
-            {
-                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
-            };
+            _handler = new DiscoveryHttpClientHandler(client, logger);
             _logger = logger;
-            _context = context;
         }
-        public async Task DoRequest(HttpClient client, HttpRequestMessage request)
+        public virtual HttpClient GetClient()
         {
-
-            using (HttpResponseMessage response = await client.SendAsync(request))
+            var client = new HttpClient(_handler, false);
+            return client;
+        }
+        public virtual async Task<bool> Invoke(HttpRequestMessage request)
+        {
+            var client = GetClient();
+            try
             {
-                if (response.StatusCode != HttpStatusCode.OK)
+                using (HttpResponseMessage response = await client.SendAsync(request))
                 {
-                    if (response.StatusCode == HttpStatusCode.NotFound)
-                        return;
-
-                    // Log status
-                    var message = string.Format("Service request returned status: {0} invoking path: {1}",
-                        response.StatusCode, request.RequestUri);
-
-                    _logger?.LogInformation(message);
-
-                    return;
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    return response.StatusCode == HttpStatusCode.OK;
                 }
-                return;
+            }
+            catch (Exception e)
+            {
+                _logger?.LogError("Invoke exception: {0}", e);
+                throw;
             }
 
+            //return false;
         }
-
-        public async Task<T> DoRequest<T>(HttpClient client, HttpRequestMessage request)
+        public virtual async Task<bool> Invoke(HttpRequestMessage request, object content)
         {
-
-            using (HttpResponseMessage response = await client.SendAsync(request))
+            var client = GetClient();
+            try
             {
-                if (response.StatusCode != HttpStatusCode.OK)
+                request.Content = Serialize(content);
+                using (HttpResponseMessage response = await client.SendAsync(request))
                 {
-                    if (response.StatusCode == HttpStatusCode.NotFound)
-                        return default(T);
-
-                    // Log status
-                    var message = string.Format("Service request returned status: {0} invoking path: {1}",
-                        response.StatusCode, request.RequestUri);
-
-                    _logger?.LogInformation(message);
-
-                    return default(T);
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    return response.StatusCode == HttpStatusCode.OK;
                 }
-
-                Stream stream = await response.Content.ReadAsStreamAsync();
-                return Deserialize<T>(stream);
+            }
+            catch (Exception e)
+            {
+                _logger?.LogError("Invoke exception: {0}", e);
+                throw;
             }
 
+            //return false;
         }
-        public async Task<T> DoHateoasRequest<T>(HttpClient client, HttpRequestMessage request, string key)
+
+        public virtual async Task<T> Invoke<T>(HttpRequestMessage request, object content = null)
         {
-
-
-            using (HttpResponseMessage response = await client.SendAsync(request))
+            var client = GetClient();
+            try
             {
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (content != null)
                 {
-                    if (response.StatusCode == HttpStatusCode.NotFound)
-                        return default(T);
-
-                    // Log status
-                    var message = string.Format("Service request returned status: {0} invoking path: {1}",
-                        response.StatusCode, request.RequestUri);
-
-                    _logger?.LogInformation(message);
-
-                    return default(T);
+                    request.Content = Serialize(content);
                 }
-
-                string json = await response.Content.ReadAsStringAsync();
-                if (string.IsNullOrEmpty(json))
+                using (HttpResponseMessage response = await client.SendAsync(request))
                 {
-                    return default(T);
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    return Deserialize<T>(stream);
                 }
-                var parsed = JObject.Parse(json);
-                if (parsed == null)
-                {
-                    return default(T);
-                }
-                var items = parsed["_embedded"]?[key];
-                if (items == null)
-                {
-                    return default(T);
-                }
-                return items.ToObject<T>();
-
-                //return Deserialize<T>(stream);
+            }
+            catch (Exception e)
+            {
+                _logger?.LogError("Invoke exception: {0}", e);
+                throw;
             }
 
+            //return default(T);
         }
-        protected virtual T Deserialize<T>(Stream stream)
+
+        public virtual T Deserialize<T>(Stream stream)
         {
             try
             {
@@ -130,9 +104,16 @@ namespace UWay.Skynet.Cloud.Discovery.Abstract
             }
             catch (Exception e)
             {
-                _logger.LogError("Serialization exception: {0}", e);
+                _logger?.LogError("Deserialize exception: {0}", e);
+                throw;
             }
-            return default(T);
+
+        }
+
+        public virtual HttpContent Serialize(object toSerialize)
+        {
+            string json = JsonConvert.SerializeObject(toSerialize);
+            return new StringContent(json, Encoding.UTF8, "application/json");
         }
 
         protected virtual HttpRequestMessage GetRequest(HttpMethod method, string requestUri)
@@ -142,45 +123,6 @@ namespace UWay.Skynet.Cloud.Discovery.Abstract
             return request;
         }
 
-        protected virtual async Task<HttpClient> GetClientAsync()
-        {
-            var client = new HttpClient(_handler, false);
-
-            var token = await _context.HttpContext.GetTokenAsync("access_token");
-            if (token != null)
-            {
-                _logger.LogDebug("Found a token {token}", token);
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            }
-            else
-            {
-                _logger.LogDebug("Token not found in HttpContext");
-                string authHeader = await Task.FromResult(_context.HttpContext.Request.Headers["Authorization"]);
-                if (authHeader != null)
-                {
-                    _logger.LogDebug("Found authorization header");
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authHeader.Replace("bearer ", string.Empty));
-                }
-            }
-
-            return client;
-        }
-
-        protected virtual HttpContent GetRequestContent(object toSerialize)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(toSerialize);
-                _logger?.LogDebug("GetRequestContent generated JSON: {0}", json);
-                return new StringContent(json, Encoding.UTF8, "application/json");
-
-            }
-            catch (Exception e)
-            {
-                _logger?.LogError("GetRequestContent Exception: {0}", e);
-            }
-
-            return new StringContent(string.Empty, Encoding.UTF8, "application/json");
-        }
+        
     }
 }

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-
-using System.Text;
-using System.Threading.Tasks;
 using UWay.Skynet.Cloud.Data;
 using UWay.Skynet.Cloud.Nom.Entity;
 using UWay.Skynet.Cloud.Linq;
 using UWay.Skynet.Cloud.Request;
+using Skynet.Cloud.Noap;
 
 namespace UWay.Skynet.Cloud.Nom.Service.Interface
 {

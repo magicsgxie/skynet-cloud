@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using UWay.Skynet.Cloud.IE.Core;
@@ -19,6 +20,14 @@ namespace UWay.Skynet.Cloud.IE
         /// <param name="dataItems">数据</param>
         /// <returns>文件</returns>
         Task<TemplateFileInfo> Export<T>(string fileName, ICollection<T> dataItems) where T : class;
+
+        /// <summary>
+        /// 到处Excel
+        /// </summary>
+        /// <param name="fileName">文件名称</param>
+        /// <param name="dt">数据</param>
+        /// <returns></returns>
+        Task<TemplateFileInfo> Export(string fileName, DataTable dt);
 
         /// <summary>
         ///     导出Excel

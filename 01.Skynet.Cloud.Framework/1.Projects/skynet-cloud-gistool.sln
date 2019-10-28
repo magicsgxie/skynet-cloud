@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Coud.Gis.Common", "Skynet.Coud.Gis.Common\Skynet.Coud.Gis.Common.csproj", "{812816FB-309D-41C5-B626-3E3BE0797425}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.GisTool", "Skynet.Cloud.GisTool\Skynet.Cloud.GisTool.csproj", "{624FB6AD-476A-4A6E-A658-DF5021F3E511}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Gis.Entity", "Skynet.Cloud.Gis.Entity\Skynet.Cloud.Gis.Entity.csproj", "{B5C700A5-D18A-4DCF-A0A7-0C0255A499A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{812816FB-309D-41C5-B626-3E3BE0797425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{812816FB-309D-41C5-B626-3E3BE0797425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{812816FB-309D-41C5-B626-3E3BE0797425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{812816FB-309D-41C5-B626-3E3BE0797425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624FB6AD-476A-4A6E-A658-DF5021F3E511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624FB6AD-476A-4A6E-A658-DF5021F3E511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624FB6AD-476A-4A6E-A658-DF5021F3E511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624FB6AD-476A-4A6E-A658-DF5021F3E511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5C700A5-D18A-4DCF-A0A7-0C0255A499A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5C700A5-D18A-4DCF-A0A7-0C0255A499A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5C700A5-D18A-4DCF-A0A7-0C0255A499A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5C700A5-D18A-4DCF-A0A7-0C0255A499A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7D51EFF-9DFD-48BD-BF2E-C726D8FD6BA0}
+	EndGlobalSection
+EndGlobal

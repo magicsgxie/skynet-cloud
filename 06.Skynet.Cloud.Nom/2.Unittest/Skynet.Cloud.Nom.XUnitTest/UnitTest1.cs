@@ -13,6 +13,7 @@ using UWay.Skynet.Cloud.Nom.Service.Interface;
 using UWay.Skynet.Cloud.Linq;
 using System.Collections.Generic;
 using UWay.Skynet.Cloud.Request;
+using Skynet.Cloud.Noap;
 
 namespace UWay.Skynet.Cloud.Nom.XUnitTest
 {

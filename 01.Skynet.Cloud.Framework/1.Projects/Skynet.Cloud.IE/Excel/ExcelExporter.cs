@@ -1,6 +1,7 @@
 ﻿using Aspose.Cells;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using UWay.Skynet.Cloud.IE.Core;
@@ -239,6 +240,29 @@ namespace UWay.Skynet.Cloud.IE.Excel
             sheet.Cells.ImportData(items.ToDataTable(), 2, 1, importTableOptions);
         }
 
+        /// <summary>
+        ///     添加导出数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sheet"></param>
+        /// <param name="startRowIndex"></param>
+        /// <param name="items"></param>
+        protected void AddDataItems(Worksheet sheet,  DataTable dt)
+        {
+            if (dt == null || dt.Rows.Count == 0)
+                return;
+            //var tbStyle = TableStyles.Medium10;
+            //if (exporter != null && !exporter.TableStyle.IsNullOrWhiteSpace())
+            //    tbStyle = (TableStyles)Enum.Parse(typeof(TableStyles), exporter.TableStyle);
+            //sheet.Cells.LoadFromCollection(items, false, tbStyle);
+            ImportTableOptions importTableOptions = new ImportTableOptions()
+            {
+                ConvertGridStyle = true,
+                DateFormat = "yyyy-MM-dd hh:mm:ss",
+            };
+            sheet.Cells.ImportData(dt, 2, 1, importTableOptions);
+        }
+
 
         /// <summary>
         ///     添加样式
@@ -345,6 +369,26 @@ namespace UWay.Skynet.Cloud.IE.Excel
         }
 
         /// <summary>
+        ///     获取头部定义
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="exporterHeaderList"></param>
+        /// <returns></returns>
+        private static bool GetExporterHeaderInfoList(DataTable dt, out List<ExporterHeaderInfo> exporterHeaderList)
+        {
+            exporterHeaderList = new List<ExporterHeaderInfo>();
+            
+            for (var i = 0; i < dt.Columns.Count; i++)
+                exporterHeaderList.Add(new ExporterHeaderInfo
+                {
+                    Index = i + 1,
+                    PropertyName = dt.Columns[i].ColumnName,
+                    ExporterHeader = new ExporterHeaderAttribute(dt.Columns[i].Caption)
+                });
+            return false;
+        }
+
+        /// <summary>
         ///     获取表全局定义
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -372,6 +416,87 @@ namespace UWay.Skynet.Cloud.IE.Excel
             return null;
         }
 
+        /// <summary>
+        ///     获取表全局定义
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        private static ExcelExporterAttribute GetExporterAttribute(DataTable dt)
+        {
+            var export = dt.GetCustomAttributes();
+            return new ExcelExporterAttribute
+            {
+                FontSize = export.FontSize,
+                HeaderFontSize = export.HeaderFontSize
+            };
+            
 
+        }
+
+        ///// <summary>
+        /////     获取表全局定义
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <returns></returns>
+        //private static ExcelExporterAttribute GetExporter() 
+        //{
+        //    var exporterTableAttributes =
+        //        typeof(T).GetCustomAttributes(typeof(ExcelExporterAttribute), true) as ExcelExporterAttribute[];
+        //    if (exporterTableAttributes != null && exporterTableAttributes.Length > 0)
+        //        return exporterTableAttributes[0];
+
+        //    var exporterAttributes =
+        //        typeof(T).GetCustomAttributes(typeof(ExporterAttribute), true) as ExporterAttribute[];
+
+        //    if (exporterAttributes != null && exporterAttributes.Length > 0)
+        //    {
+        //        var export = exporterAttributes[0];
+        //        return new ExcelExporterAttribute
+        //        {
+        //            FontSize = export.FontSize,
+        //            HeaderFontSize = export.HeaderFontSize
+        //        };
+        //    }
+
+        //    return null;
+        //}
+
+        public Task<TemplateFileInfo> Export(string fileName, DataTable dt)
+        {
+            if (string.IsNullOrWhiteSpace(fileName)) throw new ArgumentException("文件名必须填写!", nameof(fileName));
+            //允许不存在扩展名
+            //var extension = Path.GetExtension(fileName);
+            //if (string.IsNullOrWhiteSpace(extension))
+            //{
+            //    fileName = fileName + ".xlsx";
+            //}
+            var fileInfo = ExcelHelper.CreateExcelPackage(fileName, workbook =>
+            {
+                //导出定义
+                var exporter = GetExporterAttribute(dt);
+
+                //if (exporter?.Author != null)
+                //    workbook. = exporter?.Author;
+
+                var sheet = workbook.Worksheets.Add(dt.GetSheet());
+                sheet.AutoFitRows();
+                sheet.AutoFitColumns();
+                //sheet
+                //workbook.
+                //sheet. = true;
+                if (GetExporterHeaderInfoList(dt,out var exporterHeaderList)) return;
+                AddHeader(exporterHeaderList, sheet, exporter, (cell, isbold, size) =>
+                {
+                    var style = workbook.CreateStyle();
+                    style.Font.IsBold = isbold;
+                    if (size.HasValue)
+                        style.Font.DoubleSize = size.Value;
+                    cell.SetStyle(style);
+                });
+                AddDataItems(sheet,dt);
+                AddStyle(exporter, exporterHeaderList, sheet);
+            });
+            return Task.FromResult(fileInfo);
+        }
     }
 }

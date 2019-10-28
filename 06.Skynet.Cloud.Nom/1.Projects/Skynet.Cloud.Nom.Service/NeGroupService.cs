@@ -9,6 +9,7 @@ using UWay.Skynet.Cloud.Nom.Service.Interface;
 using UWay.Skynet.Cloud.Data;
 using UWay.Skynet.Cloud.Linq;
 using System.Data;
+using Skynet.Cloud.Noap;
 
 namespace UWay.Skynet.Cloud.Nom.Services
 {
@@ -25,7 +26,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="item"></param>
         public int AddNeGroup(NetType netType, NeGroup item)
         {
-            using (var uow = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var uow = UnitOfWork.Get(netType.ToContainerName( DataBaseType.Normal)))
             {
                 using (var r = new NeGroupRepository(uow))
                 {
@@ -41,7 +42,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="item"></param>
         public int UpdateNeGroup(NetType netType, NeGroup item)
         {
-            using (var uow = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var uow = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeGroupRepository(uow))
                 {
@@ -58,7 +59,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="item"></param>
         public int UpdateNeGroupName(NetType netType, int neGroupId, string neGroupName)
         {
-            using (var uow = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var uow = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeGroupRepository(uow))
                 {
@@ -75,7 +76,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="idArrays"></param>
         public string DeleteNeGroup(NetType netType, int[] idArrays)
         {
-            using (var uow = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var uow = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeGroupRepository(uow))
                 {
@@ -94,7 +95,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="idArrays">网元列表</param>
         public int DelNeGroupItems(NetType netType, int[] idArrays)
         {
-            using (var uow = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var uow = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeGroupRepository(uow))
                 {
@@ -110,7 +111,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="item">网元</param>
         public int AddNeGroupItem(NetType netType, NeGroupItem item)
         {
-            using (var uow = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var uow = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeGroupRepository(uow))
                 {
@@ -126,7 +127,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="item">网元</param>
         public void UpdateNeGroupItem(NetType netType, NeGroupItem item)
         {
-            using (var uow = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var uow = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeGroupRepository(uow))
                 {
@@ -145,7 +146,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public List<NeGroup> GetNeGroups(NetType netType, List<IFilterDescriptor> conditions)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeGroupRepository(context).GetNeGroups().Where(conditions).ToList();
 
@@ -159,7 +160,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="conditions">动态条件</param>
         public List<NeGroupItem> GetNeGroupItems(NetType netType, List<IFilterDescriptor> conditions)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeGroupRepository(context).GetNeGroupItems().ToList();
             }
@@ -174,7 +175,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public DataTable GetNeGroupItemsByGroupID(NetType netType, int groupId, int neLevel)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeGroupRepository(context).GetNeGroupItemsByGroupID(netType, groupId, neLevel);
             }
@@ -188,7 +189,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public List<NeGroup> GetNeGroupByFilter(NetType netType, List<IFilterDescriptor> conditions, string filter)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeGroupRepository(context).GetNeGroups().Where(conditions)
                     .Where(p => p.GroupName.ToUpper().Contains(filter.ToUpper())).ToList();

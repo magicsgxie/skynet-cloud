@@ -29,7 +29,7 @@ using System.Runtime.Serialization;
 
 namespace UWay.Skynet.Cloud.Nom.Entity
 {    
-    public class ImportDataTemplate
+    public class ImportTemplate
     {
       
         public int? IsAutoApproval
@@ -283,7 +283,7 @@ namespace UWay.Skynet.Cloud.Nom.Entity
             get;
         }
 
-        public IList<ImportDataTemplateField> DataFields
+        public IList<ImportDataField> DataFields
         {
             set;
             get;

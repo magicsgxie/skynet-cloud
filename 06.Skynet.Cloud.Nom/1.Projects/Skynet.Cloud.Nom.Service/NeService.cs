@@ -10,6 +10,7 @@ using UWay.Skynet.Cloud.Nom.Service.Interface;
 using UWay.Skynet.Cloud.Data;
 using UWay.Skynet.Cloud.Linq;
 using UWay.Skynet.Cloud.Request;
+using Skynet.Cloud.Noap;
 
 namespace UWay.Skynet.Cloud.Nom.Services
 {
@@ -26,9 +27,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="netGenerationType"></param>
         /// <param name="citys"></param>
         /// <returns></returns>
-        public List<string> GetNeVendorCodesByCitys(NetType netGenerationType, int[] citys)
+        public List<string> GetNeVendorCodesByCitys(NetType netType, int[] citys)
         {
-            using (var context = UnitOfWork.Get(netGenerationType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeBts().Where( p => citys.Contains(p.CityID)).Select(o => o.Vendor).ToList();
             }
@@ -42,7 +43,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public int GeStaticBtsAllCount(NetType netType)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 var q = new NeRepository(context).GetNeBts().Count();
                 return q;
@@ -55,7 +56,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public int GeStaticCellAllCount(NetType netType)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 var q = new NeRepository(context).GetNeCells().Count();
                 return q;
@@ -69,7 +70,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public List<Pair> GetStaticNeBtsCityCount(NetType netType)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 var q = new NeRepository(context).GetNeBts();
                 var q1 = from p in q group p by p.CityID into g select new Pair { First = g.Key, Second = g.Count() };
@@ -85,7 +86,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public List<Pair> GetStaticNeCellCityCount(NetType netType)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 var q = new NeRepository(context).GetNeCells();
                 var q1 = from p in q group p by p.CityID into g select new Pair { First = g.Key, Second = g.Count() };
@@ -101,7 +102,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public List<Pair> GetStaticNeBtsCountyCount(NetType netType)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 var q = new NeRepository(context).GetNeBts();
                 var q1 = from p in q group p by  int.Parse(p.CountyID) into g select new Pair { First = g.Key, Second = g.Count() };
@@ -117,7 +118,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public List<Pair> GetStaticNeCellCountyCount(NetType netType)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 var q = new NeRepository(context).GetNeCells();
                 var q1 = from p in q group p by int.Parse(p.CountyID) into g select new Pair { First = g.Key, Second = g.Count() };
@@ -133,7 +134,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public string[] GetNeVendorCodes(NetType netType)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeBts().Select(p => p.Vendor).Distinct().ToArray();
             }
@@ -168,7 +169,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
             //{
             //    sql = string.Format(@" select distinct vendor from {0} where {1} ", neRelateionInfo.BaseDataTableName, neWhere);
             //}
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 var dt =  new NeRepository(context).GetVendorsBySql(sql);
                 IList<string> vendors = new List<string>();
@@ -192,9 +193,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="neType">网络制式</param>
         /// <param name="conditions">条件集合</param>
         /// <returns></returns>
-        public NeBts[] GetNeBtsByCondition(NetType neType, IList<IFilterDescriptor> conditions)
+        public NeBts[] GetNeBtsByCondition(NetType netType, IList<IFilterDescriptor> conditions)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeBts().Where(conditions).ToArray();
             }
@@ -207,9 +208,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="conditions">条件集合</param>
         /// <param name="pagination">分页信息</param>
         /// <returns></returns>
-        public DataSourceResult BtsPage(NetType neType, DataSourceRequest request)
+        public DataSourceResult BtsPage(NetType netType, DataSourceRequest request)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeBts().ToDataSourceResult(request);
             }
@@ -222,9 +223,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="conditions">条件集合</param>
         /// <param name="pagination">分页信息</param>
         /// <returns></returns>
-        public DataSourceResult<NeBts> GetNeBtsPageByCondition(NetType neType, DataSourceRequest request)
+        public DataSourceResult<NeBts> GetNeBtsPageByCondition(NetType netType, DataSourceRequest request)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeBts().ToDataSoureceTResult<NeBts>(request);
             }
@@ -236,9 +237,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="neType">网络制式</param>
         /// <param name="conditions">条件集合</param>
         /// <returns></returns>
-        private IEnumerable<NeCell> GetNeCellBySQL(NetType neType,string sql)
+        private IEnumerable<NeCell> GetNeCellBySQL(NetType netType, string sql)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 var rep = new NeRepository(context);
                 return rep.GetNeCellsBySql(sql);
@@ -251,9 +252,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="neType">网络制式</param>
         /// <param name="conditions">条件集合</param>
         /// <returns></returns>
-        public NeCell[] GetNeCellByCondition(NetType neType, IList<IFilterDescriptor> conditions)
+        public NeCell[] GetNeCellByCondition(NetType netType, IList<IFilterDescriptor> conditions)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeCells().Where(conditions).ToArray();
             }
@@ -265,9 +266,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="conditions">条件集合</param>
         /// <param name="pagination">分页信息</param>
         /// <returns></returns>
-        public DataSourceResult GetNeCellPageByCondition(NetType neType, DataSourceRequest request)
+        public DataSourceResult GetNeCellPageByCondition(NetType netType, DataSourceRequest request)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeCells().ToDataSourceResult(request);
             }
@@ -280,9 +281,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="neType">制式</param>
         /// <param name="conditions">条件集合</param>
         /// <returns></returns>
-        public NeBscOrMme[] GetNeBscOrMmeByCondition(NetType neType, IList<IFilterDescriptor> conditions)
+        public NeBscOrMme[] GetNeBscOrMmeByCondition(NetType netType, IList<IFilterDescriptor> conditions)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeBscOrMme().Where(conditions).ToArray();
             }
@@ -295,9 +296,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="conditions">条件集合</param>
         /// <param name="topN">前多少</param>
         /// <returns></returns>
-        public NeBts[] GetTopNeBtsByCondition(NetType neType, int topN, IList<IFilterDescriptor> conditions)
+        public NeBts[] GetTopNeBtsByCondition(NetType netType, int topN, IList<IFilterDescriptor> conditions)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeBts().Where(conditions).Take(topN).ToArray();
             }
@@ -309,9 +310,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <param name="conditions">条件集合</param>
         /// <param name="topN">前多少</param>
         /// <returns></returns>
-        public NeCell[] GetTopNeCellByCondition(NetType neType, int topN, IList<IFilterDescriptor> conditions)
+        public NeCell[] GetTopNeCellByCondition(NetType netType, int topN, IList<IFilterDescriptor> conditions)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeCells().Where(conditions).Take(topN).ToArray();
             }
@@ -322,9 +323,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// </summary>
         /// <param name="neType">制式</param>
         /// <returns></returns>
-        public List<NeCell> GetBasicNeCell(NetType neType)
+        public List<NeCell> GetBasicNeCell(NetType netType)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetBasicNeCell().ToList();
             }
@@ -335,9 +336,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// </summary>
         /// <param name="neType"></param>
         /// <returns></returns>
-        public List<NeBts> GetBasicNeBts(NetType neType)
+        public List<NeBts> GetBasicNeBts(NetType netType)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 return new NeRepository(context).GetNeBtsCOrL().ToList();
             }
@@ -353,7 +354,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public List<NeCell> GetCellByGroup(NetType netType, IList<IFilterDescriptor> filters)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeRepository(context))
                 {
@@ -379,7 +380,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
         /// <returns></returns>
         public DataSourceResult GetCellByGroup(NetType netType, DataSourceRequest request)
         {
-            using (var context = UnitOfWork.Get(netType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeRepository(context))
                 {
@@ -394,9 +395,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
             }
         }
 
-        public NeCell GetBasicNeCellById(NetType neType, string neCellId)
+        public NeCell GetBasicNeCellById(NetType netType, string neCellId)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeRepository(context))
                 {
@@ -405,9 +406,9 @@ namespace UWay.Skynet.Cloud.Nom.Services
             }
         }
 
-        public List<NeCell> GetBasicNeCellByIds(NetType neType, List<string> neCellIds)
+        public List<NeCell> GetBasicNeCellByIds(NetType netType, List<string> neCellIds)
         {
-            using (var context = UnitOfWork.Get(neType, DataBaseType.Normal))
+            using (var context = UnitOfWork.Get(netType.ToContainerName(DataBaseType.Normal)))
             {
                 using (var r = new NeRepository(context))
                 {

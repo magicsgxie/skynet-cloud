@@ -25,6 +25,7 @@
  * 
  * 
  ************************************************************************************/
+using Skynet.Cloud.Noap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,50 +70,53 @@ namespace UWay.Skynet.Cloud.Dcs.Entity
             get;
         }
 
-        /// <summary>
-        /// 是否BSC指标
-        /// </summary>
-
         [Ignore]
-        
-        public int UserInBSC
-        {
-            get;
-            set;
-        }
-        /// <summary>
-        /// 是否BTS指标
-        /// </summary>
+        public NeLevel NeLevel { set; get; }
 
-        [Ignore]
-        
-        public int UserInBTS
-        {
-            get;
-            set;
-        }
+        ///// <summary>
+        ///// 是否BSC指标
+        ///// </summary>
 
-        /// <summary>
-        /// 是否小区指标
-        /// </summary>
-        [Ignore]
+        //[Ignore]
         
-        public int UserInCELL
-        {
-            get;
-            set;
-        }
+        //public int UserInBSC
+        //{
+        //    get;
+        //    set;
+        //}
+        ///// <summary>
+        ///// 是否BTS指标
+        ///// </summary>
 
-        /// <summary>
-        /// 是否载频指标
-        /// </summary>
-        [Ignore]
+        //[Ignore]
         
-        public int UserInCARR
-        {
-            get;
-            set;
-        }
+        //public int UserInBTS
+        //{
+        //    get;
+        //    set;
+        //}
+
+        ///// <summary>
+        ///// 是否小区指标
+        ///// </summary>
+        //[Ignore]
+        
+        //public int UserInCELL
+        //{
+        //    get;
+        //    set;
+        //}
+
+        ///// <summary>
+        ///// 是否载频指标
+        ///// </summary>
+        //[Ignore]
+        
+        //public int UserInCARR
+        //{
+        //    get;
+        //    set;
+        //}
 
         /// <summary>
         /// 是否显示

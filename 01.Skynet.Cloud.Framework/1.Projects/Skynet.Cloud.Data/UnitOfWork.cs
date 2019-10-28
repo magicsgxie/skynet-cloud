@@ -11,14 +11,14 @@ namespace UWay.Skynet.Cloud.Data
     /// </summary>
     public static class UnitOfWork
     {
-        /// 初始化才可以使用
-        /// </summary>
-        /// <param name="dbConfigurationName"></param>
-        /// <returns></returns>
-        public static IDbContext Get(NetType netType, DataBaseType dataBaseType = DataBaseType.Normal, ILoggerFactory loggerFactory = null)
-        {
-            return Get(new DbContextOption { Container = (dataBaseType == DataBaseType.Normal ? string.Format("{0}", (int)netType) : string.Format("{0}_{1}", (int)netType)), LogggerFactory = loggerFactory });
-        }
+        ///// 初始化才可以使用
+        ///// </summary>
+        ///// <param name="dbConfigurationName"></param>
+        ///// <returns></returns>
+        //public static IDbContext Get(NetType netType, DataBaseType dataBaseType = DataBaseType.Normal, ILoggerFactory loggerFactory = null)
+        //{
+        //    return Get(new DbContextOption { Container = (dataBaseType == DataBaseType.Normal ? string.Format("{0}", (int)netType) : string.Format("{0}_{1}", (int)netType)), LogggerFactory = loggerFactory });
+        //}
 
         /// <summary>
         /// 初始化才可以使用

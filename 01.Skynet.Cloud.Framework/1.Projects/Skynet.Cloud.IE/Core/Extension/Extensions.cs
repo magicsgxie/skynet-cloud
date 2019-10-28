@@ -10,11 +10,130 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-
 namespace UWay.Skynet.Cloud.IE.Core
 {
     public static class Extensions
     {
+        private const string SHEET_KEY = "cnname";
+        private const string COLUMN_IS_REQUIRED = "IS_REQUIRE";
+        private const string COLUMN_IS_PK = "IS_REQUIRE";
+        private const string DICTIONARY_VALUE = "DICTIONARY";
+        private const string EXPRESSION_KEY = "COL_EXPRESSION";
+        private const string EXPRESSION_LOG_KEY = "LOG_KEY";
+        private const string LINK_COLUMN = "LINK_COLUMN";
+        public static void AddLinkColumn(this DataColumn dt, string linkColumnName)
+        {
+            dt.ExtendedProperties.Add(LINK_COLUMN, linkColumnName);
+        }
+
+
+
+        public static string GetLinkColumn(this DataColumn dt)
+        {
+            if (dt.ExtendedProperties.ContainsKey(LINK_COLUMN))
+            {
+                return dt.ExtendedProperties[LINK_COLUMN].ToString();
+            }
+            return string.Empty;
+        }
+        public static void AddRegexExpression(this DataColumn dt, string expression)
+        {
+            dt.ExtendedProperties.Add(EXPRESSION_KEY, expression);
+        }
+
+        public static string GetRegexExpression(this DataColumn dt)
+        {
+            if (dt.ExtendedProperties.ContainsKey(EXPRESSION_KEY))
+            {
+                return dt.ExtendedProperties[EXPRESSION_KEY].ToString();
+            }
+            return string.Empty;
+        }
+
+        public static void AddExceptionFormat(this DataColumn dt, string expressionLog)
+        {
+            dt.ExtendedProperties.Add(EXPRESSION_LOG_KEY, expressionLog);
+        }
+
+        public static string GetExceptionFormat(this DataColumn dt)
+        {
+            if (dt.ExtendedProperties.ContainsKey(EXPRESSION_LOG_KEY))
+            {
+                return dt.ExtendedProperties[EXPRESSION_LOG_KEY].ToString();
+            }
+            return string.Empty;
+        }
+
+
+        public static void AddSheetName(this DataTable dt, string descrription)
+        {
+            dt.ExtendedProperties.Add(SHEET_KEY, descrription);
+        }
+
+        public static string GetSheet(this DataTable dt)
+        {
+            if(dt.ExtendedProperties.ContainsKey(SHEET_KEY))
+            {
+                return dt.ExtendedProperties[SHEET_KEY].ToString();
+            }
+            return dt.TableName;
+        }
+
+        public static void AddPrimaryKey(this DataColumn dc, bool isRequired)
+        {
+            dc.ExtendedProperties.Add(COLUMN_IS_PK, isRequired);
+        }
+
+
+        public static bool? PrimaryKey(this DataColumn dc)
+        {
+            if (dc.ExtendedProperties.ContainsKey(COLUMN_IS_PK))
+                return dc.ExtendedProperties[COLUMN_IS_PK] as bool?;
+            return false;
+        }
+
+        public static void AddRequire(this DataColumn dc, bool isRequired)
+        {
+            dc.ExtendedProperties.Add(COLUMN_IS_REQUIRED, isRequired);
+        }
+
+
+        public static bool? IsRequire(this DataColumn dc)
+        {
+            if(dc.ExtendedProperties.ContainsKey(COLUMN_IS_REQUIRED))
+                return dc.ExtendedProperties[COLUMN_IS_REQUIRED] as bool?;
+            return false;
+        }
+
+        public static void AddDictionary(this DataColumn dt, IDictionary<string, string> descrription)
+        {
+            dt.ExtendedProperties.Add(DICTIONARY_VALUE, descrription);
+        }
+
+        public static void AddDictionary(this DataColumn dt, IDictionary<string, int> descrription)
+        {
+            dt.ExtendedProperties.Add(DICTIONARY_VALUE, descrription);
+        }
+
+        public static IDictionary<string, string> GetDictionary(this DataColumn dt)
+        {
+            if (dt.ExtendedProperties.ContainsKey(SHEET_KEY))
+            {
+                return dt.ExtendedProperties[DICTIONARY_VALUE] as IDictionary<string, string>;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 设置错误信息
+        /// </summary>
+        /// <param name="currentRow"></param>
+        /// <param name="errorMessage"></param>
+        public static void SetValue(this DataRow currentRow, string fieldName, object value)
+        {
+            currentRow[fieldName] = value;
+        }
+
         public static bool IsNullOrWhiteSpace(this string str)
         {
             return string.IsNullOrWhiteSpace(str);

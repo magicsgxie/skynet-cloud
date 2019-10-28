@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UWay.Skynet.Cloud.Nom.Entity;
 using UWay.Skynet.Cloud.Data;
 using UWay.Skynet.Cloud.Linq;
+using Skynet.Cloud.Noap;
 
 namespace UWay.Skynet.Cloud.Nom.Repository
 {

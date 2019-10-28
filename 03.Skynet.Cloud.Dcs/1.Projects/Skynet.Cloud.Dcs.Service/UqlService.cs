@@ -15,10 +15,11 @@ using Steeltoe.Common.Discovery;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Skynet.Cloud.Noap;
 
 namespace Skynet.Cloud.Dcs.Service
 {
-    public class UqlService : AbstractService, IUqlService
+    public class UqlService : BaseDiscoveryService, IUqlService
     {
         //private readonly ILogger<UqlService> _logger;
         private readonly IBaseFormulaService _baseFormulaService;
@@ -30,16 +31,16 @@ namespace Skynet.Cloud.Dcs.Service
         private readonly ICfgDSService _cfgDSService;
 
         private const string CITY_URL = "http://upms/city/all";
-        private const string NE_URL = "http:///city/all";
+        private const string NE_URL = "http:///nom/all";
         //private readonly INeLevelRelService _neLevelRelService;
-        public UqlService(IDiscoveryClient client, ILogger<UqlService> logger, IHttpContextAccessor context,IBaseFormulaService baseFormulaService,
+        public UqlService(IDiscoveryClient client, ILogger<UqlService> logger, IBaseFormulaService baseFormulaService,
             IInDicatorDictItemService inDicatorCfgService,
             IFormulaCounterService formulaCounterService,
             IEnumRelService enumRelService,
             INeLevelRelService neLevelRelService,
             IBusyService busyService,
             ICfgDSService cfgDSService
-            ):base(client, logger, context)
+            ):base(client, logger)
         {
             //_logger = logger;
             _baseFormulaService = baseFormulaService;
@@ -69,10 +70,7 @@ namespace Skynet.Cloud.Dcs.Service
         /// SQL扩展表别名
         /// </summary>
         const string EXTENSION_TABLE_NAME = "extension";
-        ///// <summary>
-        ///// 所有公式
-        ///// </summary>
-        //protected Entity.FormulaInfo _formulaAll;
+
 
         /// <summary>
         /// UserType
@@ -161,10 +159,9 @@ namespace Skynet.Cloud.Dcs.Service
 
         private async Task<IList<int>> GetCityIdAsync()
         {
-            var client = await GetClientAsync();
             
-            var request = GetRequest(HttpMethod.Get, CITY_URL);
-            return await DoRequest<IList<int>>(client, request);
+            var request = GetRequest(HttpMethod.Get, $"{CITY_URL}");
+            return await Invoke<IList<int>>(request);
 
         }
 
@@ -405,7 +402,7 @@ namespace Skynet.Cloud.Dcs.Service
 
         private async Task<IList<string>> GetVendorsAsync(NetType netType, string baseT, string extendT, string destValue, string where)
         {
-            var client = await GetClientAsync();
+            
             var requestURL = string.Format("{0}/{1}?{2}extendT={3}&destvalue={4}&baseWhere={5}",
                                 NE_URL,
                                 netType,
@@ -416,7 +413,7 @@ namespace Skynet.Cloud.Dcs.Service
 
 
             var request = GetRequest(HttpMethod.Get, requestURL);
-            return await DoRequest<IList<string>>(client, request);
+            return await Invoke<IList<string>>(request);
 
         }
         #endregion
@@ -509,7 +506,7 @@ namespace Skynet.Cloud.Dcs.Service
         /// 递归建立过滤条件
         /// </summary>
         /// <param name="group"></param>
-        protected void RecursionBuildOutFilterFormula(WhereClause clause, ConditionGroup group)
+        protected void RecursionBuildOutFilterFormula(WhereClause clause, ConditionGroup group, IDictionary<string, object> nameValues = null)
         {
             if (group.ConditionFieldList != null && group.ConditionFieldList.Count > 0)
             {
@@ -547,7 +544,10 @@ namespace Skynet.Cloud.Dcs.Service
                                     sp.PhraseResult[i] = string.Format(@" {0}({1})", _subQueryFormulas[sp.PhraseResult[i].ToString().ToUpper()].VendorAggregation, _subQueryFormulas[sp.PhraseResult[i].ToString().ToUpper()].AttEnName);
                                 }
                                 clause.Terms.Add(
-                                  WhereTerm.CreateCompare(filter.Logic, SqlExpression.Raw(string.Format("Round({0},{1})", FormulaUtils.PhraseStorageDecode(sp, sp.PhraseTypeResult.ToList(), formauls.IsZero), formauls.DigitalDigit)),
+                                  WhereTerm.CreateCompare(filter.Logic, 
+                                  SqlExpression.Raw(string.Format("Round({0},{1})", 
+                                  FormulaUtils.PhraseStorageDecode(sp, sp.PhraseTypeResult.ToList(), formauls.IsZero), 
+                                  formauls.DigitalDigit)),
                                   SqlExpression.Number(d), filter.Operator));
                             }
                             else
@@ -2373,8 +2373,6 @@ namespace Skynet.Cloud.Dcs.Service
             SelectQuery mainquery = new SelectQuery();
 
             SelectQuery subquery = Build_InSite_Counter_NeAggregation(template, vendor);
-            //OracleRenderer _renderer = new OracleRenderer();
-            //string subsql = _renderer.RenderSelect(subquery);
             FromTerm maint = FromTerm.SubQuery(subquery, "");
 
             mainquery.FromClause.BaseTable = maint;

@@ -15,11 +15,11 @@ namespace UWay.Skynet.Cloud.IE.Core
         /// <summary>
         ///     头部字体大小
         /// </summary>
-        public float? HeaderFontSize { set; get; }
+        public float? HeaderFontSize { set; get; } = 11;
 
         /// <summary>
         ///     正文字体大小
         /// </summary>
-        public float? FontSize { set; get; }
+        public float? FontSize { set; get; } = 11;
     }
 }
