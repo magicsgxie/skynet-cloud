@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UWay.Skynet.Cloud.Dcs.Entity;
 using UWay.Skynet.Cloud.Data;
-using UWay.Skynet.Cloud.Cfgs.Entity;
+using UWay.Skynet.Cloud.Ccs.Entity;
 
 namespace UWay.Skynet.Cloud.Dcs.Repository
 {

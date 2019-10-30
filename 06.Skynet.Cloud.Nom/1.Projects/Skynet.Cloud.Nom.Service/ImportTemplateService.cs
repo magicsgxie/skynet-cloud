@@ -16,7 +16,7 @@ using UWay.Skynet.Cloud.Linq;
 using UWay.Skynet.Cloud.Nom.Entity;
 using UWay.Skynet.Cloud.Nom.Repository;
 using UWay.Skynet.Cloud.Nom.Service.Interface;
-using UWay.Skynet.Cloud.Cfgs.Entity;
+using UWay.Skynet.Cloud.Ccs.Entity;
 
 namespace UWay.Skynet.Cloud.Nom.Service
 {

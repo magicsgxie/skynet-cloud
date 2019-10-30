@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>UWay.Skynet.Cloud.Upms.Contollers</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Mvc\Skynet.Cloud.Mvc.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Ccs.Service.Interface\Skynet.Cloud.Ccs.Service.Interface.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Ccs.Service\Skynet.Cloud.Ccs.Service.csproj" />
+  </ItemGroup>
+
+</Project>

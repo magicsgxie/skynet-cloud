@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Skynet.Cloud.Framework",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Projects", "1.Projects", "{7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Skynet.Cloud.Cfgs", "02.Skynet.Cloud.Cfgs", "{67ED791A-938A-44D0-A259-9EB2377358ED}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Skynet.Cloud.Ccs", "02.Skynet.Cloud.Ccs", "{67ED791A-938A-44D0-A259-9EB2377358ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Projects", "1.Projects", "{5F63611C-D2CC-49C7-8C37-23744A9C136A}"
 EndProject
@@ -150,15 +150,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Noap.Connector
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Noap", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Noap\Skynet.Cloud.Noap.csproj", "{A679847D-4CDD-48D7-8C71-436C781D8E71}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Cfgs.Entity", "02.Skynet.Cloud.Cfgs\1.Projects\Skynet.Cloud.Cfgs.Entity\Skynet.Cloud.Cfgs.Entity.csproj", "{0CD4A0C5-A3A6-4069-8F70-084DD3E07882}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Ccs.Entity", "02.Skynet.Cloud.Ccs\1.Projects\Skynet.Cloud.Ccs.Entity\Skynet.Cloud.Ccs.Entity.csproj", "{842333E2-A6D2-45CE-929E-BE0650D1C765}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Cfgs.Repository", "02.Skynet.Cloud.Cfgs\1.Projects\Skynet.Cloud.Cfgs.Repository\Skynet.Cloud.Cfgs.Repository.csproj", "{9F711404-6F38-40D6-9FA0-A4156B7C779A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Ccs.Repository", "02.Skynet.Cloud.Ccs\1.Projects\Skynet.Cloud.Ccs.Repository\Skynet.Cloud.Ccs.Repository.csproj", "{61EC0441-3D9F-4940-98A6-B2DAF151DC9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Cfgs.Service", "02.Skynet.Cloud.Cfgs\1.Projects\Skynet.Cloud.Cfgs.Service\Skynet.Cloud.Cfgs.Service.csproj", "{7DCB4FAB-96B3-455A-B42C-FD478D134720}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Ccs.Service.Interface", "02.Skynet.Cloud.Ccs\1.Projects\Skynet.Cloud.Ccs.Service.Interface\Skynet.Cloud.Ccs.Service.Interface.csproj", "{B5FBC025-0B1F-47DD-8544-67BCD3D1F15A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Cfgs.Service.Interface", "02.Skynet.Cloud.Cfgs\1.Projects\Skynet.Cloud.Cfgs.Service.Interface\Skynet.Cloud.Cfgs.Service.Interface.csproj", "{8A639B2F-1D8B-4EAE-B322-7AA124D844C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Ccs.Service", "02.Skynet.Cloud.Ccs\1.Projects\Skynet.Cloud.Ccs.Service\Skynet.Cloud.Ccs.Service.csproj", "{B982F747-FD77-4B12-9B25-316538BF2F31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Cfgs.Contollers", "02.Skynet.Cloud.Cfgs\1.Projects\Skynet.Cloud.Cfgs.Web\Skynet.Cloud.Cfgs.Contollers.csproj", "{9BC39A60-C58B-4DF0-9AF1-80CC0FB88FC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Ccs.Contollers", "02.Skynet.Cloud.Ccs\1.Projects\Skynet.Cloud.Ccs.Web\Skynet.Cloud.Ccs.Contollers.csproj", "{516EB1EC-7A02-4093-A0C2-B7DEF316067F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -334,26 +334,26 @@ Global
 		{A679847D-4CDD-48D7-8C71-436C781D8E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A679847D-4CDD-48D7-8C71-436C781D8E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A679847D-4CDD-48D7-8C71-436C781D8E71}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CD4A0C5-A3A6-4069-8F70-084DD3E07882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CD4A0C5-A3A6-4069-8F70-084DD3E07882}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CD4A0C5-A3A6-4069-8F70-084DD3E07882}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CD4A0C5-A3A6-4069-8F70-084DD3E07882}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F711404-6F38-40D6-9FA0-A4156B7C779A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F711404-6F38-40D6-9FA0-A4156B7C779A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F711404-6F38-40D6-9FA0-A4156B7C779A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F711404-6F38-40D6-9FA0-A4156B7C779A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DCB4FAB-96B3-455A-B42C-FD478D134720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DCB4FAB-96B3-455A-B42C-FD478D134720}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DCB4FAB-96B3-455A-B42C-FD478D134720}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DCB4FAB-96B3-455A-B42C-FD478D134720}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A639B2F-1D8B-4EAE-B322-7AA124D844C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A639B2F-1D8B-4EAE-B322-7AA124D844C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A639B2F-1D8B-4EAE-B322-7AA124D844C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A639B2F-1D8B-4EAE-B322-7AA124D844C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BC39A60-C58B-4DF0-9AF1-80CC0FB88FC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BC39A60-C58B-4DF0-9AF1-80CC0FB88FC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BC39A60-C58B-4DF0-9AF1-80CC0FB88FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BC39A60-C58B-4DF0-9AF1-80CC0FB88FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{842333E2-A6D2-45CE-929E-BE0650D1C765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{842333E2-A6D2-45CE-929E-BE0650D1C765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{842333E2-A6D2-45CE-929E-BE0650D1C765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{842333E2-A6D2-45CE-929E-BE0650D1C765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61EC0441-3D9F-4940-98A6-B2DAF151DC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61EC0441-3D9F-4940-98A6-B2DAF151DC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61EC0441-3D9F-4940-98A6-B2DAF151DC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61EC0441-3D9F-4940-98A6-B2DAF151DC9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5FBC025-0B1F-47DD-8544-67BCD3D1F15A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5FBC025-0B1F-47DD-8544-67BCD3D1F15A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5FBC025-0B1F-47DD-8544-67BCD3D1F15A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5FBC025-0B1F-47DD-8544-67BCD3D1F15A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B982F747-FD77-4B12-9B25-316538BF2F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B982F747-FD77-4B12-9B25-316538BF2F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B982F747-FD77-4B12-9B25-316538BF2F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B982F747-FD77-4B12-9B25-316538BF2F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{516EB1EC-7A02-4093-A0C2-B7DEF316067F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{516EB1EC-7A02-4093-A0C2-B7DEF316067F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{516EB1EC-7A02-4093-A0C2-B7DEF316067F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{516EB1EC-7A02-4093-A0C2-B7DEF316067F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -418,11 +418,11 @@ Global
 		{25ADC388-3AF0-4AC0-B032-C5775AB7FB9E} = {B3AB008A-3C44-449A-9B1E-AB594D486B9A}
 		{22AB181D-5FCB-403D-B263-0AA784684887} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{A679847D-4CDD-48D7-8C71-436C781D8E71} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
-		{0CD4A0C5-A3A6-4069-8F70-084DD3E07882} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
-		{9F711404-6F38-40D6-9FA0-A4156B7C779A} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
-		{7DCB4FAB-96B3-455A-B42C-FD478D134720} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
-		{8A639B2F-1D8B-4EAE-B322-7AA124D844C6} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
-		{9BC39A60-C58B-4DF0-9AF1-80CC0FB88FC3} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
+		{842333E2-A6D2-45CE-929E-BE0650D1C765} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
+		{61EC0441-3D9F-4940-98A6-B2DAF151DC9E} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
+		{B5FBC025-0B1F-47DD-8544-67BCD3D1F15A} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
+		{B982F747-FD77-4B12-9B25-316538BF2F31} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
+		{516EB1EC-7A02-4093-A0C2-B7DEF316067F} = {5F63611C-D2CC-49C7-8C37-23744A9C136A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE362151-8B43-49C2-ABD3-060B24911784}

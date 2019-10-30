@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\..\02.Skynet.Cloud.Cfgs\1.Projects\Skynet.Cloud.Cfgs.Entity\DictItem.cs" Link="DictItem.cs" />
+    <Compile Include="..\..\..\02.Skynet.Cloud.Ccs\1.Projects\Skynet.Cloud.Ccs.Entity\DictItem.cs" Link="DictItem.cs" />
   </ItemGroup>
 
   <ItemGroup>

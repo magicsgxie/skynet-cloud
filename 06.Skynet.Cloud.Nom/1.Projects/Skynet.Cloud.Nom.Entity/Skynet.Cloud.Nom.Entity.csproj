@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\..\02.Skynet.Cloud.Cfgs\1.Projects\Skynet.Cloud.Cfgs.Entity\CityInfo.cs" Link="CityInfo.cs" />
-    <Compile Include="..\..\..\02.Skynet.Cloud.Cfgs\1.Projects\Skynet.Cloud.Cfgs.Entity\CountyInfo.cs" Link="CountyInfo.cs" />
+    <Compile Include="..\..\..\02.Skynet.Cloud.Ccs\1.Projects\Skynet.Cloud.Ccs.Entity\CityInfo.cs" Link="CityInfo.cs" />
+    <Compile Include="..\..\..\02.Skynet.Cloud.Ccs\1.Projects\Skynet.Cloud.Ccs.Entity\CountyInfo.cs" Link="CountyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
