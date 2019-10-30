@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UWay.Skynet.Cloud.Data;
 
-namespace UWay.Skynet.Cloud.Upms.Entity
+namespace UWay.Skynet.Cloud.Cfgs.Entity
 {
     
     public class DictItem

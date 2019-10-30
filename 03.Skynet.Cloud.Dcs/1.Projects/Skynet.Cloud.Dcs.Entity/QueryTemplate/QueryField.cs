@@ -45,5 +45,11 @@ namespace UWay.Skynet.Cloud.Dcs.Entity
         {
             set; get;
         }
+
+
+        public int UserInBSC { get; set; }
+        public int UserInBTS { get; set; }
+        public int UserInCARR { get; set; }
+        public int UserInCELL { get; set; }
     }
 }

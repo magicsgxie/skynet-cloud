@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 //using UWay.Skynet.Cloud.Security;
 
-namespace UWay.Skynet.Cloud.Upms.Service.Interface.Sercurity
+namespace UWay.Skynet.Cloud.Cfgs.Service.Interface.Sercurity
 {
     //public class ServiceCollectioncsExtesions
     //{

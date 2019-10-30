@@ -8,7 +8,7 @@ using UWay.Skynet.Cloud.Data;
 using UWay.Skynet.Cloud.Dcs.Entity;
 using UWay.Skynet.Cloud.Dcs.Repository;
 using UWay.Skynet.Cloud.Dcs.Service.Interface;
-using UWay.Skynet.Cloud.Upms.Entity;
+using UWay.Skynet.Cloud.Cfgs.Entity;
 
 namespace UWay.Skynet.Cloud.Dcs.Service
 {

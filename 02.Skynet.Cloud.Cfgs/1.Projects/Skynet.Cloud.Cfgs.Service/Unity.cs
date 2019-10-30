@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UWay.Skynet.Cloud.Upms.Services
+namespace UWay.Skynet.Cloud.Cfgs.Services
 {
     class Unity
     {

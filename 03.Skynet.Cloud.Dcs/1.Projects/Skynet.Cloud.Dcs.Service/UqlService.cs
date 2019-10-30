@@ -9,7 +9,7 @@ using UWay.Skynet.Cloud.Data.Render;
 using UWay.Skynet.Cloud.Dcs.Common;
 using UWay.Skynet.Cloud.Dcs.Entity;
 using UWay.Skynet.Cloud.Dcs.Service.Interface;
-using UWay.Skynet.Cloud.Upms.Entity;
+using UWay.Skynet.Cloud.Cfgs.Entity;
 using UWay.Skynet.Cloud.Discovery.Abstract;
 using Steeltoe.Common.Discovery;
 using Microsoft.AspNetCore.Http;

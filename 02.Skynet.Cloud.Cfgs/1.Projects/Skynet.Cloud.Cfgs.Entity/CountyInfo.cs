@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UWay.Skynet.Cloud.Upms.Entity
+namespace UWay.Skynet.Cloud.Cfgs.Entity
 {
     /// <summary>
     /// 行政区

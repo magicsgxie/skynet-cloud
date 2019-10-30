@@ -85,6 +85,15 @@ namespace UWay.Skynet.Cloud.Dcs.Entity
             set { _valueType = value; }
         }
 
+        public int UserInBSC { get; set; }
+        public int UserInBTS { get; set; }
+        public int UserInCARR { get; set; }
+        public int UserInCELL { get; set; }
+
+        //p.UserInBSC = 1;//counters[p.FieldID].NeCombination;
+        //                            p.UserInBTS = 1;
+        //                            p.UserInCARR = 1;
+        //                            p.UserInCELL = 1;
     }
 
 }

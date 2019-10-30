@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Noap\Skynet.Cloud.Noap.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Dcs.Entity\Skynet.Cloud.Dcs.Entity.csproj" />
   </ItemGroup>
 

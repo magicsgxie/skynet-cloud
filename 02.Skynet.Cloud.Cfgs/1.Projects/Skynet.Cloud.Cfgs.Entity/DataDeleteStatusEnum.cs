@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UWay.Skynet.Cloud.Upms.Entity
+namespace UWay.Skynet.Cloud.Cfgs.Entity
 {
     /// <summary>
     /// 数据状态枚举

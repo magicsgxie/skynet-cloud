@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UWay.Skynet.Cloud.Dcs.Entity;
 using UWay.Skynet.Cloud.Data;
+using Skynet.Cloud.Noap;
 
 namespace UWay.Skynet.Cloud.Dcs.Services.Interface
 {

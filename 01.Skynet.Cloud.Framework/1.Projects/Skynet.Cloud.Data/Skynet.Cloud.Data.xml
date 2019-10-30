@@ -838,16 +838,7 @@
             加载映射文件
             </summary>
         </member>
-        <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.AddMappingFile(UWay.Skynet.Cloud.Data.NetType)">
-            <summary>
-            加载映射文件
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.AddMappingFile(UWay.Skynet.Cloud.Data.NetType,UWay.Skynet.Cloud.Data.DataBaseType)">
-            <summary>
-            加载映射文件
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Data.DbConfiguration.AddTable(System.String,System.String,System.Xml.Linq.XElement,System.Reflection.Assembly)" -->
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.GetClass(System.Type)">
             <summary>
             根据实体类型得到映射元数据，如果不存在则Throw ORMappingException.
@@ -3870,7 +3861,6 @@
             工作单元门面类
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Data.UnitOfWork.Get(UWay.Skynet.Cloud.Data.NetType,UWay.Skynet.Cloud.Data.DataBaseType,Microsoft.Extensions.Logging.ILoggerFactory)" -->
         <member name="M:UWay.Skynet.Cloud.Data.UnitOfWork.Get(System.String,Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             初始化才可以使用

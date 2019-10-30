@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UWay.Skynet.Cloud.Request;
-using UWay.Skynet.Cloud.Upms.Entity;
-namespace UWay.Skynet.Cloud.Upms.Service.Interface
+using UWay.Skynet.Cloud.Cfgs.Entity;
+namespace UWay.Skynet.Cloud.Cfgs.Service.Interface
 {
     public interface IHolidaysService
     {
