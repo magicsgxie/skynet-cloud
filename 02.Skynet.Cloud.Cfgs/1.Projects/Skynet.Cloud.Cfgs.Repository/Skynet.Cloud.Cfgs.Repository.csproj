@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Data\Skynet.Cloud.Data.csproj" />
-    <ProjectReference Include="..\Skynet.Cloud.Upms.Entity\Skynet.Cloud.Upms.Entity.csproj" />
   </ItemGroup>
 
 </Project>

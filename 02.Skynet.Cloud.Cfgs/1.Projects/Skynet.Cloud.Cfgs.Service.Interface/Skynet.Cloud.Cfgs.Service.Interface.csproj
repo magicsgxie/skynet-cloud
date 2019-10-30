@@ -5,8 +5,4 @@
     <RootNamespace>UWay.Skynet.Cloud.Upms.Service.Interface</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Skynet.Cloud.Upms.Entity\Skynet.Cloud.Upms.Entity.csproj" />
-  </ItemGroup>
-
 </Project>

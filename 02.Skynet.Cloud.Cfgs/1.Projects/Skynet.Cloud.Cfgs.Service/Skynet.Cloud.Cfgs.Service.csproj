@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Skynet.Cloud.Upms.Repository\Skynet.Cloud.Upms.Repository.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Upms.Service.Interface\Skynet.Cloud.Upms.Service.Interface.csproj" />
   </ItemGroup>
 
