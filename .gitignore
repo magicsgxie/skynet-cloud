@@ -347,3 +347,17 @@ healthchecksdb
 target
 /.vscode
 nupkgs
+
+skynet-cloud-all.sln
+skynet-cloud-ccs.sln
+skynet-cloud-dcs.sln
+skynet-cloud-jom.sln
+skynet-cloud-nom.sln
+skynet-cloud-uflow.sln
+/01.Skynet.Cloud.Framework/1.Projects/Skynet.Cloud.Noap
+/01.Skynet.Cloud.Framework/1.Projects/kynet.Cloud.Noap.ConnectorBase
+/04.Skynet.Cloud.Ccs
+/05.Skynet.Cloud.Dcs
+/06.Skynet.Cloud.Css
+/07.Skynet.Cloud.Jom
+/08.Skynet.Cloud.Nom
