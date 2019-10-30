@@ -9,6 +9,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="2.2.0" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Discovery.ConsulBase" Version="2.2.0" />

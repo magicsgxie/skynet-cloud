@@ -1,7 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Skynet.Cloud.ConnectorBase\Skynet.Cloud.ConnectorBase.csproj" />
+    <ProjectReference Include="..\Skynet.Cloud.Noap\Skynet.Cloud.Noap.csproj" />
+  </ItemGroup>
 
 </Project>

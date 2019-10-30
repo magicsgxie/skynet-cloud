@@ -480,5 +480,7 @@ namespace UWay.Skynet.Cloud.Nom.Services
 
         //    return cells;
         //}
+
+        
     }
 }

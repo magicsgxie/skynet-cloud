@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using UWay.Skynet.Cloud.Data;
@@ -41,6 +42,12 @@ namespace UWay.Skynet.Cloud.Nom.Repository
         public IQueryable<ImportTemplate> CreateQuery()
         {
             return CreateQuery<ImportTemplate>();
+        }
+
+
+        public DataTable CreateQuery(SelectQuery selectQuery, IDictionary<string, object> parameters)
+        {
+            return ExecuteDataTable(selectQuery, parameters);
         }
     }
 }

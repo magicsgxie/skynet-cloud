@@ -5,14 +5,9 @@ namespace Skynet.Cloud.Noap
 {
     public static class NoapHelper
     {
-        public static string ToContainerName(this NetType netType, DataBaseType dataBaseType)
+        public static string ToContainerName(this NetType netType, DataBaseType dataBaseType = DataBaseType.Normal)
         {
             return string.Format("{0}_{1}", (int)netType, (int)dataBaseType);
-        }
-
-        public static string NeTableName(this NetType netType, NeLevel neLevel)
-        {
-            return string.Empty;
         }
 
         /// <summary>
@@ -96,45 +91,53 @@ namespace Skynet.Cloud.Noap
         /// <param name="netType"></param>
         /// <param name="neLevel"></param>
         /// <returns></returns>
-        public static string GetNeTableSubffix(this NetType netType, NeLevel neLevel)
+        public static string GetNeTableSubffix(this NetType netType, NeLevel neLevel, bool isTaizhang = false)
         {
-            var tablePrefix = "CELL";
+            var nePrefix = "CELL";
             switch (neLevel)
             {
                 case NeLevel.Bsc:
-                    tablePrefix = "BSC";
+                    nePrefix = "BSC";
                     break;
                 case NeLevel.Bts:
-                    tablePrefix = "BTS";
+                    nePrefix = "BTS";
                     if (netType == NetType.LTE)
                     {
-                        tablePrefix = "ENB";
+                        nePrefix = "ENB";
                     }
                     break;
                 case NeLevel.Carr:
-                    tablePrefix = "CARRIER";
+                    nePrefix = "CARRIER";
                     break;
                 case NeLevel.OMC:
-                    tablePrefix = "OMC";
+                    nePrefix = "OMC";
                     if (netType == NetType.LTE)
                     {
-                        tablePrefix = "MME";
+                        nePrefix = "MME";
                     }
                     break;
+            }
+
+            if(isTaizhang == true)
+            {
+                nePrefix = "TAIZHANG_" + nePrefix;
             }
 
             switch (netType)
             {
                 case NetType.LTE:
-                    return string.Format("{0}_{1}_{2}", "NE", tablePrefix, "L");
+                    return string.Format("{0}_{1}_{2}", "NE", nePrefix, "L");
                 case NetType.GSM:
-                    return string.Format("{0}_{1}_{2}", "NE", tablePrefix, "G");
+                    return string.Format("{0}_{1}_{2}", "NE", nePrefix, "G");
                 case NetType.WCDMA:
-                    return string.Format("{0}_{1}_{2}", "NE", tablePrefix, "W");
+                    return string.Format("{0}_{1}_{2}", "NE", nePrefix, "W");
                 case NetType.FIVEG:
-                    return string.Format("{0}_{1}_{2}", "NE", tablePrefix, "5G");
+                    return string.Format("{0}_{1}_{2}", "NE", nePrefix, "5G");
                 default:
-                    return string.Format("{0}_{1}_{2}", "NE", tablePrefix, "C");
+                    if(isTaizhang)
+                        return string.Format("{0}_{1}", "NE", nePrefix);
+                    else 
+                        return string.Format("{0}_{1}_{2}", "NE", nePrefix, "C");
             }
         }
 

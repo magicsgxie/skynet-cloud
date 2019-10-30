@@ -15,10 +15,11 @@ namespace UWay.Skynet.Cloud.Dcs.Entity
     public class NeQuery
     {
 
+
         /// <summary>
         /// 网元过滤条件
         /// </summary>
-        
+
         public string NeCondition
         {
             set;
@@ -28,7 +29,7 @@ namespace UWay.Skynet.Cloud.Dcs.Entity
         /// <summary>
         /// 载频列表。如果为空，即全部载频
         /// </summary>
-        
+
         public string Carriers
         {
             set;

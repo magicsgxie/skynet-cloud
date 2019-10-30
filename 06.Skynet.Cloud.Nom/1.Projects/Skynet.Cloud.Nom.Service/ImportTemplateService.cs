@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Skynet.Cloud.Noap;
 using Steeltoe.Common.Discovery;
 using UWay.Skynet.Cloud.Data;
 using UWay.Skynet.Cloud.Discovery.Abstract;
@@ -64,6 +65,7 @@ namespace UWay.Skynet.Cloud.Nom.Service
                             }).ToList();
                 var dicEnums = enums.GroupBy(p => p.Name).ToDictionary(o => o.Key);
                 dt.AddSheetName(template.TemplateName);
+                
                 //var citys = base.Invoke<CityInfo>()
                 var citys = GetCitysAsync(user);
                 var countys = GetCountysAsync(user);
@@ -89,6 +91,7 @@ namespace UWay.Skynet.Cloud.Nom.Service
                         dc.AddDictionary(countys.Result.ToDictionary(p => p.CountyName, v => v.CountyID));
                     }
                 }
+                dt.TableName = template.ImpTablename;
             }
             return dt;
         }
@@ -111,8 +114,11 @@ namespace UWay.Skynet.Cloud.Nom.Service
         {
             var dt = GeImportDataTemplate(templateId, user);
             var result = this._importer.Import(filename, dt);
+            result.Wait();
             var dataResult = result.Result;
             var data = dataResult.Data;
+            var oldData = GetOldDataTable(templateId, data);
+            
             return null;
         }
 
@@ -140,8 +146,8 @@ namespace UWay.Skynet.Cloud.Nom.Service
                 
                 foreach (var key in primaryKeyName)
                 {
-                    clause.Terms.Add(WhereTerm.CreateCompare(SqlExpression.Field(key), SqlExpression.Parameter(key + i + j), FilterOperator.IsEqualTo));
-                    parameters.Add(key + i + j, item[key]);
+                    clause.Terms.Add(WhereTerm.CreateCompare(SqlExpression.Field(key), SqlExpression.Parameter(string.Format("{0}{1}{2}", key, i, j)), FilterOperator.IsEqualTo));
+                    parameters.Add(string.Format("{0}{1}{2}", key,i , j), item[key]);
                     j++;
 
                 }
@@ -149,11 +155,12 @@ namespace UWay.Skynet.Cloud.Nom.Service
                 i++;
             }
 
-            //using (var context = UnitOfWork.Get())
-            //{
-
-            //}
-            return null;
+            using (var context = UnitOfWork.Get(NetType.LTE.ToContainerName(DataBaseType.Normal)))
+            {
+                var tr = new ImportDataRepository(context);
+                return tr.CreateQuery(selectQuery, parameters);
+            }
+            //return null;
         }
 
         public ImportMsgResult Import(Stream fileStream, int templateId, string user)

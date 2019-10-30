@@ -21,6 +21,8 @@ namespace UWay.Skynet.Cloud.IE.Core
         private const string EXPRESSION_KEY = "COL_EXPRESSION";
         private const string EXPRESSION_LOG_KEY = "LOG_KEY";
         private const string LINK_COLUMN = "LINK_COLUMN";
+       
+       
         public static void AddLinkColumn(this DataColumn dt, string linkColumnName)
         {
             dt.ExtendedProperties.Add(LINK_COLUMN, linkColumnName);
@@ -69,6 +71,8 @@ namespace UWay.Skynet.Cloud.IE.Core
         {
             dt.ExtendedProperties.Add(SHEET_KEY, descrription);
         }
+
+
 
         public static string GetSheet(this DataTable dt)
         {

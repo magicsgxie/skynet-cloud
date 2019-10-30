@@ -120,11 +120,6 @@ namespace UWay.Skynet.Cloud.Extensions
 
         }
 
-
-      
-
-
-
         /// <summary>
         /// 使用SQL Server数据库
         /// </summary>
