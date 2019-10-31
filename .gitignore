@@ -361,3 +361,6 @@ skynet-cloud-uflow.sln
 /06.Skynet.Cloud.Css
 /07.Skynet.Cloud.Jom
 /08.Skynet.Cloud.Nom
+/packNoapBaseConnection.bat
+/packNoapBase .bat
+/packAll.bat

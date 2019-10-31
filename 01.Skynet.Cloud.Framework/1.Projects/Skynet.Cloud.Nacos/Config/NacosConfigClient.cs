@@ -243,11 +243,8 @@ namespace UWay.Skynet.Cloud.Nacos.Config
             Timer timer = new Timer(async x =>
             {
                 await PollingAsync(x);
-#if !DEBUG
-            }, request, 0, _options.ListenInterval);
-#else
+
             }, request, 0, _options.Interval);
-#endif
 
             listeners.Add(new Listener(name, timer));
 

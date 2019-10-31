@@ -1,0 +1,22 @@
+<Project>
+  <PropertyGroup>
+    <Version>1.3.3</Version>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!--<TargetFramework>netstandard2.0</TargetFramework>-->
+    <Authors>Magic.S.G.Xie</Authors>
+    <Company>深圳市优网科技有限公司</Company>
+    <Product>天网</Product>
+    <PackageProjectUrl>https://docs.xin-lai.com/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/xin-lai/IE</RepositoryUrl>
+    <Description>
+      基础框架。
+      官方网址：http://www.uway.cn/
+      开源库地址:https://github.com/magicsgxie/skynet-cloud.git
+      交流QQ群：279218456
+    </Description>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+</Project>
