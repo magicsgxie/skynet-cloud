@@ -15,7 +15,7 @@ namespace Steeltoe.Discovery.Nacos.Registry
 
         private const string UP = "UP";
 
-        private readonly IScheduler _scheduler;
+        private readonly INacosScheduler _scheduler;
         private readonly ILogger<NacosServiceRegistry> _logger;
 
         private const string OUT_OF_SERVICE = "OUT_OF_SERVICE";
@@ -36,7 +36,7 @@ namespace Steeltoe.Discovery.Nacos.Registry
             }
         }
 
-        public NacosServiceRegistry(INacosNamingClient nacosClient, NacosDiscoveryOptions options, IScheduler scheduler = null, ILogger<NacosServiceRegistry> logger = null)
+        public NacosServiceRegistry(INacosNamingClient nacosClient, NacosDiscoveryOptions options, INacosScheduler scheduler = null, ILogger<NacosServiceRegistry> logger = null)
         {
             _scheduler = scheduler;
             _options = options ?? throw new ArgumentNullException(nameof(options));
@@ -44,7 +44,7 @@ namespace Steeltoe.Discovery.Nacos.Registry
             _logger = logger;
         }
 
-        public NacosServiceRegistry(INacosNamingClient nacosClient, IOptionsMonitor<NacosDiscoveryOptions> optionsMonitor,  IScheduler scheduler = null, ILogger<NacosServiceRegistry> logger = null)
+        public NacosServiceRegistry(INacosNamingClient nacosClient, IOptionsMonitor<NacosDiscoveryOptions> optionsMonitor,  INacosScheduler scheduler = null, ILogger<NacosServiceRegistry> logger = null)
         {
             _scheduler = scheduler;
             _optionsMonitor = optionsMonitor ?? throw new ArgumentNullException(nameof(optionsMonitor));

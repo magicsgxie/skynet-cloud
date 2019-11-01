@@ -13,7 +13,7 @@ namespace Steeltoe.Discovery.Nacos.Discovery
     /// <summary>
     /// The default scheduler used to issue TTL requests to the Consul server
     /// </summary>
-    public class NacosTtlScheduler : NacosIScheduler
+    public class NacosTtlScheduler : INacosScheduler
     {
         internal readonly ConcurrentDictionary<string, Timer> _serviceHeartbeats = new ConcurrentDictionary<string, Timer>(StringComparer.OrdinalIgnoreCase);
 
