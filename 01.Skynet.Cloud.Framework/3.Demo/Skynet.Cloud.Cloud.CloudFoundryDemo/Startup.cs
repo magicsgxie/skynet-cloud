@@ -10,6 +10,8 @@ using UWay.Skynet.Cloud.Extensions;
 using UWay.Skynet.Cloud.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
+using Skynet.Cloud.Upms.Test.Service;
+using Skynet.Cloud.Upms.Test.Service.Interface;
 
 namespace Skynet.Cloud.Cloud.CloudFoundryDemo
 {
@@ -31,6 +33,8 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo
             //services.AddMySwagger();
             services.UseMysql(Configuration);
             services.AddCustomAuthentication(Configuration);
+            //services.AddHttpClient();
+            services.AddSingleton<IRemoteTest, RemoteTest>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCustomMvc(Configuration);
             services.AddSwaggerDocumentation(Configuration);

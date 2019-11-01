@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Skynet.Cloud.Data\Skynet.Cloud.Data.csproj" />
-    <ProjectReference Include="..\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
   </ItemGroup>
 
 </Project>

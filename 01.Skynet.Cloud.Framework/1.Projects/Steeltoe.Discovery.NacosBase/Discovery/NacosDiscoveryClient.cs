@@ -67,7 +67,7 @@ namespace Steeltoe.Discovery.Nacos.Discovery
                 return await _client.ListInstancesAsync(request);
             }).Result;
             IList<IServiceInstance> instances = new List<IServiceInstance>();
-            if(result == null&& result.Hosts != null)
+            if(result != null&& result.Hosts != null)
             {
                 foreach(var host in result.Hosts)
                 {

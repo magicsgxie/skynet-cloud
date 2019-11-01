@@ -22,8 +22,6 @@ namespace UWay.Skynet.Cloud.Extensions
     /// </summary>
     public static class MvcServiceCollectionExtenstion
     {
-        private static readonly string SKYNET = "skynet";
-        private static readonly string SKYNET_CLOUD = "cloud";
         /// <summary>
         /// 使用Redistribution
         /// </summary>
@@ -80,7 +78,7 @@ namespace UWay.Skynet.Cloud.Extensions
                     ////是否验证Token有效期，使用当前时间与Token的Claims中的NotBefore和Expires对比
                     ValidateLifetime=true,
                     ////允许的服务器时间偏移量
-                    ClockSkew=TimeSpan.FromSeconds(1)
+                    ClockSkew=TimeSpan.FromSeconds(10)
 
                 };
             });            

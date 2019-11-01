@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Skynet.Cloud.Upms.Test.Service.Interface;
 using UWay.Skynet.Cloud.Mvc;
 //using UWay.Skynet.Cloud.Security.Filters;
 
@@ -15,6 +16,18 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private IRemoteTest _remoteTest;
+
+        public ValuesController(IRemoteTest remoteTest)
+        {
+            this._remoteTest = remoteTest;
+        }
+
+        //public ValuesController()
+        //{
+
+        //}
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -24,12 +37,22 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        [Permission]
+        //[Permission]
         public ActionResult<string> Get(int id)
         {
-            var name = HttpContext.User.Identity.Name;
-            var authorities = HttpContext.User.Claims.Where(p => p.Type.Equals("authorities"));
-            return "value";
+            //var name = HttpContext.User.Identity.Name;
+            //var authorities = HttpContext.User.Claims.Where(p => p.Type.Equals("authorities"));
+            try
+            {
+                var result = _remoteTest.GetUser(HttpContext.User.UserId() ?? 0);
+                result.Wait();
+                return result.Result.Data.UserNo;
+            } catch(Exception ex)
+            {
+                throw ex;
+            }
+            
+            return HttpContext.User.UserName();
         }
 
         // POST api/values

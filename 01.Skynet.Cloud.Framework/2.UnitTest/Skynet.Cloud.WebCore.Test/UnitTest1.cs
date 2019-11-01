@@ -99,7 +99,7 @@ namespace UWay.Skynet.Cloud.Mvc.Test
             // Verify token
             //IdentityModelEventSource.ShowPII = true;
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-            var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB1d2F5IiwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJzZXJ2ZXIiXSwiZXhwIjoxNTcxMDg2NTkzLCJhdXRob3JpdGllcyI6WyJzeXNfY2xpZW50X2VkaXQiLCJzeXNfZGljdF9hZGQiLCJST0xFXzEiLCJzeXNfZGVwdF9kZWwiLCJzeXNfdXNlcl9kZWwiLCJzeXNfbWVudV9hZGQiLCJzeXNfcm9sZV9hZGQiLCJzeXNfY2xpZW50X2FkZCIsInN5c19kZXB0X2VkaXQiLCJzeXNfdXNlcl9lZGl0Iiwic3lzX2RpY3RfZWRpdCIsInN5c19tZW51X2RlbCIsInN5c19tZW51X2VkaXQiLCJzeXNfcm9sZV9lZGl0Iiwic3lzX3JvbGVfcGVybSIsInN5c191c2VyX2FkZCIsInN5c190b2tlbl9kZWwiLCJzeXNfZGVwdF9hZGQiLCJzeXNfbG9nX2RlbCIsInN5c19yb2xlX2RlbCIsInN5c19jbGllbnRfZGVsIiwic3lzX2RpY3RfZGVsIl0sImp0aSI6Ijg5MTNhNzBlLTY3ODQtNDdhZC05OTYwLTdhZDk5NTMzNjliYiIsImNsaWVudF9pZCI6InBpZyJ9.uDfO8Ulx6HAznNLcHWeZ227iOLUPx9I7IuiZ1Saw9Ts";
+            var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB1d2F5Iiwib3JnIjoxLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbInNlcnZlciJdLCJpZCI6MSwiZXhwIjoxNTcyNTQ3MjgxLCJhdXRob3JpdGllcyI6WyJzeXNfY2xpZW50X2VkaXQiLCJzeXNfZGljdF9hZGQiLCJST0xFXzEiLCJzeXNfZGVwdF9kZWwiLCJzeXNfdXNlcl9kZWwiLCJzeXNfbWVudV9hZGQiLCJzeXNfcm9sZV9hZGQiLCJzeXNfY2xpZW50X2FkZCIsInN5c19kZXB0X2VkaXQiLCJzeXNfdXNlcl9lZGl0Iiwic3lzX2RpY3RfZWRpdCIsInN5c19tZW51X2RlbCIsInN5c19tZW51X2VkaXQiLCJzeXNfcm9sZV9lZGl0Iiwic3lzX3JvbGVfcGVybSIsInN5c191c2VyX2FkZCIsInN5c190b2tlbl9kZWwiLCJzeXNfZGVwdF9hZGQiLCJzeXNfbG9nX2RlbCIsInN5c19yb2xlX2RlbCIsInN5c19jbGllbnRfZGVsIiwic3lzX2RpY3RfZGVsIl0sImp0aSI6IjIwMGQ1MDc5LWQ1MTktNGE5MC1iOTg0LWY5NTdmNTU1MTJkOSIsImNsaWVudF9pZCI6InBpZyJ9.dEmZqJAuwRB7kjJwtFLQu77WnRgoVuDTWM_abxjJ2Rw";
             // exception is thrown on the next line:
             var user = handler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
             var values = user.Claims.Select(c => c.Value).ToList();
@@ -107,9 +107,14 @@ namespace UWay.Skynet.Cloud.Mvc.Test
             //ClaimTypes.Name
             //user.Identity
             var userName = user.Claims.SingleOrDefault(c => c.Type.Equals("user_name", StringComparison.InvariantCultureIgnoreCase));
+            var userId = user.Claims.SingleOrDefault(c => c.Type.Equals("id", StringComparison.InvariantCultureIgnoreCase));
+            var deptId = user.Claims.SingleOrDefault(c => c.Type.Equals("org", StringComparison.InvariantCultureIgnoreCase));
             var propInfos = user.Claims.Select(c => c.Properties).ToList();
             //ClaimTypes.Name
             Console.Out.WriteLine("name" + userName);
+            Console.Out.WriteLine("userId" + userId);
+            Console.Out.WriteLine("deptId" + deptId);
+           
             //foreach (var role in user.Claims.Where(c => c.Type == ClaimTypes.Role))
             //{
             //    Console.WriteLine("Role: " + role.Value);
