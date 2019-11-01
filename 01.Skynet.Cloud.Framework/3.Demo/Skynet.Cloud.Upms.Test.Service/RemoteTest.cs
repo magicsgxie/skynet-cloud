@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using UWay.Skynet.Cloud.Discovery.Abstract;
 using Steeltoe.Common.Discovery;
 using UWay.Skynet.Cloud.Request;
+using UWay.Skynet.Cloud;
 using Microsoft.AspNetCore.Http;
 
 namespace Skynet.Cloud.Upms.Test.Service
@@ -28,7 +29,8 @@ namespace Skynet.Cloud.Upms.Test.Service
         public async Task<R<User>> GetUser(long id)
         {
             var client = await GetClientAsync();
-            return await DoRequest<R<User>>(client,GetRequest(HttpMethod.Get, $"{USER_URL}/{id}"));
+            var result =  await DoRequest<R<User>>(client,GetRequest(HttpMethod.Get, $"{USER_URL}/{id}"));
+            return result;
 
         }
     }

@@ -31,7 +31,7 @@ namespace UWay.Skynet.Cloud.Discovery.Abstract
             _logger = logger;
             _context = context;
         }
-        public async Task DoRequest(HttpClient client, HttpRequestMessage request)
+        protected virtual async Task DoRequest(HttpClient client, HttpRequestMessage request)
         {
 
             using (HttpResponseMessage response = await client.SendAsync(request))
@@ -53,8 +53,25 @@ namespace UWay.Skynet.Cloud.Discovery.Abstract
             }
 
         }
+        public async Task Invoke(HttpRequestMessage request)
+        {
+            var client = await GetClientAsync();
+            await DoRequest(client, request);
+        }
 
-        public async Task<T> DoRequest<T>(HttpClient client, HttpRequestMessage request)
+        public async Task<T> Invoke<T>(HttpRequestMessage request)
+        {
+            var client = await GetClientAsync();
+            return await DoRequest<T>(client, request);
+        }
+
+        public async Task<T> InvokeHateoas<T>(HttpRequestMessage request, string key)
+        {
+            var client = await GetClientAsync();
+            return await DoHateoasRequest<T>(client, request, key);
+        }
+
+        protected virtual async Task<T> DoRequest<T>(HttpClient client, HttpRequestMessage request)
         {
 
             using (HttpResponseMessage response = await client.SendAsync(request))
@@ -74,11 +91,42 @@ namespace UWay.Skynet.Cloud.Discovery.Abstract
                 }
 
                 Stream stream = await response.Content.ReadAsStreamAsync();
+                
+                
                 return Deserialize<T>(stream);
             }
 
         }
-        public async Task<T> DoHateoasRequest<T>(HttpClient client, HttpRequestMessage request, string key)
+
+
+        protected virtual async Task<string> DoRequestString(HttpClient client, HttpRequestMessage request)
+        {
+
+            using (HttpResponseMessage response = await client.SendAsync(request))
+            {
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    if (response.StatusCode == HttpStatusCode.NotFound)
+                        return string.Empty;
+
+                    // Log status
+                    var message = string.Format("Service request returned status: {0} invoking path: {1}",
+                        response.StatusCode, request.RequestUri);
+
+                    _logger?.LogInformation(message);
+
+                    return string.Empty;
+                }
+
+                Stream stream = await response.Content.ReadAsStreamAsync();
+                var str = streamToString(stream);
+
+                return str;
+            }
+
+        }
+
+        protected virtual async Task<T> DoHateoasRequest<T>(HttpClient client, HttpRequestMessage request, string key)
         {
 
 
@@ -118,6 +166,13 @@ namespace UWay.Skynet.Cloud.Discovery.Abstract
                 //return Deserialize<T>(stream);
             }
 
+        }
+
+        private static String streamToString(Stream stream)
+        {
+            StreamReader reader = new StreamReader(stream);
+            string text = reader.ReadToEnd();
+            return text;
         }
         protected virtual T Deserialize<T>(Stream stream)
         {
