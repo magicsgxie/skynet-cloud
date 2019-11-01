@@ -250,7 +250,7 @@ namespace UWay.Skynet.Cloud.Mvc
             });
             services.AddSingleton<INacosServiceRegistry, NacosServiceRegistry>();
             services.AddSingleton<INacosServiceRegistrar,NacosServiceRegistrar>();
-            
+            services.AddSingleton<INacosScheduler, NacosTtlScheduler>();
             services.AddSingleton<IDiscoveryClient,NacosDiscoveryClient>();
             if (lifecycle == null)
             {
@@ -260,7 +260,9 @@ namespace UWay.Skynet.Cloud.Mvc
             {
                 services.AddSingleton(lifecycle);
             }
+
             services.AddSingleton<IHealthContributor, NacosHealthContributor>();
+
         }
 
         private static void ConfigureNacosServices(IServiceCollection services, IConfiguration config, IServiceInfo info)

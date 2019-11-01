@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Steeltoe.Discovery.Nacos.Discovery;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -20,12 +21,19 @@ namespace UWay.Skynet.Cloud.Nacos
         }
 
         public string Cluster { set; get; }
-
+        /// <summary>
+        /// Gets or sets a value indicating whether gets or sets FailFast Throw exceptions during
+        /// service registration if true, otherwise, log warnings(defaults to true).
+        /// </summary>
+        public bool FailFast { get; set; } = true;
         //public Dictionary<string, string> Metadata { get; set; }
 
         //public double Wieght { set; get; }
 
-
+        /// <summary>
+        /// Gets or sets values related to Heartbeat
+        /// </summary>
+        public NacosHeartbeatOptions Heartbeat { get; set; } = new NacosHeartbeatOptions();
         /// <summary>
         /// Gets or sets a value indicating whether Nacos Discovery client is enabled
         /// </summary>
@@ -52,7 +60,16 @@ namespace UWay.Skynet.Cloud.Nacos
 
         public string ClusterName { set; get; }
 
-
+        /// <summary>
+        /// Gets a value indicating whether heart beat is enabled
+        /// </summary>
+        public bool IsHeartBeatEnabled
+        {
+            get
+            {
+                return Heartbeat != null ? Heartbeat.Enabled : false;
+            }
+        }
         /// <summary>
         /// Gets or sets Hostname to use when accessing server
         /// </summary>

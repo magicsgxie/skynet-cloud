@@ -15,11 +15,41 @@ namespace Steeltoe.Discovery.Nacos.Registry
 
         private const string UP = "UP";
 
+        private readonly IScheduler _scheduler;
+        private readonly ILogger<NacosServiceRegistry> _logger;
+
         private const string OUT_OF_SERVICE = "OUT_OF_SERVICE";
 
-        public NacosServiceRegistry(INacosNamingClient nacosClient)
+        private readonly IOptionsMonitor<NacosDiscoveryOptions> _optionsMonitor;
+        private readonly NacosDiscoveryOptions _options;
+
+        internal NacosDiscoveryOptions Options
         {
+            get
+            {
+                if (_optionsMonitor != null)
+                {
+                    return _optionsMonitor.CurrentValue;
+                }
+
+                return _options;
+            }
+        }
+
+        public NacosServiceRegistry(INacosNamingClient nacosClient, NacosDiscoveryOptions options, IScheduler scheduler = null, ILogger<NacosServiceRegistry> logger = null)
+        {
+            _scheduler = scheduler;
+            _options = options ?? throw new ArgumentNullException(nameof(options));
             _nacosClient = nacosClient;
+            _logger = logger;
+        }
+
+        public NacosServiceRegistry(INacosNamingClient nacosClient, IOptionsMonitor<NacosDiscoveryOptions> optionsMonitor,  IScheduler scheduler = null, ILogger<NacosServiceRegistry> logger = null)
+        {
+            _scheduler = scheduler;
+            _optionsMonitor = optionsMonitor ?? throw new ArgumentNullException(nameof(optionsMonitor));
+            _nacosClient = nacosClient;
+            _logger = logger;
         }
 
         public void Deregister(INacosRegistration registration)
@@ -80,7 +110,42 @@ namespace Steeltoe.Discovery.Nacos.Registry
             return (S)result;
         }
 
-        public void Register(INacosRegistration registration)
+        /// <inheritdoc/>
+        public Task RegisterAsync(INacosRegistration registration)
+        {
+            if (registration == null)
+            {
+                throw new ArgumentNullException(nameof(registration));
+            }
+
+            return RegisterAsyncInternal(registration);
+        }
+
+        private async Task RegisterAsyncInternal(INacosRegistration registration)
+        {
+            _logger?.LogInformation("Registering service with nacos {serviceId} ", registration.ServiceId);
+
+            try
+            {
+                await ResistryAsync(registration).ConfigureAwait(false);
+                if (Options.IsHeartBeatEnabled && _scheduler != null)
+                {
+                    _scheduler.Add(registration.ServiceId);
+                }
+            }
+            catch (Exception e)
+            {
+                if (Options.FailFast)
+                {
+                    _logger?.LogError(e, "Error registering service with consul {serviceId} ", registration.ServiceId);
+                    throw;
+                }
+
+                _logger?.LogWarning(e, "Failfast is false. Error registering service with consul {serviceId} ", registration.ServiceId);
+            }
+        }
+
+        private async Task<bool> ResistryAsync(INacosRegistration registration)
         {
             RegisterInstanceRequest request = new RegisterInstanceRequest()
             {
@@ -93,20 +158,48 @@ namespace Steeltoe.Discovery.Nacos.Registry
                 Port = registration.Port,
                 NamespaceId = registration.Namespace
             };
-            _nacosClient.RegisterInstanceAsync(request);
-
+            return await _nacosClient.RegisterInstanceAsync(request);
         }
 
-        public void SetStatus(INacosRegistration registration, string status)
+        public Task DeregisterAsync(INacosRegistration registration)
         {
-            ModifyInstanceHealthStatusRequest request = new ModifyInstanceHealthStatusRequest() {
+            if (registration == null)
+            {
+                throw new ArgumentNullException(nameof(registration));
+            }
+
+            return DeregisterAsyncInternal(registration);
+        }
+
+        private async Task DeregisterAsyncInternal(INacosRegistration registration)
+        {
+            if (Options.IsHeartBeatEnabled && _scheduler != null)
+            {
+                _scheduler.Remove(registration.ServiceId);
+            }
+
+            _logger?.LogInformation("Deregistering service with consul {instanceId} ", registration.ServiceId);
+
+            ModifyInstanceHealthStatusRequest request = new ModifyInstanceHealthStatusRequest()
+            {
                 Ip = registration.Host,
                 Port = registration.Port,
                 ServiceName = registration.ServiceId,
                 Healthy = registration.Healthy,
                 NamespaceId = registration.Namespace
             };
-            _nacosClient.ModifyInstanceHealthStatusAsync(request);
+            await _nacosClient.ModifyInstanceHealthStatusAsync(request);
+        }
+
+        public void Register(INacosRegistration registration)
+        {
+            RegisterAsync(registration).GetAwaiter().GetResult();
+
+        }
+
+        public void SetStatus(INacosRegistration registration, string status)
+        {
+            DeregisterAsync(registration).GetAwaiter().GetResult();
         }
     }
 }

@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# CA2000: 丢失范围之前释放对象
+dotnet_diagnostic.CA2000.severity = suggestion
+
+# CA1031: 不捕获常规异常类型
+dotnet_diagnostic.CA1031.severity = suggestion

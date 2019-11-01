@@ -48,6 +48,22 @@ namespace Steeltoe.Discovery.Nacos.Discovery
         public HealthCheckResult Health()
         {
             var result = new HealthCheckResult();
+            // var healthCheck =  _client.SendHeartbeatAsync(new SendHeartbeatRequest
+            //{
+            //    Ephemeral = false,
+            //    ServiceName = Options.ServiceName,
+            //    GroupName = Options.GroupName,
+            //    BeatInfo = new BeatInfo
+            //    {
+            //        Ip = Options.Host,
+            //        Port = Options.Port,
+            //        ServiceName = Options.ServiceName,
+            //        Scheduled = true,
+            //        Cluster = Options.ClusterName,
+            //    },
+                
+            //});
+
             var leaderStatus = GetLeaderStatusAsync().Result;
             var services = GetCatalogServicesAsync().Result.Doms;
             result.Status = HealthStatus.UP;
