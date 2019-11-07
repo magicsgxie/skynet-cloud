@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace UWay.Skynet.Cloud.Mvc
+namespace UWay.Skynet.Cloud.Dicovery.Core
 {
     public class ScopedEurekaHealthCheckHandler : EurekaHealthCheckHandler
     {

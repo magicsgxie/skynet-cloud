@@ -22,7 +22,7 @@ using System.Net.Http;
 using System.Threading;
 using UWay.Skynet.Cloud.Nacos;
 
-namespace UWay.Skynet.Cloud.Mvc
+namespace UWay.Skynet.Cloud.Dicovery.Core
 {
     /// <summary>
     /// 服务注册发现扩展类

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.Dicovery.Core\Skynet.Cloud.Dicovery.Core.csproj" />
     <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.Mvc\Skynet.Cloud.Mvc.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Entity\Skynet.Cloud.Upms.Test.Entity.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Repository\Skynet.Cloud.Upms.Test.Repository.csproj" />

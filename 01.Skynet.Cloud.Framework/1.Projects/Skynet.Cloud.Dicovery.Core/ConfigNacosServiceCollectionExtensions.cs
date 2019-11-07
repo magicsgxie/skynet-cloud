@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.Configuration.NacosServerBase;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Steeltoe.Configuration.NacosServerBase;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace UWay.Skynet.Cloud.Mvc
+namespace UWay.Skynet.Cloud.Dicovery.Core
 {
     /// <summary>
     /// Extension methods for adding services related to Spring Cloud Config Server.
