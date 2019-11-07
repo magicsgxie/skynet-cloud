@@ -5,4 +5,14 @@
     <RootNamespace>UWay.Skynet.Cloud.Dicovery.Core</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Steeltoe.Discovery.ConsulBase" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Steeltoe.Configuration.NacosServerBase\Steeltoe.Configuration.NacosServerBase.csproj" />
+    <ProjectReference Include="..\Steeltoe.Discovery.NacosBase\Steeltoe.Discovery.NacosBase.csproj" />
+  </ItemGroup>
+
 </Project>

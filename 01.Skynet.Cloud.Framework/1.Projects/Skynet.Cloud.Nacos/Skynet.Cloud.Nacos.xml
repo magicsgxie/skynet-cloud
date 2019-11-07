@@ -414,6 +414,17 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.FailFast">
+            <summary>
+            Gets or sets a value indicating whether gets or sets FailFast Throw exceptions during
+            service registration if true, otherwise, log warnings(defaults to true).
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Heartbeat">
+            <summary>
+            Gets or sets values related to Heartbeat
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Enabled">
             <summary>
             Gets or sets a value indicating whether Nacos Discovery client is enabled
@@ -432,6 +443,11 @@
         <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.Namespace">
             <summary>
             Gets or sets a value indicating whether Nacos Discovery client is enabled
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.IsHeartBeatEnabled">
+            <summary>
+            Gets a value indicating whether heart beat is enabled
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Nacos.NacosDiscoveryOptions.HostName">
@@ -958,6 +974,31 @@
             2. none     not filter out any entity
             3. label    select by label
             
+            </summary>
+        </member>
+        <member name="P:Steeltoe.Discovery.Nacos.Discovery.NacosHeartbeatOptions.Enabled">
+            <summary>
+            Gets or sets a value indicating whether heartbeats are enabled, defaults true
+            </summary>
+        </member>
+        <member name="P:Steeltoe.Discovery.Nacos.Discovery.NacosHeartbeatOptions.TtlValue">
+            <summary>
+            Gets or sets the time to live heartbeat time, defaults 30
+            </summary>
+        </member>
+        <member name="P:Steeltoe.Discovery.Nacos.Discovery.NacosHeartbeatOptions.TtlUnit">
+            <summary>
+            Gets or sets the time unit of the TtlValue, defaults = "s"
+            </summary>
+        </member>
+        <member name="P:Steeltoe.Discovery.Nacos.Discovery.NacosHeartbeatOptions.IntervalRatio">
+            <summary>
+            Gets or sets the interval ratio
+            </summary>
+        </member>
+        <member name="P:Steeltoe.Discovery.Nacos.Discovery.NacosHeartbeatOptions.Ttl">
+            <summary>
+            Gets the time to live setting
             </summary>
         </member>
     </members>

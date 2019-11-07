@@ -5,9 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.WebEncoders;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using Steeltoe.Security.DataProtection;
-using Steeltoe.CloudFoundry.Connector.Redis;
-using Microsoft.AspNetCore.DataProtection;
 using UWay.Skynet.Cloud.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -22,26 +19,7 @@ namespace UWay.Skynet.Cloud.Extensions
     /// </summary>
     public static class MvcServiceCollectionExtenstion
     {
-        /// <summary>
-        /// 使用Redistribution
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="config"></param>
-        /// <returns></returns>
-        public static IServiceCollection UserRedis(this IServiceCollection services, IConfiguration config)
-        {
-            services.AddRedisConnectionMultiplexer(config);
-            services.AddDataProtection()
-                .PersistKeysToRedis()
-                .SetApplicationName("redis-keystore");
-            // Use Redis cache on CloudFoundry to store session data
-            services.AddDistributedRedisCache(config);
-            return services;
-        }
-
-
-
-
+       
 
         /// <summary>
         /// 添加验证

@@ -3,6 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.Services;
 using Steeltoe.CloudFoundry.Connector;
+using Steeltoe.Security.DataProtection;
+using Steeltoe.CloudFoundry.Connector.Redis;
+using Microsoft.AspNetCore.DataProtection;
 using UWay.Skynet.Cloud.Data;
 using System.Linq;
 using Steeltoe.CloudFoundry.Connector.MySql;
@@ -15,6 +18,23 @@ namespace UWay.Skynet.Cloud.Extensions
 {
     public  static partial class DbServiceCollectionExtenstion
     {
+        /// <summary>
+        /// 使用Redistribution
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        public static IServiceCollection UserRedis(this IServiceCollection services, IConfiguration config)
+        {
+            services.AddRedisConnectionMultiplexer(config);
+            services.AddDataProtection()
+                .PersistKeysToRedis()
+                .SetApplicationName("redis-keystore");
+            // Use Redis cache on CloudFoundry to store session data
+            services.AddDistributedRedisCache(config);
+            return services;
+        }
+
         private static readonly string SKYNET = "skynet";
         private static readonly string SKYNET_CLOUD = "cloud";
         private static readonly string SKYNET_CLOUD_SERVICE_DBNAME = "db";

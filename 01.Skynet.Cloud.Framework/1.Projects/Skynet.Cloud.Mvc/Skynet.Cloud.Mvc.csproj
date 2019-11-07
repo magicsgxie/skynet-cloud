@@ -13,11 +13,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.Discovery.ConsulBase" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="4.0.1" />
@@ -27,8 +22,6 @@
     <ProjectReference Include="..\Skynet.Cloud.ConnectorBase\Skynet.Cloud.ConnectorBase.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Data\Skynet.Cloud.Data.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
-    <ProjectReference Include="..\Steeltoe.Configuration.NacosServerBase\Steeltoe.Configuration.NacosServerBase.csproj" />
-    <ProjectReference Include="..\Steeltoe.Discovery.NacosBase\Steeltoe.Discovery.NacosBase.csproj" />
   </ItemGroup>
 
 </Project>
