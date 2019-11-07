@@ -365,3 +365,8 @@ skynet-cloud-uflow.sln
 /packNoapBase .bat
 /packAll.bat
 /skynet-cloud-cnoap.sln
+/skynet-cloud-modules/skynet-cloud-nom
+/skynet-cloud-modules/skynet-cloud-ccs
+/skynet-cloud-modules/skynet-cloud-css
+/skynet-cloud-modules/skynet-cloud-dcs
+/skynet-cloud-modules/skynet-cloud-jom
