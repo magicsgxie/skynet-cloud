@@ -17,14 +17,13 @@ namespace UWay.Skynet.Cloud.Data.Test
     public class Tests
     {
 
-        //[TestMethod]
-        //public void TestGetDataTableForOracle()
-        //{
-        //    BuildServiceForOracle();
-        //    var dbContext = AspectCoreContainer.Resolve<IDbContextCore>();
-        //    var repository = AspectCoreContainer.Resolve<IUserRepository>();
-        //    var user = repository.Get(p => p.Id == 1);
-        //}
+        [TestMethod]
+        public void TestGetDataTableForOracle()
+        {
+            string username = "xiesg:123456";
+            var base64 = username.ToBase64();
+
+        }
 
 
 

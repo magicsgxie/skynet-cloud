@@ -97,6 +97,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             final Map<String, Object> additionalInfo = new HashMap<>(1);
             additionalInfo.put("license", SecurityConstants.PROJECT_LICENSE);
             UserDetailIpml user = (UserDetailIpml)authentication.getUserAuthentication().getPrincipal();
+            additionalInfo.put("id", user.getId());
+            additionalInfo.put("org", user.getDeptId());
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
             return accessToken;
         };

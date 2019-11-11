@@ -23,8 +23,12 @@ namespace UWay.Skynet.Cloud.Mvc
         /// <returns></returns>
         public static string  UserName(this ClaimsPrincipal principal)
         {
-            if(principal.Identity.Name.IsNullOrEmpty())
-             return principal.Claims.Single(p => p.Type.Equals(USER_NAME, StringComparison.InvariantCultureIgnoreCase)).Value;
+            if (principal == null)
+            {
+                return string.Empty;
+            }
+            if (principal.Identity.Name.IsNullOrEmpty())
+                return principal.Claims.Single(p => p.Type.Equals(USER_NAME, StringComparison.InvariantCultureIgnoreCase)).Value;
             return principal.Identity.Name;
         }
 
@@ -35,6 +39,13 @@ namespace UWay.Skynet.Cloud.Mvc
         /// <returns></returns>
         public static long? UserId(this ClaimsPrincipal principal)
         {
+            if (principal == null)
+            {
+                return null;
+            }
+            if (principal.Claims.FirstOrDefault(p => p.Type == ClaimTypes.Sid) != null) {
+                return principal.Claims.Single(p => p.Type == ClaimTypes.Sid).Value.ToNullLong();
+            }
             return principal.Claims.Single(p => p.Type.Equals(USER_ID, StringComparison.InvariantCultureIgnoreCase)).Value.ToNullLong();
         }
 
@@ -45,11 +56,20 @@ namespace UWay.Skynet.Cloud.Mvc
         /// <returns></returns>
         public static long? DeptId(this ClaimsPrincipal principal)
         {
+            if (principal == null)
+            {
+                return null;
+            }
             return principal.Claims.Single(p => p.Type.Equals(DEPT_ID, StringComparison.InvariantCultureIgnoreCase)).Value.ToNullLong();
         }
 
         public static bool HasPermission(this ClaimsPrincipal principal,string persmission)
         {
+            if(principal == null)
+            {
+                return false;
+            }
+
             var resource = principal.Claims.Where(p => p.Type.Equals(RESOURCES));
             return resource.Any(o => o.Value.Equals(persmission, StringComparison.InvariantCultureIgnoreCase));
         }
