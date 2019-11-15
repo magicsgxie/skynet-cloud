@@ -4,6 +4,9 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Mvc
 {
+    /// <summary>
+    /// 连接和Button类型
+    /// </summary>
     public class UrlAndButtonType
     {
         public string Url { get; set; }

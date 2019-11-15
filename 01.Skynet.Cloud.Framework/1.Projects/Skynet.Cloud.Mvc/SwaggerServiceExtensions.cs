@@ -9,8 +9,17 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Mvc
 {
+    /// <summary>
+    /// swagger配置文件
+    /// </summary>
     public static class SwaggerServiceExtensions
     {
+        /// <summary>
+        /// 增加swagger文档生成
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services, IConfiguration configuration)
         {
             var version = configuration.GetSection("swagger").GetValue<string>("version");
@@ -39,6 +48,12 @@ namespace UWay.Skynet.Cloud.Mvc
             return services;
         }
 
+        /// <summary>
+        /// app swagger use
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app, IConfiguration configuration)
         {
             var version = configuration.GetSection("swagger").GetValue<string>("version");

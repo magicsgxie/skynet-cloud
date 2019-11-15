@@ -10,6 +10,7 @@ using UWay.Skynet.Cloud.Nacos;
 
 namespace UWay.Skynet.Cloud.Dicovery.Core
 {
+
     public static class DiscoveryApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseDiscoveryClient(this IApplicationBuilder app)

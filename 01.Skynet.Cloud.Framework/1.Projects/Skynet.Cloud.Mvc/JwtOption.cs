@@ -4,6 +4,9 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Mvc
 {
+    /// <summary>
+    /// JWT基础配置
+    /// </summary>
     public class JwtOption
     {
         //token是谁颁发的

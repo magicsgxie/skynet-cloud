@@ -7,6 +7,9 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Mvc
 {
+    /// <summary>
+    /// swagger过滤器
+    /// </summary>
     public class SwaggerDefaultValueFilter : IOperationFilter
     {
         public void Apply(Operation operation, OperationFilterContext context)

@@ -16,6 +16,9 @@ using UWay.Skynet.Cloud.Protocal;
 
 namespace UWay.Skynet.Cloud.Extensions
 {
+    /// <summary>
+    /// 数据服务扩展
+    /// </summary>
     public  static partial class DbServiceCollectionExtenstion
     {
         /// <summary>

@@ -11,6 +11,9 @@ using UWay.Skynet.Cloud.ConnectorBase.Relational;
 
 namespace Steeltoe.CloudFoundry.Connector.Oracle
 {
+    /// <summary>
+    /// Oracle数据提供配置扩展
+    /// </summary>
     public static class OracleProviderServiceCollectionExtensions
     {
         
