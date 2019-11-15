@@ -101,5 +101,25 @@ namespace   UWay.Skynet.Cloud.Uflow.Entity
       public string SelectInfo{ set; get;}
       [Column("CONTENT",DbType = DBType.NVarChar)]
       public string Content{ set; get;}
-   }
+
+        public InstanceStepUser Clone()
+        {
+            return new InstanceStepUser()
+            {
+                Fid = this.Fid,
+                InstanceStepId = this.InstanceStepId,
+                StepUserId = this.StepUserId,
+                UserType = this.UserType,
+                UserCode = this.UserCode,
+                Status = this.Status,
+                FormName = FormName,
+                Data = Data,
+                Creator = Creator,
+                EditDate = EditDate,
+                Editor = Editor,
+                CreateDate = CreateDate,
+                Content = Content
+            };
+        }
+    }
 }

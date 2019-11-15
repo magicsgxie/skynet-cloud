@@ -63,21 +63,38 @@ namespace   UWay.Skynet.Cloud.Uflow.Entity
       /// 0否，1是
       /// <summary>
       [Column("IS_RETURN",DbType = DBType.Int32)]
-      public int IsReturn{ set; get;}
+      public bool IsReturn{ set; get;}
       /// <summary>
       /// 必须指定下一步处理人
       /// <summary>
       [Column("IS_FORM_NEXTMAN",DbType = DBType.Int32)]
-      public int IsFormNextman{ set; get;}
+      public bool IsFormNextman{ set; get;}
       /// <summary>
       /// 处理人必须指定
       /// <summary>
       [Column("IS_FORM_NEXTMAN_MUST",DbType = DBType.Int32)]
-      public int IsFormNextmanMust{ set; get;}
+      public bool IsFormNextmanMust { set; get;}
       /// <summary>
       /// 描述
       /// <summary>
       [Column("REMARK",DbType = DBType.NVarChar)]
       public string Remark{ set; get;}
-   }
+
+      public TemplateStepFixstepList Clone()
+        {
+            return new TemplateStepFixstepList()
+            {
+                Fid = this.Fid,
+                StepId = this.StepId,
+                SelectStepSeq = this.SelectStepSeq,
+                SelectStepName = this.SelectStepName,
+                SelectFormName = this.SelectFormName,
+                IsReturn = this.IsReturn,
+                IsFormNextman = this.IsFormNextman,
+                IsFormNextmanMust = this.IsFormNextmanMust,
+                Remark = this.Remark
+            };
+
+        }
+    }
 }

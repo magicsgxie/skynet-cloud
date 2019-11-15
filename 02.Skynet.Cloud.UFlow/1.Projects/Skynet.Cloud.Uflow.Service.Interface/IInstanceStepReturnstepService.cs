@@ -55,10 +55,12 @@ namespace   UWay.Skynet.Cloud.Uflow.Service.Interface
       /// 删除退回到的步骤{退回到的步骤}对象(即:一条记录
       /// </summary>
       int Delete(string[] idArrays );
+
+      int DeleteByInstanceStepId(string id);
       /// <summary>
       /// 获取指定的退回到的步骤{退回到的步骤}对象(即:一条记录
       /// </summary>
-      InstanceStepReturnstep GetById(string id);
+        InstanceStepReturnstep GetById(string id);
       /// <summary>
       /// 获取所有的退回到的步骤{退回到的步骤}对象(即:一条记录
       /// </summary>

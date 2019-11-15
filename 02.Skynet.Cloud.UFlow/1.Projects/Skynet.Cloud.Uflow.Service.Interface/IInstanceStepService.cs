@@ -26,42 +26,47 @@
 
 
 
-namespace   UWay.Skynet.Cloud.Uflow.Service.Interface
+namespace UWay.Skynet.Cloud.Uflow.Service.Interface
 {
-   using System;
-   using UWay.Skynet.Cloud.Data;
+    using System;
+    using UWay.Skynet.Cloud.Data;
 
-   using UWay.Skynet.Cloud.Request;
-   using UWay.Skynet.Cloud.Uflow.Entity;
-   using System.Collections.Generic;
-   /// <summary>
-   /// 实例步骤表服务接口类
-   /// </summary>
-   public interface IInstanceStepService
-   {
-      /// <summary>
-      /// 添加实例步骤表{实例步骤表}对象(即:一条记录
-      /// </summary>
-      long Add(InstanceStep  instanceStep);
-      /// <summary>
-      /// 添加实例步骤表{实例步骤表}对象(即:一条记录
-      /// </summary>
-      void Add(IList<InstanceStep>  instanceSteps);
-      /// <summary>
-      /// 更新实例步骤表{实例步骤表}对象(即:一条记录
-      /// </summary>
-      int Update(InstanceStep  instanceStep);
-      /// <summary>
-      /// 删除实例步骤表{实例步骤表}对象(即:一条记录
-      /// </summary>
-      int Delete(string[] idArrays );
-      /// <summary>
-      /// 获取指定的实例步骤表{实例步骤表}对象(即:一条记录
-      /// </summary>
-      InstanceStep GetById(string id);
-      /// <summary>
-      /// 获取所有的实例步骤表{实例步骤表}对象(即:一条记录
-      /// </summary>
-      DataSourceResult Page(DataSourceRequest request);
-   }
+    using UWay.Skynet.Cloud.Request;
+    using UWay.Skynet.Cloud.Uflow.Entity;
+    using System.Collections.Generic;
+    /// <summary>
+    /// 实例步骤表服务接口类
+    /// </summary>
+    public interface IInstanceStepService
+    {
+        /// <summary>
+        /// 添加实例步骤表{实例步骤表}对象(即:一条记录
+        /// </summary>
+        long Add(InstanceStep instanceStep);
+        /// <summary>
+        /// 添加实例步骤表{实例步骤表}对象(即:一条记录
+        /// </summary>
+        void Add(IList<InstanceStep> instanceSteps);
+        /// <summary>
+        /// 更新实例步骤表{实例步骤表}对象(即:一条记录
+        /// </summary>
+        int Update(InstanceStep instanceStep);
+        /// <summary>
+        /// 删除实例步骤表{实例步骤表}对象(即:一条记录
+        /// </summary>
+        int Delete(string[] idArrays);
+        /// <summary>
+        /// 获取指定的实例步骤表{实例步骤表}对象(即:一条记录
+        /// </summary>
+        InstanceStep GetById(string id);
+
+        /// <summary>
+        /// 获取指定的实例步骤表{实例步骤表}对象(即:一条记录
+        /// </summary>
+        IEnumerable<InstanceStep> ListByInstanceId(string id);
+        /// <summary>
+        /// 获取所有的实例步骤表{实例步骤表}对象(即:一条记录
+        /// </summary>
+        DataSourceResult Page(DataSourceRequest request);
+    }
 }

@@ -71,10 +71,19 @@ namespace   UWay.Skynet.Cloud.Uflow.Repository
       {
          return Delete<InstanceStepReturnstep>(p => idArrays.Contains(p.Fid)); 
       }
-      /// <summary>
-      /// 获取指定的退回到的步骤{退回到的步骤}对象(即:一条记录
-      /// </summary>
-      public InstanceStepReturnstep GetById(string id)
+
+        /// <summary>
+        /// 删除退回到的步骤{退回到的步骤}对象(即:一条记录
+        /// </summary>
+        public int DeleteByInstanceStepId(string id)
+        {
+            return Delete<InstanceStepReturnstep>(p => p.InstanceStepId.Equals(id));
+        }
+
+        /// <summary>
+        /// 获取指定的退回到的步骤{退回到的步骤}对象(即:一条记录
+        /// </summary>
+        public InstanceStepReturnstep GetById(string id)
       {
          return GetByID<InstanceStepReturnstep>(id);
       }

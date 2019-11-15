@@ -106,5 +106,14 @@ namespace   UWay.Skynet.Cloud.Uflow.Service
             return new InstanceStepReturnstepRepository(dbContext).Query().ToDataSourceResult(request);
          }
       }
-   }
+
+        public int DeleteByInstanceStepId(string id)
+        {
+
+            using (var dbContext = UnitOfWork.Get(Unity.ContainerName))
+            {
+                return new InstanceStepReturnstepRepository(dbContext).DeleteByInstanceStepId(id);
+            }
+        }
+    }
 }

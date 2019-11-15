@@ -29,7 +29,8 @@
 namespace   UWay.Skynet.Cloud.Uflow.Entity
 {
    using System;
-   using UWay.Skynet.Cloud.Data;
+    using System.Collections.Generic;
+    using UWay.Skynet.Cloud.Data;
 
    [Table("UF_TEMPLATE_STEP")]
    public class TemplateStep
@@ -108,52 +109,52 @@ namespace   UWay.Skynet.Cloud.Uflow.Entity
       /// 指定下一个处理步骤
       /// <summary>
       [Column("IS_FORM_NEXTSTEP",DbType = DBType.Int32)]
-      public int IsFormNextstep{ set; get;}
+      public bool IsFormNextstep{ set; get;}
       /// <summary>
       /// 要求必须指定
       /// <summary>
       [Column("IS_FORM_NEXTSTEP_MUST",DbType = DBType.Int32)]
-      public int IsFormNextstepMust{ set; get;}
+      public bool IsFormNextstepMust{ set; get;}
       /// <summary>
       /// 必须指定下一步处理人
       /// <summary>
       [Column("IS_FORM_NEXTMAN",DbType = DBType.Int32)]
-      public int IsFormNextman{ set; get;}
+      public bool IsFormNextman { set; get;}
       /// <summary>
       /// 处理人必须指定
       /// <summary>
       [Column("IS_FORM_NEXTMAN_MUST",DbType = DBType.Int32)]
-      public int IsFormNextmanMust{ set; get;}
+      public bool IsFormNextmanMust { set; get;}
       /// <summary>
       /// 必须填写主办或汇签意见
       /// <summary>
       [Column("IS_FORM_SUGGESTION",DbType = DBType.Int32)]
-      public int IsFormSuggestion{ set; get;}
+      public bool IsFormSuggestion { set; get;}
       /// <summary>
       /// 意见仅对发起人和填写人可见
       /// <summary>
       [Column("IS_FORM_SUGGESTION_VISIBLE",DbType = DBType.Int32)]
-      public int IsFormSuggestionVisible{ set; get;}
+      public bool IsFormSuggestionVisible { set; get;}
       /// <summary>
       /// 允许转办
       /// <summary>
       [Column("IS_FORM_TRANSFER",DbType = DBType.Int32)]
-      public int IsFormTransfer{ set; get;}
+      public bool IsFormTransfer { set; get;}
       /// <summary>
       /// 允许退回到上一步
       /// <summary>
       [Column("IS_FORM_RETURN",DbType = DBType.Int32)]
-      public int IsFormReturn{ set; get;}
+      public bool IsFormReturn { set; get;}
       /// <summary>
       /// 允许退回到发起步骤
       /// <summary>
       [Column("IS_FORM_RETURN_FIRST",DbType = DBType.Int32)]
-      public int IsFormReturnFirst{ set; get;}
+      public bool IsFormReturnFirst { set; get;}
       /// <summary>
       /// 允许退回到完成步骤
       /// <summary>
       [Column("IS_FORM_RETURN_FINISH",DbType = DBType.Int32)]
-      public int IsFormReturnFinish{ set; get;}
+      public bool IsFormReturnFinish { set; get;}
       /// <summary>
       /// 说明
       /// <summary>
@@ -219,5 +220,8 @@ namespace   UWay.Skynet.Cloud.Uflow.Entity
       /// <summary>
       [Column("IS_TEMP_SUBFLOW",DbType = DBType.Int32)]
       public int IsTempSubflow{ set; get;}
+
+        [Ignore]
+      public List<TemplateStepFixstepList> TemplateStepFixstepLists { set; get; } = new List<TemplateStepFixstepList>();
    }
 }

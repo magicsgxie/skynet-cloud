@@ -55,10 +55,15 @@ namespace   UWay.Skynet.Cloud.Uflow.Service.Interface
       /// 删除存放用户指定的下一个处理步骤。{存放用户指定的下一个处理步骤。}对象(即:一条记录
       /// </summary>
       int Delete(string[] idArrays );
-      /// <summary>
-      /// 获取指定的存放用户指定的下一个处理步骤。{存放用户指定的下一个处理步骤。}对象(即:一条记录
-      /// </summary>
-      InstanceStepFixstep GetById(string id);
+
+        /// <summary>
+        /// 删除存放用户指定的下一个处理步骤。{存放用户指定的下一个处理步骤。}对象(即:一条记录
+        /// </summary>
+        int DeleteByInstanceStepId(string id);
+        /// <summary>
+        /// 获取指定的存放用户指定的下一个处理步骤。{存放用户指定的下一个处理步骤。}对象(即:一条记录
+        /// </summary>
+        InstanceStepFixstep GetById(string id);
       /// <summary>
       /// 获取所有的存放用户指定的下一个处理步骤。{存放用户指定的下一个处理步骤。}对象(即:一条记录
       /// </summary>
