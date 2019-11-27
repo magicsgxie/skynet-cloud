@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Skynet.Cloud.ConnectorBase
+namespace UWay.Skynet.Cloud.ConnectorBase
 {
     public class HealthContributorExtension
     {

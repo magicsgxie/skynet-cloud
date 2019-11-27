@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Cache
 {
+    /// <summary>
+    /// 内存拦截器
+    /// </summary>
     public class CachingInterceptor : AbstractInterceptor
     {
         [FromContainer]

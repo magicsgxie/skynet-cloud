@@ -5,6 +5,9 @@ using UWay.Skynet.Cloud.IoC;
 
 namespace UWay.Skynet.Cloud.Cache
 {
+    /// <summary>
+    /// 内存供应商接口
+    /// </summary>
     public interface ICachingProvider
     {
         object Get(string cacheKey);

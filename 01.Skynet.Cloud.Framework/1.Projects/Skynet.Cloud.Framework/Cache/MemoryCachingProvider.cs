@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Cache
 {
+    /// <summary>
+    /// 内存提供者
+    /// </summary>
     public class MemoryCachingProvider : ICachingProvider
     {
         private IMemoryCache _cache;

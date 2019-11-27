@@ -2,6 +2,9 @@
 
 namespace UWay.Skynet.Cloud.Cache
 {
+    /// <summary>
+    /// 内存属性设置
+    /// </summary>
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public class CachingAttribute : Attribute
     {

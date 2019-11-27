@@ -140,7 +140,7 @@ namespace UWay.Skynet.Cloud.Uflow.Entity
         /// <summary>
         [Column("EDIT_DATE", DbType = DBType.DateTime)]
         public DateTime EditDate { set; get; }
-
-        public IList<TemplateStep> TemplateSteps { set; get; } = new List<TemplateStep>()
+        [Ignore]
+        public IList<TemplateStep> TemplateSteps { set; get; } = new List<TemplateStep>();
     }
 }

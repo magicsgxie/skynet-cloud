@@ -98,11 +98,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Uflow.Service"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Dicovery.Core", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Dicovery.Core\Skynet.Cloud.Dicovery.Core.csproj", "{2D4956F7-1939-4082-9133-5B4E5C8608FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Notify", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Notify\Skynet.Cloud.Notify.csproj", "{2E2AAF3D-A286-4585-BFE5-19103B84C98F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Notify", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Notify\Skynet.Cloud.Notify.csproj", "{2E2AAF3D-A286-4585-BFE5-19103B84C98F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Tasks", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Tasks\Skynet.Cloud.Tasks.csproj", "{5E16044E-2905-4763-A3BF-34D40C08DA6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Sms", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Sms\Skynet.Cloud.Sms.csproj", "{719D4861-E801-425E-B0D6-1CB8177B1A6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Sms", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Sms\Skynet.Cloud.Sms.csproj", "{719D4861-E801-425E-B0D6-1CB8177B1A6A}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "HelpDocument", "20.HelpDocument\HelpDocument\HelpDocument.shfbproj", "{350D7235-AA84-4A80-9EC2-263954D9EFDB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Noap", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Noap\Skynet.Cloud.Noap.csproj", "{31FAD34C-030A-49EF-8E8B-2B10FEB20003}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Noap.ConnectorBase", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Noap.ConnectorBase\Skynet.Cloud.Noap.ConnectorBase.csproj", "{EBE76C45-54F3-4DBF-B785-123FB426868B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -242,6 +248,18 @@ Global
 		{719D4861-E801-425E-B0D6-1CB8177B1A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719D4861-E801-425E-B0D6-1CB8177B1A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719D4861-E801-425E-B0D6-1CB8177B1A6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{350D7235-AA84-4A80-9EC2-263954D9EFDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{350D7235-AA84-4A80-9EC2-263954D9EFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{350D7235-AA84-4A80-9EC2-263954D9EFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{350D7235-AA84-4A80-9EC2-263954D9EFDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31FAD34C-030A-49EF-8E8B-2B10FEB20003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31FAD34C-030A-49EF-8E8B-2B10FEB20003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31FAD34C-030A-49EF-8E8B-2B10FEB20003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31FAD34C-030A-49EF-8E8B-2B10FEB20003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE76C45-54F3-4DBF-B785-123FB426868B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE76C45-54F3-4DBF-B785-123FB426868B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE76C45-54F3-4DBF-B785-123FB426868B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE76C45-54F3-4DBF-B785-123FB426868B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -288,6 +306,9 @@ Global
 		{2E2AAF3D-A286-4585-BFE5-19103B84C98F} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{5E16044E-2905-4763-A3BF-34D40C08DA6D} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{719D4861-E801-425E-B0D6-1CB8177B1A6A} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
+		{350D7235-AA84-4A80-9EC2-263954D9EFDB} = {D1C39E6A-7D2E-44BB-858D-323F98AE690F}
+		{31FAD34C-030A-49EF-8E8B-2B10FEB20003} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
+		{EBE76C45-54F3-4DBF-B785-123FB426868B} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE362151-8B43-49C2-ABD3-060B24911784}

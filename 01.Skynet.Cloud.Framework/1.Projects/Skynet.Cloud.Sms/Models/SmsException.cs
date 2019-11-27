@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Magicodes.Sms.Core.Models
+namespace UWay.Skynet.Cloud.Sms.Core.Models
 {
     /// <summary>
     /// 短信异常

@@ -91,7 +91,7 @@ namespace UWay.Skynet.Cloud.Extensions
         }
     }
 
-    // <summary>
+    /// <summary>
     /// 数据状态集合对象，主要用来解耦Asp.net内置的状态对象，如：Session，Application，Cache等
     /// </summary>
     public interface IDataCollection

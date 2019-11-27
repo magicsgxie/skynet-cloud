@@ -29,7 +29,16 @@
     <DocumentationSources>
       <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
       <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Data\Skynet.Cloud.Data.csproj" />
-      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.WebCore\Skynet.Cloud.WebCore.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.ConnectorBase\Skynet.Cloud.ConnectorBase.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Mvc\Skynet.Cloud.Mvc.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.IE\Skynet.Cloud.IE.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Dicovery.Core\Skynet.Cloud.Dicovery.Core.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Notify\Skynet.Cloud.Notify.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Sms\Skynet.Cloud.Sms.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Steeltoe.Discovery.NacosBase\Steeltoe.Discovery.NacosBase.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Discovery.Abstract\Skynet.Cloud.Discovery.Abstract.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Noap\Skynet.Cloud.Noap.csproj" />
+      <DocumentationSource sourceFile="..\..\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Noap.ConnectorBase\Skynet.Cloud.Noap.ConnectorBase.csproj" />
     </DocumentationSources>
     <HelpFileFormat>Website</HelpFileFormat>
     <SyntaxFilters>C#, ASP.NET</SyntaxFilters>

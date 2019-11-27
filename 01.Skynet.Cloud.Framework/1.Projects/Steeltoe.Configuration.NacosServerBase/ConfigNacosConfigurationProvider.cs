@@ -613,7 +613,7 @@ namespace Steeltoe.Configuration.NacosServerBase
         }
 
 
-        // <summary>
+        /// <summary>
         /// Adds values from a PropertySource to the Configurtation Data dictionary managed
         /// by this provider
         /// </summary>
