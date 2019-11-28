@@ -46,6 +46,7 @@ namespace UWay.Skynet.Cloud.ApiDemo
             services.UseMysql(Configuration);
             //设置授权模式
             services.AddCustomAuthentication(Configuration);
+
             //设置MVC版本
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

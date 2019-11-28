@@ -18,8 +18,8 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args).UseCloudFoundryHosting(5000)
-                    .AddCloudFoundry()
-                    .AddConfigNacos(GetLoggerFactory())
+                    .AddCloudFoundry() //增加微服务信息
+                    .AddConfigNacos(GetLoggerFactory()) //从Nacos获取配置信息
                 .UseStartup<Startup>();
 
         public static ILoggerFactory GetLoggerFactory()

@@ -39,7 +39,7 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        //[Permission]
+        [Permission]
         public async Task<R<User>> Get(int id)
         {
             //var name = HttpContext.User.Identity.Name;
