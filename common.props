@@ -7,8 +7,8 @@
     <Authors>Magic.S.G.Xie</Authors>
     <Company>深圳市优网科技有限公司</Company>
     <Product>天网</Product>
-    <PackageProjectUrl>https://docs.xin-lai.com/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/xin-lai/IE</RepositoryUrl>
+    <PackageProjectUrl>http://192.168.15.201/svn/cdma3/trunk/code/skynet-cloud</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/magicsgxie/skynet-cloud.git</RepositoryUrl>
     <Description>
       基础框架。
       官方网址：http://www.uway.cn/

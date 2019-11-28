@@ -20,6 +20,8 @@ using UWay.Skynet.Cloud.Extensions;
 using UWay.Skynet.Cloud.IoC;
 using UWay.Skynet.Cloud.Mvc;
 using Microsoft.AspNetCore.Http;
+using Skynet.Cloud.Upms.Test.Service.Interface;
+using Skynet.Cloud.Upms.Test.Service;
 
 namespace UWay.Skynet.Cloud.ApiDemo
 {
@@ -29,7 +31,7 @@ namespace UWay.Skynet.Cloud.ApiDemo
     {
         public static ILoggerRepository Repository { get; set; }
 
-        private bool userNacos;
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,77 +40,52 @@ namespace UWay.Skynet.Cloud.ApiDemo
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            RegistryCookie(services);
-            RegistrySwagger(services);
-            //
-            return InitIoC(services);
-        }
-
-
-        public void RegistryCookie(IServiceCollection services)
-        {
+            //使用Mysql数据库连接获取主要数据库连接信息
+            services.UseMysql(Configuration);
+            //设置授权模式
+            services.AddCustomAuthentication(Configuration);
+            //设置MVC版本
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //设置MVC配置信息
+            services.AddCustomMvc();
+
+            //初始化SwaggerUI文档
+            services.AddSwaggerDocumentation(Configuration);
+            //IOC容器
+            services.InitIoC();
         }
 
-        public void RegistrySwagger(IServiceCollection services)
-        {
-            //services.AddMySwagger();
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            ConfigureEnviroment(app, env);
-            ConfigureSwagger(app);
-
-            ConfigureMvc(app);
-        }
-
-
-        /**
-         * Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-         * 
-         * */
-        public void ConfigureEnviroment(IApplicationBuilder app, IHostingEnvironment env)
-        {
             if (env.IsDevelopment())
             {
+                //
                 app.UseDeveloperExceptionPage();
-
+                //初始化SwaggerUI文档
+                app.UseSwaggerDocumentation(Configuration);
             }
-        }
-
-        public void ConfigureSwagger(IApplicationBuilder app)
-        {
-            //app.UseSwagger();
-            //app.UseSwaggerUi3();
-        }
-
-        public void ConfigureMvc(IApplicationBuilder app)
-        {
+            else
+            {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            //使用授权模式
+            app.UseAuthentication();
+            //使用MVC API
             app.UseMvc();
-        }
 
-
-        /// <summary>
-        /// IoC初始化
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns></returns>
-        private IServiceProvider InitIoC(IServiceCollection services)
-        {
-            
-            //services.UseOracle(Configuration);
-            //services.UseMysql(Configuration);
-            //services.UseSqlServer(Configuration);
-            return AspectCoreContainer.BuildServiceProvider(services);//接入AspectCore.Injector
         }
 
 
 
-       
+
+
+
+
     }
 }

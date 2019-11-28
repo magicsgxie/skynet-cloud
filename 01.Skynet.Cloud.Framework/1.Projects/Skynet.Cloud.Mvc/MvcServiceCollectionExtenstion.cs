@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication;
+using UWay.Skynet.Cloud.IoC;
 
 namespace UWay.Skynet.Cloud.Extensions
 {
@@ -75,6 +76,17 @@ namespace UWay.Skynet.Cloud.Extensions
             services.AddMemoryCache();
             services.AddSession();
             return services;
+        }
+
+
+        /// <summary>
+        /// IoC初始化
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceProvider InitIoC(this IServiceCollection services)
+        {
+            return AspectCoreContainer.BuildServiceProvider(services);//接入AspectCore.Injector
         }
 
     }

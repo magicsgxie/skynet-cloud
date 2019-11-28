@@ -108,8 +108,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Noap", "01.Sky
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Noap.ConnectorBase", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Noap.ConnectorBase\Skynet.Cloud.Noap.ConnectorBase.csproj", "{CC5CDE8C-F727-4AB3-A637-238514C5FBB0}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "HelpDocument", "20.HelpDocument\HelpDocument\HelpDocument.shfbproj", "{350D7235-AA84-4A80-9EC2-263954D9EFDB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -256,10 +254,6 @@ Global
 		{CC5CDE8C-F727-4AB3-A637-238514C5FBB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC5CDE8C-F727-4AB3-A637-238514C5FBB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC5CDE8C-F727-4AB3-A637-238514C5FBB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{350D7235-AA84-4A80-9EC2-263954D9EFDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{350D7235-AA84-4A80-9EC2-263954D9EFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{350D7235-AA84-4A80-9EC2-263954D9EFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{350D7235-AA84-4A80-9EC2-263954D9EFDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -308,7 +302,6 @@ Global
 		{719D4861-E801-425E-B0D6-1CB8177B1A6A} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{272CFAFC-D358-431E-829E-8E42F430389D} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{CC5CDE8C-F727-4AB3-A637-238514C5FBB0} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
-		{350D7235-AA84-4A80-9EC2-263954D9EFDB} = {D1C39E6A-7D2E-44BB-858D-323F98AE690F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE362151-8B43-49C2-ABD3-060B24911784}
