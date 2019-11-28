@@ -7,11 +7,19 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Data
 {
+    /// <summary>
+    /// 存储两个int的对象
+    /// </summary>
     public class Pair
     {
-
+        /// <summary>
+        /// 第一个int
+        /// </summary>
         public int First { set; get; }
         
+        /// <summary>
+        /// 第二个int
+        /// </summary>
         public int Second { set; get; }
     }
 
@@ -130,6 +138,11 @@ namespace UWay.Skynet.Cloud.Data
         }
     }
 
+    /// <summary>
+    /// 存储两个对象列表
+    /// </summary>
+    /// <typeparam name="F">第一个对象</typeparam>
+    /// <typeparam name="S">第二个对象</typeparam>
     public class Pairs<F, S> : IList<Pair<F, S>>
     {
         List<Pair<F, S>> pairs = new List<Pair<F, S>>();
@@ -233,27 +246,51 @@ namespace UWay.Skynet.Cloud.Data
         #endregion
     }
 
+    /// <summary>
+    /// 三个对象列表
+    /// </summary>
+    /// <typeparam name="F">第一个对象</typeparam>
+    /// <typeparam name="S">第二个对象</typeparam>
+    /// <typeparam name="T">第三个对象</typeparam>
     public class Triplets<F, S, T> : IList<Triplet<F, S, T>>
     {
         List<Triplet<F, S, T>> triplets = new List<Triplet<F, S, T>>();
 
         #region IList<Triplet<F,S,T>> 成员
-
+        /// <summary>
+        /// 查找对象
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public int IndexOf(Triplet<F, S, T> item)
         {
             return triplets.IndexOf(item);
         }
 
+        /// <summary>
+        /// 插入对象
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="item"></param>
         public void Insert(int index, Triplet<F, S, T> item)
         {
             triplets.Insert(index, item);
         }
 
+        /// <summary>
+        /// 移除对象
+        /// </summary>
+        /// <param name="index">索引</param>
         public void RemoveAt(int index)
         {
             triplets.RemoveAt(index);
         }
 
+        /// <summary>
+        /// 对象索引
+        /// </summary>
+        /// <param name="index">索引值</param>
+        /// <returns></returns>
         public Triplet<F, S, T> this[int index]
         {
             get
@@ -269,37 +306,64 @@ namespace UWay.Skynet.Cloud.Data
         #endregion
 
         #region ICollection<Triplet<F,S,T>> 成员
-
+        /// <summary>
+        /// 添加对象
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(Triplet<F, S, T> item)
         {
             triplets.Add(item);
         }
 
+        /// <summary>
+        /// 清除所有对象
+        /// </summary>
         public void Clear()
         {
             triplets.Clear();
         }
 
+        /// <summary>
+        /// 是否包含对象
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Contains(Triplet<F, S, T> item)
         {
             return triplets.Contains(item);
         }
 
+        /// <summary>
+        /// 复制对象
+        /// </summary>
+        /// <param name="array">对象数组</param>
+        /// <param name="arrayIndex">复制索引</param>
         public void CopyTo(Triplet<F, S, T>[] array, int arrayIndex)
         {
             triplets.CopyTo(array, arrayIndex);
         }
 
+        /// <summary>
+        /// 数量
+        /// </summary>
         public int Count
         {
             get { return triplets.Count; }
         }
 
+        /// <summary>
+        /// 是否只读
+        /// </summary>
         public bool IsReadOnly
         {
             get { return ((ICollection<Triplet<F, S, T>>)triplets).IsReadOnly; }
         }
 
+        /// <summary>
+        /// 移除对象
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Remove(Triplet<F, S, T> item)
         {
             return triplets.Remove(item);
@@ -325,6 +389,12 @@ namespace UWay.Skynet.Cloud.Data
 
         #endregion
 
+        /// <summary>
+        /// 添加对象
+        /// </summary>
+        /// <param name="f">第一个对象</param>
+        /// <param name="s">第二个对象</param>
+        /// <param name="t">第三个对象</param>
         public void Add(F f, S s, T t)
         {
             triplets.Add(new Triplet<F, S, T>(f, s, t));

@@ -111,6 +111,7 @@ namespace UWay.Skynet.Cloud.Data.Dialect.SqlBuilder
 
         #region Expression Parse
 
+        [System.Obsolete]
         protected override Expression VisitBinary(BinaryExpression b)
         {
             if (b.NodeType == ExpressionType.Power)

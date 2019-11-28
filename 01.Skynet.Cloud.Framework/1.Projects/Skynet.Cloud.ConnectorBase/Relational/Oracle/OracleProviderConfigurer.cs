@@ -17,6 +17,9 @@ using System.Net;
 
 namespace Steeltoe.CloudFoundry.Connector.Oracle
 {
+    /// <summary>
+    /// Oracle Provider Configurer
+    /// </summary>
     public class OracleProviderConfigurer
     {
         public string Configure(OracleServiceInfo si, OracleProviderConnectorOptions configuration)

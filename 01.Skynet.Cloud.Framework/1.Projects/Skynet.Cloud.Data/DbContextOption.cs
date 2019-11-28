@@ -5,10 +5,19 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Data
 {
+    /// <summary>
+    /// 上下文配置
+    /// </summary>
     public class DbContextOption
     {
+        /// <summary>
+        /// 连接名称
+        /// </summary>
         public string Container { set; get; }
 
+        /// <summary>
+        /// 默认连接
+        /// </summary>
         public bool Default { set; get; }
 
 
@@ -31,6 +40,9 @@ namespace UWay.Skynet.Cloud.Data
         /// </summary>
         public string ModuleAssemblyName { get; set; }
 
+        /// <summary>
+        /// 日志工厂
+        /// </summary>
         public ILoggerFactory LogggerFactory { set; get; }
     }
 }

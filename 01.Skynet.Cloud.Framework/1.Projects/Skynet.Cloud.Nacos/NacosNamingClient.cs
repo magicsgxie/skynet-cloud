@@ -11,15 +11,19 @@ namespace UWay.Skynet.Cloud.Nacos
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Net.Http.Headers;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class NacosNamingClient : INacosNamingClient
     {
 
 
 
         internal readonly ILogger _logger;
+        /// <summary>
+        /// 
+        /// </summary>
         protected readonly NacosDiscoveryOptions _options;
         internal readonly IHttpClientFactory _clientFactory;
         //internal readonly ILocalConfigInfoProcessor _processor;
@@ -109,7 +113,12 @@ namespace UWay.Skynet.Cloud.Nacos
 
         //}
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loggerFactory"></param>
+        /// <param name="optionAccs"></param>
+        /// <param name="clientFactory"></param>
         public NacosNamingClient(
            ILoggerFactory loggerFactory
            , IOptionsMonitor<NacosDiscoveryOptions> optionAccs
@@ -125,7 +134,10 @@ namespace UWay.Skynet.Cloud.Nacos
         }
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private string GetBaseUrl()
         {
             var hostAndPort = _serverAddressManager.GetCurrentServer();
@@ -133,6 +145,11 @@ namespace UWay.Skynet.Cloud.Nacos
         }
 
         #region Instance
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> RegisterInstanceAsync(RegisterInstanceRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -160,6 +177,11 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> RemoveInstanceAsync(RemoveInstanceRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -187,6 +209,12 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> ModifyInstanceAsync(ModifyInstanceRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -214,6 +242,11 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<ListInstancesResult> ListInstancesAsync(ListInstancesRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -235,7 +268,11 @@ namespace UWay.Skynet.Cloud.Nacos
         }
 
         
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<GetInstanceResult> GetInstanceAsync(GetInstanceRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -256,6 +293,12 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> SendHeartbeatAsync(SendHeartbeatRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -283,6 +326,11 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> ModifyInstanceHealthStatusAsync(ModifyInstanceHealthStatusRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -315,6 +363,10 @@ namespace UWay.Skynet.Cloud.Nacos
         #endregion
 
         #region Metrics
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<GetMetricsResult> GetMetricsAsync()
         {
             var responseMessage = await _clientFactory.DoRequestAsync(HttpMethod.Get, $"{GetBaseUrl()}/nacos/v1/ns/operator/metrics", timeOut: _options.TimeOut);
@@ -333,6 +385,12 @@ namespace UWay.Skynet.Cloud.Nacos
         #endregion
 
         #region Services
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> CreateServiceAsync(CreateServiceRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -360,6 +418,11 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> RemoveServiceAsync(RemoveServiceRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -387,6 +450,12 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> ModifyServiceAsync(ModifyServiceRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -414,6 +483,11 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<GetServiceResult> GetServiceAsync(GetServiceRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -434,6 +508,11 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<ListServicesResult> ListServicesAsync(ListServicesRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -456,6 +535,11 @@ namespace UWay.Skynet.Cloud.Nacos
         #endregion
 
         #region Switches
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<GetSwitchesResult> GetSwitchesAsync()
         {
             var responseMessage = await _clientFactory.DoRequestAsync(HttpMethod.Get, $"{GetBaseUrl()}/nacos/v1/ns/operator/switches", timeOut: _options.TimeOut);
@@ -472,6 +556,12 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> ModifySwitchesAsync(ModifySwitchesRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -502,6 +592,11 @@ namespace UWay.Skynet.Cloud.Nacos
         #endregion
 
         #region Cluster
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<ListClusterServersResult> ListClusterServersAsync(ListClusterServersRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -522,6 +617,10 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<GetCurrentClusterLeaderResult> GetCurrentClusterLeaderAsync()
         {
             var responseMessage = await _clientFactory.DoRequestAsync(HttpMethod.Get, $"{GetBaseUrl()}/nacos/v1/ns/raft/leader");
@@ -539,6 +638,10 @@ namespace UWay.Skynet.Cloud.Nacos
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<string>> ListServiceAsync()
         {
             ListServicesRequest request = new ListServicesRequest { PageNo = 1, PageSize = int.MaxValue };

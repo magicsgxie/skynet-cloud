@@ -13,8 +13,13 @@ namespace UWay.Skynet.Cloud.Mvc
     {
         //private readonly Logger nlog = LogManager.GetCurrentClassLogger(); //获得日志实;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public void OnException(ExceptionContext context)
         {
+            Guard.NotNull(context, "context");
             if (!context.ExceptionHandled)
             {
                 var excep = context.Exception;

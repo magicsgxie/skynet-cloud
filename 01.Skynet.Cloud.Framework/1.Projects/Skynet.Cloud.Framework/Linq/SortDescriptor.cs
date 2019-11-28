@@ -13,11 +13,18 @@ namespace UWay.Skynet.Cloud.Linq
     /// </summary>
     public class SortDescriptor : JsonObject, IDescriptor
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public SortDescriptor() : this(null, ListSortDirection.Ascending)
         {
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="order"></param>
         public SortDescriptor(string member, ListSortDirection order)
         {
             Member = member;
@@ -45,6 +52,10 @@ namespace UWay.Skynet.Cloud.Linq
             set;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
         public void Deserialize(string source)
         {
             var parts = source.Split(new[] { '-' });
@@ -59,16 +70,28 @@ namespace UWay.Skynet.Cloud.Linq
             SortDirection = sortDirection == "desc" ? ListSortDirection.Descending : ListSortDirection.Ascending;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string Serialize()
         {
             return "{0}-{1}".FormatWith(Member, SortDirection == ListSortDirection.Ascending ? "asc" : "desc");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string ToSortString()
         {
             return string.Format("{0} {1}", Member, SortDirection == ListSortDirection.Ascending ? "asc" : "desc");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
             json["field"] = Member;

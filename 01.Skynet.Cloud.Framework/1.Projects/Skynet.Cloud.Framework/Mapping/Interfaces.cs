@@ -117,6 +117,9 @@ namespace UWay.Skynet.Cloud.Mapping
     [Component( Lifestyle= LifestyleFlags.Singleton)]
     public abstract class MapperFactory : IMapperFactory
     {
+        /// <summary>
+        /// 序号
+        /// </summary>
         protected int order;
         /// <summary>
         /// 序号

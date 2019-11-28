@@ -27,8 +27,7 @@ namespace UWay.Skynet.Cloud.Linq
         /// <summary>
         ///  生成SQL查询条件
         /// </summary>
-        /// <param name="where">查询条件信息</param>
-        /// <param name="filterDescriptor">生成的SQL参数</param>
+        /// <param name="request">查询条件信息</param>
         /// <returns></returns>
         public static string ToWhere(this DataSourceRequest request)
         {
@@ -45,7 +44,12 @@ namespace UWay.Skynet.Cloud.Linq
 
         //public static DataSourceResult
         
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         private static DataSourceResult ToDataSourceResult(this DataTableWrapper enumerable, DataSourceRequest request)
         {
             var filters = new List<IFilterDescriptor>();
@@ -81,25 +85,50 @@ namespace UWay.Skynet.Cloud.Linq
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="memberName"></param>
+        /// <returns></returns>
         private static Type GetFieldByTypeFromDataColumn(DataTable dataTable, string memberName)
         {
             return dataTable.Columns.Contains(memberName) ? dataTable.Columns[memberName].DataType : null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public static DataSourceResult ToDataSourceResult(this DataTable dataTable, DataSourceRequest request)
         {
             return dataTable.WrapAsEnumerable().ToDataSourceResult(request);
         }
 
         
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public static DataSourceResult ToDataSourceResult(this IEnumerable enumerable, DataSourceRequest request)
         {
             return enumerable.AsQueryable().ToDataSourceResult(request);
         }
 
 
-
+        /// <summary>
+        /// 转化DataSource
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <param name="request"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
 
         public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, Func<TModel, TResult> selector)
         {
@@ -108,19 +137,43 @@ namespace UWay.Skynet.Cloud.Linq
 
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="queryable"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public static DataSourceResult<TResult> ToDataSoureceTResult<TResult>(this IQueryable queryable, DataSourceRequest request)
         {
             return queryable.CreateDataSourceTResult<TResult>(request);
         }
 
         
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryable"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public static DataSourceResult ToDataSourceResult(this IQueryable queryable, DataSourceRequest request)
         {
             return queryable.CreateDataSourceResult<object, object>(request, null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="queryable"></param>
+        /// <param name="sortDescriptors"></param>
+        /// <param name="groupDescriptors"></param>
+        /// <param name="aggregateDescriptors"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
         public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable queryable, IList<SortDescriptor> sortDescriptors, IList<GroupDescriptor> groupDescriptors, IList<AggregateDescriptor> aggregateDescriptors, long page, int pageSize, Func<TModel, TResult> selector)
         {
             var result = new DataSourceResult();
@@ -218,6 +271,13 @@ namespace UWay.Skynet.Cloud.Linq
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="queryable"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         private static DataSourceResult<TResult> CreateDataSourceTResult<TResult>(this IQueryable queryable, DataSourceRequest request)
         {
             var result = new DataSourceResult<TResult>();
@@ -332,7 +392,15 @@ namespace UWay.Skynet.Cloud.Linq
         }
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="queryable"></param>
+        /// <param name="request"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
         private static DataSourceResult CreateDataSourceResult<TModel, TResult>(this IQueryable queryable, DataSourceRequest request,  Func<TModel, TResult> selector)
         {
             var result = new DataSourceResult();
@@ -623,6 +691,13 @@ namespace UWay.Skynet.Cloud.Linq
             return source.GroupBy(source, groupDescriptors);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="notPagedData"></param>
+        /// <param name="groupDescriptors"></param>
+        /// <returns></returns>
         public static IQueryable GroupBy(this IQueryable source, IQueryable notPagedData, IEnumerable<GroupDescriptor> groupDescriptors)
         {
             var builder = new GroupDescriptorCollectionExpressionBuilder(source, groupDescriptors, notPagedData);
@@ -738,6 +813,13 @@ namespace UWay.Skynet.Cloud.Linq
                     source.Expression, Expression.Quote(lambda)));
         }
 
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="filterDescriptors"></param>
+        /// <returns></returns>
         public static IQueryable<TSource> Where<TSource>(this IQueryable<TSource> source, IEnumerable<IFilterDescriptor> filterDescriptors)
         {
             if (filterDescriptors.Any())
@@ -799,12 +881,23 @@ namespace UWay.Skynet.Cloud.Linq
 
         private static MethodInfo s_Take_TSource_2;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="TSource"></param>
+        /// <returns></returns>
         public static MethodInfo Take_TSource_2(Type TSource) =>
              (s_Take_TSource_2 ??
              (s_Take_TSource_2 = new Func<IQueryable<object>, int, IQueryable<object>>(Queryable.Take).GetMethodInfo().GetGenericMethodDefinition()))
               .MakeGenericMethod(TSource);
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public static IQueryable<TSource> Take<TSource>(this IQueryable<TSource> source, long count)
         {
             //if (source == null)
@@ -864,11 +957,23 @@ namespace UWay.Skynet.Cloud.Linq
         }
 
         private static MethodInfo s_Skip_TSource_2;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="TSource"></param>
+        /// <returns></returns>
         public static MethodInfo Skip_TSource_2(Type TSource) =>
             (s_Skip_TSource_2 ??
             (s_Skip_TSource_2 = new Func<IQueryable<object>, long, IQueryable<object>>(QueryableExtensions.Skip).GetMethodInfo().GetGenericMethodDefinition()))
              .MakeGenericMethod(TSource);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public static IQueryable<TSource> Skip<TSource>(this IQueryable<TSource> source, long count)
         {
             Guard.NotNull(source, "source");
@@ -1043,7 +1148,12 @@ namespace UWay.Skynet.Cloud.Linq
             }
         }
 
-       
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="enumerable"></param>
+       /// <param name="request"></param>
+       /// <returns></returns>
 
         public static TreeDataSourceResult ToTreeDataSourceResult(this IEnumerable enumerable, DataSourceRequest request)
         {
@@ -1051,7 +1161,15 @@ namespace UWay.Skynet.Cloud.Linq
         }
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <param name="request"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable,
             DataSourceRequest request,
             Func<TModel, TResult> selector)
@@ -1065,7 +1183,17 @@ namespace UWay.Skynet.Cloud.Linq
         //{
         //    return enumerable.ToTreeDataSourceResult<TModel, object, object, TResult>(request, null, null, selector);
         //}
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <param name="request"></param>
+        /// <param name="idSelector"></param>
+        /// <param name="parentIDSelector"></param>
+        /// <returns></returns>
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(
             this IQueryable<TModel> enumerable,
             DataSourceRequest request,
@@ -1075,6 +1203,18 @@ namespace UWay.Skynet.Cloud.Linq
             return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <param name="request"></param>
+        /// <param name="idSelector"></param>
+        /// <param name="parentIDSelector"></param>
+        /// <param name="rootSelector"></param>
+        /// <returns></returns>
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2>(this IQueryable<TModel> enumerable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
@@ -1084,6 +1224,20 @@ namespace UWay.Skynet.Cloud.Linq
             return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector, null, rootSelector);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="queryable"></param>
+        /// <param name="request"></param>
+        /// <param name="idSelector"></param>
+        /// <param name="parentIDSelector"></param>
+        /// <param name="rootSelector"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
@@ -1110,7 +1264,19 @@ namespace UWay.Skynet.Cloud.Linq
         //{
         //    return enumerable.CreateTreeDataSourceResult<TModel, T1, T2, TModel>(request, idSelector, parentIDSelector,  null rootSelector);
         //}
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="queryable"></param>
+        /// <param name="request"></param>
+        /// <param name="idSelector"></param>
+        /// <param name="parentIDSelector"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
         public static TreeDataSourceResult ToTreeDataSourceResult<TModel, T1, T2, TResult>(this IQueryable<TModel> queryable,
             DataSourceRequest request,
             Expression<Func<TModel, T1>> idSelector,
@@ -3208,6 +3374,9 @@ namespace UWay.Skynet.Cloud.Linq
         }
     }
 
+    /// <summary>
+    /// 资源说明
+    /// </summary>
     static class Res
     {
         public const string DuplicateIdentifier = "The identifier '{0}' was defined more than once";
@@ -3317,6 +3486,9 @@ namespace UWay.Skynet.Cloud.Linq
     public sealed class ParseException : System.Exception
     {
         int position;
+        /// <summary>
+        /// 
+        /// </summary>
         public ParseException()
         {
 
@@ -3350,13 +3522,24 @@ namespace UWay.Skynet.Cloud.Linq
         }
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class QueryableSearcher<T>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public QueryableSearcher()
         {
         }
       
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public Expression<Func<T, bool>> GetExpression(IEnumerable<IFilterDescriptor> items)
         {
             //构建 c=>Body中的c
@@ -3395,6 +3578,13 @@ namespace UWay.Skynet.Cloud.Linq
             return list.Aggregate(func);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="param"></param>
+        /// <param name="items"></param>
+        /// <param name="func"></param>
+        /// <returns></returns>
         private Expression GetGroupExpression(ParameterExpression param, IEnumerable<IFilterDescriptor> items, Func<Expression, Expression, Expression> func)
         {
 
@@ -3413,6 +3603,12 @@ namespace UWay.Skynet.Cloud.Linq
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="param"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public Expression GetExpression(ParameterExpression param, FilterDescriptor item)
         {
 
@@ -3439,6 +3635,12 @@ namespace UWay.Skynet.Cloud.Linq
             return ExpressionDict[item.Operator](exp.Body, constant);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
         private LambdaExpression GetPropertyLambdaExpression(FilterDescriptor item, ParameterExpression param)
         {
             //获取每级属性如c.Users.Proiles.UserId
@@ -3603,6 +3805,9 @@ namespace UWay.Skynet.Cloud.Linq
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static class TransformProviders
     {
         /// <summary>
@@ -3644,7 +3849,7 @@ namespace UWay.Skynet.Cloud.Linq
         /// 
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="binderType"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public bool Match(FilterDescriptor item, Type type)
         {
@@ -3655,7 +3860,7 @@ namespace UWay.Skynet.Cloud.Linq
         /// 
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="binderType"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public IEnumerable<FilterDescriptor> Transform(FilterDescriptor item, Type type)
         {
@@ -3676,7 +3881,7 @@ namespace UWay.Skynet.Cloud.Linq
         /// 
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="binderType"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public bool Match(FilterDescriptor item, Type type)
         {
@@ -3694,7 +3899,7 @@ namespace UWay.Skynet.Cloud.Linq
         /// 
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="binderType"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public IEnumerable<FilterDescriptor> Transform(FilterDescriptor item, Type type)
         {
@@ -3740,14 +3945,14 @@ namespace UWay.Skynet.Cloud.Linq
         /// 
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="binderType"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         bool Match(FilterDescriptor item, Type type);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="binderType"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         IEnumerable<FilterDescriptor> Transform(FilterDescriptor item, Type type);
     }
@@ -3761,7 +3966,7 @@ namespace UWay.Skynet.Cloud.Linq
         /// 
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="binderType"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public bool Match(FilterDescriptor item, Type type)
         {
@@ -3772,7 +3977,7 @@ namespace UWay.Skynet.Cloud.Linq
         /// 
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="binderType"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public IEnumerable<FilterDescriptor> Transform(FilterDescriptor item, Type type)
         {

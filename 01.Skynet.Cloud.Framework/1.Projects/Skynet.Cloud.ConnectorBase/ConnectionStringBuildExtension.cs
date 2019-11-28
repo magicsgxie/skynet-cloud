@@ -13,8 +13,17 @@ using UWay.Skynet.Cloud.Protocal;
 
 namespace UWay.Skynet.Cloud.Extensions
 {
+    /// <summary>
+    /// 数据库连接字符串构建
+    /// </summary>
     public static class ConnectionStringBuildExtension
     {
+        /// <summary>
+        /// Oracle连接字符串构建
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
         public static string BuildeOracleConnectionString(this IConfiguration config, string serviceName = null)
         {
             OracleServiceInfo info = string.IsNullOrEmpty(serviceName)
@@ -25,6 +34,13 @@ namespace UWay.Skynet.Cloud.Extensions
             return factory.CreateConnectionString();
         }
 
+
+        /// <summary>
+        /// Mysql连接字符串构建
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
         public static string BuildeMysqlConnectionString(this IConfiguration config, string serviceName = null)
         {
             MySqlServiceInfo info = string.IsNullOrEmpty(serviceName)
@@ -35,6 +51,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return factory.CreateConnectionString();
         }
 
+        /// <summary>
+        /// Postgre连接字符串构建
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
         public static string BuildePostgreConnectionString(this IConfiguration config, string serviceName = null)
         {
             PostgresServiceInfo info = string.IsNullOrEmpty(serviceName)
@@ -46,6 +68,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return factory.CreateConnectionString();
         }
 
+        /// <summary>
+        /// MsSql连接字符串构建
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
         public static string BuildeSqlServerConnectionString(this IConfiguration config, string serviceName = null)
         {
             SqlServerServiceInfo info = string.IsNullOrEmpty(serviceName)
@@ -59,6 +87,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return factory.CreateConnectionString();
         }
 
+        /// <summary>
+        /// 连接信息构建
+        /// </summary>
+        /// <param name="dbContextOption"></param>
+        /// <param name="dbcs"></param>
+        /// <returns></returns>
         public static IEnumerable<DbContextOption> DbContextOption(this DbContextOption dbContextOption, IDictionary<string, DbContextOption> dbcs)
         {
             if (dbcs.Count > 0)
@@ -124,6 +158,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return dbcs.Values;
         }
 
+        /// <summary>
+        /// 单一连接构建
+        /// </summary>
+        /// <param name="dbContextOption"></param>
+        /// <param name="defaultContainer"></param>
+        /// <returns></returns>
         public static DbContextOption SingleDbContextOption(this DbContextOption dbContextOption, string defaultContainer)
         {
             using (var connContext = new ProtocolDbContext(dbContextOption))

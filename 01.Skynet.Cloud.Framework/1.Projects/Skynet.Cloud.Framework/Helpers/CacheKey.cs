@@ -2,12 +2,21 @@
 
 namespace UWay.Skynet.Cloud.Helpers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CacheKey
     {
         private MethodInfo Method { get; }
         private ParameterInfo[] InputArguments { get; }
         private object[] ParameterValues { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="arguments"></param>
+        /// <param name="values"></param>
         public CacheKey(MethodInfo method, ParameterInfo[] arguments, object[] values)
         {
             this.Method = method;
@@ -15,6 +24,11 @@ namespace UWay.Skynet.Cloud.Helpers
             this.ParameterValues = values;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             CacheKey another = obj as CacheKey;
@@ -48,18 +62,31 @@ namespace UWay.Skynet.Cloud.Helpers
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string GetRedisCacheKey()
         {
             return
                 $"{this.Method.DeclaringType.Namespace}:{this.Method.DeclaringType.Name}:{this.Method.Name}:{GetHashCode()}";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string GetMemoryCacheKey()
         {
             return
                 $"{this.Method.DeclaringType.Namespace}_{this.Method.DeclaringType.Name}_{this.Method.Name}_{GetHashCode()}";
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             int hashCode = this.Method.GetHashCode();

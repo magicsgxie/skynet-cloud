@@ -54,12 +54,9 @@ namespace UWay.Skynet.Cloud.Linq
        
         public int PageSize { get; set; }
 
-        private int _currentPageIndex;
-
         /// <summary>
         /// 当前页
         /// </summary>
-       
         public int CurrentPageIndex { get; set; }
 
         /// <summary>
@@ -155,7 +152,6 @@ namespace UWay.Skynet.Cloud.Linq
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="expression"></param>
-        /// <param name="desc"></param>
         /// <returns></returns>
         private Pagination GroupBy<T>(Expression<Func<T, object>>[] expression)
         {

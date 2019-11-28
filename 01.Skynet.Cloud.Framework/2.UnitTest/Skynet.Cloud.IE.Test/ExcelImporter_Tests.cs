@@ -89,6 +89,11 @@ namespace Skynet.Cloud.IE.Test
             import.Data.ElementAt(2).Name.ShouldBe("左侧空格测试");
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [Fact(DisplayName = "必填项检测")]
         public async Task IsRequired_Test()
         {

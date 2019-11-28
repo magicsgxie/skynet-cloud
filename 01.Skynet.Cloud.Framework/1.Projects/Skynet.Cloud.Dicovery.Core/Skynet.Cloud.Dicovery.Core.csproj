@@ -5,6 +5,10 @@
     <RootNamespace>UWay.Skynet.Cloud.Dicovery.Core</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\workspace\svn\trunk\skynet-cloud\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Dicovery.Core\Skynet.Cloud.Dicovery.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Steeltoe.Discovery.ConsulBase" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="2.2.0" />

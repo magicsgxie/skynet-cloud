@@ -43,6 +43,10 @@ namespace UWay.Skynet.Cloud
             this.enumerable = enumerable;
         }
 
+        /// <summary>
+        /// 获取循环器
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
             var en = Interlocked.Exchange(ref enumerable, null);
@@ -335,6 +339,12 @@ namespace UWay.Skynet.Cloud
             return text.Substring(i + 1);
         }
 
+        /// <summary>
+        /// 条件转换
+        /// </summary>
+        /// <param name="filters">条件</param>
+        /// <param name="paramaters">参数</param>
+        /// <returns></returns>
         public static string ToCondition(this IList<IFilterDescriptor> filters, IDictionary<string, object> paramaters)
         {
             if (paramaters == null)
@@ -1501,7 +1511,9 @@ namespace UWay.Skynet.Cloud
         /// 接口的扩展方法（可枚举对象的扩展方法）
         /// Divides an enumerable into equal parts and performs an action on those parts
         /// </summary>
-        /// <typeparam name="T">?KeyValuePair<T3,List<T4>>?</typeparam>
+        /// <typeparam name="T">
+        /// ?KeyValuePair&lt;   T3,List&lt;T4&gt;&gt;?
+        /// </typeparam>
         /// <param name="enumerable">可枚举对象</param>
         /// <param name="parts">均分数</param>
         /// <param name="action">执行方法</param>
@@ -1525,6 +1537,12 @@ namespace UWay.Skynet.Cloud
             return JsonConvert.SerializeObject(val, iso);
         }
 
+        /// <summary>
+        /// 获取JSON的属性值
+        /// </summary>
+        /// <param name="json"></param>
+        /// <param name="prop"></param>
+        /// <returns></returns>
         public static string GetPropValue(this string json, string prop)
         {
             if (string.IsNullOrWhiteSpace(json)) return string.Empty;
@@ -1692,7 +1710,7 @@ namespace UWay.Skynet.Cloud
         /// 遍历当前对象，并且调用方法进行处理
         /// </summary>
         /// <typeparam name="T">类型</typeparam>
-        /// <param name="instance">实例</param>
+        /// <param name="coll">实例</param>
         /// <param name="action">方法</param>
         /// <returns>当前集合</returns>
         public static void ForEach<T>(this IEnumerable<T> coll, Action<T> action)

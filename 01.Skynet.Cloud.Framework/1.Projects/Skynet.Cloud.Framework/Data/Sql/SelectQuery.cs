@@ -72,19 +72,59 @@ namespace UWay.Skynet.Cloud.Data
     [DataContract]
 	public class SelectQuery : ICloneable
 	{
+        /// <summary>
+        /// 查询列
+        /// </summary>
 		protected SelectColumnCollection columns = new SelectColumnCollection();
+        /// <summary>
+        /// 查询条件
+        /// </summary>
 		protected WhereClause wherePhrase = new WhereClause();
+        /// <summary>
+        /// 跟组条件
+        /// </summary>
 		protected WhereClause havingPhrase = new WhereClause();
+        /// <summary>
+        /// 查询表
+        /// </summary>
 		protected FromClause fromClause = new FromClause();
 
+        /// <summary>
+        /// 排序
+        /// </summary>
 		protected OrderByTermCollection orderByTerms = new OrderByTermCollection();
+
+        /// <summary>
+        /// group By Terms
+        /// </summary>
 		protected GroupByTermCollection groupByTerms = new GroupByTermCollection();
 
-		protected int top = -1;		
-		protected bool groupByWithRollup = false;
+        /// <summary>
+        /// TOP N
+        /// </summary>
+		protected int top = -1;
+        /// <summary>
+        /// group By With Rollup
+        /// </summary>
+        protected bool groupByWithRollup = false;
+        /// <summary>
+        /// group By With Cube
+        /// </summary>
 		protected bool groupByWithCube = false;
+
+        /// <summary>
+        /// distinct
+        /// </summary>
 		protected bool distinct = false;
+
+        /// <summary>
+        /// table Space
+        /// </summary>
 		protected string tableSpace = null;
+
+        /// <summary>
+        /// index Hints
+        /// </summary>
         protected string indexHints = null;
 
 		/// <summary>

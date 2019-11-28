@@ -35,6 +35,10 @@ namespace UWay.Skynet.Cloud.Linq
             this.Value = filterValue;
         }
 
+
+        /// <summary>
+        /// 转化值
+        /// </summary>
         public object ConvertedValue
         {
             get
@@ -153,6 +157,10 @@ namespace UWay.Skynet.Cloud.Linq
             }
         }
 
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        /// <param name="json"></param>
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
             base.Serialize(json);
@@ -173,6 +181,11 @@ namespace UWay.Skynet.Cloud.Linq
             }
         }
 
+        /// <summary>
+        /// 创建过滤
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
         public override string CreateFilter(IDictionary<string, object> dictionary)
         {
             if (dictionary == null)

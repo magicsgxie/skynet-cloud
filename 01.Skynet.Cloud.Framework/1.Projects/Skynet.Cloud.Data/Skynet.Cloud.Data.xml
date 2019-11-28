@@ -106,6 +106,11 @@
             <param name="fk"></param>
             <returns></returns>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Data.Common.DateParts">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:UWay.Skynet.Cloud.Data.Common.DateParts.Year">
             <summary>
             年份
@@ -352,6 +357,26 @@
             操作类型
             </summary>
         </member>
+        <member name="F:UWay.Skynet.Cloud.Data.Common.OperationType.Insert">
+            <summary>
+            插入
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.Common.OperationType.Delete">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.Common.OperationType.Update">
+            <summary>
+            更新
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.Common.OperationType.Select">
+            <summary>
+            查询
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.Common.PagingHelper">
             <summary>
             分页帮助类
@@ -408,6 +433,20 @@
             </summary>
             <param name="sql">主SQL</param>
             <param name="parts">分页SQL信息</param>
+            <returns></returns>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.Common.ParameterHelper.rxParamsPrefix">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Common.ParameterHelper.ProcessParams(System.String,System.Object[],System.Collections.Generic.List{System.Object})">
+            <summary>
+            
+            </summary>
+            <param name="_sql"></param>
+            <param name="args_src"></param>
+            <param name="args_dest"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.Common.SqlFunctions.DateDiff(UWay.Skynet.Cloud.Data.Common.DateParts,System.DateTime,System.DateTime)">
@@ -485,11 +524,17 @@
             
             </summary>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.Configure(System.Collections.Generic.IEnumerable{UWay.Skynet.Cloud.Data.DbContextOption})">
+            <summary>
+            
+            </summary>
+            <param name="dbContextOptions"></param>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.Configure(UWay.Skynet.Cloud.Data.DbContextOption)">
             <summary>
             通过connectionStringName对象创建DbConfiguration对象（可以用于配置文件中有多个数据库连接字符串配置）
             </summary>
-            <param name="connectionStringName"></param>
+            <param name="dbContextOption"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.Configure(System.String,System.String,System.Boolean)">
@@ -498,6 +543,7 @@
             </summary>
             <param name="connectionString"></param>
             <param name="providerName"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureAccess(System.String,System.Boolean)">
@@ -505,6 +551,7 @@
             配置Access
             </summary>
             <param name="databaseFile"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureSqlCe35(System.String,System.Boolean)">
@@ -512,6 +559,7 @@
             配置SqlCe35
             </summary>
             <param name="databaseFile"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureSqlCe4(System.String,System.Boolean)">
@@ -519,6 +567,7 @@
             配置SqlCe4
             </summary>
             <param name="databaseFile"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureSQLExpress(System.String,System.Boolean)">
@@ -526,6 +575,7 @@
             配置SQLExpress
             </summary>
             <param name="databaseFile"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureSQLite(System.String,System.Boolean)">
@@ -533,6 +583,7 @@
             配置SQLite
             </summary>
             <param name="databaseFile"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureSQLite(System.String,System.String,System.Boolean)">
@@ -541,6 +592,7 @@
             </summary>
             <param name="databaseFile"></param>
             <param name="password"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureSQLite(System.String,System.Boolean,System.Boolean)">
@@ -549,6 +601,7 @@
             </summary>
             <param name="databaseFile"></param>
             <param name="failIfMissing"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureSQLite(System.String,System.String,System.Boolean,System.Boolean)">
@@ -558,6 +611,7 @@
             <param name="databaseFile"></param>
             <param name="password"></param>
             <param name="failIfMissing"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureMySQL(System.String,System.Boolean)">
@@ -565,6 +619,7 @@
             配置MySQL
             </summary>
             <param name="connectionString"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureSqlServer(System.String,System.Boolean)">
@@ -572,6 +627,7 @@
             配置SqlServer
             </summary>
             <param name="connectionString"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureOracle(System.String,System.Boolean)">
@@ -579,6 +635,7 @@
             配置Oracle
             </summary>
             <param name="connectionString"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.ConfigureOracleODP(System.String,System.Boolean)">
@@ -586,6 +643,7 @@
              配置Oracle ODP
             </summary>
             <param name="connectionString"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.Configure(System.Data.Common.DbConnection,System.String,System.String,System.Boolean)">
@@ -593,6 +651,9 @@
             通过DbConnection对象创建DbConfiguration对象
             </summary>
             <param name="conn"></param>
+            <param name="isDefault"></param>
+            <param name="entityAssmbly"></param>
+            <param name="mappFile"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.Configure(System.Data.Common.DbConnection,System.Boolean)">
@@ -600,6 +661,7 @@
             通过DbConnection对象创建DbConfiguration对象
             </summary>
             <param name="conn"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.Configure(System.String,System.Data.Common.DbConnection,System.String,System.String,System.Boolean)">
@@ -607,6 +669,10 @@
             通过DbConnection对象创建DbConfiguration对象
             </summary>
             <param name="conn"></param>
+            <param name="entityAssembly"></param>
+            <param name="containerName"></param>
+            <param name="mappingFile"></param>
+            <param name="isDefault"></param>
             <returns></returns>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbConfiguration.Items">
@@ -817,6 +883,7 @@
             批量注册特定程序集内符合特定条件的实体到数据表的映射关系
             </summary>
             <param name="typeFilter"></param>
+            <param name="asm"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.AddFile(System.String)">
@@ -838,7 +905,6 @@
             加载映射文件
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Data.DbConfiguration.AddTable(System.String,System.String,System.Xml.Linq.XElement,System.Reflection.Assembly)" -->
         <member name="M:UWay.Skynet.Cloud.Data.DbConfiguration.GetClass(System.Type)">
             <summary>
             根据实体类型得到映射元数据，如果不存在则Throw ORMappingException.
@@ -915,6 +981,26 @@
         <member name="P:UWay.Skynet.Cloud.Data.DbConfigurationInfo.SchemaLoader">
             <summary>
             得到或设置SchemaLoader工厂
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.DbConnectionString">
+            <summary>
+            连接字信息
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.DbConnectionString.ContainerName">
+            <summary>
+            连接名称
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.DbConnectionString.ConnectionString">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.DbConnectionString.Provider">
+            <summary>
+            提供者
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.DbContext">
@@ -1002,6 +1088,21 @@
             </summary>
             <param name="dbConfigurationName"></param>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Data.DbContextOption">
+            <summary>
+            上下文配置
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.DbContextOption.Container">
+            <summary>
+            连接名称
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.DbContextOption.Default">
+            <summary>
+            默认连接
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbContextOption.ConnectionString">
             <summary>
             数据库连接字符串
@@ -1020,6 +1121,11 @@
         <member name="P:UWay.Skynet.Cloud.Data.DbContextOption.ModuleAssemblyName">
             <summary>
             实体程序集名称
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.DbContextOption.LogggerFactory">
+            <summary>
+            日志工厂
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.DbHelper">
@@ -1552,6 +1658,15 @@
             <param name="isAutoClose">是否自动关闭连接</param>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Data.IDbHelper.ExecuteNonQueryAsync(System.String,System.Object,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="namedParameters"></param>
+            <param name="isAutoClose"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Data.IDbHelper.ExecuteReader(System.String,System.Object,System.Boolean)">
             <summary>
             执行查询并返回DataReader
@@ -1613,9 +1728,20 @@
             <param name="sql">SQL语句</param>
             <param name="skip">起始行</param>
             <param name="take">获取行</param>
-            <param name="rowCount">总行数</param>
             <param name="nameparameters">参数</param>
             <param name="isAutoClose">是否自动关闭连接，使用事务时设置不自动关闭</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.IDbHelper.ExecutePage``1(System.String,System.Int64,System.Int64,System.Object,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <param name="skip"></param>
+            <param name="take"></param>
+            <param name="nameparameters"></param>
+            <param name="isAutoClose"></param>
             <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.IDbSet">
@@ -2113,7 +2239,11 @@
             Rewrites nested singleton projection into server-side joins
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:UWay.Skynet.Cloud.Data.Linq.Expressions.SkipToRowNumberRewriter" -->
+        <member name="T:UWay.Skynet.Cloud.Data.Linq.Expressions.SkipToRowNumberRewriter">
+            <summary>
+            Rewrites take &amp; skip expressions into uses of TSQL row_number function
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.Linq.Expressions.SubqueryRemover">
             <summary>
             Removes one or more SelectExpression's by rewriting the expression tree to not include them, promoting
@@ -2174,7 +2304,13 @@
             Replaces references to one specific instance of an expression node with another node
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:UWay.Skynet.Cloud.Data.Linq.Internal.Grouping`2" -->
+        <member name="T:UWay.Skynet.Cloud.Data.Linq.Internal.Grouping`2">
+            <summary>
+            Simple implementation of the IGrouping interface
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TElement"></typeparam>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.Linq.Internal.MostRecentlyUsedCache`1">
             <summary>
             Implements a cache over a most recently used list
@@ -2193,8 +2329,19 @@
             <param name="expression">The root of the expression tree.</param>
             <returns>A new tree with sub-trees evaluated and replaced.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.Eval(System.Linq.Expressions.Expression,System.Func{System.Linq.Expressions.Expression,System.Boolean})" -->
-        <!-- Badly formed XML comment ignored for member "T:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.SubtreeEvaluator" -->
+        <member name="M:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.Eval(System.Linq.Expressions.Expression,System.Func{System.Linq.Expressions.Expression,System.Boolean})">
+            <summary>
+            Performs evaluation and replacement of independent sub-trees
+            </summary>
+            <param name="expression">The root of the expression tree.</param>
+            <param name="fnCanBeEvaluated">A function that decides whether a given expression node can be part of the local function.</param>
+            <returns>A new tree with sub-trees evaluated and replaced.</returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.SubtreeEvaluator">
+            <summary>
+            Evaluates &amp; replaces sub-trees when first candidate is reached (top-down)
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.Linq.Internal.PartialEvaluator.Nominator">
             <summary>
             Performs bottom-up analysis to determine which nodes can possibly
@@ -2827,7 +2974,35 @@
             <param name="id">主键列表</param>
             <returns>实体</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Data.ObjectRepository.Batch``2(System.Collections.Generic.IEnumerable{``1},System.Linq.Expressions.Expression{System.Func{UWay.Skynet.Cloud.Data.IRepository{``0},``1,System.Int32}})" -->
+        <member name="M:UWay.Skynet.Cloud.Data.ObjectRepository.Batch``2(System.Collections.Generic.IEnumerable{``1},System.Linq.Expressions.Expression{System.Func{UWay.Skynet.Cloud.Data.IRepository{``0},``1,System.Int32}})">
+            <summary>
+            批量插入
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="M"></typeparam>
+            <param name="instances"></param>
+            <param name="fnOperation"></param>
+            <example>
+            <code>
+            <![CDATA[ int n = 10;
+            var custs = Enumerable.Range(1, n).Select(
+               i => new
+               {
+                   CustomerID = "XX" + i,
+                   CompanyName = "Company" + i,
+                   ContactName = "Contact" + i,
+                   City = "Seattle",
+                  Country = "USA"
+              });
+            using(var r = new CustomerRepository(Unity.Container))
+            {
+                r.Batch<Customer, Customer>(custs,(u, c) => u.Insert(c));
+            }
+            ]]>
+            </code>
+            </example>
+            <returns>IEnumerable int</returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Data.ObjectRepository.Add``1(``0)">
             <summary>
             添加实体，返回影响行数
@@ -3113,6 +3288,26 @@
             ]]>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ObjectRepository.Query``1(System.String,System.Object,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <param name="namedParameters"></param>
+            <param name="isAutoClose"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ObjectRepository.SingleOrDefault``1(System.String,System.Object,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <param name="namedParameters"></param>
+            <param name="isAutoClose"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Data.ObjectRepository.ExecuteDataSet(UWay.Skynet.Cloud.Data.SelectQuery,System.Object,System.Boolean)">
             <summary>
             查询，返回DataSet
@@ -3231,9 +3426,8 @@
             <summary>
             执行分页查询
             </summary>
-            <param name="sql">查询语句</param>
-            <param name="pagination">分页信息</param>
-            <param name="namedParameters">参数,可以为匿名类，IDictionary，Hashtable,NameValueCollection</param>
+            <param name="query">查询语句</param>
+            <param name="request">分页信息</param>
             <param name="isAutoClose">是否自动关闭连接</param>
             <returns>首行首列值</returns>
         </member>
@@ -3242,8 +3436,7 @@
             执行分页查询
             </summary>
             <param name="sql">查询语句</param>
-            <param name="pagination">分页信息</param>
-            <param name="namedParameters">参数,可以为匿名类，IDictionary，Hashtable,NameValueCollection</param>
+            <param name="request">分页信息</param>
             <param name="isAutoClose">是否自动关闭连接</param>
             <returns>首行首列值</returns>
         </member>
@@ -3252,8 +3445,7 @@
             执行分页查询
             </summary>
             <param name="sql">查询语句</param>
-            <param name="pagination">分页信息</param>
-            <param name="namedParameters">参数,可以为匿名类，IDictionary，Hashtable,NameValueCollection</param>
+            <param name="request">分页信息</param>
             <param name="isAutoClose">是否自动关闭连接</param>
             <returns>首行首列值</returns>
         </member>
@@ -3262,8 +3454,7 @@
             执行分页查询
             </summary>
             <param name="query">查询语句</param>
-            <param name="pagination">分页信息</param>
-            <param name="namedParameters">参数,可以为匿名类，IDictionary，Hashtable,NameValueCollection</param>
+            <param name="request">分页信息</param>
             <param name="isAutoClose">是否自动关闭连接</param>
             <returns>首行首列值</returns>
         </member>
@@ -3271,6 +3462,7 @@
             <summary>
             导出CSV文件
             </summary>
+            <param name="fileHanlder">文件信息</param>
             <param name="fileName">文件信息</param>
             <param name="columns">列头</param>
             <param name="sql">查询语句</param>
@@ -3280,12 +3472,33 @@
             <summary>
             异步导出CSV文件
             </summary>
+            <param name="fileHanlder">文件处理器.</param>
             <param name="userId">用户ID.</param>
             <param name="fileName">文件名称.</param>
             <param name="columns">列头.</param>
             <param name="sql">查询语句.</param>
             <param name="namedParameters">参数.</param>
             <returns>Task&lt;System.Boolean&gt;.</returns>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.ObjectRepository.Schema">
+            <summary>
+            Schema
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ObjectRepository.GetQueryDataBaseTableSql(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Data Base 
+            </summary>
+            <param name="tableName"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ObjectRepository.GetQueryDataBaseTableColumnSql(System.String)">
+            <summary>
+            Data Base 
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.ProtocolDbContext">
             <summary>
@@ -3865,14 +4078,15 @@
             <summary>
             初始化才可以使用
             </summary>
-            <param name="dbConfigurationName"></param>
+            <param name="containerName">连接名称</param>
+            <param name="loggerFactory">日志工厂</param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.UnitOfWork.Get(UWay.Skynet.Cloud.Data.DbContextOption)">
             <summary>
             得到工作单元对象
             </summary>
-            <param name="dbConfigurationName"></param>
+            <param name="dbContextOption">配置信息</param>
             <returns></returns>
         </member>
     </members>

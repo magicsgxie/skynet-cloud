@@ -5,6 +5,9 @@
     /// </summary>
     public interface ICachable
     {
+        /// <summary>
+        /// 内存Key
+        /// </summary>
         string CacheKey { get; }
     }
 }

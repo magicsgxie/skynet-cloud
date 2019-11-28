@@ -4,9 +4,24 @@
         <name>Skynet.Cloud.Framework</name>
     </assembly>
     <members>
+        <member name="T:UWay.Skynet.Cloud.Cache.CachingAttribute">
+            <summary>
+            内存属性设置
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Cache.CachingAttribute.AbsoluteExpiration">
             <summary>
             过期时间 秒
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Cache.CachingInterceptor">
+            <summary>
+            内存拦截器
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Cache.CachingInterceptor.CacheProvider">
+            <summary>
+            内存供应商
             </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Cache.CachingInterceptor.Invoke(AspectCore.DynamicProxy.AspectContext,AspectCore.DynamicProxy.AspectDelegate)">
@@ -64,6 +79,135 @@
             <returns>The argument value.</returns>
             <param name="arg">Argument.</param>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Cache.ICachable">
+            <summary>
+            内存接口
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Cache.ICachable.CacheKey">
+            <summary>
+            内存Key
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Cache.ICachingProvider">
+            <summary>
+            内存供应商接口
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.ICachingProvider.Get(System.String)">
+            <summary>
+            从内存中获取值
+            </summary>
+            <param name="cacheKey">Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.ICachingProvider.Get``1(System.Object)">
+            <summary>
+            从内存中获取TItem类型对象
+            </summary>
+            <typeparam name="TItem">对象类型</typeparam>
+            <param name="key">Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.ICachingProvider.GetAsync(System.String)">
+            <summary>
+            异步从内存中获取值
+            </summary>
+            <param name="cacheKey">Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.ICachingProvider.Set(System.String,System.Object)">
+            <summary>
+            添加内存
+            </summary>
+            <param name="cacheKey">Key</param>
+            <param name="cacheValue">对象</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.ICachingProvider.Set(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            添加内存
+            </summary>
+            <param name="cacheKey">Key</param>
+            <param name="cacheValue">对象</param>
+            <param name="absoluteExpirationRelativeToNow">过期时间</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.ICachingProvider.SetAsync(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            异步添加内存
+            </summary>
+            <param name="cacheKey">Key</param>
+            <param name="cacheValue">对象</param>
+            <param name="absoluteExpirationRelativeToNow">过期时间</param>
+            <returns>线程任务</returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Cache.MemoryCachingProvider">
+            <summary>
+            内存提供者
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.MemoryCachingProvider.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="cache">内存</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.MemoryCachingProvider.Get(System.String)">
+            <summary>
+            从内存中获取值
+            </summary>
+            <param name="cacheKey">Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.MemoryCachingProvider.Get``1(System.Object)">
+            <summary>
+            从内存中获取TItem类型对象
+            </summary>
+            <typeparam name="TItem">对象类型</typeparam>
+            <param name="key">Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.MemoryCachingProvider.GetAsync(System.String)">
+            <summary>
+            异步从内存中获取值
+            </summary>
+            <param name="cacheKey">Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.MemoryCachingProvider.Set(System.String,System.Object)">
+            <summary>
+            添加内存
+            </summary>
+            <param name="cacheKey">Key</param>
+            <param name="cacheValue">对象</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.MemoryCachingProvider.Set(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            添加内存
+            </summary>
+            <param name="cacheKey">Key</param>
+            <param name="cacheValue">对象</param>
+            <param name="absoluteExpirationRelativeToNow">过期时间</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.MemoryCachingProvider.SetAsync(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            异步添加内存
+            </summary>
+            <param name="cacheKey">Key</param>
+            <param name="cacheValue">对象</param>
+            <param name="absoluteExpirationRelativeToNow">过期时间</param>
+            <returns>线程任务</returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Cache.Redis.RedisClient">
+            <summary>
+            Redis客户端
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="config">Redis配置信息</param>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.GetConnect(Microsoft.Extensions.Configuration.IConfigurationSection)">
             <summary>
             获取ConnectionMultiplexer
@@ -86,6 +230,26 @@
             <param name="db">默认为0：优先代码的db配置，其次config中的配置</param>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.GetServer(System.String,System.Int32)">
+            <summary>
+            获取Redis服务器
+            </summary>
+            <param name="configName"></param>
+            <param name="endPointsIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.GetSubscriber(System.String)">
+            <summary>
+            获取订阅者
+            </summary>
+            <param name="configName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.Dispose">
+            <summary>
+            销毁函数
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Cache.Redis.RedisClientSingleton">
             <summary>
             单例
@@ -94,6 +258,16 @@
         <member name="T:UWay.Skynet.Cloud.Cache.Redis.RedisSetting">
             <summary>
             Redis JSON Setting
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Cache.Redis.RedisSetting.Connection">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Cache.Redis.RedisSetting.InstanceName">
+            <summary>
+            实例名称
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.ComponentModel.PropertyChangedEventArgs">
@@ -118,6 +292,25 @@
             <param name="propertyName"></param>
             <param name="oldValue"></param>
             <param name="newValue"></param>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Steganogram.AESCryption">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Steganogram.AESCryption.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="iv"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Steganogram.AESCryption.#ctor(System.String,System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="iv"></param>
         </member>
         <member name="M:UWay.Skynet.Cloud.Steganogram.AESCryption.#ctor(System.String)">
             <summary>
@@ -371,15 +564,60 @@
             <param name="str">要加密的字符串</param>
             <returns>加密后的十六进制的哈希散列（字符串）</returns>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Data.IAggregateRoot">
+            <summary>
+            聚合接口
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.BaseModel`1">
             <summary>
             所有数据表实体类都必须实现此接口
             </summary>
             <typeparam name="TKey"></typeparam>
         </member>
+        <member name="P:UWay.Skynet.Cloud.Data.BaseModel`1.Id">
+            <summary>
+            聚合ID
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.BaseModel`1.UniqueId">
+            <summary>
+            为一值
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.JoinType">
             <summary>
             A kind of SQL join
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.JoinType.CrossJoin">
+            <summary>
+            交叉连接
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.JoinType.InnerJoin">
+            <summary>
+            内连接
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.JoinType.CrossApply">
+            <summary>
+            Cross Apply
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.JoinType.OuterApply">
+            <summary>
+            Outer Apply
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.JoinType.LeftOuter">
+            <summary>
+            左外连接
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.JoinType.SingletonLeftOuter">
+            <summary>
+            单一左外连接
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.OrderByDirection">
@@ -387,9 +625,39 @@
             Specifies how a result set should be ordered.
             </summary>
         </member>
+        <member name="F:UWay.Skynet.Cloud.Data.OrderByDirection.Null">
+            <summary>
+            空值
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.OrderByDirection.Ascending">
+            <summary>
+            升序
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.OrderByDirection.Descending">
+            <summary>
+            降序
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.ActionType">
             <summary>
             操作日志类型
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.ActionType.Auto">
+            <summary>
+            自动记录日志
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.ActionType.Manual">
+            <summary>
+            手动记录日志
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.ActionType.BigData">
+            <summary>
+            大数据查询日志记录
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.AbstractAssociationAttribute">
@@ -412,6 +680,11 @@
         <member name="T:UWay.Skynet.Cloud.Data.AssociationAttribute">
             <summary>
             关系映射标签，支持一对多和多对一
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.AssociationAttribute.IsForeignKey">
+            <summary>
+            外键
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.AssociationType">
@@ -522,6 +795,32 @@
             列映射标签
             </summary>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ColumnAttribute.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ColumnAttribute.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">列名</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ColumnAttribute.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">列名</param>
+            <param name="comment">注释</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ColumnAttribute.#ctor(System.String,UWay.Skynet.Cloud.Data.DBType,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">列名</param>
+            <param name="dBType">数据类型</param>
+            <param name="comment">注释</param>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Data.ColumnAttribute.Name">
             <summary>
             得到或设置列名
@@ -592,6 +891,11 @@
             Description of IgnoreAttribute.
             </summary>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Data.MemberAttribute">
+            <summary>
+            成员Attribute
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Data.MemberAttribute.Storage">
             <summary>
             Gets or sets a private storage field to hold the value from a column.
@@ -611,6 +915,32 @@
             <summary>
             主键标签
             </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.IdAttribute.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.IdAttribute.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">主键名称</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.IdAttribute.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">主键名称</param>
+            <param name="commment">注释</param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.IdAttribute.#ctor(System.String,UWay.Skynet.Cloud.Data.DBType,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">主键名称</param>
+            <param name="dBType">类型</param>
+            <param name="commment">注释</param>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.IdAttribute.IsDbGenerated">
             <summary>
@@ -679,6 +1009,17 @@
             <summary>
             版本标签，该标签仅仅能够应用在实体成员的类型是短整型、整型、长整型上
             </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.VersionAttribute.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.VersionAttribute.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.DataRowExtensions">
             <summary>
@@ -793,6 +1134,91 @@
             <typeparam name="T">entity</typeparam>
             <param name="reader">data reader</param>
             <returns>entity</returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.DbColumnDataType">
+            <summary>
+            列数据类型
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.DbColumnDataType.DatabaseType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.DbColumnDataType.ColumnTypes">
+            <summary>
+            列类型
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.DbColumnDataType.CSharpType">
+            <summary>
+            CSharp类型
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.DatabaseType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.MSSQL">
+            <summary>
+            MSSQL
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.MySQL">
+            <summary>
+            MySQL
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.PostgreSQL">
+            <summary>
+            PostgreSQL
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.SQLite">
+            <summary>
+            SQLite
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.InMemory">
+            <summary>
+            InMemory
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.Oracle">
+            <summary>
+            Oracle
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.MariaDB">
+            <summary>
+            MariaDB
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.MyCat">
+            <summary>
+            MyCat
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.Firebird">
+            <summary>
+            Firebird
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.DB2">
+            <summary>
+            DB2
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.DatabaseType.Access">
+            <summary>
+            Access
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.DbColumnTypeCollection">
+            <summary>
+            数据库列类型列表
+            </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.DataReaderExtensions">
             <summary>
@@ -1106,6 +1532,60 @@
             公共厂家代码
             </summary>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Data.ExcutedResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.ExcutedResult.success">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.ExcutedResult.msg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.ExcutedResult.rows">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ExcutedResult.#ctor(System.Boolean,System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="success"></param>
+            <param name="msg"></param>
+            <param name="rows"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ExcutedResult.SuccessResult(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ExcutedResult.SuccessResult(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="rows"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ExcutedResult.FailedResult(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.PaginationResult">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Data.PaginationResult.total">
             <summary>
             总条数
@@ -1124,6 +1604,39 @@
         <member name="P:UWay.Skynet.Cloud.Data.PaginationResult.pageCount">
             <summary>
             总页数
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.PaginationResult.#ctor(System.Boolean,System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="success"></param>
+            <param name="msg"></param>
+            <param name="rows"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.PaginationResult.PagedResult(System.Object,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="rows"></param>
+            <param name="total"></param>
+            <param name="size"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.Pair">
+            <summary>
+            存储两个int的对象
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Pair.First">
+            <summary>
+            第一个int
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Pair.Second">
+            <summary>
+            第二个int
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.Pair`2">
@@ -1197,6 +1710,98 @@
             将对象转化为对应的字符串显示
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.Pairs`2">
+            <summary>
+            存储两个对象列表
+            </summary>
+            <typeparam name="F">第一个对象</typeparam>
+            <typeparam name="S">第二个对象</typeparam>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.Triplets`3">
+            <summary>
+            三个对象列表
+            </summary>
+            <typeparam name="F">第一个对象</typeparam>
+            <typeparam name="S">第二个对象</typeparam>
+            <typeparam name="T">第三个对象</typeparam>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Triplets`3.IndexOf(UWay.Skynet.Cloud.Data.Triplet{`0,`1,`2})">
+            <summary>
+            查找对象
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Triplets`3.Insert(System.Int32,UWay.Skynet.Cloud.Data.Triplet{`0,`1,`2})">
+            <summary>
+            插入对象
+            </summary>
+            <param name="index"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Triplets`3.RemoveAt(System.Int32)">
+            <summary>
+            移除对象
+            </summary>
+            <param name="index">索引</param>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Triplets`3.Item(System.Int32)">
+            <summary>
+            对象索引
+            </summary>
+            <param name="index">索引值</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Triplets`3.Add(UWay.Skynet.Cloud.Data.Triplet{`0,`1,`2})">
+            <summary>
+            添加对象
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Triplets`3.Clear">
+            <summary>
+            清除所有对象
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Triplets`3.Contains(UWay.Skynet.Cloud.Data.Triplet{`0,`1,`2})">
+            <summary>
+            是否包含对象
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Triplets`3.CopyTo(UWay.Skynet.Cloud.Data.Triplet{`0,`1,`2}[],System.Int32)">
+            <summary>
+            复制对象
+            </summary>
+            <param name="array">对象数组</param>
+            <param name="arrayIndex">复制索引</param>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Triplets`3.Count">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Triplets`3.IsReadOnly">
+            <summary>
+            是否只读
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Triplets`3.Remove(UWay.Skynet.Cloud.Data.Triplet{`0,`1,`2})">
+            <summary>
+            移除对象
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Triplets`3.Add(`0,`1,`2)">
+            <summary>
+            添加对象
+            </summary>
+            <param name="f">第一个对象</param>
+            <param name="s">第二个对象</param>
+            <param name="t">第三个对象</param>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.CaseClause">
             <summary>
@@ -1399,6 +2004,16 @@
         </member>
         <member name="F:UWay.Skynet.Cloud.Data.CompareOperator.Like">
             <summary>Substring. Use '%' signs in the value to match anything</summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.CompareOperator.IsNull">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.CompareOperator.IsNotNull">
+            <summary>
+            非空
+            </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.DeleteQuery">
             <summary>
@@ -1998,6 +2613,35 @@
             Represnts a Join between two tables.
             </summary>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Join.#ctor(UWay.Skynet.Cloud.Data.FromTerm,UWay.Skynet.Cloud.Data.FromTerm,UWay.Skynet.Cloud.Data.WhereClause,UWay.Skynet.Cloud.Data.JoinType)">
+            <summary>
+            
+            </summary>
+            <param name="leftTable"></param>
+            <param name="rightTable"></param>
+            <param name="conditions"></param>
+            <param name="type"></param>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Join.LeftTable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Join.Conditions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Join.RightTable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Join.Type">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.JoinCollection">
             <summary>
               A collection that stores <see cref='T:UWay.Skynet.Cloud.Data.Join'/> objects.
@@ -2163,7 +2807,7 @@
             <summary>
             Creates a Natural JoinCondition
             </summary>
-            <param name="OtherData">Name of the OtherData in both tables</param>
+            <param name="field">Name of the OtherData in both tables</param>
             <remarks>
             Natural join means that two table are joined on an identically named fields
             in both tables
@@ -2198,7 +2842,7 @@
             <summary>
             Creates an ORDER BY term with OtherData name and table alias
             </summary>
-            <param name="OtherData">Name of a OtherData to order by</param>
+            <param name="field">Name of a OtherData to order by</param>
             <param name="table">The table this OtherData belongs to</param>
             <param name="dir">Order by direction</param>
         </member>
@@ -2206,14 +2850,14 @@
             <summary>
             Creates an ORDER BY term with OtherData name and no table alias
             </summary>
-            <param name="OtherData">Name of a OtherData to order by</param>
+            <param name="field">Name of a OtherData to order by</param>
             <param name="dir">Order by direction</param>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.OrderByTerm.#ctor(UWay.Skynet.Cloud.Data.SqlExpression,UWay.Skynet.Cloud.Data.OrderByDirection)">
             <summary>
             Creates an ORDER BY term with OtherData name and no table alias
             </summary>
-            <param name="OtherData">Name of a OtherData to order by</param>
+            <param name="expr">sql expression</param>
             <param name="dir">Order by direction</param>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.OrderByTerm.Direction">
@@ -2391,6 +3035,11 @@
             All renderers must return a string as their rendering result.
             </remarks>
         </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Render.ISqlOmRenderer.NamedParameters">
+            <summary>
+            参数列表
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Data.Render.ISqlOmRenderer.DateFormat">
             <summary>
             Sets or returns default date format for the database
@@ -2488,6 +3137,11 @@
             This version of Sql.Net has been tested with MySql 4
             </remarks>
         </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Render.MySqlRenderer.PrefixNamed">
+            <summary>
+            前缀
+            </summary>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Data.Render.MySqlRenderer.#ctor">
             <summary>
             Creates a new MySqlRenderer
@@ -2532,6 +3186,24 @@
             Parameter <paramref name="totalRowCount"/> is ignored.
             </remarks>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Render.MySqlRenderer.QueryTable">
+            <summary>
+            查询所有表信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Render.MySqlRenderer.QueryTableByTableName">
+            <summary>
+            单个查询表结构
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Render.MySqlRenderer.QueryTableColumns">
+            <summary>
+            查询表结构
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.Render.OracleRenderer">
             <summary>
             Renderer for Oracle
@@ -2540,6 +3212,11 @@
             Use OracleRenderer to render SQL statements for Oracle database.
             This version of Sql.Net has been tested with Oracle 9i.
             </remarks>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Render.OracleRenderer.PrefixNamed">
+            <summary>
+            前缀
+            </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.Render.OracleRenderer.#ctor">
             <summary>
@@ -2590,9 +3267,32 @@
             <param name="builder"></param>
             <param name="term"></param>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Render.OracleRenderer.QueryTable">
+            <summary>
+            查询所有表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Render.OracleRenderer.QueryTableByTableName">
+            <summary>
+            查询单表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Render.OracleRenderer.QueryTableColumns">
+            <summary>
+            查询表结构
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.Render.SqlOmRenderer">
             <summary>
             Provides common implementation for ISqlOmRenderer
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Render.SqlOmRenderer.PrefixNamed">
+            <summary>
+            前缀
             </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.Render.SqlOmRenderer.#ctor(System.Char,System.Char)">
@@ -2643,6 +3343,11 @@
         <member name="P:UWay.Skynet.Cloud.Data.Render.SqlOmRenderer.UpperCaseIdentifiers">
             <summary>
             Specifies weather all identifiers should be converted to upper case while rendering
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.Render.SqlOmRenderer.NamedParameters">
+            <summary>
+            前缀
             </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.Render.SqlOmRenderer.RenderUpdate(UWay.Skynet.Cloud.Data.UpdateQuery)">
@@ -2792,8 +3497,7 @@
             Renders a SqlExpression of type Function 
             </summary>
             <param name="builder"></param>
-            <param name="func"></param>
-            <param name="param"></param>
+            <param name="expr"></param>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.Render.SqlOmRenderer.Expression(System.Text.StringBuilder,UWay.Skynet.Cloud.Data.SqlExpression)">
             <summary>
@@ -3065,6 +3769,24 @@
             Renders a SQL statement which returns a result set with one row and one cell which contains the number of rows <paramref name="query"/> can generate. 
             The generated statement will work nicely with <see cref="M:System.Data.IDbCommand.ExecuteScalar"/> method.
             </remarks>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Render.SqlServerRenderer.QueryTable">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Render.SqlServerRenderer.QueryTableByTableName">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.Render.SqlServerRenderer.QueryTableColumns">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.Reporting.PivotTableException">
             <summary>
@@ -3758,6 +4480,16 @@
             Gets the column alias for this SelectColumn
             </summary>
         </member>
+        <member name="P:UWay.Skynet.Cloud.Data.SelectColumn.Expression">
+            <summary>
+            Sql Expression
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.SelectColumn.Table">
+            <summary>
+            表
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Data.SelectColumnCollection">
             <summary>
             A collection of elements of type SelectColumn
@@ -3942,6 +4674,66 @@
             	...
              </code>
             </example>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.columns">
+            <summary>
+            查询列
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.wherePhrase">
+            <summary>
+            查询条件
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.havingPhrase">
+            <summary>
+            跟组条件
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.fromClause">
+            <summary>
+            查询表
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.orderByTerms">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.groupByTerms">
+            <summary>
+            group By Terms
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.top">
+            <summary>
+            TOP N
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.groupByWithRollup">
+            <summary>
+            group By With Rollup
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.groupByWithCube">
+            <summary>
+            group By With Cube
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.distinct">
+            <summary>
+            distinct
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.tableSpace">
+            <summary>
+            table Space
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SelectQuery.indexHints">
+            <summary>
+            index Hints
+            </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.SelectQuery.#ctor">
             <summary>
@@ -4156,9 +4948,8 @@
             </summary>
             <remarks>
             The type of SqlConstant items in the collection is determined automatically.
-            See <see cref="M:UWay.Skynet.Cloud.Data.SqlConstantCollection.Add(System.Object)"/> method for more info.
             </remarks>
-            <param name="values"></param>
+            <param name="values">值</param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.SqlConstantCollection.Add(System.Object)">
@@ -4313,6 +5104,11 @@
             </code>
             </example>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Data.SqlExpression.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Data.SqlExpression.Number(System.Double)">
             <summary>
             Creates a SqlExpression which represents a numeric value.
@@ -4457,6 +5253,31 @@
         <member name="T:UWay.Skynet.Cloud.Data.SqlExpressionType">
             <summary>
             Describes the type of a <see cref="T:UWay.Skynet.Cloud.Data.SqlExpression"/>
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.SqlRenderType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SqlRenderType.Oracle">
+            <summary>
+            Oracle
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SqlRenderType.MySql">
+            <summary>
+            Mysql
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Data.SqlRenderType.SqlServer">
+            <summary>
+            MSSQL
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.SqlRenderFactories">
+            <summary>
+            Sql生成工厂
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.SqlUnion">
@@ -4727,6 +5548,11 @@
             ...
             </code>
             </example>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.WhereClause.#ctor">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Data.WhereClause.#ctor(UWay.Skynet.Cloud.Linq.FilterCompositionLogicalOperator)">
             <summary>
@@ -6032,16 +6858,84 @@
             源自：https://gitee.com/yubaolee/OpenAuth.Net/blob/bestflow/Infrastructure/DynamicLinq.cs
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.GetPropertyName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})" -->
+        <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.GetPropertyName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            取的 表达式对应的属性名称<![CDATA[Expression<Func<T,TProperty>> predicate
+                   例如：c=>c.Value.Year 侧返回：Value.Year]]>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.CreateLambdaParam``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.GenerateBody``1(System.Linq.Expressions.ParameterExpression,UWay.Skynet.Cloud.Extensions.Filter)">
             <summary>
             创建linq表达示的body部分
             </summary>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.GenerateTypeBody``1(System.Linq.Expressions.ParameterExpression,UWay.Skynet.Cloud.Extensions.Filter)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="param"></param>
+            <param name="filterObj"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.GenerateLambda(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression)">
             <summary>
             创建完整的lambda
             </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.GenerateTypeLambda``1(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="param"></param>
+            <param name="body"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.AndAlso(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="expressionRight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.Or(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="expressionRight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.And(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="expressionRight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.GenerateFilter``1(System.Linq.IQueryable{``0},System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="filterjson"></param>
+            <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.ExpressionExtensions.Compose``1(System.Linq.Expressions.Expression{``0},System.Linq.Expressions.Expression{``0},System.Func{System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression})">
             <summary>
@@ -6099,6 +6993,26 @@
             <returns>
             如果修改了该表达式或任何子表达式，则为修改后的表达式；否则返回原始表达式。
             </returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Extensions.Filter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Extensions.Filter.Key">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Extensions.Filter.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Extensions.Filter.Contrast">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Extensions.GenericExtension">
             <summary>
@@ -6173,11 +7087,26 @@
             <typeparam name="TIn">目标对象</typeparam>
             <typeparam name="TOut">输出对象</typeparam>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Extensions.ObjectExtension">
+            <summary>
+            对象扩展
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ObjectExtension.HasProperty``1(``0,System.String)">
+            <summary>
+            是否有属性
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.ObjectExtension.GetPropertyValue``2(``0,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
             <summary>
                 取得对象指定属性的值
             </summary>
             <param name="predicate">要取值的属性</param>
+            <param name="obj">要取值的属性</param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.ObjectExtension.GetPropertyValue``1(``0,System.String)">
@@ -6192,6 +7121,7 @@
             <summary>
                 设置对象指定属性的值
             </summary>
+            <param name="obj">对象</param>
             <param name="predicate">要设置值的属性</param>
             <param name="value">设置值</param>
             <returns>是否设置成功</returns>
@@ -6222,7 +7152,14 @@
             <param name="dt"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Extensions.ObjectExtension.ChangeType(System.Object,System.Type)" -->
+        <member name="M:UWay.Skynet.Cloud.Extensions.ObjectExtension.ChangeType(System.Object,System.Type)">
+            <summary>
+            类型转换（包含Nullable&lt;&gt;和非Nullable&lt;&gt;转换）
+            </summary>
+            <param name="value"></param>
+            <param name="conversionType"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.ObjectExtension.ToDataSet(System.Collections.IEnumerable,System.Boolean)">
             <summary>
             将集合转换为数据集。
@@ -6356,6 +7293,20 @@
             <param name="o">object。</param>
             <param name="t">默认值。</param>
             <returns>byte。</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ObjectExtension.ToBytes(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ObjectExtension.ToObject(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.ObjectExtension.ToChar(System.Object,System.Char)">
             <summary>
@@ -6665,6 +7616,13 @@
             <param name="email"></param>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ObjectExtension.IsTask(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Extensions.ServiceExtension">
             <summary>
             IServiceCollection扩展
@@ -6682,6 +7640,29 @@
             <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddScopedAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            添加Assembly
+            </summary>
+            <param name="service"></param>
+            <param name="interfaceAssemblyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddScopServiceAssmbly(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddSingletonAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            添加单例Assembly
+            </summary>
+            <param name="service"></param>
+            <param name="interfaceAssemblyName"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddScopedAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
             <summary>
             用DI批量注入接口程序集中对应的实现类。
@@ -6689,6 +7670,32 @@
             <param name="service"></param>
             <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
             <param name="implementAssemblyName">实现程序集的名称（不包含文件扩展名）</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddTransientAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+            <param name="interfaceAssemblyName"></param>
+            <param name="implementAssemblyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddSingletonAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+            <param name="interfaceAssemblyName"></param>
+            <param name="implementAssemblyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.RegisterControllers(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+            <param name="controllerAssemblyName"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.UseCsRedisClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String[])">
@@ -6706,9 +7713,166 @@
             </param>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAutofacServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAspectCoreWithAutofacServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAspectCoreServiceContainer(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAspectCoreServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Extensions.StringExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ParseTo(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="str"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToSByte(System.String)">
+            <summary>
+            字符串转化为sbyte
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToByte(System.String)">
+            <summary>
+            字符串转化为byte
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToUInt16(System.String)">
+            <summary>
+            字符串转化为UInt16
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToInt16(System.String)">
+            <summary>
+            字符串转化为Int16
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToUInt32(System.String)">
+            <summary>
+            字符串转化为UInt32
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToUInt64(System.String)">
+            <summary>
+            字符串转化为UInt64
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToInt64(System.String)">
+            <summary>
+            字符串转化为Int64
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToNullInt64(System.String)">
+            <summary>
+            字符串转化为Int64
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToSingle(System.String)">
+            <summary>
+            字符串转化为float
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToDouble(System.String)">
+            <summary>
+            字符串转化为double
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToDecimal(System.String)">
+            <summary>
+            字符串转化为decimal
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToBoolean(System.String)">
+            <summary>
+            字符串转化为Boolean
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToEnum``1(System.String)">
+            <summary>
+            字符串转化为枚举类型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToGuid(System.String)">
+            <summary>
+            字符串转化为Guid
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToDateTime(System.String)">
+            <summary>
+            字符串转化为时间
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToInt32(System.String)">
+            <summary>
+            字符串转化为int
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ReplaceWhitespace(System.String,System.String)">
             <summary>
-                替换空格字符
+            替换空格字符
             </summary>
             <param name="input"></param>
             <param name="replacement">替换为该字符</param>
@@ -6725,16 +7889,42 @@
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.StripHtml(System.String,System.Int32)">
             <summary>
-                清除 Html 代码，并返回指定长度的文本。(连续空行或空格会被替换为一个)
+             清除 Html 代码，并返回指定长度的文本。(连续空行或空格会被替换为一个)
             </summary>
             <param name="text"></param>
             <param name="maxLength">返回的文本长度（为0返回所有文本）</param>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.StringExtensions.ToPascalCase(System.String)">
+            <summary>
+            字符串转化为驼峰格式
+            </summary>
+            <param name="original"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Extensions.XmlNodeExtensions">
+            <summary>
+            Xml节点扩展函数
+            </summary>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.XmlNodeExtensions.ChildElementInnerText(System.Xml.XmlNode,System.String)">
             <exception cref="T:System.ArgumentException">
             Child element with name specified by <paramref name="childName"/> does not exists.
             </exception>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Extensions.XmlExtensions">
+            <summary>
+            XML拓展
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.XmlExtensions.GetAttributeValue``1(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            获取XML中元素属性值
+            </summary>
+            <typeparam name="T">属性类型</typeparam>
+            <param name="e">XML内容</param>
+            <param name="name">元素名称</param>
+            <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.XmlExtensions.IsXml(System.String)">
             <summary>
@@ -6770,7 +7960,7 @@
             <summary>
             取得指定ID下的结点内容
             </summary>
-            <param name="ADoc">XML文档内容InnerText</param>
+            <param name="AXml">XML文档内容InnerText</param>
             <param name="AID">结点ID</param>
             <returns></returns>
         </member>
@@ -6787,7 +7977,7 @@
             取得指定Name下的结点内容
             </summary>
             <param name="AXml">XML文档内容InnerText</param>
-            <param name="AId">结点Name</param>
+            <param name="AName">结点Name</param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.XmlExtensions.GetInnerTextByName(System.Xml.XmlDocument,System.String)">
@@ -6795,7 +7985,7 @@
             取得指定Name下的结点内容
             </summary>
             <param name="ADoc">文档对象</param>
-            <param name="AId">结点Name</param>
+            <param name="AName">结点Name</param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.XmlExtensions.GetInnerTextByTagName(System.String,System.String)">
@@ -6803,7 +7993,7 @@
             取得指定TagName下的结点内容
             </summary>
             <param name="AXml">XML文档内容InnerText</param>
-            <param name="AId">结点TagName</param>
+            <param name="ATagName">结点TagName</param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.XmlExtensions.GetInnerTextByTagName(System.Xml.XmlDocument,System.String)">
@@ -6811,7 +8001,7 @@
             取得指定TagName下的结点内容，如果有多个只取第一个
             </summary>
             <param name="ADoc">文档对象</param>
-            <param name="AId">结点TagName</param>
+            <param name="ATagName">结点TagName</param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Extensions.XmlExtensions.GetElementByAttributeName(System.Xml.XmlElement,System.String,System.String)">
@@ -6827,6 +8017,18 @@
             <summary>
             <see cref="T:UWay.Skynet.Cloud.FileHandling.IFileHandler"/>文件存储实现
             </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.FileHandling.FileHandler.RootPath">
+            <summary>
+            根路径
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{UWay.Skynet.Cloud.FileHandling.FileHandler})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.SaveFile(System.String,System.String,System.Boolean)">
             <summary>
@@ -6854,6 +8056,14 @@
             <param name="name">文件名称</param>
             <returns>文件流</returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.OpenFile(System.String,System.IO.FileMode)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.GetFileInformation(System.String)">
             <summary>
             获取文件信息
@@ -6861,11 +8071,43 @@
             <param name="name">文件名称</param>
             <returns>文件信息</returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.GetRootPath(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            获取根路径
+            </summary>
+            <param name="root"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.Remove(System.String)">
             <summary>
             移除一个文件
             </summary>
             <param name="name">文件名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.GetAbsolutePath(System.String,System.String,System.Boolean,System.String@)">
+            <summary>
+            获取绝对路径
+            </summary>
+            <param name="fileName"></param>
+            <param name="folder"></param>
+            <param name="rename"></param>
+            <param name="newFileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.GetFileExtendName(System.String)">
+            <summary>
+            获取扩展名
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.Rename(System.String,System.String)">
+            <summary>
+            重命名
+            </summary>
+            <param name="oldFileName"></param>
+            <param name="newFileName"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.GetAllFiles(System.String)">
@@ -6875,12 +8117,44 @@
             <param name="path"></param>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.Append(System.IO.Stream,System.Byte[])">
+            <summary>
+            追加
+            </summary>
+            <param name="stream"></param>
+            <param name="buffer"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.Zip(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            压缩
+            </summary>
+            <param name="fileName"></param>
+            <param name="subfolder"></param>
+            <param name="compressOrginalPaths"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.UnZip(System.String,System.String)">
             <summary>
             解压zip
             </summary>
             <param name="compressfilepath"></param>
             <param name="uncompressdir"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.AddFile(System.String,System.String,System.String)">
+            <summary>
+            添加文档
+            </summary>
+            <param name="name"></param>
+            <param name="folder"></param>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.Zip(System.String,System.String)">
+            <summary>
+            压缩文档
+            </summary>
+            <param name="fileName"></param>
+            <param name="directory"></param>
         </member>
         <member name="T:UWay.Skynet.Cloud.FileHandling.FileInfomation">
             <summary>
@@ -6922,9 +8196,18 @@
             文件管理接口
             </summary>
         </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.IFileHandler.AddFile(System.String,System.String,System.String)">
+            <summary>
+            添加文件
+            </summary>
+            <param name="fileName"></param>
+            <param name="folder"></param>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.FileHandling.IFileHandler.SaveFile(System.String,System.String,System.Boolean)">
             <summary>
-            
+            保存文件
             </summary>
             <param name="file">文件名称</param>
             <param name="rename">是否重命名</param>
@@ -6991,6 +8274,29 @@
             </summary>
             <param name="path"></param>
             <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.IFileHandler.Zip(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            压缩文件
+            </summary>
+            <param name="fileName">文件名称</param>
+            <param name="subfolder">子文件夹</param>
+            <param name="compressOrginalPaths"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.IFileHandler.Zip(System.String,System.String)">
+            <summary>
+            压缩文件
+            </summary>
+            <param name="fileName"></param>
+            <param name="directory"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.FileHandling.IFileHandler.UnZip(System.String,System.String)">
+            <summary>
+            解压文件
+            </summary>
+            <param name="compressfilepath"></param>
+            <param name="uncompressdir"></param>
         </member>
         <member name="T:UWay.Skynet.Cloud.Guard">
             <summary>
@@ -7067,6 +8373,12 @@
             构造函数
             </summary>
             <param name="enumerable"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.EnumerateOnce`1.GetEnumerator">
+            <summary>
+            获取循环器
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.GenericEnumerable`1">
             <summary>
@@ -7177,6 +8489,14 @@
             </summary>
             <param name="text"></param>
             <param name="c"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helper.ToCondition(System.Collections.Generic.IList{UWay.Skynet.Cloud.Linq.IFilterDescriptor},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            条件转换
+            </summary>
+            <param name="filters">条件</param>
+            <param name="paramaters">参数</param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helper.ToSort(System.Collections.Generic.IList{UWay.Skynet.Cloud.Linq.SortDescriptor})">
@@ -7611,12 +8931,31 @@
             <param name="parts"></param>
             <param name="action"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:UWay.Skynet.Cloud.Helper.DivvyUp``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Action{System.Collections.Generic.IEnumerable{``0}})" -->
+        <member name="M:UWay.Skynet.Cloud.Helper.DivvyUp``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Action{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            接口的扩展方法（可枚举对象的扩展方法）
+            Divides an enumerable into equal parts and performs an action on those parts
+            </summary>
+            <typeparam name="T">
+            ?KeyValuePair&lt;   T3,List&lt;T4&gt;&gt;?
+            </typeparam>
+            <param name="enumerable">可枚举对象</param>
+            <param name="parts">均分数</param>
+            <param name="action">执行方法</param>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Helper.JsonSerialize(System.Object)">
             <summary>
             JSON序列化
             </summary>
             <param name="val">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helper.GetPropValue(System.String,System.String)">
+            <summary>
+            获取JSON的属性值
+            </summary>
+            <param name="json"></param>
+            <param name="prop"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helper.JsonDeserialize(System.String)">
@@ -7693,7 +9032,7 @@
             遍历当前对象，并且调用方法进行处理
             </summary>
             <typeparam name="T">类型</typeparam>
-            <param name="instance">实例</param>
+            <param name="coll">实例</param>
             <param name="action">方法</param>
             <returns>当前集合</returns>
         </member>
@@ -7821,6 +9160,44 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Helpers.CacheKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.#ctor(System.Reflection.MethodInfo,System.Reflection.ParameterInfo[],System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="method"></param>
+            <param name="arguments"></param>
+            <param name="values"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.GetRedisCacheKey">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.GetMemoryCacheKey">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.CommonHelper.NewMongodbId">
             <summary>
             生成类似Mongodb的ObjectId有序、不重复Guid
@@ -7841,12 +9218,52 @@
             <param name="type"></param>
             <returns></returns>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Helpers.ConfigHelper">
+            <summary>
+            配置信息获取
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.ConfigHelper.GetSection(System.String)">
+            <summary>
+            配置节点获取
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.ConfigHelper.GetConfigurationValue(System.String)">
+            <summary>
+            获取配置节点值
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.ConfigHelper.GetConfigurationValue(System.String,System.String)">
+            <summary>
+            获取指定节点下的配置信息值
+            </summary>
+            <param name="section"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.ConfigHelper.GetConnectionString(System.String)">
+            <summary>
+            获取连接字符串
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Helpers.HttpRequestHelper">
+            <summary>
+            Http请求扩展类
+            </summary>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.HttpRequestHelper.HttpGet(System.String,System.Text.Encoding,System.Int32)">
             <summary>
             使用Get方法获取字符串结果（加入Cookie）
             </summary>
             <param name="url"></param>
             <param name="encoding"></param>
+            <param name="timeOut"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.HttpRequestHelper.HttpPost(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Text.Encoding,System.Int32,System.Collections.Generic.Dictionary{System.String,System.String})">
@@ -7862,6 +9279,7 @@
             <param name="url"></param>
             <param name="postData"></param>
             <param name="encoding"></param>
+            <param name="headers"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.HttpRequestHelper.HttpPost(System.String,System.Object,System.Text.Encoding,System.Collections.Generic.Dictionary{System.String,System.String})">
@@ -7871,6 +9289,7 @@
             <param name="url"></param>
             <param name="dataObj">传输对象，转换为JSON传输</param>
             <param name="encoding"></param>
+            <param name="headers"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.HttpRequestHelper.HttpPost(System.String,System.IO.Stream,System.String,System.Text.Encoding,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32)">
@@ -7881,8 +9300,16 @@
             <param name="postStream"></param>
             <param name="contentType"></param>
             <param name="encoding"></param>
+            <param name="headers"></param>
             <param name="timeOut"></param>
             <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.HttpRequestHelper.FillFormDataStream(System.Collections.Generic.Dictionary{System.String,System.String},System.IO.Stream)">
+            <summary>
+            获取FormData
+            </summary>
+            <param name="formData"></param>
+            <param name="stream"></param>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.HttpRequestHelper.GetQueryString(System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
@@ -7896,6 +9323,49 @@
             <summary>
             json serialization and deserialization, using Jil.
             </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Serialize(System.Object,Jil.Options)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Serialize``1(``0,Jil.Options)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Deserialize``1(System.String,Jil.Options)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Deserialize(System.String,System.Type,Jil.Options)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="destinationType"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Deserialize(System.String,Jil.Options)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="options"></param>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Helpers.Log4NetHelper">
             <summary>
@@ -8035,9 +9505,48 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetAssembly(System.String)">
+            <summary>
+            获取Assmbly
+            </summary>
+            <param name="assemblyName">Assembly name</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetServicesAssembly">
+            <summary>
+            获取Service 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetAllTypes">
+            <summary>
+            获取所有类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetTypesByAssembly(System.String)">
+            <summary>
+            获取所有类型
+            </summary>
+            <param name="assemblyName">Assembly</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetImplementType(System.String,System.Type)">
+            <summary>
+            获取实现类
+            </summary>
+            <param name="typeName"></param>
+            <param name="baseInterfaceType"></param>
+            <returns></returns>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Helpers.ServiceLocator">
             <summary>
             .Net Core自带的DI辅助类
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.ServiceLocator.#cctor">
+            <summary>
+            静态构造函数
             </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.ServiceLocator.CreateServiceBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
@@ -8047,10 +9556,47 @@
             <param name="services"></param>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.ServiceLocator.GetServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            获取Service Provider
+            </summary>
+            <param name="container"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Helpers.ServiceLocator.GetInstance``1(System.IServiceProvider)">
+            <summary>
+            获取实例
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="provider"></param>
+            <returns></returns>
+        </member>
         <member name="T:UWay.Skynet.Cloud.IoC.AspectCoreContainer">
             <summary>
             IoC容器初始化
             </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.AspectCoreContainer.BuildServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
+            <summary>
+            构建Ioc容器
+            </summary>
+            <param name="services"></param>
+            <param name="configure"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.AspectCoreContainer.Resolve``1">
+            <summary>
+            获取实例
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.AspectCoreContainer.ResolveServices``1">
+            <summary>
+            获取Service 实例
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.IoC.AutofacContainer">
             <summary>
@@ -8102,6 +9648,29 @@
             <typeparam name="T">类型</typeparam>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.AutofacContainer.Resolve``1(Autofac.Core.Parameter[])">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.AutofacContainer.Resolve(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="targetType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.AutofacContainer.Resolve(System.Type,Autofac.Core.Parameter[])">
+            <summary>
+            
+            </summary>
+            <param name="targetType"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
         <member name="T:UWay.Skynet.Cloud.IoC.ServiceLocator">
             <summary>
             服务查询类
@@ -8111,6 +9680,98 @@
             <summary>
             当前容器
             </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.ServiceLocator.GetService``1">
+            <summary>
+            获取服务
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.ServiceLocator.IsRegistered``1">
+            <summary>
+            是否注册
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.ServiceLocator.IsRegistered``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.ServiceLocator.IsRegistered(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.ServiceLocator.IsRegisteredWithKey(System.String,System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.ServiceLocator.GetService``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.ServiceLocator.GetService(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.IoC.ServiceLocator.GetService(System.String,System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.AggregateDescriptor">
+            <summary>
+            聚合
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.AggregateDescriptor.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.AggregateDescriptor.Aggregates">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.AggregateDescriptor.Member">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.AggregateDescriptor.Deserialize(System.String)">
+            <summary>
+            反序列
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.AggregateDescriptor.Serialize">
+            <summary>
+            序列化
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Linq.CompositeFilterDescriptor">
             <summary>
@@ -8136,6 +9797,56 @@
             </summary>
             <param name="parameterExpression">The parameter expression, which will be used for filtering.</param>
             <returns>A predicate filter expression.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.CompositeFilterDescriptor.Serialize(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.CompositeFilterDescriptor.CreateFilter(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            创建过滤条件
+            </summary>
+            <param name="dictionary"></param>
+            <returns></returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.CompoundKey">
+            <summary>
+            组合键
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.CompoundKey.#ctor(System.Object[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="values"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.CompoundKey.GetHashCode">
+            <summary>
+            Hash code
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.CompoundKey.Equals(System.Object)">
+            <summary>
+            比较
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.CompoundKey.Equals(UWay.Skynet.Cloud.Linq.CompoundKey)">
+            <summary>
+            比较
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.CompoundKey.GetEnumerator">
+            <summary>
+            虚幻
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.DefaultExpressionExpressions.GetDefaultExpression(System.Type)">
             <summary>
@@ -8278,6 +9989,26 @@
             <param name="binarySeparator"></param>
             <returns></returns>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.FilterCompositionLogicalOperator">
+            <summary>
+            逻辑与或
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterCompositionLogicalOperator.Null">
+            <summary>
+            无
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterCompositionLogicalOperator.And">
+            <summary>
+            与
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterCompositionLogicalOperator.Or">
+            <summary>
+            或
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Linq.FilterDescriptor">
             <summary>
             Represents declarative filtering.
@@ -8295,6 +10026,11 @@
             <param name="member">The member.</param>
             <param name="filterOperator">The filter operator.</param>
             <param name="filterValue">The filter value.</param>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.FilterDescriptor.ConvertedValue">
+            <summary>
+            转化值
+            </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Linq.FilterDescriptor.Member">
             <summary>
@@ -8355,6 +10091,19 @@
             A hash code for the current filter descriptor.
             </returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.FilterDescriptor.Serialize(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            序列化
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.FilterDescriptor.CreateFilter(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            创建过滤
+            </summary>
+            <param name="dictionary"></param>
+            <returns></returns>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Linq.FilterDescriptorBase">
             <summary>
             Base class for all <see cref="T:UWay.Skynet.Cloud.Linq.IFilterDescriptor"/> used for 
@@ -8377,6 +10126,19 @@
             </summary>
             <param name="parameterExpression">The parameter expression, which will be used for filtering.</param>
             <returns>A predicate filter expression.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.FilterDescriptorBase.Serialize(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            序列
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.FilterDescriptorBase.CreateFilter(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            创建条件
+            </summary>
+            <param name="dictionary"></param>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Linq.FilterDescriptorCollection">
             <summary>
@@ -8448,6 +10210,72 @@
             Left operand must not contain the right one.
             </summary>
         </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterOperator.IsNotStartsWith">
+            <summary>
+            开头不包括
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterOperator.IsNotEndsWith">
+            <summary>
+            结尾不包括
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterOperator.IsNull">
+            <summary>
+            为空
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterOperator.IsNotNull">
+            <summary>
+            非空
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterOperator.NotIn">
+            <summary>
+            不在列表中
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterOperator.DateTimeLessThanOrEqual">
+            <summary>
+            日期小于等于
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Linq.FilterOperator.DateBlock">
+            <summary>
+            Date Block
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.FilterOperatorHelper">
+            <summary>
+            Filter Operator扩展
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.FilterOperatorHelper.Where(UWay.Skynet.Cloud.Linq.FilterOperator,System.String,System.Object)">
+            <summary>
+            转化SQL条件
+            </summary>
+            <param name="filterOperator"></param>
+            <param name="fieldName"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.FilterOperatorHelper.Where(UWay.Skynet.Cloud.Linq.FilterOperator,System.String,System.String,System.Object)">
+            <summary>
+            转化SQL条件
+            </summary>
+            <param name="filterOperator"></param>
+            <param name="prefix"></param>
+            <param name="fieldName"></param>
+            <param name="paramName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.FilterOperatorHelper.SqlOperator(UWay.Skynet.Cloud.Linq.FilterOperator)">
+            <summary>
+            转化SQL字符
+            </summary>
+            <param name="filterOperator"></param>
+            <returns></returns>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Linq.GroupDescriptor">
             <summary>
             Represents grouping criteria.
@@ -8477,6 +10305,23 @@
             <summary>
             Changes the <see cref="T:UWay.Skynet.Cloud.Linq.SortDescriptor"/> to the next logical value.
             </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.IDescriptor">
+            <summary>
+            序列实体
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.IDescriptor.Deserialize(System.String)">
+            <summary>
+            反序列
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.IDescriptor.Serialize">
+            <summary>
+            序列
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.IFilterDescriptor.CreateFilterExpression(System.Linq.Expressions.Expression)">
             <summary>
@@ -8510,12 +10355,22 @@
             空置节点 的摘要说明
             </summary>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.Impl.Grouping.AggregateFunctionsGroup">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Linq.Impl.Grouping.AggregateFunctionsGroup.AggregateFunctionsProjection">
             <summary>
             Gets or sets the aggregate functions projection for this group. 
             This projection is used to generate aggregate functions results for this group.
             </summary>
             <value>The aggregate functions projection.</value>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Linq.Impl.Grouping.AggregateFunctionsGroup.Aggregates">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.Impl.Grouping.AggregateFunctionsGroup.GetAggregateResults(System.Collections.Generic.IEnumerable{UWay.Skynet.Cloud.Linq.Impl.AggregateFunction})">
             <summary>
@@ -8962,7 +10817,6 @@
             </summary>
             <typeparam name="T"></typeparam>
             <param name="expression"></param>
-            <param name="desc"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.Pagination.OrderByDesc``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
@@ -9081,8 +10935,102 @@
             <summary>
              生成SQL查询条件
             </summary>
-            <param name="where">查询条件信息</param>
-            <param name="filterDescriptor">生成的SQL参数</param>
+            <param name="request">查询条件信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToDataSourceResult(UWay.Skynet.Cloud.Linq.DataTableWrapper,UWay.Skynet.Cloud.Request.DataSourceRequest)">
+            <summary>
+            
+            </summary>
+            <param name="enumerable"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.GetFieldByTypeFromDataColumn(System.Data.DataTable,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dataTable"></param>
+            <param name="memberName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToDataSourceResult(System.Data.DataTable,UWay.Skynet.Cloud.Request.DataSourceRequest)">
+            <summary>
+            
+            </summary>
+            <param name="dataTable"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToDataSourceResult(System.Collections.IEnumerable,UWay.Skynet.Cloud.Request.DataSourceRequest)">
+            <summary>
+            
+            </summary>
+            <param name="enumerable"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToDataSourceResult``2(System.Collections.Generic.IEnumerable{``0},UWay.Skynet.Cloud.Request.DataSourceRequest,System.Func{``0,``1})">
+            <summary>
+            转化DataSource
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="enumerable"></param>
+            <param name="request"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToDataSoureceTResult``1(System.Linq.IQueryable,UWay.Skynet.Cloud.Request.DataSourceRequest)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="queryable"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToDataSourceResult(System.Linq.IQueryable,UWay.Skynet.Cloud.Request.DataSourceRequest)">
+            <summary>
+            
+            </summary>
+            <param name="queryable"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToDataSourceResult``2(System.Linq.IQueryable,System.Collections.Generic.IList{UWay.Skynet.Cloud.Linq.SortDescriptor},System.Collections.Generic.IList{UWay.Skynet.Cloud.Linq.GroupDescriptor},System.Collections.Generic.IList{UWay.Skynet.Cloud.Linq.AggregateDescriptor},System.Int64,System.Int32,System.Func{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="queryable"></param>
+            <param name="sortDescriptors"></param>
+            <param name="groupDescriptors"></param>
+            <param name="aggregateDescriptors"></param>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.CreateDataSourceTResult``1(System.Linq.IQueryable,UWay.Skynet.Cloud.Request.DataSourceRequest)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="queryable"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.CreateDataSourceResult``2(System.Linq.IQueryable,UWay.Skynet.Cloud.Request.DataSourceRequest,System.Func{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="queryable"></param>
+            <param name="request"></param>
+            <param name="selector"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Sort(System.Linq.IQueryable,System.Collections.Generic.IEnumerable{UWay.Skynet.Cloud.Linq.SortDescriptor})">
@@ -9192,6 +11140,15 @@
             whose elements contains a sequence of objects and a key.
             </returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.IQueryable,System.Collections.Generic.IEnumerable{UWay.Skynet.Cloud.Linq.GroupDescriptor})">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="notPagedData"></param>
+            <param name="groupDescriptors"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Aggregate(System.Linq.IQueryable,System.Collections.Generic.IEnumerable{UWay.Skynet.Cloud.Linq.Impl.AggregateFunction})">
             <summary>
             Calculates the results of given aggregates functions on a sequence of elements.
@@ -9243,6 +11200,15 @@
             <param name="values">参数</param>
             <returns><see cref="T:System.Linq.IQueryable"/></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Where``1(System.Linq.IQueryable{``0},System.Collections.Generic.IEnumerable{UWay.Skynet.Cloud.Linq.IFilterDescriptor})">
+            <summary>
+            查询
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="source"></param>
+            <param name="filterDescriptors"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Take(System.Linq.IQueryable,System.Int32)">
             <summary>
             Returns a specified number of contiguous elements from the start of a sequence.
@@ -9266,6 +11232,22 @@
             <param name="source"> The sequence to return elements from.</param>
             <param name="count"> The number of elements to return. </param>
             <exception cref="T:System.ArgumentNullException"><paramref name="source" /> is null. </exception>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Take_TSource_2(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="TSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Take``1(System.Linq.IQueryable{``0},System.Int64)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="source"></param>
+            <param name="count"></param>
+            <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Skip(System.Linq.IQueryable,System.Int32)">
             <summary>
@@ -9295,6 +11277,22 @@
             The number of elements to skip before returning the remaining elements.
             </param>
             <exception cref="T:System.ArgumentNullException"> <paramref name="source" /> is null.</exception>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Skip_TSource_2(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="TSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Skip``1(System.Linq.IQueryable{``0},System.Int64)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="source"></param>
+            <param name="count"></param>
+            <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.Count(System.Linq.IQueryable)">
             <summary> Returns the number of elements in a sequence.</summary>
@@ -9334,6 +11332,83 @@
             An <see cref="T:System.Linq.IQueryable" /> whose distinct elements form the first set for the union.
             </param>
             <exception cref="T:System.ArgumentNullException"> <paramref name="source" /> is null.</exception>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToTreeDataSourceResult(System.Collections.IEnumerable,UWay.Skynet.Cloud.Request.DataSourceRequest)">
+            <summary>
+            
+            </summary>
+            <param name="enumerable"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToTreeDataSourceResult``2(System.Linq.IQueryable{``0},UWay.Skynet.Cloud.Request.DataSourceRequest,System.Func{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="enumerable"></param>
+            <param name="request"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToTreeDataSourceResult``3(System.Linq.IQueryable{``0},UWay.Skynet.Cloud.Request.DataSourceRequest,System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2}})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="enumerable"></param>
+            <param name="request"></param>
+            <param name="idSelector"></param>
+            <param name="parentIDSelector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToTreeDataSourceResult``3(System.Linq.IQueryable{``0},UWay.Skynet.Cloud.Request.DataSourceRequest,System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="enumerable"></param>
+            <param name="request"></param>
+            <param name="idSelector"></param>
+            <param name="parentIDSelector"></param>
+            <param name="rootSelector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToTreeDataSourceResult``4(System.Linq.IQueryable{``0},UWay.Skynet.Cloud.Request.DataSourceRequest,System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Func{``0,``3})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="queryable"></param>
+            <param name="request"></param>
+            <param name="idSelector"></param>
+            <param name="parentIDSelector"></param>
+            <param name="rootSelector"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableExtensions.ToTreeDataSourceResult``4(System.Linq.IQueryable{``0},UWay.Skynet.Cloud.Request.DataSourceRequest,System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2}},System.Func{``0,``3})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="queryable"></param>
+            <param name="request"></param>
+            <param name="idSelector"></param>
+            <param name="parentIDSelector"></param>
+            <param name="selector"></param>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Linq.DynamicExpressionParsor">
             <summary>
@@ -9417,9 +11492,19 @@
             
             </summary>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.Res">
+            <summary>
+            资源说明
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Linq.ParseException">
             <summary>
             表达是构造类
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.ParseException.#ctor">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.ParseException.#ctor(System.String,System.Int32)">
@@ -9439,6 +11524,49 @@
             输出字符
             </summary>
             <returns>字符</returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.QueryableSearcher`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableSearcher`1.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableSearcher`1.GetExpression(System.Collections.Generic.IEnumerable{UWay.Skynet.Cloud.Linq.IFilterDescriptor})">
+            <summary>
+            
+            </summary>
+            <param name="items"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableSearcher`1.GetGroupExpression(System.Linq.Expressions.ParameterExpression,System.Collections.Generic.IEnumerable{UWay.Skynet.Cloud.Linq.IFilterDescriptor},System.Func{System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression})">
+            <summary>
+            
+            </summary>
+            <param name="param"></param>
+            <param name="items"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableSearcher`1.GetExpression(System.Linq.Expressions.ParameterExpression,UWay.Skynet.Cloud.Linq.FilterDescriptor)">
+            <summary>
+            
+            </summary>
+            <param name="param"></param>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.QueryableSearcher`1.GetPropertyLambdaExpression(UWay.Skynet.Cloud.Linq.FilterDescriptor,System.Linq.Expressions.ParameterExpression)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <param name="param"></param>
+            <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.QueryableSearcher`1.ChangeType(System.Object,System.Type)">
             <summary>
@@ -9474,6 +11602,11 @@
             <param name="dateTime">待转换的时间</param>
             <returns>转换后的unix time</returns>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Linq.TransformProviders">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Linq.TransformProviders.Items">
             <summary>
             
@@ -9495,7 +11628,7 @@
             
             </summary>
             <param name="item"></param>
-            <param name="binderType"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.DateBlockTransformProvider.Transform(UWay.Skynet.Cloud.Linq.FilterDescriptor,System.Type)">
@@ -9503,7 +11636,7 @@
             
             </summary>
             <param name="item"></param>
-            <param name="binderType"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Linq.UnixTimeTransformProvider">
@@ -9516,7 +11649,7 @@
             
             </summary>
             <param name="item"></param>
-            <param name="binderType"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.UnixTimeTransformProvider.Transform(UWay.Skynet.Cloud.Linq.FilterDescriptor,System.Type)">
@@ -9524,7 +11657,7 @@
             
             </summary>
             <param name="item"></param>
-            <param name="binderType"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Linq.ITransformProvider">
@@ -9537,7 +11670,7 @@
             
             </summary>
             <param name="item"></param>
-            <param name="binderType"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.ITransformProvider.Transform(UWay.Skynet.Cloud.Linq.FilterDescriptor,System.Type)">
@@ -9545,7 +11678,7 @@
             
             </summary>
             <param name="item"></param>
-            <param name="binderType"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Linq.LikeTransformProvider">
@@ -9558,7 +11691,7 @@
             
             </summary>
             <param name="item"></param>
-            <param name="binderType"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Linq.LikeTransformProvider.Transform(UWay.Skynet.Cloud.Linq.FilterDescriptor,System.Type)">
@@ -9566,13 +11699,25 @@
             
             </summary>
             <param name="item"></param>
-            <param name="binderType"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Linq.SortDescriptor">
             <summary>
             Represents declarative sorting.
             </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.SortDescriptor.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.SortDescriptor.#ctor(System.String,System.ComponentModel.ListSortDirection)">
+            <summary>
+            
+            </summary>
+            <param name="member"></param>
+            <param name="order"></param>
         </member>
         <member name="P:UWay.Skynet.Cloud.Linq.SortDescriptor.Member">
             <summary>
@@ -9586,6 +11731,30 @@
             no sorting will be applied.
             </summary>
             <value>The sort direction. The default value is null.</value>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.SortDescriptor.Deserialize(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.SortDescriptor.Serialize">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.SortDescriptor.ToSortString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Linq.SortDescriptor.Serialize(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            
+            </summary>
+            <param name="json"></param>
         </member>
         <member name="T:UWay.Skynet.Cloud.Linq.TreeDataSourceExtensions">
             <summary>
@@ -9808,6 +11977,11 @@
         <member name="T:UWay.Skynet.Cloud.Mapping.MapperFactory">
             <summary>
             映射器工厂基类
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Mapping.MapperFactory.order">
+            <summary>
+            序号
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Mapping.MapperFactory.Order">
@@ -10044,6 +12218,178 @@
             <summary>
             重置映射器引擎
             </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Protocal.ProtocalType">
+            <summary>
+            协议类型
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Protocal.ProtocalType.DB">
+            <summary>
+            DB
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Protocal.ProtocalType.Ftp">
+            <summary>
+            Ftp
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Protocal.ProtocalType.Memory">
+            <summary>
+            Memory
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Protocal.ProtocalType.File">
+            <summary>
+            File
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Protocal.ProtocalType.Http">
+            <summary>
+            Http
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Protocal.ProtocolInfo">
+            <summary>
+            协议信息定义
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolInfo.ProtocolID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolInfo.ProtocalType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolInfo.ContainerName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolInfo.CfgID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolInfo.IsConnPool">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolInfo.UpdateDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolInfo.DataBaseName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolInfo.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolInfo.Cfg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo">
+            <summary>
+            协议配置信息
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.CfgID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.Driver">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.ProviderName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.ServerName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.Password">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.DesUserID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.DesPassword">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.CONNET_POOL_MAXWAIT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.CONNET_POOL_MAXACTIVE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.CONNET_POOL_MAXIDLE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.CONNET_POOL_VALIDATEQUERY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Protocal.ProtocolCfgInfo.Port">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Protocal.DbProviderHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Protocal.DbProviderHelper.GetProviderName(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="driver"></param>
+            <returns></returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Reflection.DynamicClass.ToString">
             <exclude/>
@@ -11298,6 +13644,28 @@
             <param name="args">参数列表</param>
             <returns>返回方法调用结果</returns>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Reflection.DynamicProperty">
+            <summary>
+            动态属性
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.DynamicProperty.#ctor(System.String,System.Type)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name"></param>
+            <param name="type"></param>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Reflection.DynamicProperty.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Reflection.DynamicProperty.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Reflection.ReflectionService">
             <summary>
             
@@ -11470,6 +13838,47 @@
             <param name="member">成员</param>
             <param name="target">目标对象</param>
             <param name="value">成员值</param>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Reflection.Signature">
+            <summary>
+            签名
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Reflection.Signature.properties">
+            <summary>
+            动态属性
+            </summary>
+        </member>
+        <member name="F:UWay.Skynet.Cloud.Reflection.Signature.hashCode">
+            <summary>
+            Hash Code
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.Signature.#ctor(System.Collections.Generic.IEnumerable{UWay.Skynet.Cloud.Reflection.DynamicProperty})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="properties"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.Signature.GetHashCode">
+            <summary>
+            HashCode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.Signature.Equals(System.Object)">
+            <summary>
+            比较
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.Signature.Equals(UWay.Skynet.Cloud.Reflection.Signature)">
+            <summary>
+            比较
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Reflection.Types">
             <summary>
@@ -11676,6 +14085,13 @@
             类型助手
             </summary>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.FindIEnumerable(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="seqType"></param>
+            <returns></returns>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsNullable(System.Type)">
             <summary>
             
@@ -11773,6 +14189,180 @@
             <param name="type"></param>
             <returns></returns>
         </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsPredefinedType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsNullableType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.GetNonNullableType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.GetTypeName(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsNumericType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsSignedIntegralType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsUnsignedIntegralType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.GetNumericTypeKind(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.GetIndexerPropertyInfo(System.Type,System.Type[])">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="indexerArguments"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsCompatibleWith(System.Type,System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.FindGenericType(System.Type,System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="genericType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.GetName(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.DefaultValue(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.FindPropertyOrField(System.Type,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="memberName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.FindPropertyOrField(System.Type,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="memberName"></param>
+            <param name="staticAccess"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.SelfAndBaseTypes(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.SelfAndBaseClasses(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.AddInterface(System.Collections.Generic.List{System.Type},System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="types"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsDataRow(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsDynamicObject(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsDateTime(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.FirstSortableProperty(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.ToJavaScriptType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Reflection.TypeHelper.IsPlainType(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Request.DataSourceRequest">
             <summary>
             数据请求包
@@ -11813,9 +14403,179 @@
             汇总
             </summary>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Request.DataSourceResult">
+            <summary>
+            数据结果
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceResult.Data">
+            <summary>
+            数据列表
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceResult.Total">
+            <summary>
+            总共
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceResult.AggregateResults">
+            <summary>
+            聚合结果
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceResult.Errors">
+            <summary>
+            错误
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Request.DataSourceTableResult">
+            <summary>
+            Data Table数据结果
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceTableResult.Data">
+            <summary>
+            数据列表
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceTableResult.Total">
+            <summary>
+            总共
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceTableResult.AggregateResults">
+            <summary>
+            聚合结果
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceTableResult.Errors">
+            <summary>
+            错误
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Request.DataSourceResult`1">
+            <summary>
+            数据结果
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceResult`1.Data">
+            <summary>
+            数据列表
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceResult`1.Total">
+            <summary>
+            总共
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceResult`1.AggregateResults">
+            <summary>
+            聚合结果
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.DataSourceResult`1.Errors">
+            <summary>
+            错误
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Request.R`1">
+            <summary>
+            返回数据
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.R`1.Code">
+            <summary>
+            Code
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.R`1.Msg">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.R`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Request.R`1.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Request.R`1.#ctor(`0)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Request.R`1.#ctor(`0,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <param name="code"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Request.R`1.#ctor(`0,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <param name="code"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Request.R`1.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="errMsg"></param>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Request.R`1.#ctor(System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Request.TreeDataSourceResult">
+            <summary>
+            树结构数据源
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Request.TreeDataSourceResult.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.TreeDataSourceResult.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.TreeDataSourceResult.AggregateResults">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Request.TreeDataSourceResult.Errors">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.SkynetCloudEnvironment">
+            <summary>
+            基础框架环境变量
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.SkynetCloudEnvironment.ApplicationPhysicalPath">
             <summary>
             得到当前程序的物理路径
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.StringFormatter">
+            <summary>
+            字符串格式化工具
             </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.StringFormatter.Register(UWay.Skynet.Cloud.ITagFormatProvider)">
@@ -11933,6 +14693,11 @@
             <param name="sem"></param>
             <param name="a"></param>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Trigger.IJobExecutor">
+            <summary>
+            Job Executor
+            </summary>
+        </member>
         <member name="M:UWay.Skynet.Cloud.Trigger.IJobExecutor.StartJob">
             <summary>
             开始任务
@@ -11957,6 +14722,11 @@
         <member name="M:UWay.Skynet.Cloud.Trigger.ListJobExcutor`1.StartJob">
             <summary>
               开始任务
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Trigger.ListJobExcutor`1.StopJob">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:UWay.Skynet.Cloud.Trigger.ListJobExcutor`1.GetExcuteSource">

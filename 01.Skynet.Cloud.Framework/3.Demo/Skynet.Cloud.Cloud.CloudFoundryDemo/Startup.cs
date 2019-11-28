@@ -37,7 +37,7 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo
             //services.AddHttpClient();
             services.AddSingleton<IRemoteTest, RemoteTest>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddCustomMvc(Configuration);
+            services.AddCustomMvc();
             services.AddSwaggerDocumentation(Configuration);
         }
 

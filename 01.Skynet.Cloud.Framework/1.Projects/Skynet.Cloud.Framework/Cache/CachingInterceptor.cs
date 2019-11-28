@@ -14,6 +14,9 @@ namespace UWay.Skynet.Cloud.Cache
     /// </summary>
     public class CachingInterceptor : AbstractInterceptor
     {
+        /// <summary>
+        /// 内存供应商
+        /// </summary>
         [FromContainer]
         public ICachingProvider CacheProvider { get; set; }
 

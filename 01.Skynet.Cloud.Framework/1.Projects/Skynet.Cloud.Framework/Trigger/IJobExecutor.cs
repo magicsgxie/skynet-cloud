@@ -4,6 +4,9 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Trigger
 {
+    /// <summary>
+    /// Job Executor
+    /// </summary>
     public interface IJobExecutor
     {
         /// <summary>

@@ -5,6 +5,10 @@
     <RootNamespace>UWay.Skynet.Cloud.IE</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\workspace\svn\trunk\skynet-cloud\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.IE\Skynet.Cloud.IE.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Aspose.Cells" Version="19.9.0" />
     <PackageReference Include="Aspose.Words" Version="19.10.0" />

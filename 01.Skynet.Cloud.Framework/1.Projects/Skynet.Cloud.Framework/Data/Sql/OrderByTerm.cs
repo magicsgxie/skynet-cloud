@@ -19,7 +19,7 @@ namespace UWay.Skynet.Cloud.Data
         /// <summary>
         /// Creates an ORDER BY term with OtherData name and table alias
         /// </summary>
-        /// <param name="OtherData">Name of a OtherData to order by</param>
+        /// <param name="field">Name of a OtherData to order by</param>
         /// <param name="table">The table this OtherData belongs to</param>
         /// <param name="dir">Order by direction</param>
         public OrderByTerm(string field, FromTerm table, OrderByDirection dir)
@@ -33,7 +33,7 @@ namespace UWay.Skynet.Cloud.Data
         /// <summary>
         /// Creates an ORDER BY term with OtherData name and no table alias
         /// </summary>
-        /// <param name="OtherData">Name of a OtherData to order by</param>
+        /// <param name="field">Name of a OtherData to order by</param>
         /// <param name="dir">Order by direction</param>
         public OrderByTerm(string field, OrderByDirection dir)
             : this(field, null, dir)
@@ -43,7 +43,7 @@ namespace UWay.Skynet.Cloud.Data
         /// <summary>
         /// Creates an ORDER BY term with OtherData name and no table alias
         /// </summary>
-        /// <param name="OtherData">Name of a OtherData to order by</param>
+        /// <param name="expr">sql expression</param>
         /// <param name="dir">Order by direction</param>
         public OrderByTerm(SqlExpression expr, OrderByDirection dir)
         {

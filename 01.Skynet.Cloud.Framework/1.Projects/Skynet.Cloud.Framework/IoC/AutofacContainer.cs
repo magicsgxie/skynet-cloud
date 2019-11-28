@@ -126,16 +126,33 @@ namespace UWay.Skynet.Cloud.IoC
             return _container.Resolve<T>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static T Resolve<T>(params Parameter[] parameters)
         {
             return _container.Resolve<T>(parameters);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="targetType"></param>
+        /// <returns></returns>
         public static object Resolve(Type targetType)
         {
             return _container.Resolve(targetType);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="targetType"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static object Resolve(Type targetType, params Parameter[] parameters)
         {
             return _container.Resolve(targetType, parameters);

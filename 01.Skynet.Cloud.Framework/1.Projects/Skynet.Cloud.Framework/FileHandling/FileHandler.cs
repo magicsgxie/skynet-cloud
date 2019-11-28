@@ -21,11 +21,19 @@ namespace UWay.Skynet.Cloud.FileHandling
         private static readonly string SKYNET_CLOUD = "skynet:cloud";
         private static readonly string SKYNET_CLOUD_ROOT = "filepath";
 
+        /// <summary>
+        /// 根路径
+        /// </summary>
         protected string RootPath { get; private set; }
         
 
         private readonly ILogger<FileHandler> _logger;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="logger"></param>
         public FileHandler(IConfiguration configuration, ILogger<FileHandler> logger)
         {
             RootPath = GetRootPath(configuration);
@@ -111,6 +119,12 @@ namespace UWay.Skynet.Cloud.FileHandling
             return OpenFile(name, FileMode.Open);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
         public Stream OpenFile( string name, FileMode mode)
         {
             string fileName = Path.GetFileName(name);
@@ -180,7 +194,11 @@ namespace UWay.Skynet.Cloud.FileHandling
             }
         }
 
-
+        /// <summary>
+        /// 获取根路径
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
         private string GetRootPath(IConfiguration root)
         {
             return root.GetSection(SKYNET_CLOUD).GetValue<string>(SKYNET_CLOUD_ROOT, "");
@@ -234,6 +252,14 @@ namespace UWay.Skynet.Cloud.FileHandling
             return path;
         }
 
+        /// <summary>
+        /// 获取绝对路径
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="folder"></param>
+        /// <param name="rename"></param>
+        /// <param name="newFileName"></param>
+        /// <returns></returns>
         string GetAbsolutePath(string fileName, string folder, bool rename, out string newFileName)
         {
             var ext = GetFileExtendName(fileName);
@@ -244,13 +270,23 @@ namespace UWay.Skynet.Cloud.FileHandling
             return Path.Combine(path, fileName);
         }
 
+        /// <summary>
+        /// 获取扩展名
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         string GetFileExtendName(string fileName)
         {
             var temp = fileName.Split('.');
             return temp[temp.Length - 1];
         }
 
-
+        /// <summary>
+        /// 重命名
+        /// </summary>
+        /// <param name="oldFileName"></param>
+        /// <param name="newFileName"></param>
+        /// <returns></returns>
         public bool Rename(string oldFileName, string newFileName)
         {
             string fileName = Path.GetFileName(oldFileName);
@@ -285,12 +321,24 @@ namespace UWay.Skynet.Cloud.FileHandling
             return dir.GetFiles();
         }
 
+        /// <summary>
+        /// 追加
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="buffer"></param>
         public void Append(Stream stream, byte[] buffer)
         {
             stream.Seek(0, SeekOrigin.End);
             stream.Write(buffer, 0, buffer.Length);
         }
 
+        /// <summary>
+        /// 压缩
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="subfolder"></param>
+        /// <param name="compressOrginalPaths"></param>
+        /// <returns></returns>
         public string Zip(string fileName, string subfolder, IEnumerable<string> compressOrginalPaths)
         {
             if (subfolder.IsNullOrEmpty())
@@ -331,6 +379,14 @@ namespace UWay.Skynet.Cloud.FileHandling
             }
         }
 
+
+        /// <summary>
+        /// 添加文档
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="folder"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public string AddFile(string name, string folder, string content)
         {
             if(folder.EndsWith("\\") || folder.EndsWith("/"))
@@ -354,6 +410,12 @@ namespace UWay.Skynet.Cloud.FileHandling
             return name;
         }
 
+
+        /// <summary>
+        /// 压缩文档
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="directory"></param>
         public void Zip(string fileName, string directory)
         {
             var outPath = GetPath("");

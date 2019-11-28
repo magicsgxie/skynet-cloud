@@ -14,12 +14,30 @@ namespace UWay.Skynet.Cloud.Data
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public class IdAttribute : ColumnAttribute
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public IdAttribute() { }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="name">主键名称</param>
         public IdAttribute(string name) : base(name) { }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="name">主键名称</param>
+        /// <param name="commment">注释</param>
         public IdAttribute(string name,string commment) : base(name, commment) { }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="name">主键名称</param>
+        /// <param name="dBType">类型</param>
+        /// <param name="commment">注释</param>
         public IdAttribute(string name,DBType dBType, string commment) : base(name, dBType, commment) { }
 
 

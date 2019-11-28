@@ -12,11 +12,15 @@ namespace UWay.Skynet.Cloud.Linq
     using System.Text;
     using UWay.Skynet.Cloud.Linq.Impl;
     using UWay.Skynet.Cloud.Linq.Impl.Grouping.Aggregates;
-
+    /// <summary>
+    /// 聚合
+    /// </summary>
     public class AggregateDescriptor : IDescriptor
     {
         private readonly IDictionary<string, Func<AggregateFunction>> aggregateFactories;
-
+        /// <summary>
+        /// 
+        /// </summary>
         public AggregateDescriptor()
         {
             Aggregates = new List<AggregateFunction>();
@@ -30,19 +34,27 @@ namespace UWay.Skynet.Cloud.Linq
                   { "max", () => new MaxFunction { SourceField = Member } }
               };
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public ICollection<AggregateFunction> Aggregates
         {
             get;
             private set;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string Member
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// 反序列
+        /// </summary>
+        /// <param name="source"></param>
         public void Deserialize(string source)
         {
             var components = source.Split('-');
@@ -68,6 +80,10 @@ namespace UWay.Skynet.Cloud.Linq
             }
         }
 
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        /// <returns></returns>
         public string Serialize()
         {
             var result = new StringBuilder(Member);

@@ -77,6 +77,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return ColumnProjector.ProjectColumns(expression, null, newAlias, existingAliases);
         }
 
+        [Obsolete]
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
             var methodName = m.Method.Name;
@@ -359,6 +360,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return mex;
         }
 
+        [Obsolete]
         public override Expression Visit(Expression exp)
         {
             Expression result = base.Visit(exp);
@@ -382,6 +384,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             return result;
         }
 
+        [Obsolete]
         private Expression BindWhere(Type resultType, Expression source, LambdaExpression predicate)
         {
             ProjectionExpression projection = this.VisitSequence(source);
@@ -395,6 +398,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 );
         }
 
+        [Obsolete]
         private Expression BindReverse(Expression source)
         {
             ProjectionExpression projection = this.VisitSequence(source);
@@ -406,6 +410,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 );
         }
 
+        [Obsolete]
         private Expression BindSelect(Type resultType, Expression source, LambdaExpression selector)
         {
             ProjectionExpression projection = this.VisitSequence(source);
@@ -419,6 +424,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 );
         }
 
+        [Obsolete]
         protected virtual Expression BindSelectMany(Type resultType, Expression source, LambdaExpression collectionSelector, LambdaExpression resultSelector)
         {
             ProjectionExpression projection = this.VisitSequence(source);
@@ -464,6 +470,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 );
         }
 
+        [Obsolete]
         protected virtual Expression BindJoin(Type resultType, Expression outerSource, Expression innerSource, LambdaExpression outerKey, LambdaExpression innerKey, LambdaExpression resultSelector)
         {
             ProjectionExpression outerProjection = this.VisitSequence(outerSource);
@@ -483,7 +490,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 pc.Projector
                 );
         }
-
+        [Obsolete]
         protected virtual Expression BindIntersect(Expression outerQueryable, Expression innerQueryable, bool negate)
         {
             // SELECT * FROM outer WHERE EXISTS(SELECT * FROM inner WHERE inner = outer))
@@ -502,7 +509,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 pc.Projector, outerProjection.Aggregator
                 );
         }
-
+        [Obsolete]
         protected virtual Expression BindGroupJoin(MethodInfo groupJoinMethod, Expression outerSource, Expression innerSource, LambdaExpression outerKey, LambdaExpression innerKey, LambdaExpression resultSelector)
         {
             // A database will treat this no differently than a SelectMany w/ result selector, so just use that translation instead
@@ -528,7 +535,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         }
 
         List<OrderExpression> thenBys;
-
+        [Obsolete]
         protected virtual Expression BindOrderBy(Type resultType, Expression source, LambdaExpression orderSelector, OrderType orderType)
         {
             List<OrderExpression> myThenBys = this.thenBys;
@@ -567,7 +574,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             this.thenBys.Add(new OrderExpression(orderType, orderSelector));
             return this.Visit(source);
         }
-
+        [Obsolete]
         protected virtual Expression BindGroupBy(Expression source, LambdaExpression keySelector, LambdaExpression elementSelector, LambdaExpression resultSelector)
         {
             ProjectionExpression projection = this.VisitSequence(source);
@@ -669,7 +676,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             }
             return expression as NewExpression;
         }
-
+        [Obsolete]
         private Expression BuildPredicateWithNullsEqual(IEnumerable<Expression> source1, IEnumerable<Expression> source2)
         {
             IEnumerator<Expression> en1 = source1.GetEnumerator();
@@ -791,7 +798,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
 
             return subquery;
         }
-
+        [Obsolete]
         private Expression BindDistinct(Expression source)
         {
             ProjectionExpression projection = this.VisitSequence(source);
@@ -803,7 +810,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 pc.Projector
                 );
         }
-
+        [Obsolete]
         private Expression BindTake(Expression source, Expression take)
         {
             ProjectionExpression projection = this.VisitSequence(source);
@@ -816,7 +823,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 pc.Projector
                 );
         }
-
+        [Obsolete]
         private Expression BindSkip(Expression source, Expression skip)
         {
             ProjectionExpression projection = this.VisitSequence(source);
@@ -933,7 +940,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
                 return result;
             }
         }
-
+        [Obsolete]
         private Expression BindContains(Expression queryable, Expression match, bool isRoot)
         {
             ConstantExpression constSource = queryable as ConstantExpression;
@@ -1000,7 +1007,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
         {
             return this.Visit(this.expressionBuilder.GetDeleteExpression(upd.Mapping, instance, deleteCheck));
         }
-
+        [Obsolete]
         private Expression BindBatch(IDbSet upd, Expression instances, LambdaExpression operation)
         {
             var save = this.batchUpd;
@@ -1096,7 +1103,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
             }
             return false;
         }
-
+        [Obsolete]
         protected override Expression VisitMemberAccess(MemberExpression m)
         {
             var memberType = m.Member.GetMemberType();

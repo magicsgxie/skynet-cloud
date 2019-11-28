@@ -10,6 +10,9 @@ namespace UWay.Skynet.Cloud.Helpers
     {
         private static IServiceCollection _container;
 
+        /// <summary>
+        /// 静态构造函数
+        /// </summary>
         static ServiceLocator()
         {
             _container = new ServiceCollection();
@@ -27,11 +30,22 @@ namespace UWay.Skynet.Cloud.Helpers
             return _container;
         }
 
+        /// <summary>
+        /// 获取Service Provider
+        /// </summary>
+        /// <param name="container"></param>
+        /// <returns></returns>
         public static IServiceProvider GetServiceProvider(IServiceCollection container = null)
         {
             return CreateServiceBuilder(container).BuildServiceProvider();
         }
 
+        /// <summary>
+        /// 获取实例
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="provider"></param>
+        /// <returns></returns>
         public static T GetInstance<T>(IServiceProvider provider=null)
         {
             if (provider == null) provider = GetServiceProvider();

@@ -60,12 +60,20 @@ namespace UWay.Skynet.Cloud.Linq
             }
         }
 
-
+        /// <summary>
+        /// 序列
+        /// </summary>
+        /// <param name="json"></param>
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
 
         }
 
+        /// <summary>
+        /// 创建条件
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
         public virtual string CreateFilter(IDictionary<string, object> dictionary)
         {
             return string.Empty;

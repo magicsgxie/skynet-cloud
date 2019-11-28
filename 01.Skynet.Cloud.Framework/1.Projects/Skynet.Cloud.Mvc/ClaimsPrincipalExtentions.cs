@@ -63,6 +63,12 @@ namespace UWay.Skynet.Cloud.Mvc
             return principal.Claims.Single(p => p.Type.Equals(DEPT_ID, StringComparison.InvariantCultureIgnoreCase)).Value.ToNullLong();
         }
 
+        /// <summary>
+        /// 权限判断
+        /// </summary>
+        /// <param name="principal"></param>
+        /// <param name="persmission"></param>
+        /// <returns></returns>
         public static bool HasPermission(this ClaimsPrincipal principal,string persmission)
         {
             if(principal == null)
@@ -70,7 +76,7 @@ namespace UWay.Skynet.Cloud.Mvc
                 return false;
             }
 
-            var resource = principal.Claims.Where(p => p.Type.Equals(RESOURCES));
+            var resource = principal.Claims.Where(p => p.Type.Equals(RESOURCES, StringComparison.InvariantCultureIgnoreCase));
             return resource.Any(o => o.Value.Equals(persmission, StringComparison.InvariantCultureIgnoreCase));
         }
     }

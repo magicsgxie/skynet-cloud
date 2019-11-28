@@ -1,5 +1,8 @@
 ﻿namespace UWay.Skynet.Cloud.Nacos
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class BaseRequest
     {        
         /// <summary>

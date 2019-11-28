@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using UWay.Skynet.Cloud.Nacos.Utilities;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class AddListenerRequest : BaseRequest
     {
         /// <summary>
@@ -44,12 +47,18 @@
             ? $"{DataId}{CharacterUtil.TwoEncode}{Group}{CharacterUtil.TwoEncode}{ContentMD5}{CharacterUtil.OneEncode}"
             : $"{DataId}{CharacterUtil.TwoEncode}{Group}{CharacterUtil.TwoEncode}{ContentMD5}{CharacterUtil.TwoEncode}{Tenant}{CharacterUtil.OneEncode}";
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public override void CheckParam()
         {
             ParamUtil.CheckTDG(Tenant, DataId, Group);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToQueryString()
         {
             return $"Listening-Configs={ListeningConfigs}";

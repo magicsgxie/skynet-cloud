@@ -37,6 +37,9 @@ namespace UWay.Skynet.Cloud.Trigger
             IsRuning = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void StopJob()
         {
             IsRuning = false;

@@ -14,8 +14,8 @@ namespace UWay.Skynet.Cloud.Extensions
     public static class ExpressionExtensions
     {
         /// <summary>
-        ///     取的  Expression<Func<T,TProperty>> predicate 表达式对应的属性名称
-        ///         例如：c=>c.Value.Year 侧返回：Value.Year
+        /// 取的 表达式对应的属性名称<![CDATA[Expression<Func<T,TProperty>> predicate
+        ///        例如：c=>c.Value.Year 侧返回：Value.Year]]>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TProperty"></typeparam>
@@ -27,6 +27,13 @@ namespace UWay.Skynet.Cloud.Extensions
             //return expression.Member.Name; //该属性只返回最后一个属性，因此采用下面方法返回。
             return expression.ToString().Substring(2);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static ParameterExpression CreateLambdaParam<T>(string name)
         {
             return Expression.Parameter(typeof(T), name);
@@ -121,6 +128,13 @@ namespace UWay.Skynet.Cloud.Extensions
             return filter;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="param"></param>
+        /// <param name="filterObj"></param>
+        /// <returns></returns>
         public static Expression<Func<T, bool>> GenerateTypeBody<T>(this ParameterExpression param, Filter filterObj)
         {
             return (Expression<Func<T, bool>>) (param.GenerateBody<T>(filterObj));
@@ -135,21 +149,46 @@ namespace UWay.Skynet.Cloud.Extensions
             return Expression.Lambda(body, param);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="param"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         public static Expression<Func<T, bool>> GenerateTypeLambda<T>(this ParameterExpression param, Expression body)
         {
             return (Expression<Func<T, bool>>) (param.GenerateLambda(body));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="expressionRight"></param>
+        /// <returns></returns>
         public static Expression AndAlso(this Expression expression, Expression expressionRight)
         {
             return Expression.AndAlso(expression, expressionRight);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="expressionRight"></param>
+        /// <returns></returns>
         public static Expression Or(this Expression expression, Expression expressionRight)
         {
             return Expression.Or(expression, expressionRight);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="expressionRight"></param>
+        /// <returns></returns>
         public static Expression And(this Expression expression, Expression expressionRight)
         {
             return Expression.And(expression, expressionRight);
@@ -164,7 +203,13 @@ namespace UWay.Skynet.Cloud.Extensions
         //    IQueryable<T> result = query.Provider.CreateQuery<T>(expr);
         //    return result;
         //}
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <param name="filterjson"></param>
+        /// <returns></returns>
         public static IQueryable<T> GenerateFilter<T>(this IQueryable<T> query, string filterjson)
         {
             if (!string.IsNullOrEmpty(filterjson))
@@ -275,10 +320,22 @@ namespace UWay.Skynet.Cloud.Extensions
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class Filter
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Key { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Value { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Contrast { get; set; }
     }
 }

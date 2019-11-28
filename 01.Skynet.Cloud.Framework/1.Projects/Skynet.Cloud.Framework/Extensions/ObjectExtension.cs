@@ -16,8 +16,18 @@ using System.Xml.Linq;
 
 namespace UWay.Skynet.Cloud.Extensions
 {
+    /// <summary>
+    /// 对象扩展
+    /// </summary>
     public static class ObjectExtension
     {
+        /// <summary>
+        /// 是否有属性
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         public static bool HasProperty<T>(this T obj, string propertyName)
         {
             return obj != null && obj.GetType().GetProperties().Any(p => p.Name.Equals(propertyName));
@@ -26,6 +36,7 @@ namespace UWay.Skynet.Cloud.Extensions
         ///     取得对象指定属性的值
         /// </summary>
         /// <param name="predicate">要取值的属性</param>
+        /// <param name="obj">要取值的属性</param>
         /// <returns></returns>
         public static object GetPropertyValue<T, TProperty>(this T obj, Expression<Func<T, TProperty>> predicate)
         {
@@ -58,6 +69,7 @@ namespace UWay.Skynet.Cloud.Extensions
         /// <summary>
         ///     设置对象指定属性的值
         /// </summary>
+        /// <param name="obj">对象</param>
         /// <param name="predicate">要设置值的属性</param>
         /// <param name="value">设置值</param>
         /// <returns>是否设置成功</returns>
@@ -181,7 +193,7 @@ namespace UWay.Skynet.Cloud.Extensions
         }
 
         /// <summary>
-        /// 类型转换（包含Nullable<>和非Nullable<>转换）
+        /// 类型转换（包含Nullable&lt;&gt;和非Nullable&lt;&gt;转换）
         /// </summary>
         /// <param name="value"></param>
         /// <param name="conversionType"></param>
@@ -599,6 +611,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return info;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static byte[] ToBytes(this object obj)
         {
             if (obj == null)
@@ -611,6 +628,11 @@ namespace UWay.Skynet.Cloud.Extensions
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static object ToObject(this byte[] source)
         {
             using (var memStream = new MemoryStream())
@@ -1293,6 +1315,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return EmailRegex.IsMatch(email);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static bool IsTask(this Type source)
         {
             return source.BaseType == typeof(Task);

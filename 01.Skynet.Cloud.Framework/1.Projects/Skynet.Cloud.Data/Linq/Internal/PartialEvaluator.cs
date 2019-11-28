@@ -25,7 +25,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Internal
         }
 
         /// <summary>
-        /// Performs evaluation & replacement of independent sub-trees
+        /// Performs evaluation and replacement of independent sub-trees
         /// </summary>
         /// <param name="expression">The root of the expression tree.</param>
         /// <param name="fnCanBeEvaluated">A function that decides whether a given expression node can be part of the local function.</param>
@@ -43,7 +43,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Internal
         }
 
         /// <summary>
-        /// Evaluates & replaces sub-trees when first candidate is reached (top-down)
+        /// Evaluates &amp; replaces sub-trees when first candidate is reached (top-down)
         /// </summary>
         class SubtreeEvaluator : UWay.Skynet.Cloud.Data.Linq.ExpressionVisitor
         {

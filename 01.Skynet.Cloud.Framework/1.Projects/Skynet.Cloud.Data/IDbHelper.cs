@@ -33,6 +33,13 @@ namespace UWay.Skynet.Cloud.Data
         /// <returns></returns>
         int ExecuteNonQuery(string sql,  dynamic namedParameters = null, bool isAutoClose = true);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="namedParameters"></param>
+        /// <param name="isAutoClose"></param>
+        /// <returns></returns>
         Task<int> ExecuteNonQueryAsync(string sql, dynamic namedParameters = null, bool isAutoClose = true);
         /// <summary>
         /// 执行查询并返回DataReader
@@ -92,12 +99,21 @@ namespace UWay.Skynet.Cloud.Data
         /// <param name="sql">SQL语句</param>
         /// <param name="skip">起始行</param>
         /// <param name="take">获取行</param>
-        /// <param name="rowCount">总行数</param>
         /// <param name="nameparameters">参数</param>
         /// <param name="isAutoClose">是否自动关闭连接，使用事务时设置不自动关闭</param>
         /// <returns></returns>
         DataSourceTableResult ExecutePage(string sql, long skip, long take, dynamic nameparameters, bool isAutoClose = true);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="skip"></param>
+        /// <param name="take"></param>
+        /// <param name="nameparameters"></param>
+        /// <param name="isAutoClose"></param>
+        /// <returns></returns>
         DataSourceResult ExecutePage<T>(string sql, long skip, long take, dynamic nameparameters, bool isAutoClose = true) where T : new();
 
 

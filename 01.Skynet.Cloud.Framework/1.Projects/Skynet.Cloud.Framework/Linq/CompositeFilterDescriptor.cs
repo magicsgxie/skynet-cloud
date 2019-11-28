@@ -79,6 +79,10 @@ namespace UWay.Skynet.Cloud.Linq
             this.SubscribeForFilterDescriptorCollectionEvents();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
             base.Serialize(json);
@@ -95,6 +99,11 @@ namespace UWay.Skynet.Cloud.Linq
 
         partial void UnsubscribeForFilterDescriptorCollectionEvents();
 
+        /// <summary>
+        /// 创建过滤条件
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
         public override string CreateFilter(IDictionary<string, object> dictionary)
         {
             var conditions = new List<string>();

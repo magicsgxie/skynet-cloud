@@ -36,27 +36,29 @@ namespace UWay.Skynet.Cloud.Helpers
             return list;
         }
 
+        /// <summary>
+        /// 获取Assmbly
+        /// </summary>
+        /// <param name="assemblyName">Assembly name</param>
+        /// <returns></returns>
         public static Assembly GetAssembly(string assemblyName)
         {
             return GetAllAssemblies().FirstOrDefault(assembly => assembly.FullName.Contains(assemblyName));
         }
 
+        /// <summary>
+        /// 获取Service 
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<Assembly> GetServicesAssembly()
         {
             return GetAllAssemblies().Where(assembly => assembly.FullName.Match("((?:[a-z][a-z0-9_]*))(\\.)(Service)(,)")|| assembly.FullName.Match("((?:[a-z][a-z0-9_]*))(\\.)(Services)(,)"));
         }
 
-        //public static IEnumerable<Assembly> GetServiceInterfacesAssembly()
-        //{
-        //    return GetAllAssemblies().Where(assembly => assembly.FullName.Match("*.Service.Interface.???") || assembly.FullName.Match("*.Services.Interface.???"));
-        //}
-
-        //public static Assembly GetServiceInterfacesAssembly(string name)
-        //{
-        //    return GetAllAssemblies().FirstOrDefault(assembly => assembly.FullName.Contains(name));
-        //}
-
-
+        /// <summary>
+        /// 获取所有类型
+        /// </summary>
+        /// <returns></returns>
         public static IList<Type> GetAllTypes()
         {
             var list = new List<Type>();
@@ -71,6 +73,11 @@ namespace UWay.Skynet.Cloud.Helpers
             return list;
         }
 
+        /// <summary>
+        /// 获取所有类型
+        /// </summary>
+        /// <param name="assemblyName">Assembly</param>
+        /// <returns></returns>
         public static IList<Type> GetTypesByAssembly(string assemblyName)
         {
             var list = new List<Type>();
@@ -83,6 +90,12 @@ namespace UWay.Skynet.Cloud.Helpers
             return list;
         }
 
+        /// <summary>
+        /// 获取实现类
+        /// </summary>
+        /// <param name="typeName"></param>
+        /// <param name="baseInterfaceType"></param>
+        /// <returns></returns>
         public static Type GetImplementType(string typeName, Type baseInterfaceType)
         {
             return GetAllTypes().FirstOrDefault(t =>

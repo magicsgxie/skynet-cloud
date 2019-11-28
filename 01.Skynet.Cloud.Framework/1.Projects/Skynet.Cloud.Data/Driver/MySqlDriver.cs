@@ -117,7 +117,7 @@ namespace UWay.Skynet.Cloud.Data.Driver
             }
         }
 
-        public ISqlOmRenderer Render
+        public override ISqlOmRenderer Render
         {
             get
             {
@@ -135,7 +135,7 @@ namespace UWay.Skynet.Cloud.Data.Driver
             command.Parameters.Add(p);
         }
 
-        protected void AddParameter(DbCommand cmd, string name, object item)
+        protected override void AddParameter(DbCommand cmd, string name, object item)
         {
             MySqlParameter p = new MySqlParameter();
             p.ParameterName = name;

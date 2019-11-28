@@ -12,8 +12,15 @@ namespace UWay.Skynet.Cloud.Mvc
     /// </summary>
     public class SwaggerDefaultValueFilter : IOperationFilter
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="context"></param>
         public void Apply(Operation operation, OperationFilterContext context)
         {
+            Guard.NotNull(operation, "operation");
+            Guard.NotNull(context, "context");
             foreach (var parameter in operation.Parameters.OfType<NonBodyParameter>())
             {
                 var description = context.ApiDescription.ParameterDescriptions.FirstOrDefault(p => p.Name == parameter.Name);

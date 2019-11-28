@@ -7,13 +7,29 @@ using UWay.Skynet.Cloud.Data.Render;
 
 namespace UWay.Skynet.Cloud.Data
 {
+    /// <summary>
+    /// 数据库类型
+    /// </summary>
     public enum SqlRenderType
     {
+        /// <summary>
+        /// Oracle
+        /// </summary>
         Oracle,
+        /// <summary>
+        /// Mysql
+        /// </summary>
         MySql,
+
+        /// <summary>
+        /// MSSQL
+        /// </summary>
         SqlServer
     }
 
+    /// <summary>
+    /// Sql生成工厂
+    /// </summary>
     public class SqlRenderFactories
     {
         static IDictionary<SqlRenderType, ISqlOmRenderer> renders = new Dictionary<SqlRenderType, ISqlOmRenderer>();

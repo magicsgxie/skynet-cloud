@@ -3,6 +3,9 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Nacos
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ModifyServiceRequest : BaseRequest
     {
         /// <summary>
@@ -35,11 +38,18 @@ namespace UWay.Skynet.Cloud.Nacos
         /// </summary>
         public string GroupName { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override void CheckParam()
         {
             ParamUtil.CheckServiceName(ServiceName);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToQueryString()
         {
             var sb = new StringBuilder(1024);

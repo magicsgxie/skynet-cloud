@@ -11,7 +11,9 @@ namespace UWay.Skynet.Cloud.Data
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public class AssociationAttribute : AbstractAssociationAttribute
     {
-
+        /// <summary>
+        /// 外键
+        /// </summary>
         public virtual bool IsForeignKey { get { return isForeignKey; } set { isForeignKey = value; } }
     }
 

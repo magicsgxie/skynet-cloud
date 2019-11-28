@@ -1,6 +1,9 @@
 ﻿
 namespace UWay.Skynet.Cloud.Data.Common
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum DateParts
     {
         /// <summary>

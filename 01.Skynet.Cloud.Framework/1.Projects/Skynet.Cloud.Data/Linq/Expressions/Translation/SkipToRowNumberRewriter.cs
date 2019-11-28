@@ -10,7 +10,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Expressions
     using UWay.Skynet.Cloud.Linq;
 
     /// <summary>
-    /// Rewrites take & skip expressions into uses of TSQL row_number function
+    /// Rewrites take &amp; skip expressions into uses of TSQL row_number function
     /// </summary>
     class SkipToRowNumberRewriter : DbExpressionVisitor
     {

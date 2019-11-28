@@ -6,11 +6,26 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Reflection
 {
+    /// <summary>
+    /// 签名
+    /// </summary>
     public  class Signature : IEquatable<Signature>
     {
+        /// <summary>
+        /// 动态属性
+        /// </summary>
         public DynamicProperty[] properties;
+
+        /// <summary>
+        /// Hash Code
+        /// </summary>
         public int hashCode;
 
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="properties"></param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily")]
         public Signature(IEnumerable<DynamicProperty> properties)
         {
@@ -22,16 +37,32 @@ namespace UWay.Skynet.Cloud.Reflection
             }
         }
 
+        /// <summary>
+        /// HashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return hashCode;
         }
 
+
+        /// <summary>
+        /// 比较
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             return obj is Signature ? Equals((Signature)obj) : false;
         }
 
+
+        /// <summary>
+        /// 比较
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(Signature other)
         {
             if (properties.Length != other.properties.Length) return false;

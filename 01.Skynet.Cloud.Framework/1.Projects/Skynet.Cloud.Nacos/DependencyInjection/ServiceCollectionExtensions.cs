@@ -7,8 +7,17 @@
     using System.Net.Http;
     using UWay.Skynet.Cloud.Nacos.Config;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configure"></param>
+        /// <returns></returns>
         public static IServiceCollection AddNacos(this IServiceCollection services, Action<NacosClientConfiguration> configure)
         {
             if (services == null)
@@ -29,6 +38,13 @@
             return services;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <param name="sectionName"></param>
+        /// <returns></returns>
         public static IServiceCollection AddNacos(this IServiceCollection services, IConfiguration configuration, string sectionName = "nacos")
         {
             if (services == null)
@@ -48,6 +64,13 @@
             return services;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configure"></param>
+        /// <param name="httpClientAction"></param>
+        /// <returns></returns>
         public static IServiceCollection AddNacos(this IServiceCollection services, Action<NacosClientConfiguration> configure, Action<HttpClient> httpClientAction)
         {
             if (services == null)
@@ -69,6 +92,15 @@
             return services;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <param name="httpClientAction"></param>
+        /// <param name="sectionName"></param>
+        /// <returns></returns>
         public static IServiceCollection AddNacos(this IServiceCollection services, IConfiguration configuration, Action<HttpClient> httpClientAction, string sectionName = "UWay.Skynet.Cloud.Nacos")
         {
             if (services == null)

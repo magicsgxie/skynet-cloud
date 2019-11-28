@@ -69,6 +69,9 @@ namespace UWay.Skynet.Cloud.Data
 		WhereTermCollection whereTerms = new WhereTermCollection();
 		WhereClauseCollection clauses = new WhereClauseCollection();
 
+        /// <summary>
+        /// 
+        /// </summary>
 		public WhereClause()
 		{
 		}

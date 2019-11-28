@@ -24,8 +24,14 @@ namespace UWay.Skynet.Cloud.Data
         /// <summary>Substring. Use '%' signs in the value to match anything</summary>
         Like,
 
+        /// <summary>
+        /// ¿Õ
+        /// </summary>
         IsNull,
 
+        /// <summary>
+        /// ·Ç¿Õ
+        /// </summary>
         IsNotNull 
     }
 }

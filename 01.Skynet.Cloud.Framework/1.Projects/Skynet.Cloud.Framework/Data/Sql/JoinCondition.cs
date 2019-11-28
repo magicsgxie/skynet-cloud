@@ -30,15 +30,15 @@ namespace UWay.Skynet.Cloud.Data
 	{
 		string leftField, rightField;
 
-		/// <summary>
-		/// Creates a Natural JoinCondition
-		/// </summary>
-		/// <param name="OtherData">Name of the OtherData in both tables</param>
-		/// <remarks>
-		/// Natural join means that two table are joined on an identically named fields
-		/// in both tables
-		/// </remarks>
-		public JoinCondition(string field) : this(field, field)
+        /// <summary>
+        /// Creates a Natural JoinCondition
+        /// </summary>
+        /// <param name="field">Name of the OtherData in both tables</param>
+        /// <remarks>
+        /// Natural join means that two table are joined on an identically named fields
+        /// in both tables
+        /// </remarks>
+        public JoinCondition(string field) : this(field, field)
 		{
 		}
 

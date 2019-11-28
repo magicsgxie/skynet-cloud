@@ -78,11 +78,17 @@ namespace UWay.Skynet.Cloud.Data
             get { return alias; }
         }
 
+        /// <summary>
+        /// Sql Expression
+        /// </summary>
         internal SqlExpression Expression
         {
             get { return expr; }
         }
 
+        /// <summary>
+        /// ±í
+        /// </summary>
         public FromTerm Table
         {
             get

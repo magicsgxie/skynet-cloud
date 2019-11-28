@@ -73,35 +73,71 @@ namespace UWay.Skynet.Cloud.Linq
         /// </summary>
         [Description("不包含")]
         DoesNotContain = 11,
-
+        /// <summary>
+        /// 开头不包括
+        /// </summary>
         [Description("开头不包括")]
         IsNotStartsWith,
 
+        /// <summary>
+        /// 结尾不包括
+        /// </summary>
         [Description("结尾不包括")]
         IsNotEndsWith,
 
+        /// <summary>
+        /// 为空
+        /// </summary>
         [Description("为空")]
         IsNull,
 
+        /// <summary>
+        /// 非空
+        /// </summary>
         [Description("非空")]
         IsNotNull,
 
+        /// <summary>
+        /// 不在列表中
+        /// </summary>
         [Description("不在列表中")]
         NotIn,
 
+        /// <summary>
+        /// 日期小于等于
+        /// </summary>
         DateTimeLessThanOrEqual,
-
+        /// <summary>
+        /// Date Block
+        /// </summary>
         DateBlock, //日期用到，其余用不到
     }
 
-
+    /// <summary>
+    /// Filter Operator扩展
+    /// </summary>
     public static class FilterOperatorHelper
     {
+        /// <summary>
+        /// 转化SQL条件
+        /// </summary>
+        /// <param name="filterOperator"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string Where(this FilterOperator filterOperator, string fieldName, object value)
         {
             return Where(filterOperator, "", fieldName, value);
         }
 
+        /// <summary>
+        /// 转化SQL条件
+        /// </summary>
+        /// <param name="filterOperator"></param>
+        /// <param name="prefix"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="paramName"></param>
+        /// <returns></returns>
         public static string Where(this FilterOperator filterOperator, string prefix, string fieldName, object paramName)
         {
             string formate = string.Empty;
@@ -145,6 +181,11 @@ namespace UWay.Skynet.Cloud.Linq
             return formate;
         }
 
+        /// <summary>
+        /// 转化SQL字符
+        /// </summary>
+        /// <param name="filterOperator"></param>
+        /// <returns></returns>
         public static string SqlOperator(this FilterOperator filterOperator)
         {
             string formate = string.Empty;

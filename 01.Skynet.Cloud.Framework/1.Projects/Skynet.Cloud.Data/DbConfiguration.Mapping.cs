@@ -281,6 +281,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 批量注册特定程序集内符合特定条件的实体到数据表的映射关系
         /// </summary>
         /// <param name="typeFilter"></param>
+        /// <param name="asm"></param>
         /// <returns></returns>
         public DbConfiguration AddFromAssembly(Assembly asm, System.Func<Type, bool> typeFilter)
         {
@@ -444,66 +445,7 @@ namespace UWay.Skynet.Cloud.Data
             }
         }
 
-        /// <summary>
-        ///// 加载映射文件
-        ///// </summary>
-        //public void AddMappingFile(NetType netGenerationType)
-        //{
-        //    var path = System.AppDomain.CurrentDomain.BaseDirectory ?? AppDomain.CurrentDomain.RelativeSearchPath;
-        //    var files = Directory.EnumerateFiles(path, string.Format("uway.{0}*.mapping.xml", netGenerationType));
-        //    if (files.Any())
-        //    {
-        //        foreach (var item in files)
-        //        {
-        //            using (var stream = File.OpenRead(item))
-        //            {
-        //                try
-        //                {
-        //                    AddFile(stream);
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    sqlLogger().Log(LogLevel.Error, ex, string.Format("读取映射文件:{0}",
-        //                        item));
-        //                    continue;
-        //                }
-
-        //            }
-        //        }
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 加载映射文件
-        ///// </summary>
-        //public void AddMappingFile(NetType netGenerationType, DataBaseType databaseType)
-        //{
-        //    var path = System.AppDomain.CurrentDomain.BaseDirectory ?? AppDomain.CurrentDomain.RelativeSearchPath;
-
-           
-        //    var files = Directory.EnumerateFiles(path, string.Format("uway.{0}.{1}.mapping.xml", netGenerationType, databaseType.ToString()));
-        //    if (files.Any())
-        //    {
-        //        foreach (var item in files)
-        //        {
-        //            using (var stream = File.OpenRead(item))
-        //            {
-        //                try
-        //                {
-        //                    AddFile(stream);
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    sqlLogger().Log(LogLevel.Error, ex, string.Format("读取映射文件:{0}",
-        //                       item));
-        //                    continue;
-        //                }
-
-        //            }
-        //        }
-        //    }
-        //}
-
+       
 
         private void AddTable(string globalSchema, string @namespace, XElement item, Assembly asm)
         {

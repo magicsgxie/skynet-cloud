@@ -171,7 +171,7 @@ namespace UWay.Skynet.Cloud.Data
             return this.deferred.Contains(member);
         }
 
-
+        [Obsolete]
         internal Expression ApplyPolicy(Expression expression, MemberInfo member)
         {
             List<LambdaExpression> ops;
@@ -225,6 +225,7 @@ namespace UWay.Skynet.Cloud.Data
                 return new RelationshipIncluder(dbExpressionBuilder, policy).Visit(expression);
             }
 
+            [Obsolete]
             protected override Expression VisitProjection(ProjectionExpression proj)
             {
                 Expression projector = this.Visit(proj.Projector);

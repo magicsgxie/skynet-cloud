@@ -9,6 +9,9 @@ using UWay.Skynet.Cloud.Linq.Impl.Grouping.Aggregates;
 
 namespace UWay.Skynet.Cloud.Linq.Impl.Grouping
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [KnownType(typeof(AggregateFunctionsGroup))]
     public class AggregateFunctionsGroup : Group
     {
@@ -19,7 +22,9 @@ namespace UWay.Skynet.Cloud.Linq.Impl.Grouping
         /// <value>The aggregate functions projection.</value>
 
         public object AggregateFunctionsProjection { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<string, object> Aggregates
         {
             get

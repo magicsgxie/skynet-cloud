@@ -27,6 +27,9 @@ namespace UWay.Skynet.Cloud.Data.Render
 	/// </summary>
 	public abstract class SqlOmRenderer : ISqlOmRenderer //, IClauseRendererContext
 	{
+        /// <summary>
+        /// ǰ׺
+        /// </summary>
         protected virtual string PrefixNamed { get { return "@"; } }
         string dateFormat = "yyyy-MM-dd";
 		string dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
@@ -96,6 +99,9 @@ namespace UWay.Skynet.Cloud.Data.Render
 
         private NameValueCollection _namedParameters = new NameValueCollection();
 
+        /// <summary>
+        /// ǰ׺
+        /// </summary>
         public NameValueCollection NamedParameters
         {
             get
@@ -537,8 +543,7 @@ namespace UWay.Skynet.Cloud.Data.Render
         /// Renders a SqlExpression of type Function 
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="func"></param>
-        /// <param name="param"></param>
+        /// <param name="expr"></param>
         protected virtual void Round(StringBuilder builder, SqlExpression expr)
         {
             builder.Append("round(");

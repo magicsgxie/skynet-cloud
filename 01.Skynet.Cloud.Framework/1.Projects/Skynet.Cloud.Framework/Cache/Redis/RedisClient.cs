@@ -8,13 +8,20 @@ namespace UWay.Skynet.Cloud.Cache.Redis
 
 
  
-
+    /// <summary>
+    /// Redis客户端
+    /// </summary>
     public class RedisClient : IDisposable
     {
         private readonly int DEFAULT_PORT = 6379;
 
         private IConfiguration _config;
         private ConcurrentDictionary<string, ConnectionMultiplexer> _connections;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="config">Redis配置信息</param>
         public RedisClient(IConfiguration config)
         {
             _config = config;
@@ -81,6 +88,12 @@ namespace UWay.Skynet.Cloud.Cache.Redis
             return GetConnect(redisConfig).GetDatabase(defaultDb);
         }
 
+        /// <summary>
+        /// 获取Redis服务器
+        /// </summary>
+        /// <param name="configName"></param>
+        /// <param name="endPointsIndex"></param>
+        /// <returns></returns>
         public IServer GetServer(string configName = null, int endPointsIndex = 0)
         {
             IConfigurationSection redisConfig = CheckeConfig(configName);
@@ -100,12 +113,20 @@ namespace UWay.Skynet.Cloud.Cache.Redis
 
         }
 
+        /// <summary>
+        /// 获取订阅者
+        /// </summary>
+        /// <param name="configName"></param>
+        /// <returns></returns>
         public ISubscriber GetSubscriber(string configName = null)
         {
             IConfigurationSection redisConfig = CheckeConfig(configName);
             return GetConnect(redisConfig).GetSubscriber();
         }
 
+        /// <summary>
+        /// 销毁函数
+        /// </summary>
         public void Dispose()
         {
             if (_connections != null && _connections.Count > 0)

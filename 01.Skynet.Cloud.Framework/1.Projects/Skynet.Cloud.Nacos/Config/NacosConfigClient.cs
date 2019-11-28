@@ -14,6 +14,9 @@ using YamlDotNet.Serialization;
 
 namespace UWay.Skynet.Cloud.Nacos.Config
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class NacosConfigClient: INacosConfigClient
     {
         private readonly ILogger _logger;
@@ -23,6 +26,13 @@ namespace UWay.Skynet.Cloud.Nacos.Config
         private readonly List<Listener> listeners;
         private readonly ServerAddressManager _serverAddressManager;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loggerFactory"></param>
+        /// <param name="optionAccs"></param>
+        /// <param name="clientFactory"></param>
+        /// <param name="processor"></param>
         public NacosConfigClient(
             ILoggerFactory loggerFactory
             , IOptionsMonitor<NacosClientConfiguration> optionAccs
@@ -32,6 +42,14 @@ namespace UWay.Skynet.Cloud.Nacos.Config
             
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loggerFactory"></param>
+        /// <param name="optionAccs"></param>
+        /// <param name="clientFactory"></param>
+        /// <param name="processor"></param>
         public NacosConfigClient(
                 ILoggerFactory loggerFactory
                 , NacosClientConfiguration optionAccs
@@ -47,6 +65,11 @@ namespace UWay.Skynet.Cloud.Nacos.Config
             this._serverAddressManager = new ServerAddressManager(_options);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<string> GetConfigAsync(GetConfigRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -171,6 +194,11 @@ namespace UWay.Skynet.Cloud.Nacos.Config
            
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> PublishConfigAsync(PublishConfigRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -197,6 +225,12 @@ namespace UWay.Skynet.Cloud.Nacos.Config
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<bool> RemoveConfigAsync(RemoveConfigRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -223,6 +257,12 @@ namespace UWay.Skynet.Cloud.Nacos.Config
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public Task AddListenerAsync(AddListenerRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");
@@ -251,6 +291,12 @@ namespace UWay.Skynet.Cloud.Nacos.Config
             return Task.CompletedTask;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public Task RemoveListenerAsync(RemoveListenerRequest request)
         {
             if (request == null) throw new NacosException(ConstValue.CLIENT_INVALID_PARAM, "request param invalid");

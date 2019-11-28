@@ -48,11 +48,21 @@ namespace UWay.Skynet.Cloud.Reflection
         }
     }
 
+
+    /// <summary>
+    /// 动态属性
+    /// </summary>
     public class DynamicProperty
     {
         string name;
         Type type;
 
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         public DynamicProperty(string name, Type type)
         {
             if (name == null) throw new ArgumentNullException("name");
@@ -61,11 +71,19 @@ namespace UWay.Skynet.Cloud.Reflection
             this.type = type;
         }
 
+
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string Name
         {
             get { return name; }
         }
 
+
+        /// <summary>
+        /// 类型
+        /// </summary>
         public Type Type
         {
             get { return type; }

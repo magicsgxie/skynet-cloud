@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Data
 {
+    /// <summary>
+    /// 成员Attribute
+    /// </summary>
     public abstract class MemberAttribute : Attribute
     {
         /// <summary>

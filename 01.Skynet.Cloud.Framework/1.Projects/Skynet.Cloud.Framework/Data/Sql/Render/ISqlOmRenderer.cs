@@ -29,6 +29,9 @@ namespace UWay.Skynet.Cloud.Data.Render
 	/// </remarks>
 	public interface ISqlOmRenderer
 	{
+        /// <summary>
+        /// 参数列表
+        /// </summary>
         NameValueCollection NamedParameters { get; }
         /// <summary>
         /// Sets or returns default date format for the database

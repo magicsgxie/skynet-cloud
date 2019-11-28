@@ -7,6 +7,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>SA1101;SA1124;SA1201;SA1309;SA1310;SA1401;SA1600;SA1652;1591;CS8002</NoWarn>
+    <DocumentationFile>C:\workspace\svn\trunk\skynet-cloud\01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.ConnectorBase\Skynet.Cloud.ConnectorBase.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

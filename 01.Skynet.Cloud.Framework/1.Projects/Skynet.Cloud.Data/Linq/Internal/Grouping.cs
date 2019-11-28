@@ -8,7 +8,7 @@ using System.Linq;
 namespace UWay.Skynet.Cloud.Data.Linq.Internal
 {
     /// <summary>
-    /// Simple implementation of the IGrouping<TKey, TElement> interface
+    /// Simple implementation of the IGrouping interface
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TElement"></typeparam>

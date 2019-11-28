@@ -17,6 +17,9 @@ using System;
 
 namespace Steeltoe.CloudFoundry.Connector.Oracle
 {
+    /// <summary>
+    /// Oracle Provider ConnectorFactory
+    /// </summary>
     public class OracleProviderConnectorFactory
     {
         private OracleServiceInfo _info;

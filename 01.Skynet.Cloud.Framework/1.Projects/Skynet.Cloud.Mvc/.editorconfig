@@ -5,3 +5,6 @@ dotnet_diagnostic.CA2000.severity = suggestion
 
 # CA1031: 不捕获常规异常类型
 dotnet_diagnostic.CA1031.severity = suggestion
+
+# CA1018: 用 AttributeUsageAttribute 标记属性
+dotnet_diagnostic.CA1018.severity = suggestion

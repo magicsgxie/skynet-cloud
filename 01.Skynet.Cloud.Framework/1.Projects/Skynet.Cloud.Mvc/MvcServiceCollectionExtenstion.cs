@@ -14,13 +14,12 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace UWay.Skynet.Cloud.Extensions
 {
+
     /// <summary>
     /// Service扩展类
     /// </summary>
     public static class MvcServiceCollectionExtenstion
     {
-       
-
         /// <summary>
         /// 添加验证
         /// </summary>
@@ -67,9 +66,8 @@ namespace UWay.Skynet.Cloud.Extensions
         /// 添加用户自定义Mvc，主要再建立MvcWeb网站时使用
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddCustomMvc(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCustomMvc(this IServiceCollection services)
         {
             services.AddOptions();
             services.Configure<WebEncoderOptions>(options => options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs));

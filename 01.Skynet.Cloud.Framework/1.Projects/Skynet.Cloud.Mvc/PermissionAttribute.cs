@@ -14,20 +14,33 @@ namespace UWay.Skynet.Cloud.Mvc
     {
         public UrlAndButtonType UrlAndButtonType { get; }
 
-        public PermissionAuthorizationRequirement(string url, ButtonType buttonType, bool isPage)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strurl"></param>
+        /// <param name="buttonType"></param>
+        /// <param name="isPage"></param>
+        public PermissionAuthorizationRequirement(string strurl, ButtonType buttonType, bool isPage)
         {
             UrlAndButtonType = new UrlAndButtonType()
             {
-                Url = url,
+                Url = strurl,
                 ButtonType = (byte)buttonType,
                 IsPage = isPage
             };
         }
-        public PermissionAuthorizationRequirement(string url, byte buttonType, bool isPage)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="buttonType"></param>
+        /// <param name="isPage"></param>
+        public PermissionAuthorizationRequirement(string strurl, byte buttonType, bool isPage)
         {
             UrlAndButtonType = new UrlAndButtonType()
             {
-                Url = url,
+                Url = strurl,
                 ButtonType = buttonType,
                 IsPage = isPage
             };
@@ -46,10 +59,10 @@ namespace UWay.Skynet.Cloud.Mvc
         /// <param name="url">地址</param>
         /// <param name="buttonType">按钮类型</param>
         /// <param name="isPage">是否是页面</param>
-        public PermissionAttribute(string url = default(string), ButtonType buttonType = ButtonType.View, bool isPage = true) :
+        public PermissionAttribute(string strurl = default(string), ButtonType buttonType = ButtonType.View, bool isPage = true) :
             base(typeof(RequiresPermissionAttributeExecutor))
         {
-            Arguments = new object[] { new PermissionAuthorizationRequirement(url, buttonType, isPage) };
+            Arguments = new object[] { new PermissionAuthorizationRequirement(strurl, buttonType, isPage) };
         }
         /// <summary>
         /// 构造器
@@ -57,10 +70,10 @@ namespace UWay.Skynet.Cloud.Mvc
         /// <param name="url">地址</param>
         /// <param name="buttonType">按钮类型</param>
         /// <param name="isPage">是否是页面</param>
-        public PermissionAttribute(string url, byte buttonType, bool isPage = true) :
+        public PermissionAttribute(string strurl, byte buttonType, bool isPage = true) :
             base(typeof(RequiresPermissionAttributeExecutor))
         {
-            Arguments = new object[] { new PermissionAuthorizationRequirement(url, buttonType, isPage) };
+            Arguments = new object[] { new PermissionAuthorizationRequirement(strurl, buttonType, isPage) };
         }
 
         private class RequiresPermissionAttributeExecutor : Attribute, IAsyncResourceFilter
@@ -97,15 +110,16 @@ namespace UWay.Skynet.Cloud.Mvc
                 //var authorities = context.HttpContext.User.Claims.Where(p => p.Type.Equals( "authorities")).Select(o => o.Value).ToList();
                 if(context.HttpContext.User.HasPermission(menuUrl))
                 {
-                    await next();
+                    await next().ConfigureAwait(false);
                 } else
                 {
+                    string innermsg = PermissionStatusCodes.Status2Unauthorized+"";
                     context.Result = new ContentResult()
                     {
-                        Content = PermissionStatusCodes.Status2Unauthorized.ToString()
+                        Content = innermsg
                     };
 
-                    await context.Result.ExecuteResultAsync(context);
+                    await context.Result.ExecuteResultAsync(context).ConfigureAwait(false);
                 }
             }
         }

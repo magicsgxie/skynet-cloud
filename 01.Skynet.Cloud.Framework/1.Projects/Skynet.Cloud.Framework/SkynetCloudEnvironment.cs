@@ -6,6 +6,10 @@ using UWay.Skynet.Cloud.Extensions;
 
 namespace UWay.Skynet.Cloud
 {
+
+    /// <summary>
+    /// 基础框架环境变量
+    /// </summary>
     public class SkynetCloudEnvironment
     {
         internal static string PropertiesFile;

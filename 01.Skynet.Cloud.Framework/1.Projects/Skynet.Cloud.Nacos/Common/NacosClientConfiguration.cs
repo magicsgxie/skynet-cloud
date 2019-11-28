@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace UWay.Skynet.Cloud.Nacos
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class NacosClientConfiguration
     {
 
@@ -23,6 +26,10 @@ namespace UWay.Skynet.Cloud.Nacos
         /// default namespace
         /// </summary>
         public string Namespace { get; set; } = "";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsSecure { set; get; }
 
         /// <summary>
@@ -51,6 +58,9 @@ namespace UWay.Skynet.Cloud.Nacos
         /// </summary>
         public int Interval { get; set; } = 8000;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<string, string> Metadata { set; get; }
 
 

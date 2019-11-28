@@ -9,9 +9,19 @@ namespace UWay.Skynet.Cloud.Data.Common
 {
     public class ParameterHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
         // Helper to handle named parameters from object properties
         public static Regex rxParamsPrefix = new Regex(@"(?<!@)@\w+", RegexOptions.Compiled);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_sql"></param>
+        /// <param name="args_src"></param>
+        /// <param name="args_dest"></param>
+        /// <returns></returns>
         public static string ProcessParams(string _sql, object[] args_src, List<object> args_dest)
         {
             return rxParamsPrefix.Replace(_sql, m =>

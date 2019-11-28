@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Nacos
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface INacosConfigClient
     {
         /// <summary>

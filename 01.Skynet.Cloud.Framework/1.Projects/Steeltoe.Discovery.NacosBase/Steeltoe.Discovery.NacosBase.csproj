@@ -5,6 +5,10 @@
     <RootNamespace>Steeltoe.Discovery.Nacos</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\workspace\svn\trunk\skynet-cloud\01.Skynet.Cloud.Framework\1.Projects\Steeltoe.Discovery.NacosBase\Steeltoe.Discovery.NacosBase.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Common" Version="2.2.0" />

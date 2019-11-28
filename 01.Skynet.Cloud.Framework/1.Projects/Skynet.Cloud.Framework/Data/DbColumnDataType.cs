@@ -8,30 +8,81 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Data
 {
+    /// <summary>
+    /// 列数据类型
+    /// </summary>
     public class DbColumnDataType
     {
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
         public DatabaseType DatabaseType { get; set; }
 
+        /// <summary>
+        /// 列类型
+        /// </summary>
         public string ColumnTypes { get; set; }
 
+        /// <summary>
+        /// CSharp类型
+        /// </summary>
         public string CSharpType { get; set; }
     }
 
+    /// <summary>
+    /// 数据库类型
+    /// </summary>
     public enum DatabaseType
     {
+        /// <summary>
+        /// MSSQL
+        /// </summary>
         MSSQL,
+        /// <summary>
+        /// MySQL
+        /// </summary>
         MySQL,
+        /// <summary>
+        /// PostgreSQL
+        /// </summary>
         PostgreSQL,
+        /// <summary>
+        /// SQLite
+        /// </summary>
         SQLite,
+        /// <summary>
+        /// InMemory
+        /// </summary>
         InMemory,
+        /// <summary>
+        /// Oracle
+        /// </summary>
         Oracle,
+        /// <summary>
+        /// MariaDB
+        /// </summary>
         MariaDB,
+        /// <summary>
+        /// MyCat
+        /// </summary>
         MyCat,
+        /// <summary>
+        /// Firebird
+        /// </summary>
         Firebird,
+        /// <summary>
+        /// DB2
+        /// </summary>
         DB2,
+        /// <summary>
+        /// Access
+        /// </summary>
         Access
     }
 
+    /// <summary>
+    /// 数据库列类型列表
+    /// </summary>
     public class DbColumnTypeCollection
     {
         public static IList<DbColumnDataType> DbColumnDataTypes=>new List<DbColumnDataType>()

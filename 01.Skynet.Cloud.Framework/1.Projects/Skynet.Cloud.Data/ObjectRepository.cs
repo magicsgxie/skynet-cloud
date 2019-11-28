@@ -112,6 +112,7 @@ namespace UWay.Skynet.Cloud.Data
 
         /// <summary>
         /// 批量插入
+        /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="M"></typeparam>
         /// <param name="instances"></param>
@@ -136,7 +137,6 @@ namespace UWay.Skynet.Cloud.Data
         /// </code>
         /// </example>
         /// <returns>IEnumerable int</returns>
-
         protected IEnumerable<int> Batch<T, M>(IEnumerable<M> instances, Expression<Func<IRepository<T>, M, int>> fnOperation)
         {
             return dbContext.Set<T>().Batch<M>(instances, fnOperation);
@@ -484,6 +484,14 @@ namespace UWay.Skynet.Cloud.Data
             return Query<T>(sql, namedParameters, isAutoClose);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="namedParameters"></param>
+        /// <param name="isAutoClose"></param>
+        /// <returns></returns>
         protected IEnumerable<T> Query<T>(string sql,  dynamic namedParameters = null, bool isAutoClose = true) where T : new()
         {
             //var sql = dbContext.DbConfiguration.Driver.Render.RenderSelect(query);
@@ -496,6 +504,14 @@ namespace UWay.Skynet.Cloud.Data
             //return entitys;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="namedParameters"></param>
+        /// <param name="isAutoClose"></param>
+        /// <returns></returns>
         protected T SingleOrDefault<T>(string sql, dynamic namedParameters = null, bool isAutoClose = true) where T : new()
         {
             //var sql = dbContext.DbConfiguration.Driver.Render.RenderSelect(query);
@@ -701,9 +717,8 @@ namespace UWay.Skynet.Cloud.Data
         /// <summary>
         /// 执行分页查询
         /// </summary>
-        /// <param name="sql">查询语句</param>
-        /// <param name="pagination">分页信息</param>
-        /// <param name="namedParameters">参数,可以为匿名类，IDictionary，Hashtable,NameValueCollection</param>
+        /// <param name="query">查询语句</param>
+        /// <param name="request">分页信息</param>
         /// <param name="isAutoClose">是否自动关闭连接</param>
         /// <returns>首行首列值</returns>
         protected DataSourceResult Page<T>(SelectQuery query, DataSourceRequest request, bool isAutoClose = true) where T : new()
@@ -731,8 +746,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 执行分页查询
         /// </summary>
         /// <param name="sql">查询语句</param>
-        /// <param name="pagination">分页信息</param>
-        /// <param name="namedParameters">参数,可以为匿名类，IDictionary，Hashtable,NameValueCollection</param>
+        /// <param name="request">分页信息</param>
         /// <param name="isAutoClose">是否自动关闭连接</param>
         /// <returns>首行首列值</returns>
         protected DataSourceResult Page<T>(string sql, DataSourceRequest request, bool isAutoClose = true) where T:new ()
@@ -758,8 +772,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 执行分页查询
         /// </summary>
         /// <param name="sql">查询语句</param>
-        /// <param name="pagination">分页信息</param>
-        /// <param name="namedParameters">参数,可以为匿名类，IDictionary，Hashtable,NameValueCollection</param>
+        /// <param name="request">分页信息</param>
         /// <param name="isAutoClose">是否自动关闭连接</param>
         /// <returns>首行首列值</returns>
         protected DataSourceTableResult Page(string sql, DataSourceRequest request, bool isAutoClose = true)
@@ -787,8 +800,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 执行分页查询
         /// </summary>
         /// <param name="query">查询语句</param>
-        /// <param name="pagination">分页信息</param>
-        /// <param name="namedParameters">参数,可以为匿名类，IDictionary，Hashtable,NameValueCollection</param>
+        /// <param name="request">分页信息</param>
         /// <param name="isAutoClose">是否自动关闭连接</param>
         /// <returns>首行首列值</returns>
         public DataSourceTableResult Page(SelectQuery query, DataSourceRequest request, bool isAutoClose = true)
@@ -816,6 +828,7 @@ namespace UWay.Skynet.Cloud.Data
         /// <summary>
         /// 导出CSV文件
         /// </summary>
+        /// <param name="fileHanlder">文件信息</param>
         /// <param name="fileName">文件信息</param>
         /// <param name="columns">列头</param>
         /// <param name="sql">查询语句</param>
@@ -891,12 +904,13 @@ namespace UWay.Skynet.Cloud.Data
             }
         }
 
-        
-        
+
+
 
         /// <summary>
         /// 异步导出CSV文件
         /// </summary>
+        /// <param name="fileHanlder">文件处理器.</param>
         /// <param name="userId">用户ID.</param>
         /// <param name="fileName">文件名称.</param>
         /// <param name="columns">列头.</param>
@@ -929,13 +943,21 @@ namespace UWay.Skynet.Cloud.Data
             return task;
         }
 
+        /// <summary>
+        /// Schema
+        /// </summary>
         protected IDatabaseSchema Schema
         {
             get { return dbContext.DbConfiguration.Schema; }
         }
 
 
-
+        /// <summary>
+        /// Data Base 
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         protected string GetQueryDataBaseTableSql(string tableName, IDictionary<string, object> parameters)
         {
             //dbContext.DbConfiguration.Schema
@@ -955,6 +977,11 @@ namespace UWay.Skynet.Cloud.Data
             return sql;
         }
 
+        /// <summary>
+        /// Data Base 
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
         protected string GetQueryDataBaseTableColumnSql(string tableName)
         {
 

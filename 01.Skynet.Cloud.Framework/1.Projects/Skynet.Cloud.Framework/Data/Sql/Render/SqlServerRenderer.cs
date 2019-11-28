@@ -122,6 +122,10 @@ namespace UWay.Skynet.Cloud.Data.Render
 			return RenderSelect(countQuery).Replace("\"", "").SimplifyBracket();
 		}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string QueryTable()
         {
             return @"select * from (
@@ -132,6 +136,10 @@ namespace UWay.Skynet.Cloud.Data.Render
 		) t";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string QueryTableByTableName()
         {
             return @"select * from (
@@ -142,6 +150,10 @@ namespace UWay.Skynet.Cloud.Data.Render
 		    ) t where t.tableName=@tableName";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string QueryTableColumns()
         {
             return @"select * from (

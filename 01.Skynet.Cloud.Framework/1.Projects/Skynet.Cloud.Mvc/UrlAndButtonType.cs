@@ -9,10 +9,19 @@ namespace UWay.Skynet.Cloud.Mvc
     /// </summary>
     public class UrlAndButtonType
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Url { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public byte ButtonType { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsPage { get; set; }
     }
 }

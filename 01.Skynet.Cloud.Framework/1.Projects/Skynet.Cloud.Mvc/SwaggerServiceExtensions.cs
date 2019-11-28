@@ -22,6 +22,7 @@ namespace UWay.Skynet.Cloud.Mvc
         /// <returns></returns>
         public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services, IConfiguration configuration)
         {
+            Guard.NotNull(configuration, "configuration");
             var version = configuration.GetSection("swagger").GetValue<string>("version");
             var apiName = configuration.GetSection("swagger").GetValue<string>("name");
             var description = configuration.GetSection("swagger").GetValue<string>("description");
@@ -32,7 +33,7 @@ namespace UWay.Skynet.Cloud.Mvc
                 // Swagger 2.+ support
                 var security = new Dictionary<string, IEnumerable<string>>
                 {
-                    {"Bearer", new string[] { }},
+                    {"Bearer", Array.Empty<string>()},
                 };
 
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
@@ -56,6 +57,7 @@ namespace UWay.Skynet.Cloud.Mvc
         /// <returns></returns>
         public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app, IConfiguration configuration)
         {
+            Guard.NotNull(configuration, "configuration");
             var version = configuration.GetSection("swagger").GetValue<string>("version");
             var apiName = configuration.GetSection("swagger").GetValue<string>("name");
             app.UseSwagger();

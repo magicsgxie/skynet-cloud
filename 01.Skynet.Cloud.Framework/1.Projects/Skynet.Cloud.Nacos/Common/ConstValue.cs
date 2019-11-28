@@ -1,5 +1,8 @@
 ﻿namespace UWay.Skynet.Cloud.Nacos
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ConstValue
     {
         /// <summary>

@@ -8,17 +8,29 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud.Steganogram
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AESCryption
     {
         private byte[] IV;//偏移向量
         private string KEY;//密钥
         Encoding encoding = new UTF8Encoding();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="iv"></param>
         public AESCryption(string key, string iv)
         {
             this.IV = encoding.GetBytes(iv);
             this.KEY = key;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="iv"></param>
         public AESCryption(string key, byte[] iv)
         {
             this.IV = iv;

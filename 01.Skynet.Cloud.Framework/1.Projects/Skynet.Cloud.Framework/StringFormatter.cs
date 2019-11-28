@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UWay.Skynet.Cloud
 {
+    /// <summary>
+    /// 字符串格式化工具
+    /// </summary>
     public sealed class StringFormatter
     {
         private static Dictionary<string, ITagFormatProvider> formatters = new Dictionary<string, ITagFormatProvider>();

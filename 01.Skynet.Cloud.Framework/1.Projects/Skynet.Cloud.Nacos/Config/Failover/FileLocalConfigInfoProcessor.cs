@@ -3,12 +3,21 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class FileLocalConfigInfoProcessor : ILocalConfigInfoProcessor
     {
         private readonly string FAILOVER_BASE = Path.Combine(Directory.GetCurrentDirectory(), "UWay.Skynet.Cloud.Nacos-data", "data");
         private readonly string SNAPSHOT_BASE = Path.Combine(Directory.GetCurrentDirectory(), "UWay.Skynet.Cloud.Nacos-data", "snapshot");
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataId"></param>
+        /// <param name="group"></param>
+        /// <param name="tenant"></param>
+        /// <returns></returns>
         public async Task<string> GetFailoverAsync(string dataId, string group, string tenant)
         {
             string failoverFile;
@@ -32,6 +41,13 @@
             return await Task.FromResult(config);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataId"></param>
+        /// <param name="group"></param>
+        /// <param name="tenant"></param>
+        /// <returns></returns>
         public async Task<string> GetSnapshotAync(string dataId, string group, string tenant)
         {
             FileInfo file = GetSnapshotFile(dataId, group, tenant);
@@ -61,6 +77,14 @@
             return file;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataId"></param>
+        /// <param name="group"></param>
+        /// <param name="tenant"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public async Task SaveSnapshotAsync(string dataId, string group, string tenant, string config)
         {
             FileInfo snapshotFile = GetSnapshotFile(dataId, group, tenant);

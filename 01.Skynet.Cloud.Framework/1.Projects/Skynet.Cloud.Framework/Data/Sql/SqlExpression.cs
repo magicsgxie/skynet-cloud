@@ -49,6 +49,10 @@ namespace UWay.Skynet.Cloud.Data
 		CaseClause caseClause = new CaseClause();
 		SqlExpression subExpr1, subExpr2;
 
+
+        /// <summary>
+        /// ¹¹Ôìº¯Êý
+        /// </summary>
 		private SqlExpression()
 		{
 		}

@@ -11,8 +11,15 @@ namespace UWay.Skynet.Cloud.Data
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public class VersionAttribute : ColumnAttribute
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public VersionAttribute() { }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
         public VersionAttribute(string name) : base(name) { }
     }
 

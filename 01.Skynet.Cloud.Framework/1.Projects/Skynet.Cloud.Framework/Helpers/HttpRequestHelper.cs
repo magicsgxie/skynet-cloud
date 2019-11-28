@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 
 namespace UWay.Skynet.Cloud.Helpers
 {
+    /// <summary>
+    /// Http请求扩展类
+    /// </summary>
     public static class HttpRequestHelper
     {
         #region 同步方法
@@ -16,6 +19,7 @@ namespace UWay.Skynet.Cloud.Helpers
         /// </summary>
         /// <param name="url"></param>
         /// <param name="encoding"></param>
+        /// <param name="timeOut"></param>
         /// <returns></returns>
         public static string HttpGet(string url, Encoding encoding = null, int timeOut = 60000)
         {
@@ -62,6 +66,7 @@ namespace UWay.Skynet.Cloud.Helpers
         /// <param name="url"></param>
         /// <param name="postData"></param>
         /// <param name="encoding"></param>
+        /// <param name="headers"></param>
         /// <returns></returns>
         public static string HttpPost(string url, string postData, Encoding encoding = null, Dictionary<string, string> headers = null)
         {
@@ -69,7 +74,7 @@ namespace UWay.Skynet.Cloud.Helpers
                 encoding = Encoding.UTF8;
             if (string.IsNullOrWhiteSpace(postData))
                 throw new ArgumentNullException("postData");
-            byte[] data = encoding.GetBytes(postData);
+            //byte[] data = encoding.GetBytes(postData);
             MemoryStream stream = new MemoryStream();
             var formDataBytes = postData == null ? new byte[0] : Encoding.UTF8.GetBytes(postData);
             stream.Write(formDataBytes, 0, formDataBytes.Length);
@@ -83,6 +88,7 @@ namespace UWay.Skynet.Cloud.Helpers
         /// <param name="url"></param>
         /// <param name="dataObj">传输对象，转换为JSON传输</param>
         /// <param name="encoding"></param>
+        /// <param name="headers"></param>
         /// <returns></returns>
         public static string HttpPost(string url, object dataObj, Encoding encoding = null, Dictionary<string, string> headers = null)
         {
@@ -106,6 +112,7 @@ namespace UWay.Skynet.Cloud.Helpers
         /// <param name="postStream"></param>
         /// <param name="contentType"></param>
         /// <param name="encoding"></param>
+        /// <param name="headers"></param>
         /// <param name="timeOut"></param>
         /// <returns></returns>
         public static string HttpPost(string url, Stream postStream = null, string contentType = "application/x-www-form-urlencoded", Encoding encoding = null, Dictionary<string, string> headers=null, int timeOut = 60000)
@@ -163,6 +170,11 @@ namespace UWay.Skynet.Cloud.Helpers
 
         #endregion
 
+        /// <summary>
+        /// 获取FormData
+        /// </summary>
+        /// <param name="formData"></param>
+        /// <param name="stream"></param>
         public static void FillFormDataStream(this Dictionary<string, string> formData, Stream stream)
         {
             string dataString = GetQueryString(formData);

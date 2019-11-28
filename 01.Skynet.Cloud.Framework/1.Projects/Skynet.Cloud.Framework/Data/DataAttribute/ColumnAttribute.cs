@@ -12,22 +12,40 @@ namespace UWay.Skynet.Cloud.Data
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public class ColumnAttribute : MemberAttribute
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public ColumnAttribute()
         {
             DbType = DBType.Unkonw;
             IsNullable = true;
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="name">列名</param>
         public ColumnAttribute(string name):this(name, DBType.Unkonw, string.Empty)
         {
             
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="name">列名</param>
+        /// <param name="comment">注释</param>
         public ColumnAttribute(string name, string comment) : this(name, DBType.Unkonw, comment)
         {
 
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="name">列名</param>
+        /// <param name="dBType">数据类型</param>
+        /// <param name="comment">注释</param>
         public ColumnAttribute(string name, DBType dBType, string comment)
         {
             Name = name;

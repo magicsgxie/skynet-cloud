@@ -7,19 +7,31 @@ using System.Text;
 
 namespace UWay.Skynet.Cloud.Nacos
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class NacosDiscoveryOptions
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public const string NACOS_DISCOVERY_CONFIGURATION_PREFIX = "nacos:discovery";
         private string _hostName;
         private string _hostAddress;
         //private string _scheme = "http";
 
+        /// <summary>
+        /// 
+        /// </summary>
         public NacosDiscoveryOptions()
         {
             _hostName = ResolveHostName();
             _hostAddress = ResolveHostAddress(_hostName);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Cluster { set; get; }
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets FailFast Throw exceptions during
@@ -57,7 +69,9 @@ namespace UWay.Skynet.Cloud.Nacos
         /// </summary>
         public string Namespace { get; set; } = "";
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string ClusterName { set; get; }
 
         /// <summary>
@@ -79,7 +93,9 @@ namespace UWay.Skynet.Cloud.Nacos
             set => _hostName = value;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string Host { set; get; }
 
         /// <summary>
@@ -141,7 +157,11 @@ namespace UWay.Skynet.Cloud.Nacos
         public bool IsSecure { get; set; } = false;
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hostName"></param>
+        /// <returns></returns>
         protected virtual string ResolveHostAddress(string hostName)
         {
             string result = null;
@@ -168,6 +188,10 @@ namespace UWay.Skynet.Cloud.Nacos
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         protected virtual string ResolveHostName()
         {
             string result = null;

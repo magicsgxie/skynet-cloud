@@ -65,16 +65,15 @@ namespace UWay.Skynet.Cloud.Data
 			this.AddRange(items);
 		}
 
-		/// <summary>
-		/// Creates a SqlConstantCollection from a list of values.
-		/// </summary>
-		/// <remarks>
-		/// The type of SqlConstant items in the collection is determined automatically.
-		/// See <see cref="Add"/> method for more info.
-		/// </remarks>
-		/// <param name="values"></param>
-		/// <returns></returns>
-		public static SqlConstantCollection FromList(IList values)
+        /// <summary>
+        /// Creates a SqlConstantCollection from a list of values.
+        /// </summary>
+        /// <remarks>
+        /// The type of SqlConstant items in the collection is determined automatically.
+        /// </remarks>
+        /// <param name="values">ֵ</param>
+        /// <returns></returns>
+        public static SqlConstantCollection FromList(IList values)
 		{
 			SqlConstantCollection collection = new SqlConstantCollection(values.Count);
 			foreach(object val in values)

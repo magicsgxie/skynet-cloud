@@ -29,7 +29,9 @@ namespace UWay.Skynet.Cloud.Data.Render
     /// </remarks>
     public class OracleRenderer : SqlOmRenderer
 	{
-
+        /// <summary>
+        /// 前缀
+        /// </summary>
         protected override string PrefixNamed
         {
             get
@@ -187,6 +189,10 @@ namespace UWay.Skynet.Cloud.Data.Render
             builder.AppendFormat(" {0}", dir);
         }
 
+        /// <summary>
+        /// 查询所有表
+        /// </summary>
+        /// <returns></returns>
         public override string QueryTable()
         {
             
@@ -199,6 +205,10 @@ namespace UWay.Skynet.Cloud.Data.Render
             where dt.table_name = dtc.table_name and dt.table_name = uo.object_name and uo.object_type = 'TABLE'";
         }
 
+        /// <summary>
+        /// 查询单表
+        /// </summary>
+        /// <returns></returns>
         public override string QueryTableByTableName()
         {
             return @"select dt.table_name tableName,
@@ -213,6 +223,10 @@ namespace UWay.Skynet.Cloud.Data.Render
                 order by uo.CREATED desc";
         }
 
+        /// <summary>
+        /// 查询表结构
+        /// </summary>
+        /// <returns></returns>
         public override string QueryTableColumns()
         {
             return @"select temp.column_name columnname,

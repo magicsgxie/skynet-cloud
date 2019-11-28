@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\workspace\svn\trunk\skynet-cloud\01.Skynet.Cloud.Framework\1.Projects\Steeltoe.Configuration.NacosServerBase\Steeltoe.Configuration.NacosServerBase.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Steeltoe.Common.Http" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase" Version="2.2.0" />

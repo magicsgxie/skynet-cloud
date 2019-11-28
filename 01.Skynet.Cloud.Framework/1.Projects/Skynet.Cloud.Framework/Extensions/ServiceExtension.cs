@@ -57,6 +57,13 @@ namespace UWay.Skynet.Cloud.Extensions
             }
             return service;
         }
+
+        /// <summary>
+        /// 添加Assembly
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="interfaceAssemblyName"></param>
+        /// <returns></returns>
         public static IServiceCollection AddScopedAssembly(this IServiceCollection service, string interfaceAssemblyName)
         {
             if (service == null)
@@ -83,6 +90,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return service;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns></returns>
         public static IServiceCollection AddScopServiceAssmbly(this IServiceCollection service)
         {
             var assemblys = RuntimeHelper.GetServicesAssembly();
@@ -97,6 +109,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return service;
         }
 
+        /// <summary>
+        /// 添加单例Assembly
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="interfaceAssemblyName"></param>
+        /// <returns></returns>
         public static IServiceCollection AddSingletonAssembly(this IServiceCollection service, string interfaceAssemblyName)
         {
             if (service == null)
@@ -188,6 +206,13 @@ namespace UWay.Skynet.Cloud.Extensions
         //    var assmbly = RuntimeHelper.GetServicesAssembly();
         //}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="interfaceAssemblyName"></param>
+        /// <param name="implementAssemblyName"></param>
+        /// <returns></returns>
         public static IServiceCollection AddTransientAssembly(this IServiceCollection service, string interfaceAssemblyName, string implementAssemblyName)
         {
             if (service == null)
@@ -226,6 +251,14 @@ namespace UWay.Skynet.Cloud.Extensions
 
             return service;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="interfaceAssemblyName"></param>
+        /// <param name="implementAssemblyName"></param>
+        /// <returns></returns>
         public static IServiceCollection AddSingletonAssembly(this IServiceCollection service, string interfaceAssemblyName, string implementAssemblyName)
         {
             if (service == null)
@@ -265,6 +298,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return service;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="controllerAssemblyName"></param>
+        /// <returns></returns>
         public static IServiceCollection RegisterControllers(this IServiceCollection service,
             string controllerAssemblyName)
         {
@@ -329,11 +368,23 @@ namespace UWay.Skynet.Cloud.Extensions
             services.AddSingleton<IDistributedCache>(new Microsoft.Extensions.Caching.Redis.CSRedisCache(RedisHelper.Instance));
             return services;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceProvider BuildAutofacServiceProvider(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             return AutofacContainer.Build(services);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configure"></param>
+        /// <returns></returns>
         public static IServiceProvider BuildAspectCoreWithAutofacServiceProvider(this IServiceCollection services, Action<IAspectConfiguration> configure = null)
         {
             if(services==null)throw new ArgumentNullException(nameof(services));
@@ -342,6 +393,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return AutofacContainer.Build(services, configure);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configure"></param>
+        /// <returns></returns>
         public static IServiceContainer BuildAspectCoreServiceContainer(this IServiceCollection services,
             Action<IAspectConfiguration> configure = null)
         {
@@ -351,6 +408,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return services.ToServiceContainer();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configure"></param>
+        /// <returns></returns>
         public static IServiceProvider BuildAspectCoreServiceProvider(this IServiceCollection services,
             Action<IAspectConfiguration> configure = null)
         {

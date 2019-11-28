@@ -144,7 +144,7 @@ namespace UWay.Skynet.Cloud.Data.Linq.Translation
             }
         }
 
-
+        [Obsolete]
         protected override Expression VisitClientJoin(ClientJoinExpression join)
         {
             // convert client join into a up-front lookup table builder & replace client-join in tree with lookup accessor

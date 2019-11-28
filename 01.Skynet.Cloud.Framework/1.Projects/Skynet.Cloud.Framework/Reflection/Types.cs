@@ -217,6 +217,11 @@ namespace UWay.Skynet.Cloud.Reflection
     /// </summary>
     public static class TypeHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="seqType"></param>
+        /// <returns></returns>
         public static Type FindIEnumerable(this Type seqType)
         {
             if (seqType == null || seqType == typeof(string))
@@ -540,6 +545,11 @@ namespace UWay.Skynet.Cloud.Reflection
             typeof(Convert)
         };
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsPredefinedType(this Type type)
         {
             foreach (Type t in PredefinedTypes)
@@ -553,17 +563,32 @@ namespace UWay.Skynet.Cloud.Reflection
         }
 
  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
 
         public static bool IsNullableType(this Type type)
         {
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static Type GetNonNullableType(this Type type)
         {
             return IsNullableType(type) ? type.GetGenericArguments()[0] : type;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static string GetTypeName(this Type type)
         {
             Type baseType = GetNonNullableType(type);
@@ -572,21 +597,42 @@ namespace UWay.Skynet.Cloud.Reflection
             return s;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsNumericType(this Type type)
         {
             return GetNumericTypeKind(type) != 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsSignedIntegralType(this Type type)
         {
             return GetNumericTypeKind(type) == 2;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsUnsignedIntegralType(this Type type)
         {
             return GetNumericTypeKind(type) == 3;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static int GetNumericTypeKind(this Type type)
         {
             if (type == null)
@@ -623,6 +669,13 @@ namespace UWay.Skynet.Cloud.Reflection
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="indexerArguments"></param>
+        /// <returns></returns>
         public static PropertyInfo GetIndexerPropertyInfo(this Type type, params Type[] indexerArguments)
         {
             return
@@ -652,6 +705,13 @@ namespace UWay.Skynet.Cloud.Reflection
             return true;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
         public static bool IsCompatibleWith(this Type source, Type target)
         {
             if (source == target) return true;
@@ -776,6 +836,12 @@ namespace UWay.Skynet.Cloud.Reflection
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="genericType"></param>
+        /// <returns></returns>
         public static Type FindGenericType(this Type type, Type genericType)
         {
             while (type != null && type != typeof(object))
@@ -794,11 +860,22 @@ namespace UWay.Skynet.Cloud.Reflection
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static string GetName(this Type type)
         {
             return type.FullName.Replace(type.Namespace + ".", "");
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static object DefaultValue(this Type type)
         {
             if (type.IsValueType)
@@ -806,6 +883,13 @@ namespace UWay.Skynet.Cloud.Reflection
             return null;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="memberName"></param>
+        /// <returns></returns>
         public static MemberInfo FindPropertyOrField(this Type type, string memberName)
         {
             MemberInfo memberInfo = type.FindPropertyOrField(memberName, false);
@@ -818,6 +902,14 @@ namespace UWay.Skynet.Cloud.Reflection
             return memberInfo;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="memberName"></param>
+        /// <param name="staticAccess"></param>
+        /// <returns></returns>
         public static MemberInfo FindPropertyOrField(this Type type, string memberName, bool staticAccess)
         {
             BindingFlags flags = BindingFlags.Public | BindingFlags.DeclaredOnly |
@@ -832,6 +924,11 @@ namespace UWay.Skynet.Cloud.Reflection
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static IEnumerable<Type> SelfAndBaseTypes(this Type type)
         {
             if (type.IsInterface)
@@ -843,6 +940,12 @@ namespace UWay.Skynet.Cloud.Reflection
             return SelfAndBaseClasses(type);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static IEnumerable<Type> SelfAndBaseClasses(this Type type)
         {
             while (type != null)
@@ -852,6 +955,12 @@ namespace UWay.Skynet.Cloud.Reflection
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="types"></param>
+        /// <param name="type"></param>
         static void AddInterface(List<Type> types, Type type)
         {
             if (!types.Contains(type))
@@ -861,21 +970,45 @@ namespace UWay.Skynet.Cloud.Reflection
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsDataRow(this Type type)
         {
             return type.IsCompatibleWith(typeof(DataRow)) || type.IsCompatibleWith(typeof(DataRowView));
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsDynamicObject(this Type type)
         {
             return type == typeof(object) || type.IsCompatibleWith(typeof(System.Dynamic.IDynamicMetaObjectProvider));
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsDateTime(this Type type)
         {
             return type == typeof(DateTime) || type == typeof(DateTime?);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static string FirstSortableProperty(this Type type)
         {
             PropertyInfo firstSortableProperty = type.GetProperties().Where(property => property.PropertyType.IsPredefinedType()).FirstOrDefault();
@@ -888,6 +1021,12 @@ namespace UWay.Skynet.Cloud.Reflection
             return firstSortableProperty.Name;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static string ToJavaScriptType(this Type type)
         {
             if (type == null)
@@ -933,6 +1072,12 @@ namespace UWay.Skynet.Cloud.Reflection
             return "Object";
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool IsPlainType(this Type type)
         {
             return !type.IsDynamicObject() && !type.IsDataRow() && !(type.IsCompatibleWith(typeof(ICustomTypeDescriptor)));

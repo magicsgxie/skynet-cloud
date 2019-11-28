@@ -4,8 +4,17 @@ using System.Text.RegularExpressions;
 
 namespace UWay.Skynet.Cloud.Extensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class StringExtensions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static object ParseTo(this string str, string type)
         {
             switch (type)
@@ -42,6 +51,11 @@ namespace UWay.Skynet.Cloud.Extensions
             throw new NotSupportedException(string.Format("The string of \"{0}\" can not be parsed to {1}", str, type));
         }
 
+        /// <summary>
+        /// 字符串转化为sbyte
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static sbyte? ToSByte(this string value)
         {
             sbyte value2;
@@ -52,6 +66,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为byte
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static byte? ToByte(this string value)
         {
             byte value2;
@@ -62,6 +81,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为UInt16
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static ushort? ToUInt16(this string value)
         {
             ushort value2;
@@ -72,6 +96,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+
+        /// <summary>
+        /// 字符串转化为Int16
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static short? ToInt16(this string value)
         {
             short value2;
@@ -82,6 +112,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为UInt32
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static uint? ToUInt32(this string value)
         {
             uint value2;
@@ -92,6 +127,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为UInt64
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static ulong? ToUInt64(this string value)
         {
             ulong value2;
@@ -102,6 +142,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为Int64
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static long ToInt64(this string value)
         {
             long value2 = -1;
@@ -112,6 +157,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return value2;
         }
 
+        /// <summary>
+        /// 字符串转化为Int64
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static long? ToNullInt64(this string value)
         {
             long value2;
@@ -122,6 +172,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为float
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static float? ToSingle(this string value)
         {
             float value2;
@@ -132,6 +187,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为double
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static double? ToDouble(this string value)
         {
             double value2;
@@ -142,6 +202,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为decimal
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static decimal? ToDecimal(this string value)
         {
             decimal value2;
@@ -152,6 +217,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为Boolean
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static bool? ToBoolean(this string value)
         {
             bool value2;
@@ -162,6 +232,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为枚举类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static T? ToEnum<T>(this string str) where T : struct
         {
             T t;
@@ -172,6 +248,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为Guid
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static Guid? ToGuid(this string str)
         {
             Guid value;
@@ -182,6 +263,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+        /// <summary>
+        /// 字符串转化为时间
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTime? ToDateTime(this string value)
         {
             DateTime value2;
@@ -192,6 +278,12 @@ namespace UWay.Skynet.Cloud.Extensions
             return null;
         }
 
+
+        /// <summary>
+        /// 字符串转化为int
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static int? ToInt32(this string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -207,7 +299,7 @@ namespace UWay.Skynet.Cloud.Extensions
         }
 
         /// <summary>
-        ///     替换空格字符
+        /// 替换空格字符
         /// </summary>
         /// <param name="input"></param>
         /// <param name="replacement">替换为该字符</param>
@@ -231,7 +323,7 @@ namespace UWay.Skynet.Cloud.Extensions
         }
 
         /// <summary>
-        ///     清除 Html 代码，并返回指定长度的文本。(连续空行或空格会被替换为一个)
+        ///  清除 Html 代码，并返回指定长度的文本。(连续空行或空格会被替换为一个)
         /// </summary>
         /// <param name="text"></param>
         /// <param name="maxLength">返回的文本长度（为0返回所有文本）</param>
@@ -255,6 +347,11 @@ namespace UWay.Skynet.Cloud.Extensions
             return text;
         }
 
+        /// <summary>
+        /// 字符串转化为驼峰格式
+        /// </summary>
+        /// <param name="original"></param>
+        /// <returns></returns>
         public static string ToPascalCase(this string original)
         {
             Regex invalidCharsRgx = new Regex("[^_a-zA-Z0-9]");

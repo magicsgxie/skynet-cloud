@@ -10,10 +10,17 @@ namespace UWay.Skynet.Cloud.FileHandling
     /// </summary>
     public interface IFileHandler
     {
+        /// <summary>
+        /// 添加文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="folder"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         string AddFile(string fileName, string folder, string content);
 
         /// <summary>
-        /// 
+        /// 保存文件
         /// </summary>
         /// <param name="file">文件名称</param>
         /// <param name="rename">是否重命名</param>
@@ -84,10 +91,27 @@ namespace UWay.Skynet.Cloud.FileHandling
         /// <returns></returns>
         FileInfo[] GetAllFiles(string path);
 
+        /// <summary>
+        /// 压缩文件
+        /// </summary>
+        /// <param name="fileName">文件名称</param>
+        /// <param name="subfolder">子文件夹</param>
+        /// <param name="compressOrginalPaths"></param>
+        /// <returns></returns>
         string Zip(string fileName, string subfolder, IEnumerable<string> compressOrginalPaths);
 
+        /// <summary>
+        /// 压缩文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="directory"></param>
         void Zip(string fileName, string directory);
 
+        /// <summary>
+        /// 解压文件
+        /// </summary>
+        /// <param name="compressfilepath"></param>
+        /// <param name="uncompressdir"></param>
         void UnZip(string compressfilepath, string uncompressdir);
     }
 }

@@ -9,8 +9,12 @@ using System.Diagnostics;
 
 namespace UWay.Skynet.Cloud.Extensions
 {
+    /// <summary>
+    /// Xml节点扩展函数
+    /// </summary>
     public static class XmlNodeExtensions
     {
+        
         /// <exception cref="ArgumentException">
         /// Child element with name specified by <paramref name="childName"/> does not exists.
         /// </exception>
@@ -32,9 +36,18 @@ namespace UWay.Skynet.Cloud.Extensions
         }
     }
 
-
+    /// <summary>
+    /// XML拓展
+    /// </summary>
     public static class XmlExtensions
     {
+        /// <summary>
+        /// 获取XML中元素属性值
+        /// </summary>
+        /// <typeparam name="T">属性类型</typeparam>
+        /// <param name="e">XML内容</param>
+        /// <param name="name">元素名称</param>
+        /// <returns></returns>
         public static T GetAttributeValue<T>(this XElement e, string name)
         {
             if (e.Attribute(name) != null)
@@ -122,7 +135,7 @@ namespace UWay.Skynet.Cloud.Extensions
         /// <summary>
         /// 取得指定ID下的结点内容
         /// </summary>
-        /// <param name="ADoc">XML文档内容InnerText</param>
+        /// <param name="AXml">XML文档内容InnerText</param>
         /// <param name="AID">结点ID</param>
         /// <returns></returns>
         public static string GetInnerTextById(this string AXml, string AID)
@@ -150,7 +163,7 @@ namespace UWay.Skynet.Cloud.Extensions
         /// 取得指定Name下的结点内容
         /// </summary>
         /// <param name="AXml">XML文档内容InnerText</param>
-        /// <param name="AId">结点Name</param>
+        /// <param name="AName">结点Name</param>
         /// <returns></returns>
         public static string GetInnerTextByName(this string AXml, string AName)
         {
@@ -162,7 +175,7 @@ namespace UWay.Skynet.Cloud.Extensions
         /// 取得指定Name下的结点内容
         /// </summary>
         /// <param name="ADoc">文档对象</param>
-        /// <param name="AId">结点Name</param>
+        /// <param name="AName">结点Name</param>
         /// <returns></returns>
         public static string GetInnerTextByName(this XmlDocument ADoc, string AName)
         {
@@ -178,7 +191,7 @@ namespace UWay.Skynet.Cloud.Extensions
         /// 取得指定TagName下的结点内容
         /// </summary>
         /// <param name="AXml">XML文档内容InnerText</param>
-        /// <param name="AId">结点TagName</param>
+        /// <param name="ATagName">结点TagName</param>
         /// <returns></returns>
         public static string GetInnerTextByTagName(this string AXml, string ATagName)
         {
@@ -190,7 +203,7 @@ namespace UWay.Skynet.Cloud.Extensions
         /// 取得指定TagName下的结点内容，如果有多个只取第一个
         /// </summary>
         /// <param name="ADoc">文档对象</param>
-        /// <param name="AId">结点TagName</param>
+        /// <param name="ATagName">结点TagName</param>
         /// <returns></returns>
         public static string GetInnerTextByTagName(this XmlDocument ADoc, string ATagName)
         {

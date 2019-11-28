@@ -5,7 +5,7 @@ using UWay.Skynet.Cloud.Sms.Core.Models;
 namespace UWay.Skynet.Cloud.Sms
 {
     /// <summary>
-    ///     短信服务
+    /// 短信服务
     /// </summary>
     public interface ISmsService
     {
@@ -20,15 +20,15 @@ namespace UWay.Skynet.Cloud.Sms
         /// <summary>
         ///     发送模板消息（适用于阿里大鱼等）
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">短信消息</param>
         /// <returns></returns>
         Task<SendResult> SendTemplateMessageAsync(SendTemplateMessageInput message);
 
         /// <summary>
         /// 发送服务类的短信消息
         /// </summary>
-        /// <param name="phone"></param>
-        /// <param name="message"></param>
+        /// <param name="phone">手机号码</param>
+        /// <param name="message">短信消息</param>
         /// <returns></returns>
         Task<SendResult> SendServerMessageAsync(string phone, string message);
     }

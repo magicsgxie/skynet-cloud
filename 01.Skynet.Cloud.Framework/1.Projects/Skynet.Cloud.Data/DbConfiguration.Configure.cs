@@ -173,7 +173,10 @@ namespace UWay.Skynet.Cloud.Data
 
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dbContextOptions"></param>
         public static void Configure(IEnumerable<DbContextOption> dbContextOptions)
         {
             dbContextOptions.ForEach(item =>
@@ -186,7 +189,7 @@ namespace UWay.Skynet.Cloud.Data
         /// <summary>
         /// 通过connectionStringName对象创建DbConfiguration对象（可以用于配置文件中有多个数据库连接字符串配置）
         /// </summary>
-        /// <param name="connectionStringName"></param>
+        /// <param name="dbContextOption"></param>
         /// <returns></returns>
         public static DbConfiguration Configure(DbContextOption dbContextOption)
         {
@@ -381,13 +384,14 @@ namespace UWay.Skynet.Cloud.Data
             PopulateSqlServer2000(cfg, factory);
         }
 
-        
+
 
         /// <summary>
         ///  通过connectionString和providerName创建DbConfiguration对象
         /// </summary>
         /// <param name="connectionString"></param>
         /// <param name="providerName"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration Configure(string connectionString, string providerName, bool isDefault)
         {
@@ -419,6 +423,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 配置Access
         /// </summary>
         /// <param name="databaseFile"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureAccess(string databaseFile, bool isDefault)
         {
@@ -429,6 +434,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 配置SqlCe35
         /// </summary>
         /// <param name="databaseFile"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureSqlCe35(string databaseFile, bool isDefault)
         {
@@ -439,6 +445,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 配置SqlCe4
         /// </summary>
         /// <param name="databaseFile"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureSqlCe4(string databaseFile, bool isDefault)
         {
@@ -449,6 +456,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 配置SQLExpress
         /// </summary>
         /// <param name="databaseFile"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureSQLExpress(string databaseFile, bool isDefault)
         {
@@ -459,6 +467,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 配置SQLite
         /// </summary>
         /// <param name="databaseFile"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureSQLite(string databaseFile, bool isDefault)
         {
@@ -470,6 +479,7 @@ namespace UWay.Skynet.Cloud.Data
         /// </summary>
         /// <param name="databaseFile"></param>
         /// <param name="password"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureSQLite(string databaseFile, string password, bool isDefault)
         {
@@ -481,6 +491,7 @@ namespace UWay.Skynet.Cloud.Data
         /// </summary>
         /// <param name="databaseFile"></param>
         /// <param name="failIfMissing"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureSQLite(string databaseFile, bool failIfMissing, bool isDefault)
         {
@@ -493,6 +504,7 @@ namespace UWay.Skynet.Cloud.Data
         /// <param name="databaseFile"></param>
         /// <param name="password"></param>
         /// <param name="failIfMissing"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureSQLite(string databaseFile, string password, bool failIfMissing, bool isDefault)
         {
@@ -503,6 +515,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 配置MySQL
         /// </summary>
         /// <param name="connectionString"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureMySQL(string connectionString, bool isDefault)
         {
@@ -513,6 +526,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 配置SqlServer
         /// </summary>
         /// <param name="connectionString"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureSqlServer(string connectionString, bool isDefault)
         {
@@ -523,6 +537,7 @@ namespace UWay.Skynet.Cloud.Data
         /// 配置Oracle
         /// </summary>
         /// <param name="connectionString"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureOracle(string connectionString, bool isDefault)
         {
@@ -533,6 +548,7 @@ namespace UWay.Skynet.Cloud.Data
         ///  配置Oracle ODP
         /// </summary>
         /// <param name="connectionString"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration ConfigureOracleODP(string connectionString, bool isDefault)
         {
@@ -545,18 +561,22 @@ namespace UWay.Skynet.Cloud.Data
         /// 通过DbConnection对象创建DbConfiguration对象
         /// </summary>
         /// <param name="conn"></param>
+        /// <param name="isDefault"></param>
+        /// <param name="entityAssmbly"></param>
+        /// <param name="mappFile"></param>
         /// <returns></returns>
         public static DbConfiguration Configure(DbConnection conn, string entityAssmbly, string mappFile, bool isDefault)
         {
             return Configure(Guid.NewGuid().ToString(), conn, entityAssmbly, mappFile, isDefault);
         }
 
-       
+
 
         /// <summary>
         /// 通过DbConnection对象创建DbConfiguration对象
         /// </summary>
         /// <param name="conn"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration Configure(DbConnection conn, bool isDefault)
         {
@@ -567,6 +587,10 @@ namespace UWay.Skynet.Cloud.Data
         /// 通过DbConnection对象创建DbConfiguration对象
         /// </summary>
         /// <param name="conn"></param>
+        /// <param name="entityAssembly"></param>
+        /// <param name="containerName"></param>
+        /// <param name="mappingFile"></param>
+        /// <param name="isDefault"></param>
         /// <returns></returns>
         public static DbConfiguration Configure(string containerName, DbConnection conn, string entityAssembly, string mappingFile, bool isDefault)
         {
