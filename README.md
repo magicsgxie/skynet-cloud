@@ -15,17 +15,27 @@
 │  │  │ 
 │  │  ├─1.Projects-------------工程
 │  │  │  │ 
+│  │  │  ├─Skynet.Cloud.ConnectionBase-------------设置连接信息
+│  │  │  │ 
+│  │  │  ├─Skynet.Cloud.Dicovery.Core-------------发现注册
+│  │  │  │ 
+│  │  │  ├─Skynet.Cloud.Discovery.Abstract-------------跨服务调用超类
+│  │  │  │ 
 │  │  │  ├─Skynet.Cloud.Data-------------ORM
 │  │  │  │ 
 │  │  │  ├─Skynet.Cloud.Framework-------------框架基础组件
 │  │  │  │ 
 │  │  │  ├─Skynet.Cloud.Mvc-------------Mvc基础扩展
 │  │  │  │ 
+│  │  │  ├─Skynet.Cloud.IE-------------导入导出
+│  │  │  │ 
+│  │  │  ├─Skynet.Cloud.Sms-------------短信
+│  │  │  │ 
+│  │  │  ├─Skynet.Cloud.Tasks-------------任务调度
+│  │  │  │ 
 │  │  │  ├─Skynet.Cloud.Nacos-------------Nacos访问
 │  │  │  │ 
 │  │  │  ├─Skynet.Cloud.Security-------------安全设置
-│  │  │  │ 
-│  │  │  ├─Skynet.Cloud.WebCore-------------.net core Web扩展
 │  │  │  │ 
 │  │  │  ├─Steeltoe.Configuration.NacosServerBase-------------Nacos注册中心
 │  │  │  │ 
@@ -35,21 +45,37 @@
 │  │  │ 
 │  │  ├─3.Demo-------------示例
 │  │ 
-│  ├─02.Skynet.Cloud.Upms-------------权限管理
+│  ├─skynet-cloud-common-------------类库
 │  │  │ 
-│  │  ├─1.Projects-------------工程
+│  │  ├─skynet-cloud-common-core-------------基础核心类库
 │  │  │ 
-│  │  ├─2.UnitTest-------------单元测试
+│  │  ├─skynet-cloud-common-data-------------数据库访问核心
 │  │  │ 
-│  │  ├─3.Demo-------------示例
+│  │  ├─skynet-cloud-common-feign-------------远程调用核心类库
+│  │  │ 
+│  │  ├─skynet-cloud-common-log-------------日志核心类库
+│  │  │ 
+│  │  ├─skynet-cloud-common-security-------------安全验证核心类库
 │  │ 
-│  ├─03.Skynet.Cloud.Dcs
+│  ├─skynet-cloud-modules-------------模块类库
 │  │  │ 
-│  │  ├─1.Projects-------------工程
+│  │  ├─skynet-cloud-dcs-------------数据中心服务
 │  │  │ 
-│  │  ├─2.UnitTest-------------单元测试
+│  │  ├─skynet-cloud-ccs-------------字典中心服务
 │  │  │ 
-│  │  ├─3.Demo-------------示例
+│  │  ├─skynet-cloud-nom-------------网络管理服务
+│  │  │ 
+│  │  ├─skynet-cloud-upms-------------系统管理服务
+│  │ 
+│  ├─skynet-cloud-auth-------------权限管理
+│  │ 
+│  ├─skynet-cloud-gateway-------------网关
+│  │ 
+│  ├─skynet-cloud-visual-------------可视乎类库
+│  │  │ 
+│  │  ├─skynet-cloud-codegen-------------代码生成
+│  │  │ 
+│  │  ├─skynet-cloud-monitor-------------spring boot观察类库
 
 ```
 ----
