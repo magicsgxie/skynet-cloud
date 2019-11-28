@@ -100,58 +100,58 @@ ULinq是一个轻量简单易用的开源Linq ORM框架，支持Nullable类型�
 ### ULinq使用简介
 #### 创建和持久化类
 ##### 创建和设计持久化类
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;  
+using System.Collections.Generic;  
+using System.Linq;  
+using System.Text;  
 
-namespace UWay.Ufa.Enterprise.Entity
-{
-    public class User
-    {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-    }
-}
+namespace UWay.Ufa.Enterprise.Entity  
+{  
+    public class User  
+    {  
+        public int Id { get; set; }  
+        public string FirstName { get; set; }  
+        public string LastName { get; set; }  
+    }  
+}  
 ##### Table Config
 1.  Name 属性 用来描述Table Name
 默认约定：表名和实体类名完全一致
 重写方式一：使用DbConfiguration SetClassNameToTalbeName(Func<string, string> fnClassNameToTableName)，表名和类名不一样，但是大部分都遵循一定的规律，比如表名都是复数，类名都是单数，那么可以自定义这种类名到表名的映射规则，少数不一致的可以通过重写方式二进行
-DbConfiguration
-                .Configure(connectionStringName)
-                .SetSqlLogger(() => new SqlLog(Console.Out))
-                .SetClassNameToTalbeName(DbConfiguration.Plural);//把类名转化为复数形式的表名
-重写方式二：标签方式
-[Table(Name = "Order Details")]
-public class OrderDetail {}
-重写方式三：使用Fluent Api来设置类名到表名间的映射，例如 把OrderDetail 实体类名映射到表名为:Order Details
-DbConfiguration
-                .Configure(connectionStringName)
-                .SetSqlLogger(() => new SqlLog(Console.Out))
-                .AddClass<OrderDetail>(p =>
-                    {
-                        p.TableName("Order Details");
-                    });//注册映射类
-2. Readonly 属性用来描述表是否是只读的
-默认约定：false， 表示可以增删改查
-重写方式一：标签方式
-[Table(Name = "Order Details",Readonly=true)]
-public class OrderDetail
-重写方式二：Fluent API
- p.TableName("Order Details").Readonly();
- 3. Schema 属性，数据库schema名称,可选的
- 默认约定：null
- 重写方式一：标签方式
- [Table(Name = "Order Details",Readonly=true, Schema="dbo")]
-public class OrderDetail
-重写方式二：Fluent API
-p.TableName("Order Details").Readonly().Schema("dbo");
-
-完整的基于Lambda表达式的Fluent API配置代码如下：
-static DbConfiguration dbConfiguration3 = DbConfiguration
-              .Configure(connectionStringName)
-              .AddClass<OrderDetail>(p => { p.TableName("Order Details").Readonly().Schema("dbo"); });
+DbConfiguration  
+                .Configure(connectionStringName)  
+                .SetSqlLogger(() => new SqlLog(Console.Out))  
+                .SetClassNameToTalbeName(DbConfiguration.Plural);//把类名转化为复数形式的表名  
+重写方式二：标签方式  
+[Table(Name = "Order Details")]  
+public class OrderDetail {}  
+重写方式三：使用Fluent Api来设置类名到表名间的映射，例如 把OrderDetail 实体类名映射到表名为:Order Details  
+DbConfiguration  
+                .Configure(connectionStringName)  
+                .SetSqlLogger(() => new SqlLog(Console.Out))  
+                .AddClass<OrderDetail>(p =>  
+                    {  
+                        p.TableName("Order Details");  
+                    });//注册映射类  
+2. Readonly 属性用来描述表是否是只读的  
+默认约定：false， 表示可以增删改查  
+重写方式一：标签方式  
+[Table(Name = "Order Details",Readonly=true)]  
+public class OrderDetail  
+重写方式二：Fluent API  
+ p.TableName("Order Details").Readonly();  
+ 3. Schema 属性，数据库schema名称,可选的  
+ 默认约定：null  
+ 重写方式一：标签方式  
+ [Table(Name = "Order Details",Readonly=true, Schema="dbo")]  
+public class OrderDetail  
+重写方式二：Fluent API  
+p.TableName("Order Details").Readonly().Schema("dbo");  
+  
+完整的基于Lambda表达式的Fluent API配置代码如下：  
+static DbConfiguration dbConfiguration3 = DbConfiguration  
+              .Configure(connectionStringName)  
+              .AddClass<OrderDetail>(p => { p.TableName("Order Details").Readonly().Schema("dbo"); });  
 ##### Attribute Mapping
    Attribute的映射配置方式和LinqToSQL的配置方式类似，不用太多的笔墨进行介绍每个Attribute的含义，直接用代码说话。 （以Northwind数据库的Customers表和Orders 表为例，客户和订单是一对多关系为例）
    
