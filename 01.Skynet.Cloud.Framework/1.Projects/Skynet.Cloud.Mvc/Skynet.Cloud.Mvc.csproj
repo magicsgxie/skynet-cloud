@@ -23,8 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Skynet.Cloud.ConnectorBase\Skynet.Cloud.ConnectorBase.csproj" />
-    <ProjectReference Include="..\Skynet.Cloud.Data\Skynet.Cloud.Data.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
   </ItemGroup>
 

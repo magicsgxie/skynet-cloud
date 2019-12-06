@@ -137,6 +137,9 @@ namespace UWay.Skynet.Cloud.Extensions
                 
                 dbContextOption = dbContextOption.SingleDbContextOption(defaultContainer);
 
+            } else
+            {
+                dbContextOption.Container = defaultContainer;
             }
 
             DbConfiguration.Configure(dbContextOption);
