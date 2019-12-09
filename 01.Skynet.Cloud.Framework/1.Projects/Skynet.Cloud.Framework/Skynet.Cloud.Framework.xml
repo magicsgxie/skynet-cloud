@@ -197,79 +197,6 @@
             <param name="absoluteExpirationRelativeToNow">过期时间</param>
             <returns>线程任务</returns>
         </member>
-        <member name="T:UWay.Skynet.Cloud.Cache.Redis.RedisClient">
-            <summary>
-            Redis客户端
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="config">Redis配置信息</param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.GetConnect(Microsoft.Extensions.Configuration.IConfigurationSection)">
-            <summary>
-            获取ConnectionMultiplexer
-            </summary>
-            <param name="redisConfig">RedisConfig配置文件</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.CheckeConfig(System.String)">
-            <summary>
-            检查入参数
-            </summary>
-            <param name="configName">RedisConfig配置文件中的 Redis_Default/Redis_6 名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.GetDatabase(System.String,System.Nullable{System.Int32})">
-            <summary>
-            获取数据库
-            </summary>
-            <param name="configName"></param>
-            <param name="db">默认为0：优先代码的db配置，其次config中的配置</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.GetServer(System.String,System.Int32)">
-            <summary>
-            获取Redis服务器
-            </summary>
-            <param name="configName"></param>
-            <param name="endPointsIndex"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.GetSubscriber(System.String)">
-            <summary>
-            获取订阅者
-            </summary>
-            <param name="configName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Cache.Redis.RedisClient.Dispose">
-            <summary>
-            销毁函数
-            </summary>
-        </member>
-        <member name="T:UWay.Skynet.Cloud.Cache.Redis.RedisClientSingleton">
-            <summary>
-            单例
-            </summary>
-        </member>
-        <member name="T:UWay.Skynet.Cloud.Cache.Redis.RedisSetting">
-            <summary>
-            Redis JSON Setting
-            </summary>
-        </member>
-        <member name="P:UWay.Skynet.Cloud.Cache.Redis.RedisSetting.Connection">
-            <summary>
-            连接字符串
-            </summary>
-        </member>
-        <member name="P:UWay.Skynet.Cloud.Cache.Redis.RedisSetting.InstanceName">
-            <summary>
-            实例名称
-            </summary>
-        </member>
         <member name="T:UWay.Skynet.Cloud.ComponentModel.PropertyChangedEventArgs">
             <summary>
             
@@ -662,7 +589,7 @@
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.AbstractAssociationAttribute">
             <summary>
-            
+            抽象外键关联树形
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.AbstractAssociationAttribute.ThisKey">
@@ -676,6 +603,11 @@
             Gets or sets one or more members of the target entity class as key values on the other side of the association.
             </summary>
             <value>Default = Id of the related class.</value>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.Data.AbstractAssociationAttribute.IsForeignKey">
+            <summary>
+            Gets or sets a value indicating whether foreign key.
+            </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.AssociationAttribute">
             <summary>
@@ -893,7 +825,7 @@
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.MemberAttribute">
             <summary>
-            成员Attribute
+            成员Attribute.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.MemberAttribute.Storage">
@@ -1322,74 +1254,84 @@
             SqlCE40 Provider
             </summary>
         </member>
+        <member name="T:UWay.Skynet.Cloud.Data.DbTable">
+            <summary>
+            数据库表格.
+            </summary>
+        </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTable.TableName">
             <summary>
-            表名
+            Gets or sets 表名.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTable.TableComment">
             <summary>
-            表说明
+            Gets or sets 表说明.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTable.Columns">
             <summary>
-            字段集合
+            Gets or sets 字段集合.
+            </summary>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Data.DbTableColumn">
+            <summary>
+            数据库表格列.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.ColName">
             <summary>
-            字段名
+            Gets or sets 字段名.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.IsIdentity">
             <summary>
-            是否自增
+            Gets or sets a value indicating whether 是否自增.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.IsPrimaryKey">
             <summary>
-            是否主键
+            Gets or sets a value indicating whether 是否主键.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.ColumnType">
             <summary>
-            字段数据类型
+            Gets or sets 字段数据类型.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.ColumnLength">
             <summary>
-            字段数据长度
+            Gets or sets 字段数据长度.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.IsNullable">
             <summary>
-            是否允许为空
+            Gets or sets a value indicating whether 是否允许为空.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.DefaultValue">
             <summary>
-            默认值
+            Gets or sets 默认值.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.Comments">
             <summary>
-            字段说明
+            Gets or sets 字段说明.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.CSharpType">
             <summary>
-            C#数据类型
+            Gets or sets c#数据类型.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.DataPrecision">
             <summary>
-            数据精度
+            Gets or sets 数据精度.
             </summary>
         </member>
         <member name="P:UWay.Skynet.Cloud.Data.DbTableColumn.DataScale">
             <summary>
-            数据刻度
+            数据刻度.
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.DBType">
@@ -1713,10 +1655,10 @@
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.Pairs`2">
             <summary>
-            存储两个对象列表
+            存储两个对象列表.
             </summary>
-            <typeparam name="F">第一个对象</typeparam>
-            <typeparam name="S">第二个对象</typeparam>
+            <typeparam name="F">第一个对象.</typeparam>
+            <typeparam name="S">第二个对象.</typeparam>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.Triplets`3">
             <summary>
@@ -7623,127 +7565,6 @@
             <param name="source"></param>
             <returns></returns>
         </member>
-        <member name="T:UWay.Skynet.Cloud.Extensions.ServiceExtension">
-            <summary>
-            IServiceCollection扩展
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddTransientAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
-            <summary>
-            用DI批量注入接口程序集中对应的实现类。
-            <para>
-            需要注意的是，这里有如下约定：
-            IUserService --> UserService, IUserRepository --> UserRepository.
-            </para>
-            </summary>
-            <param name="service"></param>
-            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddScopedAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
-            <summary>
-            添加Assembly
-            </summary>
-            <param name="service"></param>
-            <param name="interfaceAssemblyName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddScopServiceAssmbly(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            
-            </summary>
-            <param name="service"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddSingletonAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
-            <summary>
-            添加单例Assembly
-            </summary>
-            <param name="service"></param>
-            <param name="interfaceAssemblyName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddScopedAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
-            <summary>
-            用DI批量注入接口程序集中对应的实现类。
-            </summary>
-            <param name="service"></param>
-            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
-            <param name="implementAssemblyName">实现程序集的名称（不包含文件扩展名）</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddTransientAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="service"></param>
-            <param name="interfaceAssemblyName"></param>
-            <param name="implementAssemblyName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddSingletonAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="service"></param>
-            <param name="interfaceAssemblyName"></param>
-            <param name="implementAssemblyName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.RegisterControllers(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="service"></param>
-            <param name="controllerAssemblyName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.UseCsRedisClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String[])">
-            <summary>
-            使用CSRedis代替StackChange.Redis
-            <remarks>
-            关于CSRedis项目，请参考<seealso cref="!:https://github.com/2881099/csredis"/>
-            </remarks>
-            </summary>
-            <param name="services"></param>
-            <param name="redisConnectionStrings">redis连接字符串。
-            <remarks>
-            如果是单机模式，请只输入一个连接字符串；如果是集群模式，请输入多个连接字符串
-            </remarks>
-            </param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAutofacServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            
-            </summary>
-            <param name="services"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAspectCoreWithAutofacServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
-            <summary>
-            
-            </summary>
-            <param name="services"></param>
-            <param name="configure"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAspectCoreServiceContainer(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
-            <summary>
-            
-            </summary>
-            <param name="services"></param>
-            <param name="configure"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAspectCoreServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
-            <summary>
-            
-            </summary>
-            <param name="services"></param>
-            <param name="configure"></param>
-            <returns></returns>
-        </member>
         <member name="T:UWay.Skynet.Cloud.Extensions.StringExtensions">
             <summary>
             
@@ -8025,6 +7846,7 @@
         </member>
         <member name="M:UWay.Skynet.Cloud.FileHandling.FileHandler.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{UWay.Skynet.Cloud.FileHandling.FileHandler})">
             <summary>
+            Initializes a new instance of the <see cref="T:UWay.Skynet.Cloud.FileHandling.FileHandler"/> class.
             构造函数
             </summary>
             <param name="configuration"></param>
@@ -9160,44 +8982,6 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="T:UWay.Skynet.Cloud.Helpers.CacheKey">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.#ctor(System.Reflection.MethodInfo,System.Reflection.ParameterInfo[],System.Object[])">
-            <summary>
-            
-            </summary>
-            <param name="method"></param>
-            <param name="arguments"></param>
-            <param name="values"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.Equals(System.Object)">
-            <summary>
-            
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.GetRedisCacheKey">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.GetMemoryCacheKey">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.CacheKey.GetHashCode">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.CommonHelper.NewMongodbId">
             <summary>
             生成类似Mongodb的ObjectId有序、不重复Guid
@@ -9228,29 +9012,29 @@
             配置节点获取
             </summary>
             <param name="key"></param>
-            <returns></returns>
+            <returns>IConfigurationSection</returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.ConfigHelper.GetConfigurationValue(System.String)">
             <summary>
             获取配置节点值
             </summary>
             <param name="key"></param>
-            <returns></returns>
+            <returns>string</returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.ConfigHelper.GetConfigurationValue(System.String,System.String)">
             <summary>
             获取指定节点下的配置信息值
             </summary>
-            <param name="section"></param>
+            <param name="section">键</param>
             <param name="key"></param>
-            <returns></returns>
+            <returns>string</returns>
         </member>
         <member name="M:UWay.Skynet.Cloud.Helpers.ConfigHelper.GetConnectionString(System.String)">
             <summary>
             获取连接字符串
             </summary>
-            <param name="key"></param>
-            <returns></returns>
+            <param name="key">键</param>
+            <returns>string</returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Helpers.HttpRequestHelper">
             <summary>
@@ -9317,226 +9101,6 @@
             参数之间用&amp;连接，首位没有符号，如：a=1&amp;b=2&amp;c=3
             </summary>
             <param name="formData"></param>
-            <returns></returns>
-        </member>
-        <member name="T:UWay.Skynet.Cloud.Helpers.JsonConvertor">
-            <summary>
-            json serialization and deserialization, using Jil.
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Serialize(System.Object,Jil.Options)">
-            <summary>
-            
-            </summary>
-            <param name="source"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Serialize``1(``0,Jil.Options)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="source"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Deserialize``1(System.String,Jil.Options)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="source"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Deserialize(System.String,System.Type,Jil.Options)">
-            <summary>
-            
-            </summary>
-            <param name="source"></param>
-            <param name="destinationType"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.JsonConvertor.Deserialize(System.String,Jil.Options)">
-            <summary>
-            
-            </summary>
-            <param name="source"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="T:UWay.Skynet.Cloud.Helpers.Log4NetHelper">
-            <summary>
-            log4net封装类
-            *********************************使用说明**********************************
-            1.首先将配置文件(log4net.config或App.config)放置在程序运行目录
-            2.调用SetConfig方法，并传入配置文件的全路径
-            3.调用WriteError、WriteInfo、WriteFatal、WriteDebug等方法
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.SetConfig(log4net.Repository.ILoggerRepository,System.String)">
-            <summary>
-            读取配置文件，并使其生效。如果未找到配置文件，则抛出异常
-            </summary>
-            <param name="repository"></param>
-            <param name="configFilePath">配置文件全路径</param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteError(System.Type,System.Exception)">
-            <summary>
-            输出错误日志到Log4Net
-            </summary>
-            <param name="t"></param>
-            <param name="ex"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteError(System.Type,System.String)">
-            <summary>
-            输出错误日志到Log4Net
-            </summary>
-            <param name="t"></param>
-            <param name="msg"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteInfo(System.Type,System.String)">
-            <summary>
-            记录消息日志
-            </summary>
-            <param name="t"></param>
-            <param name="msg"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteInfo(System.Type,System.Exception)">
-            <summary>
-            记录消息日志
-            </summary>
-            <param name="t"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteFatal(System.Type,System.String)">
-            <summary>
-            记录致命错误日志
-            </summary>
-            <param name="t"></param>
-            <param name="msg"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteFatal(System.Type,System.Exception)">
-            <summary>
-            记录致命错误日志
-            </summary>
-            <param name="t"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteDebug(System.Type,System.String)">
-            <summary>
-            记录Debug日志
-            </summary>
-            <param name="t"></param>
-            <param name="msg"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteDebug(System.Type,System.Exception)">
-            <summary>
-            记录Debug日志
-            </summary>
-            <param name="t"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteWarn(System.Type,System.String)">
-            <summary>
-            记录警告信息
-            </summary>
-            <param name="t"></param>
-            <param name="msg"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.Log4NetHelper.WriteWarn(System.Type,System.Exception)">
-            <summary>
-            记录警告信息
-            </summary>
-            <param name="t"></param>
-            <param name="exception"></param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.NPOIHelper.ExportExcel(System.Data.DataTable,System.String)">
-            <summary>
-            DataTable 导出到 Excel 的 MemoryStream
-            </summary>
-            <param name="dtSource">源 DataTable</param>
-            <param name="strHeaderText">表头文本 空值未不要表头标题</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.NPOIHelper.ExportExcel(System.Data.DataTable,System.String,System.String)">
-            <summary>
-            DaataTable 导出到 Excel 文件
-            </summary>
-            <param name="dtSource">源 DataaTable</param>
-            <param name="strHeaderText">表头文本</param>
-            <param name="strFileName">保存位置(文件名及路径)</param>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.NPOIHelper.ImportExcel(System.String)">
-            <summary>
-            读取 excel
-            默认第一行为标头
-            </summary>
-            <param name="strFileName">excel 文档路径</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.NPOIHelper.ExportExcel(System.Data.DataSet,System.String)">
-            <summary>
-            DataSet 导出到 Excel 的 MemoryStream
-            </summary>
-            <param name="dsSource">源 DataSet</param>
-            <param name="strHeaderText">表头文本 空值未不要表头标题(多个表对应多个表头以英文逗号(,)分开，个数应与表相同)</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.NPOIHelper.ExportFromDSExcel(NPOI.HSSF.UserModel.HSSFWorkbook,System.Data.DataTable,System.String)">
-            <summary>
-            DataTable 导出到 Excel 的 MemoryStream
-            </summary>
-            <param name="workbook">源 workbook</param>
-            <param name="dtSource">源 DataTable</param>
-            <param name="strHeaderText">表头文本 空值未不要表头标题(多个表对应多个表头以英文逗号(,)分开，个数应与表相同)</param>
-            <returns></returns>
-        </member>
-        <member name="T:UWay.Skynet.Cloud.Helpers.RuntimeHelper">
-            <summary>
-            运行时帮助类
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetAllAssemblies">
-            <summary>
-            获取项目程序集，排除所有的系统程序集(Microsoft.***、System.***等)、Nuget下载包
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetAssembly(System.String)">
-            <summary>
-            获取Assmbly
-            </summary>
-            <param name="assemblyName">Assembly name</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetServicesAssembly">
-            <summary>
-            获取Service 
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetAllTypes">
-            <summary>
-            获取所有类型
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetTypesByAssembly(System.String)">
-            <summary>
-            获取所有类型
-            </summary>
-            <param name="assemblyName">Assembly</param>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Helpers.RuntimeHelper.GetImplementType(System.String,System.Type)">
-            <summary>
-            获取实现类
-            </summary>
-            <param name="typeName"></param>
-            <param name="baseInterfaceType"></param>
             <returns></returns>
         </member>
         <member name="T:UWay.Skynet.Cloud.Helpers.ServiceLocator">
@@ -14621,6 +14185,16 @@
             ${property:PropertyName??DefaultValue}
             </summary>
         </member>
+        <member name="P:UWay.Skynet.Cloud.PropertyFormatProvider.SupportColon">
+            <summary>
+            Support括号
+            </summary>
+        </member>
+        <member name="P:UWay.Skynet.Cloud.PropertyFormatProvider.Tag">
+            <summary>
+            标记
+            </summary>
+        </member>
         <member name="T:UWay.Skynet.Cloud.Threading.Local">
             <summary>
             
@@ -14692,55 +14266,6 @@
             </summary>
             <param name="sem"></param>
             <param name="a"></param>
-        </member>
-        <member name="T:UWay.Skynet.Cloud.Trigger.IJobExecutor">
-            <summary>
-            Job Executor
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Trigger.IJobExecutor.StartJob">
-            <summary>
-            开始任务
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Trigger.IJobExecutor.StopJob">
-            <summary>
-             结束任务
-            </summary>
-        </member>
-        <member name="T:UWay.Skynet.Cloud.Trigger.ListJobExcutor`1">
-            <summary>
-            通用列表循环任务执行者基类
-            </summary>
-            <typeparam name="IType"></typeparam>
-        </member>
-        <member name="P:UWay.Skynet.Cloud.Trigger.ListJobExcutor`1.IsRuning">
-            <summary>
-             运行状态
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Trigger.ListJobExcutor`1.StartJob">
-            <summary>
-              开始任务
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Trigger.ListJobExcutor`1.StopJob">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Trigger.ListJobExcutor`1.GetExcuteSource">
-            <summary>
-              获取list数据源
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:UWay.Skynet.Cloud.Trigger.ListJobExcutor`1.ExcuteItem(`0,System.Int32)">
-            <summary>
-             个体任务执行
-            </summary>
-            <param name="item">单个实体</param>
-            <param name="index">在数据源中的索引</param>
         </member>
     </members>
 </doc>

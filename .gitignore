@@ -370,3 +370,15 @@ skynet-cloud-uflow.sln
 /skynet-cloud-modules/skynet-cloud-css
 /skynet-cloud-modules/skynet-cloud-dcs
 /skynet-cloud-modules/skynet-cloud-jom
+/skynet-cloud-modules/skynet-cloud-sgep
+/20.HelpDocument/HelpDocument/Help.zip
+/20.HelpDocument/HelpDocument/Help
+/01.Skynet.Cloud.Framework/1.Projects/Skynet.Cloud.IE/Skynet.Cloud.IE.xml
+/01.Skynet.Cloud.Framework/1.Projects/Skynet.Cloud.Mvc/Skynet.Cloud.Mvc.xml
+/01.Skynet.Cloud.Framework/1.Projects/Skynet.Cloud.Sms/Skynet.Cloud.Sms.xml
+/01.Skynet.Cloud.Framework/1.Projects/Skynet.Cloud.Tasks/Skynet.Cloud.Tasks.xml
+/01.Skynet.Cloud.Framework/1.Projects/Skynet.Cloud.Connector.Noap/Skynet.Cloud.Noap.ConnectorBase.xml
+/01.Skynet.Cloud.Framework/1.Projects/Skynet.Cloud.Discovery.Abstract/Skynet.Cloud.Discovery.Abstract.xml
+/01.Skynet.Cloud.Framework/1.Projects/Skynet.Cloud.Discovery.Core/Skynet.Cloud.Dicovery.Core.xml
+/01.Skynet.Cloud.Framework/1.Projects/Steeltoe.Configuration.NacosServerBase/Steeltoe.Configuration.NacosServerBase.xml
+/01.Skynet.Cloud.Framework/1.Projects/Steeltoe.Discovery.NacosBase/Steeltoe.Discovery.NacosBase.xml

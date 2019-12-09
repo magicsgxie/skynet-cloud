@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UWay.Skynet.Cloud.Nacos;
 
-namespace UWay.Skynet.Cloud.Dicovery.Core
+namespace UWay.Skynet.Cloud.Discovery.Core
 {
 
     public static class DiscoveryApplicationBuilderExtensions

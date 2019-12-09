@@ -2393,7 +2393,12 @@
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.ManyToOneAttribute">
             <summary>
-            多对一
+            多对一.
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Data.ManyToOneAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UWay.Skynet.Cloud.Data.ManyToOneAttribute"/> class.
             </summary>
         </member>
         <member name="T:UWay.Skynet.Cloud.Data.MappingConversion">

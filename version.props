@@ -1,0 +1,34 @@
+<Project>
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+    <StyleCopVersion>1.1.118</StyleCopVersion>
+    <AspNetCoreVersion>2.2.0</AspNetCoreVersion>
+    <MysqlVersion>8.0.16</MysqlVersion>
+    <NpgsqlVersion>4.0.7</NpgsqlVersion>
+    <OracleManagedDataAccessVersion>2.19.3</OracleManagedDataAccessVersion>
+    <SqlServerClientVersion>4.6.1</SqlServerClientVersion>
+    <SwashbuckleVersion>4.0.1</SwashbuckleVersion>
+    <AutofacVersion>4.4.0</AutofacVersion>
+    <JSONVersion>12.0.2</JSONVersion>
+    <SharpCompressVersion>0.23.0</SharpCompressVersion>
+    <AspectCoreAutofacVersion>1.2.0</AspectCoreAutofacVersion>
+    <SystemVersion>4.3.0</SystemVersion>
+    <DependencyModelVersion>3.1.0</DependencyModelVersion>
+    <SteeltoeVersion>2.2.0</SteeltoeVersion>
+    <StandardVersion>netstandard2</StandardVersion>
+    <NetcoreappVersion>netcoreapp2.2</NetcoreappVersion>
+    <JilVersion>2.17.0</JilVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Description>
+基于spring cloud的天网微服务.net core
+    </Description>
+    <Company>深圳市优网科技有限公司</Company>
+    <Authors>magic.s.g.xie</Authors>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopVersion)">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

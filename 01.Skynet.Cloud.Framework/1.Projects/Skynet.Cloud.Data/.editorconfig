@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0809: 过时成员重写未过时成员
+dotnet_diagnostic.CS0809.severity = warning

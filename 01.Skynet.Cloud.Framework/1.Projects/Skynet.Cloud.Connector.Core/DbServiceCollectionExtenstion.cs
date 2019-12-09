@@ -1,39 +1,34 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Steeltoe.CloudFoundry.Connector.Services;
-using Steeltoe.CloudFoundry.Connector;
-using Steeltoe.Security.DataProtection;
-using Steeltoe.CloudFoundry.Connector.Redis;
-using Microsoft.AspNetCore.DataProtection;
-using UWay.Skynet.Cloud.Data;
-using System.Linq;
-using Steeltoe.CloudFoundry.Connector.MySql;
-using Steeltoe.CloudFoundry.Connector.SqlServer;
-using Steeltoe.CloudFoundry.Connector.PostgreSql;
-using Steeltoe.CloudFoundry.Connector.Oracle;
-using UWay.Skynet.Cloud.Protocal;
-
-namespace UWay.Skynet.Cloud.Extensions
+﻿namespace UWay.Skynet.Cloud.Extensions
 {
+    using System.Linq;
+    using AspectCore.Extensions.DependencyInjection;
+    using Microsoft.AspNetCore.DataProtection;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Steeltoe.CloudFoundry.Connector.Redis;
+    using Steeltoe.Security.DataProtection;
+    using UWay.Skynet.Cloud.Data;
+
     /// <summary>
-    /// 数据服务扩展
+    /// 数据服务扩展.
     /// </summary>
-    public  static partial class DbServiceCollectionExtenstion
+    public static partial class DbServiceCollectionExtenstion
     {
         /// <summary>
-        /// 使用Redistribution
+        /// 使用Redistribution.
         /// </summary>
-        /// <param name="services"></param>
-        /// <param name="config"></param>
-        /// <returns></returns>
+        /// <param name="services">服务列表.</param>
+        /// <param name="config">配置.</param>
+        /// <returns>IServiceCollection.</returns>
         public static IServiceCollection UserRedis(this IServiceCollection services, IConfiguration config)
         {
             services.AddRedisConnectionMultiplexer(config);
             services.AddDataProtection()
                 .PersistKeysToRedis()
                 .SetApplicationName("redis-keystore");
-            // Use Redis cache on CloudFoundry to store session data
+
+            // Use Redis cache on CloudFoundry to store session data.
             services.AddDistributedRedisCache(config);
             return services;
         }
@@ -47,30 +42,30 @@ namespace UWay.Skynet.Cloud.Extensions
         private static readonly string SKYNET_CLOUD_SERVICE_ENTITY = "entity";
 
         /// <summary>
-        /// 使用Oracle
+        /// 使用Oracle.
         /// </summary>
-        /// <param name="services"></param>
-        /// <param name="config"></param>
-        /// <param name="serviceName"></param>
-        /// <returns></returns>
+        /// <param name="services">服务列表.</param>
+        /// <param name="config">配置列表.</param>
+        /// <param name="serviceName">服务名称.</param>
+        /// <returns>IServiceCollection.</returns>
         public static IServiceCollection UseOracle(this IServiceCollection services, IConfiguration config, string serviceName = null)
         {
-            ILoggerFactory loggerFactory = services.BuildAspectCoreServiceProvider().GetService<ILoggerFactory>();
+            ILoggerFactory loggerFactory = services.BuildAspectInjectorProvider().GetService<ILoggerFactory>();
             AddDataBaseInfo(config, "DB_Oracle_ConnStr", DbProviderNames.Oracle_Managed_ODP, serviceName, loggerFactory);
             return RegistryService(config, services);
         }
 
 
         /// <summary>
-        /// 使用Mysql数据库
+        /// 使用Mysql数据库.
         /// </summary>
-        /// <param name="services"></param>
-        /// <param name="config"></param>
-        /// <param name="serviceName"></param>
-        /// <returns></returns>
+        /// <param name="services">服务列表.</param>
+        /// <param name="config">配置列表.</param>
+        /// <param name="serviceName">服务名称.</param>
+        /// <returns>IServiceCollection.</returns>
         public static IServiceCollection UseMysql(this IServiceCollection services, IConfiguration config, string serviceName = null)
         {
-            ILoggerFactory loggerFactory = services.BuildAspectCoreServiceProvider().GetService<ILoggerFactory>();
+            ILoggerFactory loggerFactory = services.BuildAspectInjectorProvider().GetService<ILoggerFactory>();
 
             AddDataBaseInfo(config, "DB_MySql_ConnStr", DbProviderNames.MySQL, serviceName, loggerFactory);
             return RegistryService(config, services);
@@ -82,8 +77,11 @@ namespace UWay.Skynet.Cloud.Extensions
             var serviceInterfaceAssmbly = section.GetValue<string>(SKYNET_CLOUD_SERVICE_INTERFACE);
             var serviceImplAssembly = section.GetValue<string>(SKYNET_CLOUD_SERVICE_IMPL);
             if (!serviceInterfaceAssmbly.IsNullOrEmpty() && !serviceImplAssembly.IsNullOrEmpty())
+            {
                 services
                     .AddScopedAssembly(serviceInterfaceAssmbly, serviceImplAssembly);
+            }
+
             return services;
         }
 
@@ -102,7 +100,7 @@ namespace UWay.Skynet.Cloud.Extensions
                         dbConnectionString = config.BuildeOracleConnectionString(serviceName);
                         break;
                     case DbProviderNames.MySQL:
-                        dbConnectionString = config.BuildeMysqlConnectionString( serviceName);
+                        dbConnectionString = config.BuildeMysqlConnectionString(serviceName);
                         break;
                     case DbProviderNames.SqlServer:
                         dbConnectionString = config.BuildeSqlServerConnectionString(serviceName);
@@ -122,37 +120,35 @@ namespace UWay.Skynet.Cloud.Extensions
 
         private static void AddMainDb(string container, string dbConnectionString, string providerName, string entityAssmbly, bool isFromDB, string defaultContainer, ILoggerFactory loggerFactory = null)
         {
-            //var entityAssmbly = config.GetSection("appSettings").GetValue<string>("ENTITY_ASSMBLY");
+            // var entityAssmbly = config.GetSection("appSettings").GetValue<string>("ENTITY_ASSMBLY");
             DbContextOption dbContextOption = new DbContextOption
             {
                 Container = container,
                 ConnectionString = dbConnectionString,
                 ModuleAssemblyName = entityAssmbly,
                 Provider = providerName,
-                LogggerFactory = loggerFactory
+                LogggerFactory = loggerFactory,
             };
 
             if (isFromDB)
             {
-                
                 dbContextOption = dbContextOption.SingleDbContextOption(defaultContainer);
-
-            } else
+            }
+            else
             {
                 dbContextOption.Container = defaultContainer;
             }
 
             DbConfiguration.Configure(dbContextOption);
-
         }
 
         /// <summary>
-        /// 使用SQL Server数据库
+        /// 使用SQL Server数据库.
         /// </summary>
-        /// <param name="services"></param>
-        /// <param name="config"></param>
-        /// <param name="serviceName"></param>
-        /// <returns></returns>
+        /// <param name="services">服务列表.</param>
+        /// <param name="config">配置列表.</param>
+        /// <param name="serviceName">服务名称.</param>
+        /// <returns>IServiceCollection.</returns>
         public static IServiceCollection UseSqlServer(this IServiceCollection services, IConfiguration config, string serviceName = null)
         {
             ILoggerFactory loggerFactory = services.BuildAspectCoreServiceProvider().GetService<ILoggerFactory>();
@@ -162,7 +158,7 @@ namespace UWay.Skynet.Cloud.Extensions
             return RegistryService(config, services);
         }
 
-       
+
 
     }
 }

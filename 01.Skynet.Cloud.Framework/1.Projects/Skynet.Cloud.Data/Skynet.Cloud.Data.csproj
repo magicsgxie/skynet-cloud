@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="..\..\..\version.props"></Import>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>UWay.Skynet.Cloud.Data</RootNamespace>
@@ -10,14 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="8.0.16" />
-    <PackageReference Include="Npgsql" Version="4.0.7" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.3" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
+    <PackageReference Include="MySql.Data" Version="$(MysqlVersion)" />
+    <PackageReference Include="Npgsql" Version="$(NpgsqlVersion)" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="$(OracleManagedDataAccessVersion)" />
+    <PackageReference Include="System.Data.SqlClient" Version="$(SqlServerClientVersion)" />
+    <PackageReference Include="Skynet.Cloud.Framework" Version="$(Version)" />
   </ItemGroup>
 
 </Project>

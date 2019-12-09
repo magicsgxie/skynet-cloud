@@ -66,16 +66,7 @@ namespace UWay.Skynet.Cloud
         }
     }
 
-    //sealed class SdkPathFormateProvider : ITagFormatProvider
-    //{
-    //    public bool SupportColon { get { return false; } }
-    //    public string Tag { get { return "SDK_PATH"; } }
-
-    //    public string Format(string str, params string[] args)
-    //    {
-    //        return NLiteEnvironment.SDK_Path;
-    //    }
-    //}
+    
 
     sealed class EnvironmentVariableFormatProvider : ITagFormatProvider
     {
@@ -88,22 +79,7 @@ namespace UWay.Skynet.Cloud
         }
     }
 
-    //sealed class ResourceFormatProvider : ITagFormatProvider
-    //{
-    //    public bool SupportColon { get { return true; } }
-    //    public string Tag { get { return "RES"; } }
-
-    //    public string Format(string str, params string[] args)
-    //    {
-    //        var strNew = ResourceRepository.Strings.Get(str);
-    //        if (args != null && args.Length > 0 && strNew.HasValue())
-    //        {
-    //            var agrArray = args.Cast<object>().ToArray();
-    //            strNew = strNew.Format(agrArray);//string.Format(strNew, agrArray);
-    //        }
-    //        return strNew;
-    //    }
-    //}
+    
 
     /// <summary>
     /// ${property:PropertyName}
@@ -111,7 +87,14 @@ namespace UWay.Skynet.Cloud
     /// </summary>
     sealed class PropertyFormatProvider : ITagFormatProvider
     {
+        /// <summary>
+        /// Support括号
+        /// </summary>
         public bool SupportColon { get { return true; } }
+
+        /// <summary>
+        /// 标记
+        /// </summary>
         public string Tag { get { return "PROPERTY"; } }
 
         public string Format(string str, params string[] args)

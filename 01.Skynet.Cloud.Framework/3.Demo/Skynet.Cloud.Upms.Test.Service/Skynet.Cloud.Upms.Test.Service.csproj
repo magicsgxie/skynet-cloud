@@ -1,9 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
+  <ItemGroup>
+        <PackageReference Include="Skynet.Cloud.Data" Version="1.0.0" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.Discovery.Abstract\Skynet.Cloud.Discovery.Abstract.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Entity\Skynet.Cloud.Upms.Test.Entity.csproj" />

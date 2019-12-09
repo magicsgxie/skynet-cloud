@@ -16,7 +16,7 @@ namespace Steeltoe.CloudFoundry.Connector.Oracle
     /// </summary>
     public static class OracleProviderServiceCollectionExtensions
     {
-        
+
 
         /// <summary>
         /// Add Oracle and its IHealthContributor to a ServiceCollection

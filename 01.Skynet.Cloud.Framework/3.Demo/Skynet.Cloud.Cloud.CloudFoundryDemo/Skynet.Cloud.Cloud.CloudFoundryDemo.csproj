@@ -12,11 +12,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+    <PackageReference Include="Skynet.Cloud.Mvc" Version="1.0.0" />
+    <PackageReference Include="Skynet.Cloud.Connector.Core" Version="1.0.0" />
+    <PackageReference Include="Skynet.Cloud.Discovery.Core" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.Dicovery.Core\Skynet.Cloud.Dicovery.Core.csproj" />
-    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.Mvc\Skynet.Cloud.Mvc.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Entity\Skynet.Cloud.Upms.Test.Entity.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Repository\Skynet.Cloud.Upms.Test.Repository.csproj" />
     <ProjectReference Include="..\Skynet.Cloud.Upms.Test.Service.Interface\Skynet.Cloud.Upms.Test.Service.Interface.csproj" />

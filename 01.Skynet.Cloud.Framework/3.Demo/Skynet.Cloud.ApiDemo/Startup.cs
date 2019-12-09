@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using log4net;
-using log4net.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
@@ -29,7 +27,6 @@ namespace UWay.Skynet.Cloud.ApiDemo
 
     public class Startup
     {
-        public static ILoggerRepository Repository { get; set; }
 
         
         public Startup(IConfiguration configuration)
@@ -44,6 +41,7 @@ namespace UWay.Skynet.Cloud.ApiDemo
         {
             //使用Mysql数据库连接获取主要数据库连接信息
             services.UseMysql(Configuration);
+            var dbContext = UnitOfWork.Get("upms");
             //设置授权模式
             services.AddCustomAuthentication(Configuration);
 

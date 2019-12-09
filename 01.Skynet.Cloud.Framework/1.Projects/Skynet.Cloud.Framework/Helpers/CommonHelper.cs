@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using Microsoft.AspNetCore.Http;
 
 namespace UWay.Skynet.Cloud.Helpers
 {

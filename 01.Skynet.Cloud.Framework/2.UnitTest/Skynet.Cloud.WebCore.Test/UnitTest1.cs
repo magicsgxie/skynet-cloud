@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Steeltoe.Common.Discovery;
 using UWay.Skynet.Cloud.Mvc;
-using UWay.Skynet.Cloud.Dicovery.Core;
+using UWay.Skynet.Cloud.Discovery.Core;
 using System;
 using System.IO;
 using System.Linq;

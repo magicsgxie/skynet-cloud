@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="..\..\..\version.props"></Import>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>UWay.Skynet.Cloud.Tasks</RootNamespace>
@@ -11,10 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Skynet.Cloud.Notify\Skynet.Cloud.Notify.csproj" />
+    <PackageReference Include="Skynet.Cloud.Notify" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

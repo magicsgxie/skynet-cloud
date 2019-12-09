@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# SA1606: Element documentation should have summary text
+dotnet_diagnostic.SA1606.severity = warning
+
+# SA1202: Elements should be ordered by access
+dotnet_diagnostic.SA1202.severity = warning

@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.Configuration;
+
 using Microsoft.Extensions.Logging;
 using SharpCompress.Archives;
 using SharpCompress.Common;
 using SharpCompress.Writers;
 using SharpCompress.Readers;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
+using System.Linq;
 using System.Text;
 
 namespace UWay.Skynet.Cloud.FileHandling
@@ -25,11 +25,11 @@ namespace UWay.Skynet.Cloud.FileHandling
         /// 根路径
         /// </summary>
         protected string RootPath { get; private set; }
-        
 
         private readonly ILogger<FileHandler> _logger;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="FileHandler"/> class.
         /// 构造函数
         /// </summary>
         /// <param name="configuration"></param>
@@ -201,7 +201,7 @@ namespace UWay.Skynet.Cloud.FileHandling
         /// <returns></returns>
         private string GetRootPath(IConfiguration root)
         {
-            return root.GetSection(SKYNET_CLOUD).GetValue<string>(SKYNET_CLOUD_ROOT, "");
+            return root.GetSection(SKYNET_CLOUD).GetValue<string>(SKYNET_CLOUD_ROOT, "/");
         }
 
         /// <summary>

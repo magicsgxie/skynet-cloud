@@ -14,7 +14,7 @@ namespace UWay.Skynet.Cloud.Data
         /// <summary>
         /// 外键
         /// </summary>
-        public virtual bool IsForeignKey { get { return isForeignKey; } set { isForeignKey = value; } }
+        public virtual bool IsForeignKey { get { return base.IsForeignKey; } set { base.IsForeignKey = value; } }
     }
 
 }

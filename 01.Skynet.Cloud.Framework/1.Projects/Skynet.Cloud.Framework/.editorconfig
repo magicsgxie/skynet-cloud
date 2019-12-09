@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# SA1401: Fields should be private
+dotnet_diagnostic.SA1401.severity = none

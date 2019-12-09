@@ -139,15 +139,15 @@ namespace UWay.Skynet.Cloud.Data
     }
 
     /// <summary>
-    /// 存储两个对象列表
+    /// 存储两个对象列表.
     /// </summary>
-    /// <typeparam name="F">第一个对象</typeparam>
-    /// <typeparam name="S">第二个对象</typeparam>
+    /// <typeparam name="F">第一个对象.</typeparam>
+    /// <typeparam name="S">第二个对象.</typeparam>
     public class Pairs<F, S> : IList<Pair<F, S>>
     {
         List<Pair<F, S>> pairs = new List<Pair<F, S>>();
 
-        #region ICollection<Pair<F,S>> 成员
+        #region ICollection<Pair<F,S>> 成员.
 
         public void Add(Pair<F, S> item)
         {

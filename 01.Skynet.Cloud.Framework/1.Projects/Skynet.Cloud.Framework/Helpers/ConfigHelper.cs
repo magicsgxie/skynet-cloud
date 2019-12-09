@@ -14,7 +14,7 @@ namespace UWay.Skynet.Cloud.Helpers
         /// 配置节点获取
         /// </summary>
         /// <param name="key"></param>
-        /// <returns></returns>
+        /// <returns>IConfigurationSection</returns>
         public static IConfigurationSection GetSection(string key)
         {
             return configuration.GetSection(key);
@@ -24,7 +24,7 @@ namespace UWay.Skynet.Cloud.Helpers
         /// 获取配置节点值
         /// </summary>
         /// <param name="key"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string GetConfigurationValue(string key)
         {
             return configuration[key];
@@ -33,9 +33,9 @@ namespace UWay.Skynet.Cloud.Helpers
         /// <summary>
         /// 获取指定节点下的配置信息值
         /// </summary>
-        /// <param name="section"></param>
+        /// <param name="section">键</param>
         /// <param name="key"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string GetConfigurationValue(string section, string key)
         {
             return GetSection(section)?[key];
@@ -44,8 +44,8 @@ namespace UWay.Skynet.Cloud.Helpers
         /// <summary>
         /// 获取连接字符串
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
+        /// <param name="key">键</param>
+        /// <returns>string</returns>
         public static string GetConnectionString(string key)
         {
             return configuration.GetConnectionString(key);

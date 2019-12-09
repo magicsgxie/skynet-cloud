@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="..\..\..\version.props"></Import>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>UWay.Skynet.Cloud.Dicovery.Core</RootNamespace>
+    <RootNamespace>UWay.Skynet.Cloud.Discovery.Core</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Steeltoe.Discovery.ConsulBase" Version="2.2.0" />
     <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

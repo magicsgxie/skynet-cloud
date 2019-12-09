@@ -1,14 +1,19 @@
-﻿using System;
+﻿// <copyright file="MemberMapping.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+using System;
 using System.Linq;
 using System.Reflection;
 using UWay.Skynet.Cloud.Data.Common;
 using UWay.Skynet.Cloud.Data.Linq.Internal;
 using UWay.Skynet.Cloud.Data.LinqToSql;
-using UWay.Skynet.Cloud.Reflection;
 using UWay.Skynet.Cloud.Mapping;
+using UWay.Skynet.Cloud.Reflection;
 
 namespace UWay.Skynet.Cloud.Data.Mapping
 {
+
+
     class MemberMapping : IMemberMapping
     {
         internal MemberInfo member;
@@ -89,7 +94,7 @@ namespace UWay.Skynet.Cloud.Data.Mapping
 
         private void InitializeAssociationAttribute(bool isEnumerableType, AbstractAssociationAttribute association)
         {
-            isManyToOne = association.isForeignKey;
+            isManyToOne = association.IsForeignKey;
             if (isEnumerableType)
             {
                 if (isManyToOne)

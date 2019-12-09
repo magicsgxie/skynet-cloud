@@ -1197,7 +1197,7 @@ namespace UWay.Skynet.Cloud
             }
             catch (Exception ex)
             {
-                Log4NetHelper.WriteError(typeof(Helper), ex);
+                //Log4NetHelper.WriteError(typeof(Helper), ex);
                 return "";
             }
             return urlParam;
@@ -1240,7 +1240,7 @@ namespace UWay.Skynet.Cloud
             }
             catch (Exception ex)
             {
-                Log4NetHelper.WriteError(typeof(Helper), ex);
+                //Log4NetHelper.WriteError(typeof(Helper), ex);
                 return "";
             }
             return urlParam;

@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using UWay.Skynet.Cloud.Nacos;
 
-namespace UWay.Skynet.Cloud.Dicovery.Core
+namespace UWay.Skynet.Cloud.Discovery.Core
 {
     /// <summary>
     /// Nacos Config Host扩展

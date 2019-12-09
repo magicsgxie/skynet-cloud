@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace UWay.Skynet.Cloud.Dicovery.Core
+namespace UWay.Skynet.Cloud.Discovery.Core
 {
     /// <summary>
     /// Extension methods for adding services related to Spring Cloud Config Server.

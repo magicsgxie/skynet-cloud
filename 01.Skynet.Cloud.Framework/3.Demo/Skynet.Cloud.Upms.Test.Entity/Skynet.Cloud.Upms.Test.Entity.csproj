@@ -1,11 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj" />
+    <PackageReference Include="Skynet.Cloud.Framework" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

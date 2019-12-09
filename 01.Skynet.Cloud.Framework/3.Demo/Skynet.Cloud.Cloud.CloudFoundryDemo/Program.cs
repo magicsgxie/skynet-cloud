@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using UWay.Skynet.Cloud.Dicovery.Core;
+using UWay.Skynet.Cloud.Discovery.Core;
 using Microsoft.AspNetCore;
 
 namespace Skynet.Cloud.Cloud.CloudFoundryDemo
@@ -12,15 +12,15 @@ namespace Skynet.Cloud.Cloud.CloudFoundryDemo
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            //CreateWebHostBuilder(args).Build().Run();
         }
 
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args).UseCloudFoundryHosting(5000)
-                    .AddCloudFoundry() //增加微服务信息
-                    .AddConfigNacos(GetLoggerFactory()) //从Nacos获取配置信息
-                .UseStartup<Startup>();
+        //public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        //    WebHost.CreateDefaultBuilder(args).UseCloudFoundryHosting(5000)
+        //            .AddCloudFoundry() //增加微服务信息
+        //            .AddConfigNacos(GetLoggerFactory()) //从Nacos获取配置信息
+        //        .UseStartup<Startup>();
 
         public static ILoggerFactory GetLoggerFactory()
         {

@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Skynet.Cloud.Connector.Core</name>
+    </assembly>
+    <members>
+        <member name="T:UWay.Skynet.Cloud.Extensions.DbServiceCollectionExtenstion">
+            <summary>
+            数据服务扩展.
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.DbServiceCollectionExtenstion.UserRedis(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            使用Redistribution.
+            </summary>
+            <param name="services">服务列表.</param>
+            <param name="config">配置.</param>
+            <returns>IServiceCollection.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.DbServiceCollectionExtenstion.UseOracle(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            使用Oracle.
+            </summary>
+            <param name="services">服务列表.</param>
+            <param name="config">配置列表.</param>
+            <param name="serviceName">服务名称.</param>
+            <returns>IServiceCollection.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.DbServiceCollectionExtenstion.UseMysql(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            使用Mysql数据库.
+            </summary>
+            <param name="services">服务列表.</param>
+            <param name="config">配置列表.</param>
+            <param name="serviceName">服务名称.</param>
+            <returns>IServiceCollection.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.DbServiceCollectionExtenstion.UseSqlServer(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            使用SQL Server数据库.
+            </summary>
+            <param name="services">服务列表.</param>
+            <param name="config">配置列表.</param>
+            <param name="serviceName">服务名称.</param>
+            <returns>IServiceCollection.</returns>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Extensions.RuntimeHelper">
+            <summary>
+            运行时帮助类.
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.RuntimeHelper.GetAllAssemblies">
+            <summary>
+            获取项目程序集，排除所有的系统程序集(Microsoft.***、System.***等)、Nuget下载包.
+            </summary>
+            <returns>IList.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.RuntimeHelper.GetAssembly(System.String)">
+            <summary>
+            获取Assmbly
+            </summary>
+            <param name="assemblyName">Assembly name.</param>
+            <returns>Assembly</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.RuntimeHelper.GetServicesAssembly">
+            <summary>
+            获取Service.
+            </summary>
+            <returns>IEnumerable.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.RuntimeHelper.GetAllTypes">
+            <summary>
+            获取所有类型.
+            </summary>
+            <returns>IList.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.RuntimeHelper.GetTypesByAssembly(System.String)">
+            <summary>
+            获取所有类型
+            </summary>
+            <param name="assemblyName">Assembly.</param>
+            <returns>IList.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.RuntimeHelper.GetImplementType(System.String,System.Type)">
+            <summary>
+            获取实现类.
+            </summary>
+            <param name="typeName">类型名称.</param>
+            <param name="baseInterfaceType">基础类型.</param>
+        </member>
+        <member name="T:UWay.Skynet.Cloud.Extensions.ServiceExtension">
+            <summary>
+            IServiceCollection扩展.
+            </summary>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddTransientAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            用DI批量注入接口程序集中对应的实现类.
+            <para>
+            需要注意的是，这里有如下约定：
+            IUserService --> UserService, IUserRepository --> UserRepository.
+            </para>
+            </summary>
+            <param name="service">服务列表.</param>
+            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）.</param>
+            <returns>IServiceCollection.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddScopedAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            添加Assembly.
+            </summary>
+            <param name="service">服务列表.</param>
+            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）.</param>
+            <returns>IServiceCollection.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddScopServiceAssmbly(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加 Scope Service.
+            </summary>
+            <param name="service">服务列表.</param>
+            <returns>IServiceCollection.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddSingletonAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            添加单例Assembly.
+            </summary>
+            <param name="service">服务列表.</param>
+            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）.</param>
+            <returns>IServiceCollection</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddScopedAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
+            <summary>
+            用DI批量注入接口程序集中对应的实现类.
+            </summary>
+            <param name="service">服务列表.</param>
+            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）.</param>
+            <param name="implementAssemblyName">实现程序集的名称（不包含文件扩展名）.</param>
+            <returns>IServiceCollection</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddTransientAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
+            <summary>
+            Add Transient Assembly.
+            </summary>
+            <param name="service">服务列表.</param>
+            <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）.</param>
+            <param name="implementAssemblyName">实现程序集的名称（不包含文件扩展名）.</param>
+            <returns>IServiceCollection</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.AddSingletonAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+            <param name="interfaceAssemblyName"></param>
+            <param name="implementAssemblyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAutofacServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Build Autoface Service Provider.
+            </summary>
+            <param name="services">服务列表.</param>
+            <returns>IServiceProvider.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAspectCoreWithAutofacServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
+            <summary>
+            Build Aspect Core With Autofac Service Provider.
+            </summary>
+            <param name="services">服务列表.</param>
+            <param name="configure">配置信息.</param>
+            <returns>IServiceProvider.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAspectCoreServiceContainer(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
+            <summary>
+            Build AspectCore Service Container.
+            </summary>
+            <param name="services">服务列表.</param>
+            <param name="configure">配置信息.</param>
+            <returns>IServiceProvider.</returns>
+        </member>
+        <member name="M:UWay.Skynet.Cloud.Extensions.ServiceExtension.BuildAspectCoreServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{AspectCore.Configuration.IAspectConfiguration})">
+            <summary>
+            Build AspectCore Service Provider.
+            </summary>
+            <param name="services">服务列表.</param>
+            <param name="configure">配置信息.</param>
+            <returns>IServiceProvider.</returns>
+        </member>
+    </members>
+</doc>

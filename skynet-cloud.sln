@@ -104,9 +104,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Tasks", "01.Sk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Sms", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Sms\Skynet.Cloud.Sms.csproj", "{719D4861-E801-425E-B0D6-1CB8177B1A6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Noap", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Noap\Skynet.Cloud.Noap.csproj", "{272CFAFC-D358-431E-829E-8E42F430389D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Noap.ConnectorBase", "01.Skynet.Cloud.Framework\1.Projects\Skynet.Cloud.Noap.ConnectorBase\Skynet.Cloud.Noap.ConnectorBase.csproj", "{CC5CDE8C-F727-4AB3-A637-238514C5FBB0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_share", "_share", "{9F7D86A6-0FF4-43C7-ABA6-F7339FE13F28}"
+	ProjectSection(SolutionItems) = preProject
+		version.props = version.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -246,14 +247,6 @@ Global
 		{719D4861-E801-425E-B0D6-1CB8177B1A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719D4861-E801-425E-B0D6-1CB8177B1A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719D4861-E801-425E-B0D6-1CB8177B1A6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{272CFAFC-D358-431E-829E-8E42F430389D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{272CFAFC-D358-431E-829E-8E42F430389D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{272CFAFC-D358-431E-829E-8E42F430389D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{272CFAFC-D358-431E-829E-8E42F430389D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC5CDE8C-F727-4AB3-A637-238514C5FBB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC5CDE8C-F727-4AB3-A637-238514C5FBB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC5CDE8C-F727-4AB3-A637-238514C5FBB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC5CDE8C-F727-4AB3-A637-238514C5FBB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -300,8 +293,6 @@ Global
 		{2E2AAF3D-A286-4585-BFE5-19103B84C98F} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{5E16044E-2905-4763-A3BF-34D40C08DA6D} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 		{719D4861-E801-425E-B0D6-1CB8177B1A6A} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
-		{272CFAFC-D358-431E-829E-8E42F430389D} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
-		{CC5CDE8C-F727-4AB3-A637-238514C5FBB0} = {7016CC4C-A9CB-4DBF-A35E-ECFAE6D0C3F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE362151-8B43-49C2-ABD3-060B24911784}
