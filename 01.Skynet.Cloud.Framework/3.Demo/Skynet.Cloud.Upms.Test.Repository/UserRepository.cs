@@ -5,6 +5,8 @@ using System.Linq;
 using UWay.Skynet.Cloud.Data;
 using UWay.Skynet.Cloud.Linq;
 using UWay.Skynet.Cloud;
+using System.Data;
+using UWay.Skynet.Cloud.Request;
 
 namespace Skynet.Cloud.Upms.Test.Repository
 {
@@ -28,6 +30,11 @@ namespace Skynet.Cloud.Upms.Test.Repository
         public IList<User> Page(Pagination pagination)
         {
             return CreateQuery<User>().Paging(pagination).ToList();
+        }
+
+        public DataSourceTableResult ToPage(string sql, DataSourceRequest request)
+        {
+            return base.Page(sql, request);
         }
     }
 }

@@ -121,7 +121,11 @@ namespace UWay.Skynet.Cloud.Data
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
-                    cmdParams = cmd.Parameters.JsonSerialize();
+                    if(cmd.Parameters != null)
+                    {
+                        cmdParams = cmd.Parameters.JsonSerialize();
+                    }
+                    
                     cmdSql = cmd.CommandText;
                     return cmd.ExecuteNonQuery();
                 }
@@ -352,7 +356,11 @@ namespace UWay.Skynet.Cloud.Data
                     adp.SelectCommand = cmd;
                     var ds = new DataSet();
                     adp.Fill(ds);
-                    cmdParams = cmd.Parameters.JsonSerialize();
+                    if(cmd.Parameters != null)
+                    {
+                        cmdParams = cmd.Parameters.JsonSerialize();
+                    }
+                    
                     cmdSql = cmd.CommandText;
                     return ds;
                 }
@@ -389,7 +397,11 @@ namespace UWay.Skynet.Cloud.Data
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
-                    cmdParams = cmd.Parameters.JsonSerialize();
+                    if(cmd.Parameters != null)
+                    {
+                        cmdParams = cmd.Parameters.JsonSerialize();
+                    }
+                    
                     cmdSql = cmd.CommandText;
                     return cmd.ExecuteScalarAsync();
                 }
@@ -430,7 +442,10 @@ namespace UWay.Skynet.Cloud.Data
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
-                    cmdParams = cmd.Parameters.JsonSerialize();
+                    if(cmd.Parameters != null)
+                    {
+                        cmdParams = cmd.Parameters.JsonSerialize();
+                    }
                     cmdSql = cmd.CommandText;
                     return cmd.ExecuteScalar();
                 }
