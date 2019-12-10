@@ -483,7 +483,14 @@ namespace UWay.Skynet.Cloud.Data
             {
                 if (take > 0)
                 {
-                    Parallel.Invoke(() => tempRowCount = (int)this.ExecuteScalar(parts.sqlCount, nameparameters, false), () => dt = this.ExecuteDataTable(pageSql, nameparameters, false));
+                    if(Driver.AllowsMultipleOpenReaders == false)
+                    {
+                        tempRowCount = (int)this.ExecuteScalar(parts.sqlCount, nameparameters, false);
+                        dt = this.ExecuteDataTable(pageSql, nameparameters, false);
+                    } else
+                    {
+                        Parallel.Invoke(() => tempRowCount = (int)this.ExecuteScalar(parts.sqlCount, nameparameters, false), () => dt = this.ExecuteDataTable(pageSql, nameparameters, false));
+                    }
                 }
                 else
                 {

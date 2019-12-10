@@ -34,8 +34,6 @@ namespace UWay.Skynet.Cloud.Data.Driver
         private static readonly Regex chinaRegix = new Regex(@"[\u4e00-\u9fa5]", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnoreCase);
         public override void AddParameter(DbCommand command, NamedParameter parameter, object value)
         {
-            //Oracle.ManagedDataAccess.Client.OracleConnection
-            //IDbDataParameter p = command.CreateParameter();
             OracleParameter p = new OracleParameter();
             InitializeParameter(p, parameter, value);
             command.Parameters.Add(p);
