@@ -483,11 +483,12 @@ namespace UWay.Skynet.Cloud.Data
             {
                 if (take > 0)
                 {
-                    if(Driver.AllowsMultipleOpenReaders == false)
+                    if (this.Driver.AllowsMultipleOpenReaders == false)
                     {
                         tempRowCount = (int)this.ExecuteScalar(parts.sqlCount, nameparameters, false);
                         dt = this.ExecuteDataTable(pageSql, nameparameters, false);
-                    } else
+                    }
+                    else
                     {
                         Parallel.Invoke(() => tempRowCount = (int)this.ExecuteScalar(parts.sqlCount, nameparameters, false), () => dt = this.ExecuteDataTable(pageSql, nameparameters, false));
                     }
@@ -505,8 +506,10 @@ namespace UWay.Skynet.Cloud.Data
             {
                 if (isAutoClose == true)
                 {
-                    if (connection.State != ConnectionState.Closed)
-                        connection.Close();
+                    if (this.connection.State != ConnectionState.Closed)
+                    {
+                        this.connection.Close();
+                    }
                 }
             }
 
