@@ -17,8 +17,8 @@ namespace UWay.Skynet.Cloud.Data
     /// </summary>
     class DbHelper : ConnectionHost, IDbHelper
     {
-
         internal DbConfiguration dbConfiguration;
+
         public IDriver Driver { get; set; }
 
         public DbConnection Connection { get { return connection; } }
@@ -36,10 +36,10 @@ namespace UWay.Skynet.Cloud.Data
         }
 
         /// <summary>
-        /// 创建参数
+        /// 创建参数.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name">参数名称.</param>
+        /// <param name="value">参数值.</param>
         /// <returns></returns>
         public DbParameter Parameter(string name, object value)
         {
@@ -67,12 +67,12 @@ namespace UWay.Skynet.Cloud.Data
 
                 using (DbCommand cmd = Driver.CreateCommand(connection, sql, namedParameters))
                 {
-                    cmdParams = GetParameters(cmd.Parameters);
+                    cmdParams = this.GetParameters(cmd.Parameters);
                     cmdSql = cmd.CommandText;
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
-                    
+
                     return cmd.ExecuteNonQueryAsync();
                 }
             }
@@ -111,7 +111,7 @@ namespace UWay.Skynet.Cloud.Data
             Guard.NotNullOrEmpty(sql, "sql");
             Exception err = null;
             string cmdSql = string.Empty;
-            string cmdParams =string.Empty;
+            string cmdParams = string.Empty;
             try
             {
                 using (DbCommand cmd = Driver.CreateCommand(connection, sql, namedParameters))
@@ -121,11 +121,7 @@ namespace UWay.Skynet.Cloud.Data
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
-                    if(cmd.Parameters != null)
-                    {
-                        cmdParams = cmd.Parameters.JsonSerialize();
-                    }
-                    
+
                     cmdSql = cmd.CommandText;
                     return cmd.ExecuteNonQuery();
                 }
@@ -222,7 +218,7 @@ namespace UWay.Skynet.Cloud.Data
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
 
-                    
+
                     //log.Log(LogLevel.Information, GetSqlLogInfo("ExecuteReader: sql:{0}\r\nparamters:{1}", sqlString, jsonString));
                     return cmd.ExecuteReaderAsync();
                 }
@@ -298,7 +294,7 @@ namespace UWay.Skynet.Cloud.Data
             var cmdParameters = new StringBuilder();
             if (parameters != null && parameters.Count > 0)
             {
-                foreach(DbParameter item in parameters)
+                foreach (DbParameter item in parameters)
                 {
                     cmdParameters.AppendLine(item.ParameterName + ":" + item.Value);
                 }
@@ -308,10 +304,11 @@ namespace UWay.Skynet.Cloud.Data
 
         private void LogSql(Exception ex, string sql, string params1)
         {
-            if(ex == null)
+            if (ex == null)
             {
                 LogInformation(sql, params1);
-            } else
+            }
+            else
             {
                 LogError(ex, sql, params1);
             }
@@ -319,16 +316,17 @@ namespace UWay.Skynet.Cloud.Data
 
         private void LogInformation(string sql, string params1)
         {
-            
+
             log.Log(LogLevel.Information, GetSqlLogInfo("ExecuteNonQuery: sql:{0}\r\nparamters:{1}", sql, params1));
         }
 
-        private void LogError(Exception ex,string sql, string params1)
+        private void LogError(Exception ex, string sql, string params1)
         {
             log.Log(LogLevel.Error, ex, GetSqlLogInfo("ExecuteNonQuery: sql:{0}\r\nparamters:{1}", sql, params1));
         }
 
-        private string GetSqlLogInfo(string format, params object[] args) {
+        private string GetSqlLogInfo(string format, params object[] args)
+        {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("-------------------Sql Begin----------------");
             sb.AppendLine("-- Key:" + DbConfiguration.ConnectionString.Split(';')[0]);
@@ -350,17 +348,13 @@ namespace UWay.Skynet.Cloud.Data
             {
                 using (var cmd = Driver.CreateCommand(connection, sql, namedParameters))
                 {
-                    
                     cmd.CommandType = CommandType;
                     var adp = this.dbConfiguration.DbProviderFactory.CreateDataAdapter();
                     adp.SelectCommand = cmd;
                     var ds = new DataSet();
                     adp.Fill(ds);
-                    if(cmd.Parameters != null)
-                    {
-                        cmdParams = cmd.Parameters.JsonSerialize();
-                    }
-                    
+                    cmdParams = GetParameters(cmd.Parameters);
+
                     cmdSql = cmd.CommandText;
                     return ds;
                 }
@@ -397,11 +391,8 @@ namespace UWay.Skynet.Cloud.Data
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
-                    if(cmd.Parameters != null)
-                    {
-                        cmdParams = cmd.Parameters.JsonSerialize();
-                    }
-                    
+                    cmdParams = GetParameters(cmd.Parameters);
+
                     cmdSql = cmd.CommandText;
                     return cmd.ExecuteScalarAsync();
                 }
@@ -438,14 +429,11 @@ namespace UWay.Skynet.Cloud.Data
             {
                 using (var cmd = Driver.CreateCommand(connection, sql, namedParameters))
                 {
-                    
+
                     cmd.CommandType = CommandType;
                     if (connection.State != ConnectionState.Open)
                         connection.Open();
-                    if(cmd.Parameters != null)
-                    {
-                        cmdParams = cmd.Parameters.JsonSerialize();
-                    }
+                    cmdParams = this.GetParameters(cmd.Parameters);
                     cmdSql = cmd.CommandText;
                     return cmd.ExecuteScalar();
                 }
@@ -464,29 +452,29 @@ namespace UWay.Skynet.Cloud.Data
                     if (connection.State != ConnectionState.Closed)
                         connection.Close();
                 }
-                //AddAttachInfo();
-                ////log.AddMessage("")
-                //log.Log();
             }
         }
 
+        /// <inheritdoc/>
         public DataSourceTableResult ExecutePage(string sql, long skip, long take, dynamic nameparameters, bool isAutoClose = true)
         {
 
             Guard.NotNullOrEmpty(sql, "sql");
-            //sql = GetReplaceSql(sql);
             PagingHelper.SQLParts parts;
-            //rowCount = 0;
 
             DataSourceTableResult ds = new DataSourceTableResult();
             if (!PagingHelper.SplitSQL(sql, out parts))
             {
                 throw new Exception("Unable to parse SQL statement for paged query");
             }
+
             var sqlCount = parts.sqlCount;
             var pageSql = sql;
             if (take > 0)
+            {
                 pageSql = Driver.BuildPageQuery(skip, take, parts, nameparameters);
+            }
+
             if (connection.State != ConnectionState.Open)
                 connection.Open();
             var tempRowCount = 0;
@@ -494,15 +482,20 @@ namespace UWay.Skynet.Cloud.Data
             try
             {
                 if (take > 0)
-                    System.Threading.Tasks.Parallel.Invoke(() => tempRowCount = (int)ExecuteScalar(parts.sqlCount, nameparameters, false), () => dt = ExecuteDataTable(pageSql, nameparameters, false));
+                {
+                    Parallel.Invoke(() => tempRowCount = (int)this.ExecuteScalar(parts.sqlCount, nameparameters, false), () => dt = this.ExecuteDataTable(pageSql, nameparameters, false));
+                }
                 else
-                    dt = ExecuteDataTable(pageSql, nameparameters, false);
+                {
+                    dt = this.ExecuteDataTable(pageSql, nameparameters, false);
+                }
             }
             catch (Exception ex)
-            {  
+            {
                 throw new QueryException(ex.Message, ex);
             }
-            finally {
+            finally
+            {
                 if (isAutoClose == true)
                 {
                     if (connection.State != ConnectionState.Closed)
@@ -515,26 +508,30 @@ namespace UWay.Skynet.Cloud.Data
             return ds;
         }
 
-
-        public DataSourceResult ExecutePage<T>(string sql, long skip, long take, dynamic nameparameters, bool isAutoClose = true) where T: new ()
+        /// <inheritdoc/>
+        public DataSourceResult ExecutePage<T>(string sql, long skip, long take, dynamic nameparameters, bool isAutoClose = true) where T : new()
         {
-
             Guard.NotNullOrEmpty(sql, "sql");
-            //sql = GetReplaceSql(sql);
             PagingHelper.SQLParts parts;
-            //rowCount = 0;
 
             DataSourceResult ds = new DataSourceResult();
             if (!PagingHelper.SplitSQL(sql, out parts))
             {
                 throw new Exception("Unable to parse SQL statement for paged query");
             }
+
             var sqlCount = parts.sqlCount;
             var pageSql = sql;
             if (take > 0)
+            {
                 pageSql = Driver.BuildPageQuery(skip, take, parts, nameparameters);
+            }
+
             if (connection.State != ConnectionState.Open)
+            {
                 connection.Open();
+            }
+
             var tempRowCount = 0;
             DbDataReader dr = null;
             try
@@ -561,7 +558,5 @@ namespace UWay.Skynet.Cloud.Data
             ds.Data = dr.ToList<T>();
             return ds;
         }
-
-
     }
 }
