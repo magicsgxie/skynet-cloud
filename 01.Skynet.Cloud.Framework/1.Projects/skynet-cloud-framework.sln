@@ -34,13 +34,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Upms.Test.Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Upms.Test.Service.Interface", "..\3.Demo\Skynet.Cloud.Upms.Test.Service.Interface\Skynet.Cloud.Upms.Test.Service.Interface.csproj", "{7134929B-C4B4-45DC-9F4F-81B547E14D57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.SwaggerUI", "Skynet.Cloud.SwaggerUI\Skynet.Cloud.SwaggerUI.csproj", "{CAF54D6C-3126-4BB1-8A57-AE94926A1C58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.SwaggerUI", "Skynet.Cloud.SwaggerUI\Skynet.Cloud.SwaggerUI.csproj", "{CAF54D6C-3126-4BB1-8A57-AE94926A1C58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Storage.Core", "Skynet.Cloud.Storage.Core\Skynet.Cloud.Storage.Core.csproj", "{3E51E328-FDE2-4DF6-88DC-250B5550A660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Storage.Core", "Skynet.Cloud.Storage.Core\Skynet.Cloud.Storage.Core.csproj", "{3E51E328-FDE2-4DF6-88DC-250B5550A660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Storage.Local.Core", "Skynet.Cloud.Storage.Local.Core\Skynet.Cloud.Storage.Local.Core.csproj", "{AE0DEE39-106E-456A-9FDB-367C610B56AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Storage.Local.Core", "Skynet.Cloud.Storage.Local.Core\Skynet.Cloud.Storage.Local.Core.csproj", "{AE0DEE39-106E-456A-9FDB-367C610B56AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Storage.Ftp.Core", "Skynet.Cloud.Storage.Ftp.Core\Skynet.Cloud.Storage.Ftp.Core.csproj", "{341578F4-4FA9-4242-8513-76BEF274696E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Storage.Ftp.Core", "Skynet.Cloud.Storage.Ftp.Core\Skynet.Cloud.Storage.Ftp.Core.csproj", "{341578F4-4FA9-4242-8513-76BEF274696E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Notify", "Skynet.Cloud.Notify\Skynet.Cloud.Notify.csproj", "{99DC2CAC-3491-406C-97C8-B89C3C19A035}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Tasks", "Skynet.Cloud.Tasks\Skynet.Cloud.Tasks.csproj", "{DA323C14-E29C-4323-BCC7-A177357D888A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +108,14 @@ Global
 		{341578F4-4FA9-4242-8513-76BEF274696E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{341578F4-4FA9-4242-8513-76BEF274696E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{341578F4-4FA9-4242-8513-76BEF274696E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99DC2CAC-3491-406C-97C8-B89C3C19A035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99DC2CAC-3491-406C-97C8-B89C3C19A035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99DC2CAC-3491-406C-97C8-B89C3C19A035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99DC2CAC-3491-406C-97C8-B89C3C19A035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA323C14-E29C-4323-BCC7-A177357D888A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA323C14-E29C-4323-BCC7-A177357D888A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA323C14-E29C-4323-BCC7-A177357D888A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA323C14-E29C-4323-BCC7-A177357D888A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +135,8 @@ Global
 		{3E51E328-FDE2-4DF6-88DC-250B5550A660} = {4B57D35D-AC80-4FB2-8496-FF5619303879}
 		{AE0DEE39-106E-456A-9FDB-367C610B56AE} = {4B57D35D-AC80-4FB2-8496-FF5619303879}
 		{341578F4-4FA9-4242-8513-76BEF274696E} = {4B57D35D-AC80-4FB2-8496-FF5619303879}
+		{99DC2CAC-3491-406C-97C8-B89C3C19A035} = {4B57D35D-AC80-4FB2-8496-FF5619303879}
+		{DA323C14-E29C-4323-BCC7-A177357D888A} = {4B57D35D-AC80-4FB2-8496-FF5619303879}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7EEC8EC5-19FF-4ED7-82B6-52ED1381CEB8}
