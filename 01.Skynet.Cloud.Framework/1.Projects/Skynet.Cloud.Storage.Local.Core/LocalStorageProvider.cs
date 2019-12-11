@@ -13,28 +13,28 @@ namespace UWay.Skynet.Cloud.Storage.Local.Core
     public class LocalStorageProvider : IStorageProvider
     {
         /// <summary>
-        /// Defines the _rootPath
+        /// Defines the _rootPath.
         /// </summary>
         private readonly string _rootPath;
 
         /// <summary>
-        /// Defines the _rootUrl
+        /// Defines the _rootUrl.
         /// </summary>
         private readonly string _rootUrl;
 
         /// <summary>
-        /// Gets the ProviderName
+        /// Gets the ProviderName.
         /// </summary>
         public string ProviderName => "Local";
 
         /// <summary>
         /// Gets or sets the AllowExtensionList
-        /// 允许的扩展列表
+        /// 允许的扩展列表.
         /// </summary>
         public IList<string> AllowExtensionList { get; set; }
 
         /// <summary>
-        /// The ExceptionHandling
+        /// The ExceptionHandling.
         /// </summary>
         /// <param name="ioAction">The ioAction<see cref="Action"/></param>
         private void ExceptionHandling(Action ioAction)
@@ -74,11 +74,11 @@ namespace UWay.Skynet.Cloud.Storage.Local.Core
         }
 
         /// <summary>
-        /// The ExceptionHandling
+        /// The ExceptionHandling.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="ioFunc">The ioFunc<see cref="Func{T}"/></param>
-        /// <returns>The <see cref="T"/></returns>
+        /// <typeparam name="T"><see cref="T"/>.</typeparam>
+        /// <param name="ioFunc">The ioFunc<see cref="Func{T}"/>.</param>
+        /// <returns>The <see cref="T"/>.</returns>
         private T ExceptionHandling<T>(Func<T> ioFunc)
         {
             try
@@ -118,12 +118,12 @@ namespace UWay.Skynet.Cloud.Storage.Local.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalStorageProvider"/> class.
         /// </summary>
-        /// <param name="rootPath">文件根路径</param>
-        /// <param name="rootUrl">根Url</param>
+        /// <param name="rootPath">文件根路径.</param>
+        /// <param name="rootUrl">根Url.</param>
         public LocalStorageProvider(string rootPath, string rootUrl)
         {
-            _rootPath = rootPath;
-            _rootUrl = rootUrl;
+            this._rootPath = rootPath;
+            this._rootUrl = rootUrl;
         }
 
         /// <summary>

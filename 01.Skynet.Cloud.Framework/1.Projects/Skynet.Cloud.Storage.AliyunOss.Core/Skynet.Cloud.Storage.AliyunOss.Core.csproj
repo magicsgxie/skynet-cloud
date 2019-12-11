@@ -3,10 +3,10 @@
   <Import Project="..\..\..\version.props"></Import>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>UWay.Skynet.Cloud.Storage.Ftp.Core</RootNamespace>
+    <RootNamespace>UWay.Skynet.Cloud.Storage.AliyunOss.Core</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentFTP" Version="28.0.5" />
+    <PackageReference Include="aliyun.oss.sdk.core" Version="2.5.3" />
     <PackageReference Include="Skynet.Cloud.Storage.Core" Version="$(SkynetCloudVersion)" />
   </ItemGroup>
 </Project>
