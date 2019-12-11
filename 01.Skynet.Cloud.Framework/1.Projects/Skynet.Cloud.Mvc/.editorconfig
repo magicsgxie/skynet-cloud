@@ -8,3 +8,9 @@ dotnet_diagnostic.CA1031.severity = suggestion
 
 # CA1018: 用 AttributeUsageAttribute 标记属性
 dotnet_diagnostic.CA1018.severity = suggestion
+
+# SA1201: Elements should appear in the correct order
+dotnet_diagnostic.SA1201.severity = none
+
+# CA1062: 验证公共方法的参数
+dotnet_diagnostic.CA1062.severity = warning

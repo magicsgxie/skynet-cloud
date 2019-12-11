@@ -382,3 +382,6 @@ skynet-cloud-uflow.sln
 /01.Skynet.Cloud.Framework/1.Projects/Skynet.Cloud.Discovery.Core/Skynet.Cloud.Dicovery.Core.xml
 /01.Skynet.Cloud.Framework/1.Projects/Steeltoe.Configuration.NacosServerBase/Steeltoe.Configuration.NacosServerBase.xml
 /01.Skynet.Cloud.Framework/1.Projects/Steeltoe.Discovery.NacosBase/Steeltoe.Discovery.NacosBase.xml
+/01.Skynet.Cloud.Framework/3.Demo/Skynet.Cloud.ApiDemo/Skynet.Cloud.ApiDemo.xml
+/doc/skynet-cloud打包发布.docx
+/doc/skynet-cloud项目建立.docx

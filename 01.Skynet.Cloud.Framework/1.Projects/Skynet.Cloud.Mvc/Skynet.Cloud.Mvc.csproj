@@ -10,17 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Skynet.Cloud.Framework" Version="1.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="4.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="4.0.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="$(NLogVersion)" />
+    <PackageReference Include="Skynet.Cloud.Framework" Version="$(SkynetCloudVersion)" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Framework", ".\Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj", "{12C7B85D-F36E-4017-961A-EA5FC4F76044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Framework", "Skynet.Cloud.Framework\Skynet.Cloud.Framework.csproj", "{12C7B85D-F36E-4017-961A-EA5FC4F76044}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_share", "_share", "{6B921623-0929-43CB-8E59-9F50FC19F86E}"
 	ProjectSection(SolutionItems) = preProject
@@ -14,13 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_share", "_share", "{6B9216
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Projects", "1.Projects", "{4B57D35D-AC80-4FB2-8496-FF5619303879}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Data", ".\Skynet.Cloud.Data\Skynet.Cloud.Data.csproj", "{5AECC22C-842B-4F8E-8AAD-0BDBCAA7AAB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Data", "Skynet.Cloud.Data\Skynet.Cloud.Data.csproj", "{5AECC22C-842B-4F8E-8AAD-0BDBCAA7AAB5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Mvc", ".\Skynet.Cloud.Mvc\Skynet.Cloud.Mvc.csproj", "{9C626BD7-E2A8-4A70-989F-020259CFC1CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Mvc", "Skynet.Cloud.Mvc\Skynet.Cloud.Mvc.csproj", "{9C626BD7-E2A8-4A70-989F-020259CFC1CD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.ConnectorBase", ".\Skynet.Cloud.ConnectorBase\Skynet.Cloud.ConnectorBase.csproj", "{137CC125-23F6-40CF-9697-4D1F8DC9C427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.ConnectorBase", "Skynet.Cloud.ConnectorBase\Skynet.Cloud.ConnectorBase.csproj", "{137CC125-23F6-40CF-9697-4D1F8DC9C427}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Connector.Core", ".\Skynet.Cloud.Connector.Core\Skynet.Cloud.Connector.Core.csproj", "{6616A818-A3D6-409B-A286-B6E464BF82C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Connector.Core", "Skynet.Cloud.Connector.Core\Skynet.Cloud.Connector.Core.csproj", "{6616A818-A3D6-409B-A286-B6E464BF82C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Demo", "3.Demo", "{2763AF2F-5D4F-48C0-811F-7C8E95F05A65}"
 EndProject
@@ -33,6 +33,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Upms.Test.Service", "..\3.Demo\Skynet.Cloud.Upms.Test.Service\Skynet.Cloud.Upms.Test.Service.csproj", "{43C26E44-D148-49AE-8210-6074CE14B585}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skynet.Cloud.Upms.Test.Service.Interface", "..\3.Demo\Skynet.Cloud.Upms.Test.Service.Interface\Skynet.Cloud.Upms.Test.Service.Interface.csproj", "{7134929B-C4B4-45DC-9F4F-81B547E14D57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.SwaggerUI", "Skynet.Cloud.SwaggerUI\Skynet.Cloud.SwaggerUI.csproj", "{CAF54D6C-3126-4BB1-8A57-AE94926A1C58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Storage.Core", "Skynet.Cloud.Storage.Core\Skynet.Cloud.Storage.Core.csproj", "{3E51E328-FDE2-4DF6-88DC-250B5550A660}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Storage.Local.Core", "Skynet.Cloud.Storage.Local.Core\Skynet.Cloud.Storage.Local.Core.csproj", "{AE0DEE39-106E-456A-9FDB-367C610B56AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet.Cloud.Storage.Ftp.Core", "Skynet.Cloud.Storage.Ftp.Core\Skynet.Cloud.Storage.Ftp.Core.csproj", "{341578F4-4FA9-4242-8513-76BEF274696E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +88,22 @@ Global
 		{7134929B-C4B4-45DC-9F4F-81B547E14D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7134929B-C4B4-45DC-9F4F-81B547E14D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7134929B-C4B4-45DC-9F4F-81B547E14D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAF54D6C-3126-4BB1-8A57-AE94926A1C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAF54D6C-3126-4BB1-8A57-AE94926A1C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAF54D6C-3126-4BB1-8A57-AE94926A1C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAF54D6C-3126-4BB1-8A57-AE94926A1C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E51E328-FDE2-4DF6-88DC-250B5550A660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E51E328-FDE2-4DF6-88DC-250B5550A660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E51E328-FDE2-4DF6-88DC-250B5550A660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E51E328-FDE2-4DF6-88DC-250B5550A660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE0DEE39-106E-456A-9FDB-367C610B56AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0DEE39-106E-456A-9FDB-367C610B56AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0DEE39-106E-456A-9FDB-367C610B56AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0DEE39-106E-456A-9FDB-367C610B56AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{341578F4-4FA9-4242-8513-76BEF274696E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{341578F4-4FA9-4242-8513-76BEF274696E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{341578F4-4FA9-4242-8513-76BEF274696E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{341578F4-4FA9-4242-8513-76BEF274696E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +119,10 @@ Global
 		{3B555221-F2CA-4620-861F-F4C54A0EAB97} = {2763AF2F-5D4F-48C0-811F-7C8E95F05A65}
 		{43C26E44-D148-49AE-8210-6074CE14B585} = {2763AF2F-5D4F-48C0-811F-7C8E95F05A65}
 		{7134929B-C4B4-45DC-9F4F-81B547E14D57} = {2763AF2F-5D4F-48C0-811F-7C8E95F05A65}
+		{CAF54D6C-3126-4BB1-8A57-AE94926A1C58} = {4B57D35D-AC80-4FB2-8496-FF5619303879}
+		{3E51E328-FDE2-4DF6-88DC-250B5550A660} = {4B57D35D-AC80-4FB2-8496-FF5619303879}
+		{AE0DEE39-106E-456A-9FDB-367C610B56AE} = {4B57D35D-AC80-4FB2-8496-FF5619303879}
+		{341578F4-4FA9-4242-8513-76BEF274696E} = {4B57D35D-AC80-4FB2-8496-FF5619303879}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7EEC8EC5-19FF-4ED7-82B6-52ED1381CEB8}

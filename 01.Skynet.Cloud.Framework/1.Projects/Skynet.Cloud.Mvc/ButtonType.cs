@@ -1,50 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UWay.Skynet.Cloud.Mvc
+﻿namespace UWay.Skynet.Cloud.Mvc
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     /// <summary>
     /// 按钮操作类型
-    /// 最好不要动
+    /// 最好不要动.
     /// </summary>
     public enum ButtonType
     {
         /// <summary>
-        /// 查看
+        /// 查看.
         /// </summary>
         View = 1,
+
         /// <summary>
-        /// 新增
+        /// 新增.
         /// </summary>
         Add = 2,
+
         /// <summary>
-        /// 编辑
+        /// 编辑.
         /// </summary>
         Edit = 3,
+
         /// <summary>
-        /// 删除
+        /// 删除.
         /// </summary>
         Delete = 4,
+
         /// <summary>
-        /// 打印
+        /// 打印.
         /// </summary>
         Print = 5,
+
         /// <summary>
-        /// 审核
+        /// 审核.
         /// </summary>
         Check = 6,
+
         /// <summary>
-        /// 作废
+        /// 作废.
         /// </summary>
         Cancle = 7,
+
         /// <summary>
-        /// 结束
+        /// 结束.
         /// </summary>
         Finish = 8,
+
         /// <summary>
-        /// 扩展
+        /// 扩展.
         /// </summary>
-        Extend = 9
+        Extend = 9,
     }
 }

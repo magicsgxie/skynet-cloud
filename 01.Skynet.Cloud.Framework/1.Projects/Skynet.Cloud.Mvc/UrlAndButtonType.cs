@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace UWay.Skynet.Cloud.Mvc
 {
     /// <summary>
@@ -10,17 +7,17 @@ namespace UWay.Skynet.Cloud.Mvc
     public class UrlAndButtonType
     {
         /// <summary>
-        /// 地址.
+        /// Gets or sets 地址.
         /// </summary>
         public string Url { get; set; }
 
         /// <summary>
-        /// 类型.
+        /// Gets or sets 类型.
         /// </summary>
         public byte ButtonType { get; set; }
 
         /// <summary>
-        /// 是否为页面.
+        /// Gets or sets a value indicating whether 是否为页面.
         /// </summary>
         public bool IsPage { get; set; }
     }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
 
 namespace UWay.Skynet.Cloud.ApiDemo
 {
@@ -19,6 +20,7 @@ namespace UWay.Skynet.Cloud.ApiDemo
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            //WebHost.CreateDefaultBuilder(args).UseNLog()
             WebHost.CreateDefaultBuilder(args).ConfigureLogging((hostingContext, logging) =>
             {
                 //从appsettings.json中获取Logging的配置

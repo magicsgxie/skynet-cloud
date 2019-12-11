@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\version.props"></Import>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>UWay.Skynet.Cloud.Storage.Ftp.Core</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Skynet.Cloud.Storage.Core" Version="$(SkynetCloudVersion)" />
+  </ItemGroup>
+</Project>

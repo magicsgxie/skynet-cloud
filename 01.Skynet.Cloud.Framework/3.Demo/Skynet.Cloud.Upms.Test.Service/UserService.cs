@@ -60,7 +60,7 @@ namespace Skynet.Cloud.Upms.Test.Service
                 sorts.Add(new SortDescriptor { Member = "CITY_ID", SortDirection = ListSortDirection.Ascending });
                 DataSourceRequest request = new DataSourceRequest { 
                     Page = 1,
-                    PageSize = 10,
+                    PageSize = 2,
                     Sorts = sorts
                 };
                 var sql = @"SELECT 

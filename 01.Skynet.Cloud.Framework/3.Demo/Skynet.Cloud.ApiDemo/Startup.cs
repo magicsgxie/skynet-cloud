@@ -4,22 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.HttpsPolicy;
+using NLog.Extensions.Logging;
+using NLog.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using UWay.Skynet.Cloud.Data;
-using UWay.Skynet.Cloud.Helpers;
 using UWay.Skynet.Cloud.Extensions;
-using UWay.Skynet.Cloud.IoC;
-using UWay.Skynet.Cloud.Mvc;
-using Microsoft.AspNetCore.Http;
-using Skynet.Cloud.Upms.Test.Service.Interface;
-using Skynet.Cloud.Upms.Test.Service;
+using UWay.Skynet.Cloud.SwaggerUI;
 
 namespace UWay.Skynet.Cloud.ApiDemo
 {
@@ -52,26 +45,28 @@ namespace UWay.Skynet.Cloud.ApiDemo
             services.AddCustomMvc();
 
             //初始化SwaggerUI文档
-            services.AddSwaggerDocumentation(Configuration);
+            services.AddCustomSwaggerGen(Configuration);
             //IOC容器
             services.InitIoC();
         }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            //loggerFactory.AddNLog();
             if (env.IsDevelopment())
             {
-                //
-                app.UseDeveloperExceptionPage();
                 //初始化SwaggerUI文档
-                app.UseSwaggerDocumentation(Configuration);
+                app.UseCustomSwaggerUI(Configuration);
+                //env.ConfigureNLog("NLog.Development.config");
+                app.UseDeveloperExceptionPage();
             }
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                //env.ConfigureNLog("NLog.config");
             }
             //使用授权模式
             app.UseAuthentication();
