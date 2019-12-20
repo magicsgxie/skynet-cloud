@@ -20,6 +20,7 @@ using UWay.Skynet.Cloud.Steganogram;
 using UWay.Skynet.Cloud.Helpers;
 using UWay.Skynet.Cloud.Request;
 using UWay.Skynet.Cloud.Linq;
+using System.Linq.Expressions;
 
 namespace UWay.Skynet.Cloud
 {
@@ -112,6 +113,20 @@ namespace UWay.Skynet.Cloud
             if (paging != null)
                 return paging.ParseQuery(query) as IQueryable<T>;
             return query;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> ToLambda<T>(this IEnumerable<IFilterDescriptor> args)
+        {
+            if (args == null || args.Count() == 0)
+                return c => true;
+            var seracher = new QueryableSearcher<T>();
+            return seracher.GetExpression(args);
         }
 
 
@@ -1984,6 +1999,20 @@ namespace UWay.Skynet.Cloud
         public static IEnumerable<IDictionary<string, object>> ToJson(this IEnumerable<JsonObject> items)
         {
             return items.Select(i => i.ToJson());
+        }
+
+        /// <summary>
+        /// 集合连接成字符串
+        /// </summary>
+        /// <param name="objs">对象列表</param>
+        /// <param name="splite">分割符</param>
+        /// <param name="isAddMark"></param>
+        /// <returns></returns>
+        public static string Concat<T>(this IEnumerable<T> objs, string splite = ",", bool isAddMark = false)
+        {
+            if (!objs.Any())
+                return string.Empty;
+            return string.Join(splite, objs.Select(p => string.Format("{0}{1}{0}", isAddMark == true ? "'" : "", p.ToString())));
         }
 
 

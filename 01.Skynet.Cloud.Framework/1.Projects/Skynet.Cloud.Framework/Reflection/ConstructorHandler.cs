@@ -29,9 +29,15 @@ namespace UWay.Skynet.Cloud.Reflection
                 args = new object[0];
 
             ConstructorHandler handler;
-            if (!factoryMethodCache.TryGetValue(constructor, out handler))
-                factoryMethodCache[constructor] = handler = constructor.GetCreator();
-
+            if(factoryMethodCache.ContainsKey(constructor))
+            {
+                handler = factoryMethodCache[constructor];
+            }
+            else
+            {
+                handler = constructor.GetCreator();
+                factoryMethodCache.Add(constructor,handler);
+            }
             return handler(args);
         }
     }
