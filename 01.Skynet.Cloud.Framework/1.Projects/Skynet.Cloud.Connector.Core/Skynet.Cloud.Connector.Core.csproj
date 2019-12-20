@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.Oracle" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="$(DependencyModelVersion)" />
-    <PackageReference Include="Skynet.Cloud.ConnectorBase" Version="$(Version)" />
+    <PackageReference Include="Skynet.Cloud.ConnectorBase" Version="$(SkynetCloudVersion)" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="System.Runtime.Loader" Version="$(SystemVersion)" />

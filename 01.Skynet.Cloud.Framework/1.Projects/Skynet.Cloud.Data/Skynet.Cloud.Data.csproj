@@ -14,7 +14,7 @@
     <PackageReference Include="Npgsql" Version="$(NpgsqlVersion)" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="$(OracleManagedDataAccessVersion)" />
     <PackageReference Include="System.Data.SqlClient" Version="$(SqlServerClientVersion)" />
-    <PackageReference Include="Skynet.Cloud.Framework" Version="$(Version)" />
+    <PackageReference Include="Skynet.Cloud.Framework" Version="$(SkynetCloudVersion)" />
   </ItemGroup>
 
 </Project>

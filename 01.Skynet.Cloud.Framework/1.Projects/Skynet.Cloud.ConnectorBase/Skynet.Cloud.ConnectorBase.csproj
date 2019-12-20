@@ -11,7 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.Oracle" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Skynet.Cloud.Data" Version="$(Version)" />
+    <PackageReference Include="Skynet.Cloud.Data" Version="$(SkynetCloudVersion)" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="$(AspNetCoreVersion)" />
   </ItemGroup>
