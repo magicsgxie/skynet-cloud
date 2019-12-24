@@ -833,8 +833,6 @@ namespace UWay.Skynet.Cloud.Linq
                     var predicate = expressionBuilder.CreateFilterExpression();
                     return source.Where<TSource>(predicate);
                 }
-                //var seacher = new QueryableSearcher<TSource>();
-                //return sources.Where<TSource>(seacher.GetExpression(filterDescriptors));
             }
             return source;
         }
