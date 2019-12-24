@@ -123,6 +123,10 @@ namespace UWay.Skynet.Cloud.Storage.Local.Core
         public LocalStorageProvider(string rootPath, string rootUrl)
         {
             this._rootPath = rootPath;
+            if(string.IsNullOrEmpty(_rootPath))
+            {
+                _rootPath = AppDomain.CurrentDomain.BaseDirectory;
+            }
             this._rootUrl = rootUrl;
         }
 
