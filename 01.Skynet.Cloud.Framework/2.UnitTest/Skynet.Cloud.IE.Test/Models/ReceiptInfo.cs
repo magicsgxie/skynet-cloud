@@ -2,7 +2,7 @@
 
 namespace UWay.Skynet.Cloud.IE.Tests.Models
 {
-    [ExporterAndImporter.Core.Exporter(Name = "深圳市优网科技有限公司电子收款凭证")]
+    [Core.Exporter(Name = "深圳市优网科技有限公司电子收款凭证")]
     public class ReceiptInfo
     {
         /// <summary>
