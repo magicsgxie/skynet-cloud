@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\..\..\version.props"></Import>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;</TargetFrameworks>
+    <PackageId>Skynet.Cloud.IE.Html</PackageId>
+    <RootNamespace>UWay.Skynet.Cloud.IE.Html</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Tpls\default.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Tpls\default.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CacoCode.RazorEngine.NetCore" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IE.Core\Skynet.Cloud.IE.Core.csproj" />
+  </ItemGroup>
+
+</Project>

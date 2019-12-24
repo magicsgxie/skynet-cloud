@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Skynet.Cloud.IE.Test
+namespace UWay.Skynet.Cloud.IE.Tests
 {
     public class TestBase
     {

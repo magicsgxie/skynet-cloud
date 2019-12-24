@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\..\version.props"></Import>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;</TargetFrameworks>
+    <PackageId>Skynet.Cloud.IE.Word</PackageId>
+    <RootNamespace>UWay.Skynet.Cloud.IE.Word</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlToOpenXml.dll" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IE.Html\Skynet.Cloud.IE.Html.csproj" />
+  </ItemGroup>
+
+</Project>

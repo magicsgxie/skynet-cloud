@@ -1,10 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using UWay.Skynet.Cloud.IE;
+﻿// ======================================================================
+// 
+//           Copyright (C) 2019-2030 深圳市优网科技有限公司
+//           All rights reserved
+// 
+//           filename : ImportQuestionBankDto.cs
+//           description :
+// 
+//           created by magic.s.g.xie at  2019-09-26 14:59
+//           
+//           
+//           
+//           Blog：http://www.cnblogs.com/codelove/
+// 
+// ======================================================================
 
-namespace Skynet.Cloud.IE.Test.Models
+using System.ComponentModel.DataAnnotations;
+using UWay.Skynet.Cloud.IE.Core;
+
+namespace UWay.Skynet.Cloud.IE.Tests.Models
 {
     /// <summary>
     ///     Class Name:QuestionBankSheetDto

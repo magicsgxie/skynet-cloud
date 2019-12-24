@@ -15,7 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.IE\Skynet.Cloud.IE.csproj" />
+    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.IE\IE.Excel\Skynet.Cloud.IE.Excel.csproj" />
+    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.IE\IE.Html\Skynet.Cloud.IE.Html.csproj" />
+    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.IE\IE.Pdf\Skynet.Cloud.IE.Pdf.csproj" />
+    <ProjectReference Include="..\..\1.Projects\Skynet.Cloud.IE\IE.Word\Skynet.Cloud.IE.Word.csproj" />
   </ItemGroup>
 
 </Project>

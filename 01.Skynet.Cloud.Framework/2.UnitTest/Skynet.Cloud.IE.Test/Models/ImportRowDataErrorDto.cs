@@ -1,10 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using UWay.Skynet.Cloud.IE;
+﻿// ======================================================================
+// 
+//           Copyright (C) 2019-2030 深圳市优网科技有限公司
+//           All rights reserved
+// 
+//           filename : ImportProductDto.cs
+//           description :
+// 
+//           created by magic.s.g.xie at  2019-09-11 13:51
+//           
+//           
+//           
+//           Blog：http://www.cnblogs.com/codelove/
+// 
+// ======================================================================
 
-namespace Skynet.Cloud.IE.Test.Models
+using UWay.Skynet.Cloud.IE.Core;
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace UWay.Skynet.Cloud.IE.Tests.Models
 {
     public class ImportRowDataErrorDto
     {
@@ -41,7 +55,7 @@ namespace Skynet.Cloud.IE.Test.Models
         /// <summary>
         ///     产品型号
         /// </summary>
-        [ImporterHeader(Name = "产品型号", IsAllowRepeat = false)]
+        [ImporterHeader(Name = "产品型号",IsAllowRepeat = false)]
         public string Model { get; set; }
 
         /// <summary>

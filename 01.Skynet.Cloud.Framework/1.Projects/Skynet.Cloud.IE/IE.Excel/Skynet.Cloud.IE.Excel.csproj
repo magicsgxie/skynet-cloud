@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+   <Import Project="..\..\..\..\version.props"></Import>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;</TargetFrameworks>
+    <PackageId>Skynet.Cloud.IE.Excel</PackageId>
+    <RootNamespace>UWay.Skynet.Cloud.IE.Excel</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.2" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.19" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IE.Core\Skynet.Cloud.IE.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\..\version.props"></Import>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;</TargetFrameworks>
+    <PackageId>Skynet.Cloud.IE.Pdf</PackageId>
+    <RootNamespace>UWay.Skynet.Cloud.IE.Pdf</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Haukcode.DinkToPdf" Version="1.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IE.Core\Skynet.Cloud.IE.Core.csproj" />
+    <ProjectReference Include="..\IE.Html\Skynet.Cloud.IE.Html.csproj" />
+  </ItemGroup>
+
+</Project>

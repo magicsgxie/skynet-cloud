@@ -1,23 +1,37 @@
-ï»¿using System;
-using System.Collections.Generic;
+// ======================================================================
+// 
+//           Copyright (C) 2019-2030 ÉîÛÚÊĞÓÅÍø¿Æ¼¼ÓĞÏŞ¹«Ë¾
+//           All rights reserved
+// 
+//           filename : ExcelImporter_Tests.cs
+//           description :
+// 
+//           created by magic.s.g.xie at  2019-09-11 13:51
+//           
+//           
+//           
+//           Blog£ºhttp://www.cnblogs.com/codelove/
+// 
+// ======================================================================
+
+using UWay.Skynet.Cloud.IE.Core;
+using UWay.Skynet.Cloud.IE.Core.Extension;
+using UWay.Skynet.Cloud.IE.Core.Models;
+using UWay.Skynet.Cloud.IE.Excel;
+using UWay.Skynet.Cloud.IE.Tests.Models;
+using Shouldly;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using UWay.Skynet.Cloud.IE;
-using UWay.Skynet.Cloud.IE.Excel;
 using Xunit;
-using Shouldly;
-using Skynet.Cloud.IE.Test.Models;
-using UWay.Skynet.Cloud.IE.Core.Models;
-using UWay.Skynet.Cloud.IE.Core;
 
-namespace Skynet.Cloud.IE.Test
+namespace UWay.Skynet.Cloud.IE.Tests
 {
     public class ExcelImporter_Tests
     {
         public IImporter Importer = new ExcelImporter();
 
-        [Fact(DisplayName = "ç”Ÿæˆæ¨¡æ¿")]
+        [Fact(DisplayName = "Éú³ÉÄ£°å")]
         public async Task GenerateTemplate_Test()
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), nameof(GenerateTemplate_Test) + ".xlsx");
@@ -29,12 +43,14 @@ namespace Skynet.Cloud.IE.Test
             var result = await Importer.GenerateTemplate<ImportProductDto>(filePath);
             result.ShouldNotBeNull();
             File.Exists(filePath).ShouldBeTrue();
+
+            //TODO:ÁĞÍ·Òş²Ø²âÊÔ
         }
 
-        [Fact(DisplayName = "ç”Ÿæˆæ¨¡æ¿å­—èŠ‚")]
+        [Fact(DisplayName = "Éú³ÉÄ£°å×Ö½Ú")]
         public async Task GenerateTemplateBytes_Test()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), nameof(GenerateTemplateBytes_Test) + ".xlsx");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), nameof(GenerateTemplateBytes_Test) +".xlsx");
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
@@ -47,12 +63,12 @@ namespace Skynet.Cloud.IE.Test
             File.Exists(filePath).ShouldBeTrue();
         }
 
-        [Fact(DisplayName = "å¯¼å…¥")]
+        [Fact(DisplayName = "µ¼Èë")]
         public async Task Importer_Test()
         {
-            //ç¬¬ä¸€åˆ—ä¹±åº
+            //µÚÒ»ÁĞÂÒĞò
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Import", "äº§å“å¯¼å…¥æ¨¡æ¿.xlsx");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Import", "²úÆ·µ¼ÈëÄ£°å.xlsx");
             var import = await Importer.Import<ImportProductDto>(filePath);
             import.ShouldNotBeNull();
 
@@ -61,40 +77,35 @@ namespace Skynet.Cloud.IE.Test
             import.Data.Count.ShouldBeGreaterThanOrEqualTo(2);
             foreach (var item in import.Data)
             {
-                if (item.Name.Contains("ç©ºæ ¼æµ‹è¯•"))
+                if (item.Name.Contains("¿Õ¸ñ²âÊÔ"))
                 {
                     item.Name.ShouldBe(item.Name.Trim());
                 }
 
-                if (item.Code.Contains("ä¸å»é™¤ç©ºæ ¼æµ‹è¯•"))
+                if (item.Code.Contains("²»È¥³ı¿Õ¸ñ²âÊÔ"))
                 {
                     item.Code.ShouldContain(" ");
                 }
-                //å»é™¤ä¸­é—´ç©ºæ ¼æµ‹è¯•
+                //È¥³ıÖĞ¼ä¿Õ¸ñ²âÊÔ
                 item.BarCode.ShouldBe("123123");
             }
 
-            //å¯ä¸ºç©ºç±»å‹æµ‹è¯•
+            //¿ÉÎª¿ÕÀàĞÍ²âÊÔ
             import.Data.ElementAt(4).Weight.HasValue.ShouldBe(true);
             import.Data.ElementAt(5).Weight.HasValue.ShouldBe(false);
-            //æå–æ€§åˆ«å…¬å¼æµ‹è¯•
-            import.Data.ElementAt(0).Sex.ShouldBe("å¥³");
-            //è·å–å½“å‰æ—¥æœŸä»¥åŠæ—¥æœŸç±»å‹æµ‹è¯•  å¦‚æœæ—¶é—´ä¸å¯¹ï¼Œè¯·æ‰“å¼€å¯¹åº”çš„Excelå³å¯æ›´æ–°ä¸ºå½“å‰æ—¶é—´ï¼Œç„¶åå†è¿è¡Œæ­¤å•å…ƒæµ‹è¯•
+            //ÌáÈ¡ĞÔ±ğ¹«Ê½²âÊÔ
+            import.Data.ElementAt(0).Sex.ShouldBe("Å®");
+            //»ñÈ¡µ±Ç°ÈÕÆÚÒÔ¼°ÈÕÆÚÀàĞÍ²âÊÔ  Èç¹ûÊ±¼ä²»¶Ô£¬Çë´ò¿ª¶ÔÓ¦µÄExcel¼´¿É¸üĞÂÎªµ±Ç°Ê±¼ä£¬È»ºóÔÙÔËĞĞ´Ëµ¥Ôª²âÊÔ
             //import.Data[0].FormulaTest.Date.ShouldBe(DateTime.Now.Date);
-            //æ•°å€¼æµ‹è¯•
+            //ÊıÖµ²âÊÔ
             import.Data.ElementAt(0).DeclareValue.ShouldBe(123123);
             import.Data.ElementAt(0).Name.ShouldBe("1212");
             import.Data.ElementAt(0).BarCode.ShouldBe("123123");
             import.Data.ElementAt(1).Name.ShouldBe("12312312");
-            import.Data.ElementAt(2).Name.ShouldBe("å·¦ä¾§ç©ºæ ¼æµ‹è¯•");
+            import.Data.ElementAt(2).Name.ShouldBe("×ó²à¿Õ¸ñ²âÊÔ");
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [Fact(DisplayName = "å¿…å¡«é¡¹æ£€æµ‹")]
+        [Fact(DisplayName = "±ØÌîÏî¼ì²â")]
         public async Task IsRequired_Test()
         {
             var pros = typeof(ImportProductDto).GetProperties();
@@ -110,7 +121,7 @@ namespace Skynet.Cloud.IE.Test
                     case "Name":
                         item.IsRequired().ShouldBe(true);
                         break;
-                    //å¯ä¸ºç©ºç±»å‹
+                    //¿ÉÎª¿ÕÀàĞÍ
                     case "Weight":
                     //string
                     case "IdNo":
@@ -120,10 +131,10 @@ namespace Skynet.Cloud.IE.Test
             }
         }
 
-        [Fact(DisplayName = "é¢˜åº“å¯¼å…¥æµ‹è¯•")]
+        [Fact(DisplayName = "Ìâ¿âµ¼Èë²âÊÔ")]
         public async Task QuestionBankImporter_Test()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Import", "é¢˜åº“å¯¼å…¥æ¨¡æ¿.xlsx");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Import", "Ìâ¿âµ¼ÈëÄ£°å.xlsx");
             var import = await Importer.Import<ImportQuestionBankDto>(filePath);
             import.ShouldNotBeNull();
 
@@ -135,59 +146,76 @@ namespace Skynet.Cloud.IE.Test
             import.TemplateErrors.Count.ShouldBe(0);
         }
 
-        [Fact(DisplayName = "æ•°æ®é”™è¯¯æ£€æµ‹")]
+        [Fact(DisplayName = "½É·ÑÁ÷Ë®µ¼Èë²âÊÔ")]
+        public async Task ImportPaymentLogs_Test()
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Import", "½É·ÑÁ÷Ë®µ¼ÈëÄ£°å.xlsx");
+            var import = await Importer.Import<ImportPaymentLogDto>(filePath);
+            import.ShouldNotBeNull();
+            import.HasError.ShouldBeTrue();
+            import.Exception.ShouldBeNull();
+            import.Data.Count.ShouldBe(20);
+        }
+
+        [Fact(DisplayName = "Êı¾İ´íÎó¼ì²â")]
         public async Task RowDataError_Test()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Errors", "æ•°æ®é”™è¯¯.xlsx");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Errors", "Êı¾İ´íÎó.xlsx");
             var result = await Importer.Import<ImportRowDataErrorDto>(filePath);
             result.ShouldNotBeNull();
             result.HasError.ShouldBeTrue();
 
             result.TemplateErrors.Count.ShouldBe(0);
 
-            result.RowErrors.ShouldContain(p => p.RowIndex == 2 && p.FieldErrors.ContainsKey("äº§å“åç§°"));
-            result.RowErrors.ShouldContain(p => p.RowIndex == 3 && p.FieldErrors.ContainsKey("äº§å“åç§°"));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 2 && p.FieldErrors.ContainsKey("²úÆ·Ãû³Æ"));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 3 && p.FieldErrors.ContainsKey("²úÆ·Ãû³Æ"));
 
-            result.RowErrors.ShouldContain(p => p.RowIndex == 7 && p.FieldErrors.ContainsKey("äº§å“ä»£ç "));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 7 && p.FieldErrors.ContainsKey("²úÆ·´úÂë"));
 
-            result.RowErrors.ShouldContain(p => p.RowIndex == 3 && p.FieldErrors.ContainsKey("é‡é‡(KG)"));
-            result.RowErrors.ShouldContain(p => p.RowIndex == 4 && p.FieldErrors.ContainsKey("å…¬å¼æµ‹è¯•"));
-            result.RowErrors.ShouldContain(p => p.RowIndex == 5 && p.FieldErrors.ContainsKey("å…¬å¼æµ‹è¯•"));
-            result.RowErrors.ShouldContain(p => p.RowIndex == 6 && p.FieldErrors.ContainsKey("å…¬å¼æµ‹è¯•"));
-            result.RowErrors.ShouldContain(p => p.RowIndex == 7 && p.FieldErrors.ContainsKey("å…¬å¼æµ‹è¯•"));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 3 && p.FieldErrors.ContainsKey("ÖØÁ¿(KG)"));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 4 && p.FieldErrors.ContainsKey("¹«Ê½²âÊÔ"));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 5 && p.FieldErrors.ContainsKey("¹«Ê½²âÊÔ"));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 6 && p.FieldErrors.ContainsKey("¹«Ê½²âÊÔ"));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 7 && p.FieldErrors.ContainsKey("¹«Ê½²âÊÔ"));
 
-            result.RowErrors.ShouldContain(p => p.RowIndex == 3 && p.FieldErrors.ContainsKey("èº«ä»½è¯"));
-            result.RowErrors.First(p => p.RowIndex == 3 && p.FieldErrors.ContainsKey("èº«ä»½è¯")).FieldErrors.Count
-                .ShouldBe(2);
+            result.RowErrors.ShouldContain(p => p.RowIndex == 3 && p.FieldErrors.ContainsKey("Éí·İÖ¤"));
+            result.RowErrors.First(p => p.RowIndex == 3 && p.FieldErrors.ContainsKey("Éí·İÖ¤")).FieldErrors.Count
+                .ShouldBe(3);
 
-            result.RowErrors.ShouldContain(p => p.RowIndex == 4 && p.FieldErrors.ContainsKey("èº«ä»½è¯"));
-            result.RowErrors.ShouldContain(p => p.RowIndex == 5 && p.FieldErrors.ContainsKey("èº«ä»½è¯"));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 4 && p.FieldErrors.ContainsKey("Éí·İÖ¤"));
+            result.RowErrors.ShouldContain(p => p.RowIndex == 5 && p.FieldErrors.ContainsKey("Éí·İÖ¤"));
 
-            #region é‡å¤é”™è¯¯
+            #region ÖØ¸´´íÎó
 
             var errorRows = "5,6".Split(',').ToList();
             result.RowErrors.ShouldContain(p =>
-                errorRows.Contains(p.RowIndex.ToString()) && p.FieldErrors.ContainsKey("äº§å“ä»£ç ") &&
-                p.FieldErrors.Values.Contains("å­˜åœ¨æ•°æ®é‡å¤ï¼Œè¯·æ£€æŸ¥ï¼æ‰€åœ¨è¡Œï¼š5ï¼Œ6ã€‚"));
+                errorRows.Contains(p.RowIndex.ToString()) && p.FieldErrors.ContainsKey("²úÆ·´úÂë") &&
+                p.FieldErrors.Values.Contains("´æÔÚÊı¾İÖØ¸´£¬Çë¼ì²é£¡ËùÔÚĞĞ£º5£¬6¡£"));
 
             errorRows = "8,9,11,13".Split(',').ToList();
             result.RowErrors.ShouldContain(p =>
-                errorRows.Contains(p.RowIndex.ToString()) && p.FieldErrors.ContainsKey("äº§å“ä»£ç ") &&
-                p.FieldErrors.Values.Contains("å­˜åœ¨æ•°æ®é‡å¤ï¼Œè¯·æ£€æŸ¥ï¼æ‰€åœ¨è¡Œï¼š8ï¼Œ9ï¼Œ11ï¼Œ13ã€‚"));
+                errorRows.Contains(p.RowIndex.ToString()) && p.FieldErrors.ContainsKey("²úÆ·´úÂë") &&
+                p.FieldErrors.Values.Contains("´æÔÚÊı¾İÖØ¸´£¬Çë¼ì²é£¡ËùÔÚĞĞ£º8£¬9£¬11£¬13¡£"));
 
-            errorRows = "4ï¼Œ6ï¼Œ8ï¼Œ10ï¼Œ11ï¼Œ13".Split('ï¼Œ').ToList();
+            errorRows = "4£¬6£¬8£¬10£¬11£¬13".Split('£¬').ToList();
             result.RowErrors.ShouldContain(p =>
-                errorRows.Contains(p.RowIndex.ToString()) && p.FieldErrors.ContainsKey("äº§å“å‹å·") &&
-                p.FieldErrors.Values.Contains("å­˜åœ¨æ•°æ®é‡å¤ï¼Œè¯·æ£€æŸ¥ï¼æ‰€åœ¨è¡Œï¼š4ï¼Œ6ï¼Œ8ï¼Œ10ï¼Œ11ï¼Œ13ã€‚"));
+                errorRows.Contains(p.RowIndex.ToString()) && p.FieldErrors.ContainsKey("²úÆ·ĞÍºÅ") &&
+                p.FieldErrors.Values.Contains("´æÔÚÊı¾İÖØ¸´£¬Çë¼ì²é£¡ËùÔÚĞĞ£º4£¬6£¬8£¬10£¬11£¬13¡£"));
             #endregion
 
             result.RowErrors.Count.ShouldBeGreaterThan(0);
+
+            //Ò»ĞĞ½öÔÊĞí´æÔÚÒ»ÌõÊı¾İ
+            foreach (var item in result.RowErrors.GroupBy(p => p.RowIndex).Select(p => new { p.Key, Count = p.Count() }))
+            {
+                item.Count.ShouldBe(1);
+            }
         }
 
-        [Fact(DisplayName = "æ¨¡æ¿é”™è¯¯æ£€æµ‹")]
+        [Fact(DisplayName = "Ä£°å´íÎó¼ì²â")]
         public async Task TplError_Test()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Errors", "æ¨¡æ¿å­—æ®µé”™è¯¯.xlsx");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Errors", "Ä£°å×Ö¶Î´íÎó.xlsx");
             var result = await Importer.Import<ImportProductDto>(filePath);
             result.ShouldNotBeNull();
             result.HasError.ShouldBeTrue();
@@ -196,10 +224,10 @@ namespace Skynet.Cloud.IE.Test
             result.TemplateErrors.Count(p => p.ErrorLevel == ErrorLevels.Warning).ShouldBe(1);
         }
 
-        [Fact(DisplayName = "æˆªæ–­æ•°æ®æµ‹è¯•")]
+        [Fact(DisplayName = "½Ø¶ÏÊı¾İ²âÊÔ")]
         public async Task ImporterDataEnd_Test()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Import", "æˆªæ–­æ•°æ®æµ‹è¯•.xlsx");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", "Import", "½Ø¶ÏÊı¾İ²âÊÔ.xlsx");
             var import = await Importer.Import<ImportProductDto>(filePath);
             import.ShouldNotBeNull();
             import.Data.ShouldNotBeNull();
