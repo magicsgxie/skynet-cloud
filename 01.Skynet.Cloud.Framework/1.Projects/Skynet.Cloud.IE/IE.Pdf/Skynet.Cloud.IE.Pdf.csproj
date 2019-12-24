@@ -7,10 +7,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Haukcode.DinkToPdf" Version="1.1.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IE.Core\Skynet.Cloud.IE.Core.csproj" />
-    <ProjectReference Include="..\IE.Html\Skynet.Cloud.IE.Html.csproj" />
+    <PackageReference Include="Skynet.Cloud.IE.Core" Version="1.0.0" />
+    <PackageReference Include="Skynet.Cloud.IE.Html" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

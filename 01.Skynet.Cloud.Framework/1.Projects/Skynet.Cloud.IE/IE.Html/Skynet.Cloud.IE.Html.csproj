@@ -16,9 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="CacoCode.RazorEngine.NetCore" Version="1.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IE.Core\Skynet.Cloud.IE.Core.csproj" />
+    <PackageReference Include="Skynet.Cloud.IE.Core" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

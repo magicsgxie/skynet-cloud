@@ -10,8 +10,6 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.19" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IE.Core\Skynet.Cloud.IE.Core.csproj" />
+    <PackageReference Include="Skynet.Cloud.IE.Core" Version="1.0.0" />
   </ItemGroup>
 </Project>

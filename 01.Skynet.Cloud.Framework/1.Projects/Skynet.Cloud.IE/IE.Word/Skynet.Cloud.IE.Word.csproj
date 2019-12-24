@@ -8,10 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="HtmlToOpenXml.dll" Version="2.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\IE.Html\Skynet.Cloud.IE.Html.csproj" />
+    <PackageReference Include="Skynet.Cloud.IE.Html" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
