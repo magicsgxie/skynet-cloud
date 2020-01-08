@@ -1,16 +1,9 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : ImporterHeaderAttribute.cs
 //           description :
 // 
 //           created by magic.s.g.xie at  2019-09-11 13:51
-//           
-//           
-//           QQ：279218456（编程交流）
-//           
 // 
 // ======================================================================
 
@@ -19,7 +12,7 @@ using System;
 namespace UWay.Skynet.Cloud.IE.Core
 {
     /// <summary>
-    /// 导入头部特性
+    ///     导入头部特性
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class ImporterHeaderAttribute : Attribute
@@ -55,7 +48,7 @@ namespace UWay.Skynet.Cloud.IE.Core
         public int ColumnIndex { get; set; }
 
         /// <summary>
-        /// 是否允许重复
+        ///     是否允许重复
         /// </summary>
         public bool IsAllowRepeat { get; set; } = true;
 

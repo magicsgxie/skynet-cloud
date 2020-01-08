@@ -1,16 +1,9 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : IExporter.cs
 //           description :
 // 
 //           created by magic.s.g.xie at  2019-09-11 13:51
-//           
-//           
-//           QQ：279218456（编程交流）
-//           
 // 
 // ======================================================================
 
@@ -32,7 +25,7 @@ namespace UWay.Skynet.Cloud.IE.Core
         /// <param name="fileName">文件名称</param>
         /// <param name="dataItems">数据</param>
         /// <returns>文件</returns>
-        Task<TemplateFileInfo> Export<T>(string fileName, ICollection<T> dataItems) where T : class;
+        Task<ExportFileInfo> Export<T>(string fileName, ICollection<T> dataItems) where T : class;
 
         /// <summary>
         ///     导出Excel
@@ -47,17 +40,17 @@ namespace UWay.Skynet.Cloud.IE.Core
         /// <param name="fileName">文件名称</param>
         /// <param name="dataItems">数据</param>
         /// <returns>文件</returns>
-        Task<TemplateFileInfo> Export<T>(string fileName, DataTable dataItems) where T : class;
+        Task<ExportFileInfo> Export<T>(string fileName, DataTable dataItems) where T : class;
 
         /// <summary>
-        /// 导出Excel
+        ///     导出Excel
         /// </summary>
         /// <param name="dataItems">数据</param>
         /// <returns>文件二进制数组</returns>
         Task<byte[]> ExportAsByteArray<T>(DataTable dataItems) where T : class;
 
         /// <summary>
-        /// 导出Excel表头
+        ///     导出Excel表头
         /// </summary>
         /// <param name="items">表头数组</param>
         /// <param name="sheetName">工作簿名称</param>

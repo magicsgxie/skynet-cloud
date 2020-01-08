@@ -1,23 +1,14 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : ExportDocumentInfo.cs
 //           description :
 // 
 //           created by magic.s.g.xie at  2019-09-26 14:59
-//           
-//           
-//           QQ：279218456（编程交流）
-//           
 // 
 // ======================================================================
 
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using UWay.Skynet.Cloud.IE.Core.Extension;
 
 namespace UWay.Skynet.Cloud.IE.Core.Models
@@ -111,5 +102,4 @@ namespace UWay.Skynet.Cloud.IE.Core.Models
         /// </summary>
         public TData Data { get; set; }
     }
-
 }

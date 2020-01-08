@@ -1,15 +1,12 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : ExcelHelper.cs
 //           description :
 // 
 //           created by magic.s.g.xie at  2019-09-11 13:51
+//           
 //          
-//          
-//           QQ：279218456（编程交流）
+//           
 //           
 // 
 // ======================================================================
@@ -29,9 +26,9 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         /// <param name="fileName">文件名</param>
         /// <param name="creator"></param>
         /// <returns></returns>
-        public static TemplateFileInfo CreateExcelPackage(string fileName, Action<ExcelPackage> creator)
+        public static ExportFileInfo CreateExcelPackage(string fileName, Action<ExcelPackage> creator)
         {
-            var file = new TemplateFileInfo(fileName,
+            var file = new ExportFileInfo(fileName,
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
             using (var excelPackage = new ExcelPackage())
@@ -43,7 +40,7 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
             return file;
         }
 
-        private static void Save(ExcelPackage excelPackage, TemplateFileInfo file)
+        private static void Save(ExcelPackage excelPackage, ExportFileInfo file)
         {
             excelPackage.SaveAs(new FileInfo(file.FileName));
         }

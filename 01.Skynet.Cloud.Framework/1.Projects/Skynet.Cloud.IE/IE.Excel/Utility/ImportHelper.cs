@@ -1,24 +1,16 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : ImportHelper.cs
 //           description :
 // 
 //           created by magic.s.g.xie at  2019-09-18 16:25
+//           
 //          
-//          
-//           QQ：279218456（编程交流）
+//           
 //           
 // 
 // ======================================================================
 
-using UWay.Skynet.Cloud.IE.Core;
-using UWay.Skynet.Cloud.IE.Core.Extension;
-using UWay.Skynet.Cloud.IE.Core.Models;
-using OfficeOpenXml;
-using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -27,20 +19,62 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Reflection;
 using System.Threading.Tasks;
+using UWay.Skynet.Cloud.IE.Core;
+using UWay.Skynet.Cloud.IE.Core.Extension;
+using UWay.Skynet.Cloud.IE.Core.Models;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace UWay.Skynet.Cloud.IE.Excel.Utility
 {
+    /// <summary>
+    ///     导入辅助类
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ImportHelper<T> : IDisposable where T : class, new()
     {
+        private ExcelImporterAttribute _excelImporterAttribute;
+
         /// <summary>
         /// </summary>
         /// <param name="filePath"></param>
-        public ImportHelper(string filePath = null) => FilePath = filePath;
+        public ImportHelper(string filePath = null)
+        {
+            FilePath = filePath;
+        }
 
         /// <summary>
         ///     导入全局设置
         /// </summary>
-        protected ExcelImporterAttribute ExcelImporterAttribute { get; set; }
+        protected ExcelImporterAttribute ExcelImporterSettings
+        {
+            get
+            {
+                if (_excelImporterAttribute == null)
+                {
+                    var type = typeof(T);
+                    _excelImporterAttribute = type.GetAttribute<ExcelImporterAttribute>(true);
+                    if (_excelImporterAttribute != null) return _excelImporterAttribute;
+
+                    var importerAttribute = type.GetAttribute<ImporterAttribute>(true);
+                    if (importerAttribute != null)
+                    {
+                        _excelImporterAttribute = new ExcelImporterAttribute()
+                        {
+                            HeaderRowIndex = importerAttribute.HeaderRowIndex
+                        };
+                    }
+                    else
+                        _excelImporterAttribute = new ExcelImporterAttribute();
+
+                    return _excelImporterAttribute;
+                }
+
+                return _excelImporterAttribute;
+            }
+            set => _excelImporterAttribute = value;
+        }
+
 
         /// <summary>
         ///     导入文件路径
@@ -57,9 +91,11 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         /// </summary>
         protected List<ImporterHeaderInfo> ImporterHeaderInfos { get; set; }
 
+        /// <summary>
+        /// </summary>
         public void Dispose()
         {
-            ExcelImporterAttribute = null;
+            ExcelImporterSettings = null;
             FilePath = null;
             ImporterHeaderInfos = null;
             ImportResult = null;
@@ -72,14 +108,9 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         /// <returns></returns>
         public Task<ImportResult<T>> Import(string filePath = null)
         {
-            if (!string.IsNullOrWhiteSpace(filePath))
-            {
-                FilePath = filePath;
-            }
+            if (!string.IsNullOrWhiteSpace(filePath)) FilePath = filePath;
 
             ImportResult = new ImportResult<T>();
-            ExcelImporterAttribute =
-                typeof(T).GetAttribute<ExcelImporterAttribute>(true) ?? new ExcelImporterAttribute();
 
             try
             {
@@ -92,40 +123,33 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
                         #region 检查模板
 
                         ParseTemplate(excelPackage);
-                        if (ImportResult.HasError)
-                        {
-                            return Task.FromResult(ImportResult);
-                        }
+                        if (ImportResult.HasError) return Task.FromResult(ImportResult);
 
                         #endregion
 
                         ParseData(excelPackage);
+
                         #region 数据验证
+
                         for (var i = 0; i < ImportResult.Data.Count; i++)
                         {
-                            var isValid = ValidatorHelper.TryValidate(ImportResult.Data.ElementAt(i), out var validationResults);
+                            var isValid = ValidatorHelper.TryValidate(ImportResult.Data.ElementAt(i),
+                                out var validationResults);
                             if (!isValid)
                             {
-                                var rowIndex = ExcelImporterAttribute.HeaderRowIndex + i + 1;
+                                var rowIndex = ExcelImporterSettings.HeaderRowIndex + i + 1;
                                 var dataRowError = GetDataRowErrorInfo(rowIndex);
                                 foreach (var validationResult in validationResults)
                                 {
                                     var key = validationResult.MemberNames.First();
                                     var column = ImporterHeaderInfos.FirstOrDefault(a => a.PropertyName == key);
-                                    if (column != null)
-                                    {
-                                        key = column.ExporterHeader.Name;
-                                    }
+                                    if (column != null) key = column.ExporterHeader.Name;
 
                                     var value = validationResult.ErrorMessage;
                                     if (dataRowError.FieldErrors.ContainsKey(key))
-                                    {
                                         dataRowError.FieldErrors[key] += Environment.NewLine + value;
-                                    }
                                     else
-                                    {
                                         dataRowError.FieldErrors.Add(key, value);
-                                    }
                                 }
                             }
                         }
@@ -147,16 +171,13 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         }
 
         /// <summary>
-        /// 获取当前行
+        ///     获取当前行
         /// </summary>
         /// <param name="rowIndex"></param>
         /// <returns></returns>
         private DataRowErrorInfo GetDataRowErrorInfo(int rowIndex)
         {
-            if (ImportResult.RowErrors == null)
-            {
-                ImportResult.RowErrors = new List<DataRowErrorInfo>();
-            }
+            if (ImportResult.RowErrors == null) ImportResult.RowErrors = new List<DataRowErrorInfo>();
 
             var dataRowError = ImportResult.RowErrors.FirstOrDefault(p => p.RowIndex == rowIndex);
             if (dataRowError == null)
@@ -167,23 +188,20 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
                 };
                 ImportResult.RowErrors.Add(dataRowError);
             }
-            return dataRowError;
 
+            return dataRowError;
         }
 
         /// <summary>
-        /// 检查重复数据
+        ///     检查重复数据
         /// </summary>
         private void RepeatDataCheck()
         {
             //获取需要检查重复数据的列
             var notAllowRepeatCols = ImporterHeaderInfos.Where(p => p.ExporterHeader.IsAllowRepeat == false).ToList();
-            if (notAllowRepeatCols.Count == 0)
-            {
-                return;
-            }
+            if (notAllowRepeatCols.Count == 0) return;
 
-            var rowIndex = ExcelImporterAttribute.HeaderRowIndex;
+            var rowIndex = ExcelImporterSettings.HeaderRowIndex;
             var qDataList = ImportResult.Data.Select(p =>
             {
                 rowIndex++;
@@ -203,10 +221,7 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
                 {
                     //当前行值
                     var currentValue = qDataByProp[i].Value;
-                    if (i == 0 || string.IsNullOrEmpty(currentValue?.ToString()))
-                    {
-                        continue;
-                    }
+                    if (i == 0 || string.IsNullOrEmpty(currentValue?.ToString())) continue;
 
                     //上一行的值
                     var preValue = qDataByProp[i - 1].Value;
@@ -215,16 +230,10 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
                         listRepeatRows.Add(qDataByProp[i - 1].RowIndex);
                         listRepeatRows.Add(qDataByProp[i].RowIndex);
                         //如果不是最后一行，则继续检测
-                        if (i != qDataByProp.Count - 1)
-                        {
-                            continue;
-                        }
+                        if (i != qDataByProp.Count - 1) continue;
                     }
 
-                    if (listRepeatRows.Count == 0)
-                    {
-                        continue;
-                    }
+                    if (listRepeatRows.Count == 0) continue;
 
                     var errorIndexsStr = string.Join("，", listRepeatRows.Distinct());
                     foreach (var repeatRow in listRepeatRows.Distinct())
@@ -235,13 +244,9 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
                                   notAllowRepeatCol.PropertyName;
                         var error = $"存在数据重复，请检查！所在行：{errorIndexsStr}。";
                         if (dataRowError.FieldErrors.ContainsKey(key))
-                        {
                             dataRowError.FieldErrors[key] += Environment.NewLine + error;
-                        }
                         else
-                        {
                             dataRowError.FieldErrors.Add(key, error);
-                        }
                     }
 
                     listRepeatRows.Clear();
@@ -256,13 +261,12 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         protected virtual void LabelingError(ExcelPackage excelPackage)
         {
             //是否标注错误
-            if (ExcelImporterAttribute.IsLabelingError && ImportResult.HasError)
+            if (ExcelImporterSettings.IsLabelingError && ImportResult.HasError)
             {
                 var worksheet = GetImportSheet(excelPackage);
                 //TODO:标注模板错误
                 //标注数据错误
                 foreach (var item in ImportResult.RowErrors)
-                {
                     foreach (var field in item.FieldErrors)
                     {
                         var col = ImporterHeaderInfos.First(p => p.ExporterHeader.Name == field.Key);
@@ -271,7 +275,6 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
                         cell.Style.Font.Bold = true;
                         cell.AddComment(string.Join(",", field.Value), col.ExporterHeader.Author);
                     }
-                }
 
                 var ext = Path.GetExtension(FilePath);
                 excelPackage.SaveAs(new FileInfo(FilePath.Replace(ext, "_" + ext)));
@@ -284,10 +287,7 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         /// <exception cref="ArgumentException">文件路径不能为空! - filePath</exception>
         private static void CheckImportFile(string filePath)
         {
-            if (string.IsNullOrWhiteSpace(filePath))
-            {
-                throw new ArgumentException("文件路径不能为空!", nameof(filePath));
-            }
+            if (string.IsNullOrWhiteSpace(filePath)) throw new ArgumentException("文件路径不能为空!", nameof(filePath));
 
             //TODO:在Docker容器中存在文件路径找不到问题，暂时先注释掉
             //if (!File.Exists(filePath))
@@ -304,33 +304,27 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         {
             ImportResult.TemplateErrors = new List<TemplateErrorInfo>();
             //获取导入实体列定义
-            ParseImporterHeader(out var enumColumns, out var boolColumns);
+            ParseImporterHeader();
             try
             {
                 //根据名称获取Sheet，如果不存在则取第一个
                 var worksheet = GetImportSheet(excelPackage);
                 var excelHeaders = new Dictionary<string, int>();
-                var endColumnCount = ExcelImporterAttribute.EndColumnCount ?? worksheet.Dimension.End.Column;
+                var endColumnCount = ExcelImporterSettings.EndColumnCount ?? worksheet.Dimension.End.Column;
                 for (var columnIndex = 1; columnIndex <= endColumnCount; columnIndex++)
                 {
-                    var header = worksheet.Cells[ExcelImporterAttribute.HeaderRowIndex, columnIndex].Text;
+                    var header = worksheet.Cells[ExcelImporterSettings.HeaderRowIndex, columnIndex].Text;
 
                     //如果未设置读取的截止列，则默认指定为出现空格，则读取截止
-                    if (ExcelImporterAttribute.EndColumnCount.HasValue &&
-                        columnIndex > ExcelImporterAttribute.EndColumnCount.Value ||
+                    if (ExcelImporterSettings.EndColumnCount.HasValue &&
+                        columnIndex > ExcelImporterSettings.EndColumnCount.Value ||
                         string.IsNullOrWhiteSpace(header))
-                    {
                         break;
-                    }
 
                     //不处理空表头
-                    if (string.IsNullOrWhiteSpace(header))
-                    {
-                        continue;
-                    }
+                    if (string.IsNullOrWhiteSpace(header)) continue;
 
                     if (excelHeaders.ContainsKey(header))
-                    {
                         ImportResult.TemplateErrors.Add(new TemplateErrorInfo
                         {
                             ErrorLevel = ErrorLevels.Error,
@@ -338,13 +332,11 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
                             RequireColumnName = null,
                             Message = "列头重复！"
                         });
-                    }
 
                     excelHeaders.Add(header, columnIndex);
                 }
 
                 foreach (var item in ImporterHeaderInfos)
-                {
                     if (!excelHeaders.ContainsKey(item.ExporterHeader.Name))
                     {
                         //仅验证必填字段
@@ -373,11 +365,8 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
                         item.IsExist = true;
                         //设置列索引
                         if (item.ExporterHeader.ColumnIndex == 0)
-                        {
                             item.ExporterHeader.ColumnIndex = excelHeaders[item.ExporterHeader.Name];
-                        }
                     }
-                }
             }
             catch (Exception ex)
             {
@@ -397,55 +386,75 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException">导入实体没有定义ImporterHeader属性</exception>
-        protected virtual bool ParseImporterHeader(out Dictionary<int, IDictionary<string, int>> enumColumns,
-            out List<int> boolColumns)
+        protected virtual bool ParseImporterHeader()
         {
             ImporterHeaderInfos = new List<ImporterHeaderInfo>();
-            enumColumns = new Dictionary<int, IDictionary<string, int>>();
-            boolColumns = new List<int>();
             var objProperties = typeof(T).GetProperties();
-            if (objProperties.Length == 0)
-            {
-                return false;
-            }
+            if (objProperties.Length == 0) return false;
 
-            for (var i = 0; i < objProperties.Length; i++)
+            foreach (var propertyInfo in objProperties)
             {
                 //TODO:简化并重构
                 //如果不设置，则自动使用默认定义
                 var importerHeaderAttribute =
-                    (objProperties[i].GetCustomAttributes(typeof(ImporterHeaderAttribute), true) as
+                    (propertyInfo.GetCustomAttributes(typeof(ImporterHeaderAttribute), true) as
                         ImporterHeaderAttribute[])?.FirstOrDefault() ?? new ImporterHeaderAttribute
                         {
-                            Name = objProperties[i].GetDisplayName() ?? objProperties[i].Name
+                            Name = propertyInfo.GetDisplayName() ?? propertyInfo.Name
                         };
 
                 if (string.IsNullOrWhiteSpace(importerHeaderAttribute.Name))
-                {
-                    importerHeaderAttribute.Name = objProperties[i].GetDisplayName() ?? objProperties[i].Name;
-                }
+                    importerHeaderAttribute.Name = propertyInfo.GetDisplayName() ?? propertyInfo.Name;
 
                 //忽略字段处理
-                if (importerHeaderAttribute.IsIgnore == true)
-                {
-                    continue;
-                }
+                if (importerHeaderAttribute.IsIgnore) continue;
 
-                ImporterHeaderInfos.Add(new ImporterHeaderInfo
+                var colHeader = new ImporterHeaderInfo
                 {
-                    IsRequired = objProperties[i].IsRequired(),
-                    PropertyName = objProperties[i].Name,
+                    IsRequired = propertyInfo.IsRequired(),
+                    PropertyName = propertyInfo.Name,
                     ExporterHeader = importerHeaderAttribute
-                });
-                if (objProperties[i].PropertyType.BaseType?.Name.ToLower() == "enum")
+                };
+                ImporterHeaderInfos.Add(colHeader);
+
+                #region 处理值映射
+
+                var mappings = propertyInfo.GetAttributes<ValueMappingAttribute>().ToList();
+                foreach (var mappingAttribute in mappings.Where(mappingAttribute =>
+                    !colHeader.MappingValues.ContainsKey(mappingAttribute.Text)))
+                    colHeader.MappingValues.Add(mappingAttribute.Text, mappingAttribute.Value);
+
+                //如果存在自定义映射，则不会生成默认映射
+                if (mappings.Any()) continue;
+
+                //为bool类型生成默认映射
+                switch (propertyInfo.PropertyType.GetCSharpTypeName())
                 {
-                    enumColumns.Add(i + 1, objProperties[i].PropertyType.GetEnumDisplayNames());
+                    case "Boolean":
+                    case "Nullable<Boolean>":
+                        {
+                            if (!colHeader.MappingValues.ContainsKey("是")) colHeader.MappingValues.Add("是", true);
+                            if (!colHeader.MappingValues.ContainsKey("否")) colHeader.MappingValues.Add("否", false);
+                            break;
+                        }
                 }
 
-                if (objProperties[i].PropertyType == typeof(bool))
+                var type = propertyInfo.PropertyType;
+                var isNullable = type.IsNullable();
+                if (isNullable) type = type.GetNullableUnderlyingType();
+                //为枚举类型生成默认映射
+                if (type.IsEnum)
                 {
-                    boolColumns.Add(i + 1);
+                    var values = type.GetEnumTextAndValues();
+                    foreach (var value in values.Where(value => !colHeader.MappingValues.ContainsKey(value.Key)))
+                        colHeader.MappingValues.Add(value.Key, value.Value);
+
+                    if (isNullable)
+                        if (!colHeader.MappingValues.ContainsKey(string.Empty))
+                            colHeader.MappingValues.Add(string.Empty, null);
                 }
+
+                #endregion
             }
 
             return true;
@@ -458,31 +467,33 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         {
             var worksheet =
                 excelPackage.Workbook.Worksheets.Add(typeof(T).GetDisplayName() ??
-                                                     ExcelImporterAttribute.SheetName ?? "导入数据");
-            if (!ParseImporterHeader(out var enumColumns, out var boolColumns))
-            {
-                return;
-            }
+                                                     ExcelImporterSettings.SheetName ?? "导入数据");
+            if (!ParseImporterHeader()) return;
 
             //设置列头
             for (var i = 0; i < ImporterHeaderInfos.Count; i++)
             {
                 //忽略
-                if (ImporterHeaderInfos[i].ExporterHeader.IsIgnore)
-                {
-                    continue;
-                }
+                if (ImporterHeaderInfos[i].ExporterHeader.IsIgnore) continue;
 
-                worksheet.Cells[1, i + 1].Value = ImporterHeaderInfos[i].ExporterHeader.Name;
+                worksheet.Cells[ExcelImporterSettings.HeaderRowIndex, i + 1].Value =
+                    ImporterHeaderInfos[i].ExporterHeader.Name;
                 if (!string.IsNullOrWhiteSpace(ImporterHeaderInfos[i].ExporterHeader.Description))
-                {
-                    worksheet.Cells[1, i + 1].AddComment(ImporterHeaderInfos[i].ExporterHeader.Description,
+                    worksheet.Cells[ExcelImporterSettings.HeaderRowIndex, i + 1].AddComment(
+                        ImporterHeaderInfos[i].ExporterHeader.Description,
                         ImporterHeaderInfos[i].ExporterHeader.Author);
-                }
                 //如果必填，则列头标红
                 if (ImporterHeaderInfos[i].IsRequired)
+                    worksheet.Cells[ExcelImporterSettings.HeaderRowIndex, i + 1].Style.Font.Color.SetColor(Color.Red);
+
+                if (ImporterHeaderInfos[i].MappingValues.Count > 0)
                 {
-                    worksheet.Cells[1, i + 1].Style.Font.Color.SetColor(Color.Red);
+                    //针对枚举类型和Bool类型添加数据约束
+                    var range = ExcelCellBase.GetAddress(ExcelImporterSettings.HeaderRowIndex + 1, i + 1,
+                        ExcelPackage.MaxRows, i + 1);
+                    var dataValidations = worksheet.DataValidations.AddListValidation(range);
+                    foreach (var mappingValue in ImporterHeaderInfos[i].MappingValues)
+                        dataValidations.Formula.Values.Add(mappingValue.Key);
                 }
             }
 
@@ -497,26 +508,6 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
             worksheet.Cells[worksheet.Dimension.Address].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
             worksheet.Cells[worksheet.Dimension.Address].Style.Fill.PatternType = ExcelFillStyle.Solid;
             worksheet.Cells[worksheet.Dimension.Address].Style.Fill.BackgroundColor.SetColor(Color.DarkSeaGreen);
-
-            //枚举处理
-            foreach (var enumColumn in enumColumns)
-            {
-                var range = ExcelCellBase.GetAddress(1, enumColumn.Key, ExcelPackage.MaxRows, enumColumn.Key);
-                var dataValidations = worksheet.DataValidations.AddListValidation(range);
-                foreach (var displayName in enumColumn.Value)
-                {
-                    dataValidations.Formula.Values.Add(displayName.Key);
-                }
-            }
-
-            //Bool类型处理
-            foreach (var boolColumn in boolColumns)
-            {
-                var range = ExcelCellBase.GetAddress(1, boolColumn, ExcelPackage.MaxRows, boolColumn);
-                var dataValidations = worksheet.DataValidations.AddListValidation(range);
-                dataValidations.Formula.Values.Add("是");
-                dataValidations.Formula.Values.Add("否");
-            }
         }
 
         /// <summary>
@@ -527,82 +518,88 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         protected virtual void ParseData(ExcelPackage excelPackage)
         {
             var worksheet = GetImportSheet(excelPackage);
-            if (worksheet.Dimension.End.Row > 5000)
-            {
-                throw new ArgumentException("最大允许导入条数不能超过5000条");
-            }
+            if (worksheet.Dimension.End.Row > 5000) throw new ArgumentException("最大允许导入条数不能超过5000条");
 
             ImportResult.Data = new List<T>();
             var propertyInfos = new List<PropertyInfo>(typeof(T).GetProperties());
 
-            for (var rowIndex = ExcelImporterAttribute.HeaderRowIndex + 1;
+            for (var rowIndex = ExcelImporterSettings.HeaderRowIndex + 1;
                 rowIndex <= worksheet.Dimension.End.Row;
                 rowIndex++)
             {
                 var isNullNumber = 1;
                 for (var column = 1; column < worksheet.Dimension.End.Column; column++)
-                {
                     if (worksheet.Cells[rowIndex, column].Text == string.Empty)
-                    {
                         isNullNumber++;
-                    }
-                }
 
                 if (isNullNumber < worksheet.Dimension.End.Column)
                 {
                     var dataItem = new T();
-                    foreach (var propertyInfo in propertyInfos.Where(p => ImporterHeaderInfos.Any(p1 => p1.PropertyName == p.Name && p1.IsExist)))
+                    foreach (var propertyInfo in propertyInfos.Where(p =>
+                        ImporterHeaderInfos.Any(p1 => p1.PropertyName == p.Name && p1.IsExist)))
                     {
                         var col = ImporterHeaderInfos.First(a => a.PropertyName == propertyInfo.Name);
 
                         var cell = worksheet.Cells[rowIndex, col.ExporterHeader.ColumnIndex];
                         try
                         {
-                            switch (propertyInfo.PropertyType.BaseType?.Name)
-                            {
-                                case "Enum":
-                                    var enumDisplayNames = propertyInfo.PropertyType.GetEnumDisplayNames();
-                                    if (enumDisplayNames.ContainsKey(
-                                        cell.Value?.ToString() ?? throw new ArgumentException()))
+                            var cellValue = cell.Value?.ToString();
+                            if (!cellValue.IsNullOrWhiteSpace())
+                                if (col.MappingValues.Count > 0 && col.MappingValues.ContainsKey(cellValue))
+                                {
+                                    //TODO:进一步缓存并优化
+                                    var isEnum = propertyInfo.PropertyType.IsEnum;
+                                    var isNullable = propertyInfo.PropertyType.IsNullable();
+                                    var type = propertyInfo.PropertyType;
+                                    if (isNullable)
                                     {
-                                        propertyInfo.SetValue(dataItem,
-                                            enumDisplayNames[cell.Value?.ToString()]);
-                                    }
-                                    else
-                                    {
-                                        AddRowDataError(rowIndex, col, $"值 {cell.Value} 不存在模板下拉选项中");
+                                        type = propertyInfo.PropertyType.GetNullableUnderlyingType();
+                                        isEnum = type.IsEnum;
                                     }
 
+                                    var value = col.MappingValues[cellValue];
+
+                                    if (isEnum && isNullable && (value is int || value is short) &&
+                                        Enum.IsDefined(type, value))
+                                        propertyInfo.SetValue(dataItem,
+                                            value == null ? null : Enum.ToObject(type, value));
+                                    //propertyInfo.SetValue(dataItem,
+                                    //    value == null ? null : Convert.ChangeType(value, type));
+                                    else
+                                        propertyInfo.SetValue(dataItem,
+                                            value);
                                     continue;
+                                }
+
+                            //
+                            if (propertyInfo.PropertyType.IsEnum)
+                            {
+                                AddRowDataError(rowIndex, col, $"值 {cellValue} 不存在模板下拉选项中");
+                                continue;
                             }
 
-                            var cellValue = cell.Value?.ToString();
+
                             switch (propertyInfo.PropertyType.GetCSharpTypeName())
                             {
                                 case "Boolean":
-                                    propertyInfo.SetValue(dataItem, GetBooleanValue(cellValue));
+                                    propertyInfo.SetValue(dataItem, false);
+                                    //AddRowDataError(rowIndex, col, $"值 {cellValue} 不存在模板下拉选项中");
                                     break;
                                 case "Nullable<Boolean>":
-                                    propertyInfo.SetValue(dataItem,
-                                        string.IsNullOrWhiteSpace(cellValue)
-                                            ? (bool?)null
-                                            : GetBooleanValue(cellValue));
+                                    if (string.IsNullOrWhiteSpace(cellValue))
+                                        propertyInfo.SetValue(dataItem, null);
+                                    else
+                                        AddRowDataError(rowIndex, col, $"值 {cellValue} 不合法！");
                                     break;
                                 case "String":
                                     //TODO:进一步优化
                                     //移除所有的空格，包括中间的空格
                                     if (col.ExporterHeader.FixAllSpace)
-                                    {
                                         propertyInfo.SetValue(dataItem, cellValue?.Replace(" ", string.Empty));
-                                    }
                                     else if (col.ExporterHeader.AutoTrim)
-                                    {
                                         propertyInfo.SetValue(dataItem, cellValue?.Trim());
-                                    }
                                     else
-                                    {
                                         propertyInfo.SetValue(dataItem, cellValue);
-                                    }
 
                                     break;
                                 //long
@@ -824,9 +821,18 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         /// </summary>
         /// <param name="excelPackage"></param>
         /// <returns></returns>
-        protected virtual ExcelWorksheet GetImportSheet(ExcelPackage excelPackage) => excelPackage.Workbook.Worksheets[typeof(T).GetDisplayName()] ??
-                   excelPackage.Workbook.Worksheets[ExcelImporterAttribute.SheetName] ??
+        protected virtual ExcelWorksheet GetImportSheet(ExcelPackage excelPackage)
+        {
+#if NET461
+            return excelPackage.Workbook.Worksheets[typeof(T).GetDisplayName()] ??
+                   excelPackage.Workbook.Worksheets[ExcelImporterSettings.SheetName] ??
+                   excelPackage.Workbook.Worksheets[1];
+#else
+            return excelPackage.Workbook.Worksheets[typeof(T).GetDisplayName()] ??
+                   excelPackage.Workbook.Worksheets[ExcelImporterSettings.SheetName] ??
                    excelPackage.Workbook.Worksheets[0];
+#endif
+        }
 
         /// <summary>
         ///     添加数据行错误
@@ -847,10 +853,7 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         /// <returns></returns>
         private static bool GetBooleanValue(string value)
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                return false;
-            }
+            if (string.IsNullOrEmpty(value)) return false;
 
             switch (value.ToLower())
             {
@@ -874,8 +877,6 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         /// <returns>二进制字节</returns>
         public Task<byte[]> GenerateTemplateByte()
         {
-            ExcelImporterAttribute =
-                typeof(T).GetAttribute<ExcelImporterAttribute>(true) ?? new ExcelImporterAttribute();
             using (var excelPackage = new ExcelPackage())
             {
                 StructureExcel(excelPackage);
@@ -889,14 +890,9 @@ namespace UWay.Skynet.Cloud.IE.Excel.Utility
         /// <param name="fileName"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException">文件名必须填写! - fileName</exception>
-        public Task<TemplateFileInfo> GenerateTemplate(string fileName = null)
+        public Task<ExportFileInfo> GenerateTemplate(string fileName = null)
         {
-            ExcelImporterAttribute =
-                typeof(T).GetAttribute<ExcelImporterAttribute>(true) ?? new ExcelImporterAttribute();
-            if (string.IsNullOrWhiteSpace(fileName))
-            {
-                throw new ArgumentException("文件名必须填写!", fileName);
-            }
+            if (string.IsNullOrWhiteSpace(fileName)) throw new ArgumentException("文件名必须填写!", fileName);
 
             var fileInfo =
                 ExcelHelper.CreateExcelPackage(fileName, excelPackage => { StructureExcel(excelPackage); });

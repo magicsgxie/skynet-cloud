@@ -1,19 +1,17 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : ImporterHeaderInfo.cs
 //           description :
 // 
 //           created by magic.s.g.xie at  2019-09-11 13:51
+//           
 //          
-//          
-//           QQ：279218456（编程交流）
+//           
 //           
 // 
 // ======================================================================
 
+using System.Collections.Generic;
 using UWay.Skynet.Cloud.IE.Core;
 
 namespace UWay.Skynet.Cloud.IE.Excel
@@ -37,6 +35,10 @@ namespace UWay.Skynet.Cloud.IE.Excel
         ///     列属性
         /// </summary>
         public ImporterHeaderAttribute ExporterHeader { get; set; }
+
+        /// <summary>
+        /// </summary>
+        public Dictionary<string, dynamic> MappingValues { get; set; } = new Dictionary<string, dynamic>();
 
         /// <summary>
         ///     是否存在

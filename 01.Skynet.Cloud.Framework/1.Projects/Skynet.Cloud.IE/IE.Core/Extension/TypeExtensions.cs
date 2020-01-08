@@ -1,16 +1,9 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : TypeExtensions.cs
 //           description :
 // 
 //           created by magic.s.g.xie at  2019-09-11 16:53
-//           
-//           
-//           QQ：279218456（编程交流）
-//           
 // 
 // ======================================================================
 
@@ -99,6 +92,21 @@ namespace UWay.Skynet.Cloud.IE.Core.Extension
         }
 
         /// <summary>
+        ///     获取程序集属性
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="assembly"></param>
+        /// <param name="inherit"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetAttributes<T>(this ICustomAttributeProvider assembly, bool inherit = false)
+            where T : Attribute
+        {
+            return assembly
+                .GetCustomAttributes(typeof(T), inherit)
+                .OfType<T>();
+        }
+
+        /// <summary>
         ///     检查指定指定类型成员中是否存在指定的Attribute特性
         /// </summary>
         /// <typeparam name="T">要检查的Attribute特性类型</typeparam>
@@ -149,10 +157,10 @@ namespace UWay.Skynet.Cloud.IE.Core.Extension
         /// <summary>
         ///     获取枚举定义列表
         /// </summary>
-        /// <returns>返回枚举列表元组（名称、值、描述）</returns>
-        public static List<Tuple<string, int, string>> GetEnumDefinitionList(this Type type)
+        /// <returns>返回枚举列表元组（名称、值、显示名、描述）</returns>
+        public static List<Tuple<string, int, string, string>> GetEnumDefinitionList(this Type type)
         {
-            var list = new List<Tuple<string, int, string>>();
+            var list = new List<Tuple<string, int, string, string>>();
             var attrType = type;
             if (!attrType.IsEnum) return null;
             var names = Enum.GetNames(attrType);
@@ -161,17 +169,15 @@ namespace UWay.Skynet.Cloud.IE.Core.Extension
             foreach (var value in values)
             {
                 var name = names[index];
-                string des = null;
-                var objAttrs = value.GetType().GetField(value.ToString())
-                    .GetCustomAttributes(typeof(DescriptionAttribute), true);
-                if (objAttrs != null &&
-                    objAttrs.Length > 0)
-                {
-                    var descAttr = objAttrs[0] as DescriptionAttribute;
-                    des = descAttr?.Description;
-                }
-
-                var item = new Tuple<string, int, string>(name, Convert.ToInt32(value), des);
+                var field = value.GetType().GetField(value.ToString());
+                var displayName = field.GetDisplayName();
+                var des = field.GetDescription();
+                var item = new Tuple<string, int, string, string>(
+                    name,
+                    Convert.ToInt32(value),
+                    displayName.IsNullOrWhiteSpace() ? null : displayName,
+                    des.IsNullOrWhiteSpace() ? null : des
+                );
                 list.Add(item);
                 index++;
             }
@@ -180,45 +186,49 @@ namespace UWay.Skynet.Cloud.IE.Core.Extension
         }
 
         /// <summary>
-        ///     获取枚举显示名称
+        ///     是否为可为空类型
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static IDictionary<string, int> GetEnumDisplayNames(this Type type)
+        public static bool IsNullable(this Type type)
         {
-            if (!type.IsEnum) throw new InvalidOperationException();
-            var names = Enum.GetNames(type);
-            IDictionary<string, int> displayNames = new Dictionary<string, int>();
-            foreach (var name in names)
-            {
-                if (type.GetField(name)
-                    .GetCustomAttributes(typeof(DisplayAttribute), false)
-                    .SingleOrDefault() is DisplayAttribute displayAttribute)
-                {
-                    var value = (int) Enum.Parse(type, name);
-                    displayNames.Add(displayAttribute.Name, value);
-                }
-            }
-
-            return displayNames;
+            return Nullable.GetUnderlyingType(type) != null;
         }
 
         /// <summary>
-        ///     获取类的所有枚举
+        ///     获取可为空类型的底层类型
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static Dictionary<string, List<Tuple<string, int, string>>> GetClassEnumDefinitionList(this Type type)
+        public static Type GetNullableUnderlyingType(this Type type)
         {
-            var enumPros = type.GetProperties().Where(p => p.PropertyType.IsEnum);
-            var dic = new Dictionary<string, List<Tuple<string, int, string>>>();
-            foreach (var item in enumPros) dic.Add(item.Name, item.PropertyType.GetEnumDefinitionList());
+            return Nullable.GetUnderlyingType(type);
+        }
+
+
+        /// <summary>
+        ///     获取枚举列表
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>
+        ///     key :返回显示名称或者描述
+        ///     value：值
+        /// </returns>
+        public static IDictionary<string, int> GetEnumTextAndValues(this Type type)
+        {
+            if (!type.IsEnum) throw new InvalidOperationException();
+            var items = type.GetEnumDefinitionList();
+            var dic = new Dictionary<string, int>();
+            //枚举名 值 显示名称 描述
+            foreach (var tuple in items)
+            {
+                //如果描述、显示名不存在，则返回枚举名称
+                dic.Add(tuple.Item4 ?? tuple.Item3 ?? tuple.Item1, tuple.Item2);
+            }
             return dic;
         }
 
-
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>

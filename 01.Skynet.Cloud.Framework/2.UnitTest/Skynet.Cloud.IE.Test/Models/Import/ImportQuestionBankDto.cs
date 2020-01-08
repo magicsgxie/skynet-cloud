@@ -1,23 +1,21 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : ImportQuestionBankDto.cs
 //           description :
 // 
-//           created by magic.s.g.xie at  2019-09-26 14:59
+//           created by magic.s.g.xie at  2019-11-05 20:02
 //           
 //           
 //           
-//          
+//           
 // 
 // ======================================================================
 
 using System.ComponentModel.DataAnnotations;
 using UWay.Skynet.Cloud.IE.Core;
+using UWay.Skynet.Cloud.IE.Excel;
 
-namespace UWay.Skynet.Cloud.IE.Tests.Models
+namespace UWay.Skynet.Cloud.IE.Tests.Models.Import
 {
     /// <summary>
     ///     Class Name:QuestionBankSheetDto
@@ -111,6 +109,10 @@ namespace UWay.Skynet.Cloud.IE.Tests.Models
         /// </summary>
         [ImporterHeader(Name = "选项是否支持乱序")]
         [Required(ErrorMessage = "选项是否支持乱序不能为空")]
+        [ValueMapping("对", true)]
+        [ValueMapping("错", false)]
+        [ValueMapping("是", true)]
+        [ValueMapping("否", false)]
         public bool IsDisorderly { get; set; }
 
         /// <summary>

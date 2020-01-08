@@ -1,15 +1,12 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : ExcelExporter.cs
 //           description :
 // 
 //           created by magic.s.g.xie at  2019-09-11 13:51
+//           
 //          
-//          
-//           QQ：279218456（编程交流）
+//           
 //           
 // 
 // ======================================================================
@@ -23,15 +20,16 @@ using UWay.Skynet.Cloud.IE.Core;
 using UWay.Skynet.Cloud.IE.Core.Extension;
 using UWay.Skynet.Cloud.IE.Core.Models;
 using UWay.Skynet.Cloud.IE.Excel.Utility;
+using UWay.Skynet.Cloud.IE.Excel.Utility.TemplateExport;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
 namespace UWay.Skynet.Cloud.IE.Excel
 {
     /// <summary>
-    /// Excel导出程序
+    ///     Excel导出程序
     /// </summary>
-    public class ExcelExporter : IExporter
+    public class ExcelExporter : IExporter, IExportFileByTemplate
     {
         /// <summary>
         ///     表头处理函数
@@ -44,7 +42,7 @@ namespace UWay.Skynet.Cloud.IE.Excel
         /// <param name="fileName">文件名</param>
         /// <param name="dataItems">数据列</param>
         /// <returns>文件</returns>
-        public Task<TemplateFileInfo> Export<T>(string fileName, ICollection<T> dataItems) where T : class
+        public Task<ExportFileInfo> Export<T>(string fileName, ICollection<T> dataItems) where T : class
         {
             if (string.IsNullOrWhiteSpace(fileName)) throw new ArgumentException("文件名必须填写!", nameof(fileName));
             var fileInfo = ExcelHelper.CreateExcelPackage(fileName, excelPackage =>
@@ -90,7 +88,7 @@ namespace UWay.Skynet.Cloud.IE.Excel
             }
         }
 
-        public Task<TemplateFileInfo> Export<T>(string fileName, DataTable dataItems) where T : class
+        public Task<ExportFileInfo> Export<T>(string fileName, DataTable dataItems) where T : class
         {
             if (string.IsNullOrWhiteSpace(fileName))
                 throw new ArgumentException("文件名必须填写!", nameof(fileName));
@@ -102,17 +100,28 @@ namespace UWay.Skynet.Cloud.IE.Excel
                 if (exporter?.Author != null)
                     excelPackage.Workbook.Properties.Author = exporter?.Author;
 
-                var sheet = excelPackage.Workbook.Worksheets.Add(exporter?.Name ?? "导出结果");
-                sheet.OutLineApplyStyle = true;
-                if (GetExporterHeaderInfoList<T>(out var exporterHeaderList, dataItems.Columns)) 
+                if (GetExporterHeaderInfoList<T>(out var exporterHeaderList, dataItems.Columns))
                     return;
-                AddHeader(exporterHeaderList, sheet, exporter);
-                AddDataItems<T>(sheet, dataItems, exporter);
-                AddStyle(exporter, exporterHeaderList, sheet);
+
+                var data = dataItems.SplitDataTable();
+
+                var count = 0;
+                foreach (DataTable table in data.Tables)
+                {
+                    var sheet = GetWorksheet(excelPackage, exporter, count);
+                    AddWorksheet<T>(table, exporter, exporterHeaderList, sheet);
+                    count++;
+                }
             });
             return Task.FromResult(fileInfo);
         }
 
+        /// <summary>
+        /// 导出字节
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dataItems"></param>
+        /// <returns></returns>
         public Task<byte[]> ExportAsByteArray<T>(DataTable dataItems) where T : class
         {
             using (var excelPackage = new ExcelPackage())
@@ -123,13 +132,18 @@ namespace UWay.Skynet.Cloud.IE.Excel
                 if (exporter?.Author != null)
                     excelPackage.Workbook.Properties.Author = exporter?.Author;
 
-                var sheet = excelPackage.Workbook.Worksheets.Add(exporter?.Name ?? "导出结果");
-                sheet.OutLineApplyStyle = true;
                 if (GetExporterHeaderInfoList<T>(out var exporterHeaderList, dataItems.Columns))
                     return null;
-                AddHeader(exporterHeaderList, sheet, exporter);
-                AddDataItems<T>(sheet, dataItems, exporter);
-                AddStyle(exporter, exporterHeaderList, sheet);
+
+                var data = dataItems.SplitDataTable();
+                var count = 0;
+                foreach (DataTable table in data.Tables)
+                {
+                    var sheet = GetWorksheet(excelPackage, exporter, count);
+                    AddWorksheet<T>(table, exporter, exporterHeaderList, sheet);
+                    count++;
+                }
+
                 return Task.FromResult(excelPackage.GetAsByteArray());
             }
         }
@@ -181,6 +195,24 @@ namespace UWay.Skynet.Cloud.IE.Excel
             throw new NotImplementedException();
         }
 
+        private void AddWorksheet<T>(DataTable dataItems, ExcelExporterAttribute exporter,
+            List<ExporterHeaderInfo> exporterHeaderList, ExcelWorksheet sheet) where T : class
+        {
+            AddHeader(exporterHeaderList, sheet, exporter);
+            AddDataItems<T>(sheet, dataItems, exporter);
+            AddStyle(exporter, exporterHeaderList, sheet);
+        }
+
+
+        private static ExcelWorksheet GetWorksheet(ExcelPackage excelPackage, ExcelExporterAttribute exporter,
+            int count = 0)
+        {
+            var name = exporter?.Name ?? "导出结果";
+            var sheet = excelPackage.Workbook.Worksheets.Add($"{name}-{count}");
+            sheet.OutLineApplyStyle = true;
+            return sheet;
+        }
+
         /// <summary>
         ///     创建表头
         /// </summary>
@@ -217,7 +249,7 @@ namespace UWay.Skynet.Cloud.IE.Excel
                     }
                 }
         }
-    
+
 
         /// <summary>
         ///     创建表头
@@ -243,14 +275,15 @@ namespace UWay.Skynet.Cloud.IE.Excel
         /// <param name="exporterHeaders"></param>
         /// <param name="items"></param>
         /// <param name="exporter"></param>
-        protected void AddDataItems<T>(ExcelWorksheet sheet, List<ExporterHeaderInfo> exporterHeaders, ICollection<T> items,
+        protected void AddDataItems<T>(ExcelWorksheet sheet, List<ExporterHeaderInfo> exporterHeaders,
+            ICollection<T> items,
             ExcelExporterAttribute exporter)
         {
             if (items == null || items.Count == 0)
                 return;
             var tbStyle = TableStyles.Medium10;
             if (exporter != null && !exporter.TableStyle.IsNullOrWhiteSpace())
-                tbStyle = (TableStyles) Enum.Parse(typeof(TableStyles), exporter.TableStyle);
+                tbStyle = (TableStyles)Enum.Parse(typeof(TableStyles), exporter.TableStyle);
             sheet.Cells["A2"].LoadFromCollection(items, false, tbStyle);
         }
 
@@ -261,7 +294,7 @@ namespace UWay.Skynet.Cloud.IE.Excel
         /// <param name="sheet"></param>
         /// <param name="items"></param>
         /// <param name="exporter"></param>
-        protected void AddDataItems<T>(ExcelWorksheet sheet, DataTable items,ExcelExporterAttribute exporter)
+        protected void AddDataItems<T>(ExcelWorksheet sheet, DataTable items, ExcelExporterAttribute exporter)
         {
             if (items == null || items.Rows.Count == 0)
                 return;
@@ -384,31 +417,32 @@ namespace UWay.Skynet.Cloud.IE.Excel
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="exporterHeaderList"></param>
+        /// <param name="dataColumns"></param>
         /// <returns></returns>
-        private static bool GetExporterHeaderInfoList<T>(out List<ExporterHeaderInfo> exporterHeaderList,DataColumnCollection dataColumns)
+        private static bool GetExporterHeaderInfoList<T>(out List<ExporterHeaderInfo> exporterHeaderList,
+            DataColumnCollection dataColumns)
         {
             exporterHeaderList = new List<ExporterHeaderInfo>();
             var objProperties = typeof(T).GetProperties();
             if (objProperties == null || objProperties.Length == 0)
                 return true;
 
-            int index = 0;
-            for (var i = 0; i < objProperties.Length; i++)
-            {
-                if (dataColumns.Contains(objProperties[i].Name))
-                {
-                    index += 1;
-                    exporterHeaderList.Add(new ExporterHeaderInfo
+            var index = 0;
+            for (var k = 0; k < dataColumns.Count; k++)
+                for (var i = 0; i < objProperties.Length; i++)
+                    if (dataColumns[k].ColumnName.Equals(objProperties[i].Name))
                     {
-                        Index = index,
-                        PropertyName = objProperties[i].Name,
-                        ExporterHeader =
-                            (objProperties[i].GetCustomAttributes(typeof(ExporterHeaderAttribute), true) as
-                                ExporterHeaderAttribute[])?.FirstOrDefault()
-                    });
-                   
-                }
-            }
+                        index += 1;
+                        exporterHeaderList.Add(new ExporterHeaderInfo
+                        {
+                            Index = index,
+                            PropertyName = objProperties[i].Name,
+                            ExporterHeader =
+                                (objProperties[i].GetCustomAttributes(typeof(ExporterHeaderAttribute), true) as
+                                    ExporterHeaderAttribute[])?.FirstOrDefault()
+                        });
+                    }
+
             return false;
         }
 
@@ -439,6 +473,23 @@ namespace UWay.Skynet.Cloud.IE.Excel
 
             return null;
         }
-            
+
+
+        /// <summary>
+        ///     根据模板导出
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="fileName"></param>
+        /// <param name="data"></param>
+        /// <param name="template">HTML模板或模板路径</param>
+        /// <returns></returns>
+        public Task<ExportFileInfo> ExportByTemplate<T>(string fileName, T data, string template) where T : class
+        {
+            using (var helper = new TemplateExportHelper<T>())
+            {
+                helper.Export(fileName, template, data);
+                return Task.FromResult(new ExportFileInfo());
+            }
+        }
     }
 }

@@ -1,24 +1,21 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
-//           filename : ImportProductDto.cs
+//           filename : ImportRowDataErrorDto.cs
 //           description :
 // 
-//           created by magic.s.g.xie at  2019-09-11 13:51
+//           created by magic.s.g.xie at  2019-11-05 20:02
 //           
 //           
 //           
-//          
+//           
 // 
 // ======================================================================
 
-using UWay.Skynet.Cloud.IE.Core;
 using System;
 using System.ComponentModel.DataAnnotations;
+using UWay.Skynet.Cloud.IE.Core;
 
-namespace UWay.Skynet.Cloud.IE.Tests.Models
+namespace UWay.Skynet.Cloud.IE.Tests.Models.Import
 {
     public class ImportRowDataErrorDto
     {
@@ -31,8 +28,8 @@ namespace UWay.Skynet.Cloud.IE.Tests.Models
 
         /// <summary>
         ///     产品代码
-        ///         长度验证
-        ///         重复验证
+        ///     长度验证
+        ///     重复验证
         /// </summary>
         [ImporterHeader(Name = "产品代码", Description = "最大长度为20", AutoTrim = false, IsAllowRepeat = false)]
         [MaxLength(20, ErrorMessage = "产品代码最大长度为20（中文算两个字符）")]
@@ -55,7 +52,7 @@ namespace UWay.Skynet.Cloud.IE.Tests.Models
         /// <summary>
         ///     产品型号
         /// </summary>
-        [ImporterHeader(Name = "产品型号",IsAllowRepeat = false)]
+        [ImporterHeader(Name = "产品型号", IsAllowRepeat = false)]
         public string Model { get; set; }
 
         /// <summary>

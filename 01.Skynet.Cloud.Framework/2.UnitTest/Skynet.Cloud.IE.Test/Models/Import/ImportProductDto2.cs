@@ -1,26 +1,23 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
-//           filename : ImportProductDto.cs
+//           filename : ImportProductDto2.cs
 //           description :
 // 
-//           created by magic.s.g.xie at  2019-09-11 13:51
+//           created by magic.s.g.xie at  -- 
 //           
 //           
 //           
-//          
+//           
 // 
 // ======================================================================
 
-using UWay.Skynet.Cloud.IE.Core;
 using System;
 using System.ComponentModel.DataAnnotations;
+using UWay.Skynet.Cloud.IE.Core;
 
-namespace UWay.Skynet.Cloud.IE.Tests.Models
+namespace UWay.Skynet.Cloud.IE.Tests.Models.Import
 {
-    public class ImportProductDto
+    public class ImportProductDto2
     {
         /// <summary>
         ///     产品名称
@@ -31,7 +28,7 @@ namespace UWay.Skynet.Cloud.IE.Tests.Models
 
         /// <summary>
         ///     产品代码
-        ///         长度验证
+        ///     长度验证
         /// </summary>
         [ImporterHeader(Name = "产品代码", Description = "最大长度为20", AutoTrim = false)]
         [MaxLength(20, ErrorMessage = "产品代码最大长度为20（中文算两个字符）")]

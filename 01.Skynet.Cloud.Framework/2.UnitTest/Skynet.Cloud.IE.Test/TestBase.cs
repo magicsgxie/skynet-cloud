@@ -1,4 +1,16 @@
-﻿using System;
+﻿// ======================================================================
+// 
+//           filename : TestBase.cs
+//           description :
+// 
+//           created by magic.s.g.xie at  2019-10-18 14:07
+//           
+//           
+//           
+//           
+// 
+// ======================================================================
+
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -7,8 +19,16 @@ namespace UWay.Skynet.Cloud.IE.Tests
 {
     public class TestBase
     {
+        public TestBase()
+        {
+#if !NET461
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            //Encoding.UTF8
+            Encoding.GetEncoding(65001);
+#endif
+        }
         /// <summary>
-        /// 获取根目录
+        ///     获取根目录
         /// </summary>
         /// <returns></returns>
         public string GetTestRootPath()
@@ -17,14 +37,14 @@ namespace UWay.Skynet.Cloud.IE.Tests
         }
 
         /// <summary>
-        /// 获取测试文件路径
+        ///     获取测试文件路径
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
         public string GetTestFilePath(params string[] paths)
         {
             var rootPath = GetTestRootPath();
-            var list = new List<string>()
+            var list = new List<string>
             {
                 rootPath
             };
@@ -33,7 +53,7 @@ namespace UWay.Skynet.Cloud.IE.Tests
         }
 
         /// <summary>
-        /// 删除文件
+        ///     删除文件
         /// </summary>
         public void DeleteFile(string path)
         {

@@ -1,23 +1,23 @@
 ﻿// ======================================================================
 // 
-//           Copyright (C) 2019-2030 深圳市优网科技有限公司
-//           All rights reserved
-// 
 //           filename : ExcelImporterAttribute.cs
 //           description :
 // 
 //           created by magic.s.g.xie at  2019-09-11 13:51
+//           
 //          
-//          
-//           QQ：279218456（编程交流）
+//           
 //           
 // 
 // ======================================================================
 
 using UWay.Skynet.Cloud.IE.Core;
+using System;
 
 namespace UWay.Skynet.Cloud.IE.Excel
 {
+
+    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Property)]
     public class ExcelImporterAttribute : ImporterAttribute
     {
         /// <summary>
